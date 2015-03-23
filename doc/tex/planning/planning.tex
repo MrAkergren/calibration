@@ -15,6 +15,7 @@
 
 %%--SPACING AND MARGIN--%
 \usepackage[margin=4cm, top=2.5cm]{geometry}
+\setlength{\parindent}{0mm}
 
 %%--SANS-SERIF FONTS FOR SECTIONS--%%
 \usepackage{sectsty}
@@ -63,11 +64,47 @@
 
 \begin{document}
 \maketitle
+\thispagestyle{empty}
+
+\newpage
+\setcounter{page}{1}
+
+\section{Bakgrund} % (fold)
+\label{sec:bakgrund}
+
+    Parans har utvecklat en produkt som via optiska fibrer levererar naturligt solljus in i byggnader, som ett alternativ till traditionella ljuskällor. Som ett av få bolag i världen levererar de system globalt och deras för närvarande största installationer finns i Malaysia och Los Angeles. \bigskip
+
+    Med hjälp av linser fokuseras solljus in i optiska fibrer och panelen styrs med hjälp av två stegmotorer. Styrningen sker på input dels från en algoritm som, baserat på position (longitud, latitud) och tid, ger en solposition i grader och dels från en solsensor med fotocell som ger data för en finstyrning av panelens positionering då solen är framme.
+    Detta för att alltid maximera solljusets fokusering in i fibern.\bigskip
+
+    Själva panelen drivs av en spänning om tolv (12) volt och dess systemdesign bygger på en PIC32. Källkoden är till panelen är skriven i \texttt{C} och kommunikation till enheten sker via seriell förbindelse över en USB–port med hjälp av en terminalemulator. \bigskip
+
+    Fotosensorn som används i solpanelen kan representeras som ett koordinatsystem, där sensorn förväntar sig att ljuset fokuseras till en punkt som träffar origo som standard. Problemet som Parans har är tvådelat, det första problemet att i tillverkning av panelen kan linsen fokusera ner ljuset något vid sidan av origo på sensorn, vilket leder till sämre ljusintag i de optiska fibrerna. Det andra problemet är att solen inte går att fokusera ner till en punkt, utan kommer alltid att representeras av en disk, vilket kan förvirra sensorn något och då även detta leda till sämre ljusintag i de optiska fibrerna. \bigskip
+
+    Idag använder Parans en manuell metod för att kalibrera sensorn, flytta den punkt på koordinatsystemet som ljuset fokuserar ner till, genom att vrida solpanelen med hjälp av en terminalemulator och sedan kontrollera värdet på en separat luxmätare.
+
+% subsection bakgrund (end)
+
+
+\section{Syfte} % (fold)
+\label{sec:syfte}
+    Syftet med projektet är att ta fram en helt automatisk process som kan kalibrera fotosensorn i Parans solpaneler till dess maximala värde, med en tidsåtgång och precision som är högre än dagens manuella metod.
+
+%subsection syfte (end)
+
+\section{Mål} % (fold)
+\label{sec:m_l}
+
+    Målet med det här projektet är att ta fram ett automatiskt system som vrider på solpanelen för att lokalisera det X- och Y-värde där intaget av solljus är som störts, vilket mäts med hjälp av en luxmätare som levererar ljusintaget till en dator. När det optimala intaget är registrerat ska då detta värde registreras till fotosensorn så att den rättar sig efter detta värde, istället för det förinställda värdet på origo. 
+
+% section m_l (end)
+
 \section{Avgränsningar} % (fold)
 \label{sec:avgr_nsningar}
     Redan existerande hårdvara kommer att användas, dvs. sådan avsedd att användas för de ändamål nödvändiga för projektet. Detta kan vara antingen helhetslösningar eller sådana som löser delproblem och kombineras. \bigskip
 
     Mjukvara kommer att utvecklas för att nå projektets uppsatta mål. Denna kan komma att inkludera användning av båda medföljande och externa ramverk och bibliotek för att lösa olika delproblem, exempelvis grafisk framställning och kommunikation mellan olika enheter.
+
 % section avgr_nsningar (end)
 
 \section{Metod}
@@ -93,5 +130,7 @@
         22 & 9  & Utveckling, utvärdering och fokus på skriftlig rapport \\
         23 & 10 & Fokus på skriftlig rapport och presentation \\
     \end{tabularx}
+
 % section tidsplan (end)
+
 \end{document}
