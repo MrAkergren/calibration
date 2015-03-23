@@ -64,7 +64,10 @@
 
 \begin{document}
 \maketitle
+\thispagestyle{empty}
+
 \newpage
+\setcounter{page}{1}
 
 \section{Bakgrund} % (fold)
 \label{sec:bakgrund}
@@ -74,7 +77,7 @@
     Med hjälp av linser fokuseras solljus in i optiska fibrer och panelen styrs med hjälp av två stegmotorer. Styrningen sker på input dels från en algoritm som, baserat på position (longitud, latitud) och tid, ger en solposition i grader och dels från en solsensor med fotocell som ger data för en finstyrning av panelens positionering då solen är framme.
     Detta för att alltid maximera solljusets fokusering in i fibern.\bigskip
 
-    Själva panelen körs på 12V och dess systemdesign bygger på en PIC32; koden är skriven i C. Parans kommunicerar med enheten via USB-port och PUTTy \bigskip  
+    Själva panelen drivs av en spänning om tolv (12) volt och dess systemdesign bygger på en PIC32. Källkoden är till panelen är skriven i \texttt{C} och kommunikation till enheten sker via seriell förbindelse över en USB–port med hjälp av en terminalemulator. \bigskip
 
     Fotosensorn som används i solpanelen kan representeras som ett koordinatsystem, där sensorn förväntar sig att ljuset fokuseras till en punkt som träffar origo som standard. Problemet som Parans har är tvådelat, det första problemet att i tillverkning av panelen kan linsen fokusera ner ljuset något vid sidan av origo på sensorn, vilket leder till sämre ljusintag i de optiska fibrerna. Det andra problemet är att solen inte går att fokusera ner till en punkt, utan kommer alltid att representeras av en disk, vilket kan förvirra sensorn något och då även detta leda till sämre ljusintag i de optiska fibrerna. \bigskip
 
