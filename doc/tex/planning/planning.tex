@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass[a4paper, 12pt]{article}
 
 %%--LANGUAGE AND ENCODING--%%
 \usepackage[swedish]{babel}
@@ -14,7 +14,7 @@
 
 
 %%--SPACING AND MARGIN--%
-\usepackage[margin=4cm, top=2.5cm]{geometry}
+%\usepackage[margin=4cm, top=2.5cm]{geometry}
 \setlength{\parindent}{0mm}
 
 %%--SANS-SERIF FONTS FOR SECTIONS--%%
@@ -58,7 +58,7 @@
             19821112--7652 \and
             Åkergren, Oskar\\ \texttt{akergren@student.chalmers.se}  \\ 19880508--7114
 }
-\title{\vspace{2cm} \underline{Planeringsrapport} \\ Kalibrering av solsensor \\ för Parans solpanel \vspace{1cm}}
+\title{\underline{Planeringsrapport} \\ Kalibrering av solsensor \\ för Parans solpanel \vspace{1cm}}
 
 \date{\vspace{8cm}\today}
 
@@ -88,14 +88,14 @@
 
 \section{Syfte} % (fold)
 \label{sec:syfte}
-    Syftet med projektet är att ta fram en helt automatisk process som kan kalibrera fotosensorn i Parans solpaneler till dess maximala värde, med en tidsåtgång och precision som är högre än dagens manuella metod.
+    Syftet med projektet är att ta fram en helt automatisk process som kan kalibrera fotosensorn i Parans solpaneler till dess maximala värde, med en lägre tidsåtgång och högre precision än dagens manuella metod.
 
 %subsection syfte (end)
 
 \section{Mål} % (fold)
 \label{sec:m_l}
 
-    Målet med det här projektet är att ta fram ett automatiskt system som vrider på solpanelen för att lokalisera det X- och Y-värde där intaget av solljus är som störts, vilket mäts med hjälp av en luxmätare som levererar ljusintaget till en dator. När det optimala intaget är registrerat ska då detta värde registreras till fotosensorn så att den rättar sig efter detta värde, istället för det förinställda värdet på origo. 
+    Målet med det här projektet är att ta fram ett automatiskt system som vrider på solpanelen för att lokalisera det X- och Y-värde där intaget av solljus är som störst, vilket mäts med hjälp av en luxmätare som levererar ljusintaget till en dator. När det optimala intaget är registrerat ska då detta värde registreras till fotosensorn så att den rättar sig efter detta värde, istället för det förinställda värdet på origo. 
 
 % section m_l (end)
 
@@ -109,7 +109,11 @@
 
 \section{Metod}
 \label{sec:metod} % (fold)
+    Projektet inleds med en litteraturstudie för att undersöka om liknande problem har undersökts sedan tidigare, detta i syfte att undvika framställande av redan känd information och att ta nytta av den erfarenhet som eventuellt redan finns tillgänglig. \bigskip
 
+    Det verktyg som projektet kommer använda för kommunikation och versionshantering av källkod är 'git', för uppdelning och översikt av uppkomna problem kommer verktyget 'Waffle.io' att användas. Gällande verktyg för framtagandet av själva applikationen så kommer projektet att an\-vända sig av lämplig utvecklingsmiljö för mjukvaruutveckling, beroende på val av språk. För den hårdvara som projektet kräver kommer verktygen som tillhandahålls från företaget att nyttjas, det vill säga luxmätare och solpanel från Parans. \bigskip 
+
+    De delmoment som behöver lösas är först att säkerställa att luxmätaren kan rapportera in data i en sådan form att vår applikation kan nyttja datan, därefter behöver en lämplig itererande algoritm tas fram. Det är denna algoritm som är i fokus i vår litteraturstudie.
 % section metod (end)
 
 \section{Tidsplan}
