@@ -1,0 +1,100 @@
+\documentclass[a4paper, 11pt]{article}
+
+%%--LANGUAGE AND ENCODING--%%
+\usepackage[swedish]{babel}
+\usepackage[english,cleanlook]{isodate}%
+\usepackage[utf8]{inputenc}
+\usepackage{csquotes}
+
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+
+%%--BIBLOPGRAPHY--%%
+\usepackage[backend=biber, natbib=true, urldate=iso8601, maxnames=2, minnames=1, maxbibnames=10, minbibnames=6, citestyle=numeric-comp, sorting=none, firstinits=true]{biblatex}
+
+%%--SPACING AND MARGIN--%
+\usepackage[textwidth=140mm]{geometry}
+%\usepackage[margin=3.5cm, top=2.5cm]{geometry}
+\setlength{\parindent}{0mm}
+
+
+%%--SANS-SERIF FONTS FOR SECTIONS--%%
+\usepackage{sectsty}
+\usepackage{helvet}
+\allsectionsfont{\bfseries\sffamily}
+
+%%Links within the doc%%
+\usepackage[hidelinks]{hyperref}
+%%--GRAPHICS--%%  (Requires preamble)
+% \usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage[justification=centering]{caption}
+\usepackage{subcaption}
+
+
+%%--ADVANCE TABULARS--%%
+\usepackage{tabularx}
+\def\arraystretch{1.3}
+%PREAMBLE%
+%%-SECTION NUMMBERING DEPTH-%%
+%\setcounter{secnumdepth}{3} %3=Default
+
+\hyphenation{pa-nel-en instruktion-er sol-panel-en fatt-ades anse nu-varande av-sedda fungera-nde  kommunikations-stand-ard-er version-er mot-svarande enkorts-dator enhet-ens exempel-vis operativ-system doku-ment-ation platt-forms-oberoende system-utvecklings-metoden} 
+
+%%-GRAPHICS-%%
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+
+%%-BIBLIOGRAPHY-%%
+%Adds references library and formats it.
+% To  refere to a reference in the library use  \cite{} for ieee
+\addbibresource{ref.bib} \setlength{\bibitemsep}{\baselineskip} 
+%Always shows the authors in bibliography as Lastname, Firstname
+%\DeclareNameAlias{sortname}{last-first} 
+
+%%-DOCUMENT INFORMATION-%%
+%Header/Footer%
+\author{Svedberg, Pär\\ \texttt{svpar@student.chalmers.se}  \\ 
+            19821112--7652 \and
+            Åkergren, Oskar\\ \texttt{akergren@student.chalmers.se}  \\ 19880508--7114
+}
+\title{\underline{Planeringsrapport} \\ Kalibrering av solsensor \\ för Parans solpanel \vspace{1cm}}
+
+\date{\vspace{8cm}\today}
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+
+\newpage
+\setcounter{page}{1}
+\pagenumbering{roman}
+
+\input{preface}
+
+\newpage
+\tableofcontents
+\listoffigures
+\listoftables
+
+\newpage
+
+\setcounter{page}{1}
+\pagenumbering{arabic}
+
+\input{introduktion}
+\input{metod}
+\input{genomforande}
+\input{resultat}
+\input{diskussion}
+
+\printbibliography
+\addcontentsline{toc}{section}{Referenser}
+
+\newpage
+
+\setcounter{page}{1}
+\pagenumbering{Roman}
+\appendix
+
+\end{document}
