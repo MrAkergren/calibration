@@ -1,0 +1,19 @@
+Tisdag 
+--------------
+
+Vi färdigställde vår planeringsrapport under förmiddagen och hade ett möte med
+vår handledare Lennart för att få kommentarer till den. Vi fick reda på att 
+projektet är lite väl snävt så vi kommer behöva utöka det något för att få 
+tillräckligt med material att skriva om.
+
+På eftermiddagen kontaktade vi vår företagshandledare Karl, utan framgång 
+tyvärr, sedan jobbade vi på vilken typ av algoritm som behöver användas för 
+att kunna optimera sökningen av max-värdet.
+
+Jag började på en enkel algoritm som itererar en 2d array och rapporterar 
+värdet, y, och x för max-värdet i arrayen.
+
+--------------
+
+Tidsåtgång i timmar:
+8
