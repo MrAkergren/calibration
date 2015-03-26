@@ -1,0 +1,42 @@
+Måndag 15-03-23 LV1
+--------------
+
+På måndagen började vi att skriva på en planeringsrapport och dra upp ett 
+preliminärt schema för projektet. 
+
+Vi kommer att behöva ha ett möte med handledare både på företaget och här på 
+Chalmers.
+
+---
+Tisdag 
+--------------
+
+Vi färdigställde vår planeringsrapport under förmiddagen och hade ett möte med
+vår handledare Lennart för att få kommentarer till den. Vi fick reda på att 
+projektet är lite väl snävt så vi kommer behöva utöka det något för att få 
+tillräckligt med material att skriva om.
+
+På eftermiddagen kontaktade vi vår företagshandledare Karl, utan framgång 
+tyvärr, sedan jobbade vi på vilken typ av algoritm som behöver användas för 
+att kunna optimera sökningen av max-värdet.
+
+Jag började på en enkel algoritm som itererar en 2d array och rapporterar 
+värdet, y, och x för max-värdet i arrayen.
+
+--------------
+
+Onsdag
+--------------
+
+Förmiddagen spenderade på Lindholmens bibliotek för att genomföra den 
+obligatoriska kursen i referenser och sökningar som krävs för examensarbetet.
+
+Eftermiddagen spenderades till att få till ett möte med Parans, något som vi
+kommer att lösa på fredag. Vidare kollade Pär på generation av matriser för att
+kunna generera test fall.
+
+--------------
+
+ 
+Tidsåtgång i timmar: 
+19
