@@ -16,3 +16,4 @@ latex.out/
 *.bbl
 *.fls
 *.lof
+*.lot
