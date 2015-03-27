@@ -13,4 +13,4 @@ The different `.tex files should include the section they are named after, and n
 
 Subsections should be added in the section files to begin with, unless they grow to large.
 
-References should be added to `ref.bib`, and should be referred by `\cite{}` or \cite[s.~X]{}` where X is the page number or page interval 
+References should be added to `ref.bib`, and should be referred by `\cite{}` or `\cite[s.~X]{}` where X is the page number or page interval 
