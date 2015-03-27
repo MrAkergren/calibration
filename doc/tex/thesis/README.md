@@ -9,7 +9,7 @@ pdflatex thesis
 pdflatex thesis
 ```
 
-The different `.tex` files should include the section they are named after, and necessary settings should be added to `thesis.tex`, as it is the main file. 
+The different `.tex files should include the section they are named after, and necessary settings should be added to `thesis.tex`, as it is the main file. 
 
 Subsections should be added in the section files to begin with, unless they grow to large.
 
