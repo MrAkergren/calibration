@@ -90,14 +90,13 @@
 
 \section{Syfte} % (fold)
 \label{sec:syfte}
-    Syftet med projektet är att ta fram en helt automatisk process som kan kalibrera fotosensorn i Parans solpaneler till dess maximala värde, med en lägre tidsåtgång och högre precision än dagens manuella metod.
-
+    Syftet med projektet är att ta fram en helt automatisk process som kan kalibrera fotosensorn i Parans solpaneler till dess maximala värde, med en lägre tidsåtgång och högre precision än dagens manuella metod. Vidare syftar projektet till att föreslå en kommunikationslösning mellan panelen och en lux\-mätare inne i byggnaden.
 %subsection syfte (end)
 
 \section{Mål} % (fold)
 \label{sec:m_l}
 
-    Målet med det här projektet är att ta fram ett automatiskt system som vrider på solpanelen för att lokalisera det X- och Y-värde där intaget av solljus är som störst, vilket mäts med hjälp av en luxmätare som levererar ljusintaget till en dator. När det optimala intaget är registrerat ska då detta värde registreras till fotosensorn så att den rättar sig efter detta värde, istället för det förinställda värdet på origo. 
+    Målet med det här projektet är att ta fram ett automatiskt system som justerar fokuspunkten på ljussensorn, vilket då vrider på solpanelen för att lokalisera det X- och Y-värde där intaget av solljus är som störst. Ljusstyrkan mäts med hjälp av en luxmätare som levererar ljusintaget till en dator eller till en annan programmerbar enhet. När det maximala ljusintaget är uppmätt, registreras X- och Y-värdena som den nya fokuspunkten för ljussensorn, istället för det förinställda värdet på origo. Vidare är målet att ta fram någon form av kommunikation mellan en luxmätare inne i byggnaden och en panel som befinner sig på taket, så att även enheter som redan är satta i bruk kan kalibreras. 
 
 % section m_l (end)
 
@@ -105,7 +104,7 @@
 \label{sec:avgr_nsningar}
     \subsection{Hårdvara} % (fold)
     \label{subsec:h_rdvara}
-    Redan existerande hårdvara kommer att användas, dvs. sådan avsedd att användas för de ändamål nödvändiga för projektet. Den primära hårdvaran, solpanel och luxmätare, kommer att tillhandahållas av uppdragsgivaren och inga alternativ till dessa kommer att undersökas. Eventuell övrig hårdvara kan antingen vara helhetslösningar eller sådana som löser delproblem och kombineras. \bigskip
+    Redan existerande hårdvara kommer att användas, dvs. sådan avsedd att användas för de ändamål nödvändiga för projektet. Den primära hårdvaran, solpanel och luxmätare, kommer att tillhandahållas av uppdragsgivaren och inga alternativ till dessa kommer att undersökas. Eventuell övrig hårdvara kan antingen vara helhetslösningar eller sådana som löser delproblem och kombineras. Gällande lösningen som tas fram är den begränsad till att stödja företagets nu gällande panel SP3 och deras nästa version SP4.\bigskip
     % subsection h_rdvara (end)
 
     \subsection{Mjukvara} % (fold)
@@ -121,10 +120,8 @@
 
     Det verktyg som projektet kommer använda för kommunikation och versionshantering av källkod är 'git', för uppdelning och översikt av uppkomna problem kommer verktyget 'Waffle.io' att användas. Gällande verktyg för framtagandet av själva applikationen så kommer projektet att an\-vända sig av lämplig utvecklingsmiljö för mjukvaruutveckling, beroende på val av språk. För den hårdvara som projektet kräver kommer verktygen som tillhandahålls från företaget att nyttjas, det vill säga luxmätare och solpanel från Parans. \bigskip 
 
-    De delmoment som behöver lösas är först att säkerställa att luxmätaren kan rapportera in data i en sådan form att vår applikation kan nyttja datan, därefter behöver en lämplig itererande algoritm tas fram. Det är denna algoritm som är i fokus i vår litteraturstudie.
+    De delmoment som behöver lösas är först att säkerställa att luxmätaren kan rapportera in data i en sådan form att vår applikation kan nyttja datan. Därefter behöver en lämplig itererande algoritm tas fram för att lokalisera korrekt fokuspunkt för ljussensorn. Slutligen ska en kommunikationslösning mellan panelen och luxmätaren undersökas.
 % section metod (end)
-
-\newpage
 
 \section{Tidsplan}
 \label{sec:tidsplan} % (fold)
@@ -132,7 +129,7 @@
 
     \noindent \begin{tabularx}{\textwidth}{@{}ccX}
         \textbf{Vecka} & \textbf{Projekt} & \textbf{Mål}\\
-        13 & 1 & Planering och upprättande av och arbetsstruktur, uppstartsmöten \\
+        13 & 1 & Planering och upprättande av och arbetsstruktur, \newline uppstartsmöten \\
         14 & 2  & Litteraturstudier, planering och problemanalys \\
         15 & -- & Påsklov/omtentamensstudier \\
         16 & 3  & Litteraturstudier, problemanalys och utveckling \\
