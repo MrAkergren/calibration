@@ -3,18 +3,37 @@
 
     \subsection{Bakgrund} % (fold)
     \label{sub:bakgrund}
-    
-    % subsection bakgrund (end)
+        Parans har utvecklat en produkt som via optiska fibrer levererar naturligt solljus in i byggnader, som ett alternativ till traditionella ljuskällor. 
+        Som ett av få bolag i världen levererar de system globalt och deras för närvarande största installationer finns i Malaysia och Los Angeles. \bigskip
 
-    \subsection{Mål} % (fold)
-    \label{sun:mal}
-        Test text
-    % section mal (end)
+        Med hjälp av linser fokuseras solljus in i optiska fibrer och panelen styrs med hjälp av två stegmotorer. 
+        Styrningen sker på input dels från en algoritm som, baserat på position (longitud, latitud) och tid, ger en solposition i grader och dels från en solsensor med fotocell som ger data för en finstyrning av panelens positionering då solen är framme.
+        Detta för att alltid maximera solljusets fokusering in i fibern.\bigskip
+
+        Själva panelen drivs av en spänning om tolv (12) volt och dess systemdesign bygger på en PIC32. 
+        Källkoden är till panelen är skriven i \texttt{C} och kommunikation till enheten sker via seriell förbindelse över en USB–port med hjälp av en terminalemulator. \bigskip
+
+        Fotosensorn som används i solpanelen kan representeras som ett koordinatsystem, där sensorn förväntar sig att ljuset fokuseras till en punkt som träffar origo som standard. 
+        Problemet som Parans har är tvådelat, det första problemet att i tillverkning av panelen kan linsen fokusera ner ljuset något vid sidan av origo på sensorn, vilket leder till sämre ljusintag i de optiska fibrerna. 
+        Det andra problemet är att solen inte går att fokusera ner till en punkt, utan kommer alltid att representeras av en disk, vilket kan förvirra sensorn något och då även detta leda till sämre ljusintag i de optiska fibrerna. \bigskip
+
+        Idag använder Parans en manuell metod för att kalibrera sensorn, flytta den punkt på koordinatsystemet som ljuset fokuserar ner till, genom att vrida solpanelen med hjälp av en terminalemulator och sedan kontrollera värdet på en separat luxmätare.
+    % subsection bakgrund (end)
 
     \subsection{Syfte} % (fold)
     \label{sub:syfte}
-    
+          Syftet med projektet är att ta fram en helt automatisk process som kan kalibrera fotosensorn i Parans solpaneler till dess maximala värde, med en lägre tidsåtgång och högre precision än dagens manuella metod. 
+          Vidare syftar projektet till att föreslå en kommunikationslösning mellan panelen och en lux\-mätare inne i byggnaden.
     % subsection syfte (end)
+
+    \subsection{Mål} % (fold)
+    \label{sun:mal}
+        Målet med det här projektet är att ta fram ett automatiskt system som justerar fokuspunkten på ljussensorn, vilket då vrider på solpanelen för att lokalisera det X- och Y-värde där intaget av solljus är som störst. 
+        Ljusstyrkan mäts med hjälp av en luxmätare som levererar ljusintaget till en dator eller till en annan programmerbar enhet. 
+        När det maximala ljusintaget är uppmätt, registreras X- och Y-värdena som den nya fokuspunkten för ljussensorn, istället för det förinställda värdet på origo. 
+        Vidare är målet att ta fram någon form av kommunikation mellan en luxmätare inne i byggnaden och en panel som befinner sig på taket, så att även enheter som redan är satta i bruk kan kalibreras. 
+    % section mal (end)
+
 
     \subsection{Frågeställning} % (fold)
     \label{sub:fragestallning}
@@ -23,4 +42,23 @@
             \item Vilken algoritm kan anses vara lämplig för kalibreringen?
         \end{itemize}
     % subsection fr_gest_llning (end)
+
+    \section{Avgränsningar} % (fold)
+    \label{sec:avgr_nsningar}
+        \subsection{Hårdvara} % (fold)
+        \label{subsec:h_rdvara}
+            Redan existerande hårdvara kommer att användas, dvs. sådan avsedd att användas för de ändamål nödvändiga för projektet. 
+            Den primära hårdvaran, solpanel och luxmätare, kommer att tillhandahållas av uppdragsgivaren och inga alternativ till dessa kommer att undersökas. 
+            Eventuell övrig hårdvara kan antingen vara helhetslösningar eller sådana som löser delproblem och kombineras. 
+            Gällande lösningen som tas fram är den begränsad till att stödja företagets nu gällande panel SP3 och deras nästa version SP4.\bigskip
+        % subsection h_rdvara (end)
+
+        \subsection{Mjukvara} % (fold)
+        \label{subsec:mjukvara}
+            Mjukvara kommer att utvecklas för att nå projektets uppsatta mål. 
+            Denna kan komma att inkludera användning av båda medföljande och externa ramverk och bibliotek för att lösa olika delproblem, exempelvis grafisk framställning och kommunikation mellan olika enheter.
+    % subsection mjukvara (end)
+
+% section avgr_nsningar (end)
+
 % section indroduktion (end)
