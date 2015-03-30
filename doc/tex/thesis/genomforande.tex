@@ -5,5 +5,14 @@
 
     Under den andra fasen genomfördes litteratursökningar och diskussioner kring hur den tänkta lösningen skulle kunna utformas.  \bigskip
 
-    I den tredje fasen identifierades två stycken artefakter som behöver utformas för att uppnå projektets mål, dels en algoritm som kan utföra själva kalibreringen och dels en enhet för att kommunicera över den optiska fiberkabeln. Projektet genomfördes i två steg, där algoritmen utvecklades först, då denna är av störst vikt enligt direktiv från företaget.
+    I den tredje fasen identifierades två stycken artefakter som behöver utformas för att uppnå projektets mål, dels en algoritm som kan utföra själva kalibreringen och dels en enhet för att kommunicera mellan rummet och taket. Projektet genomfördes i två steg, där algoritmen utvecklades först, då denna är av störst vikt enligt direktiv från företaget.\bigskip
+
+    Förutsättningen vid litteraturstudien, gällande den trådlösa kommunikationen mellan taket och byggnadens innandöme, var att kommunikationen skall ske med standardiserade protokoll. Detta för att underlätta mottagandet av den trådlösa sändningen, i syfte att undvika tidsänken i felsökning då projektet har en relativt snäv tidsram.\bigskip
+
+    Det visade sig att trådlösa standarder för datakommunikation så som 802.11 standarderna har problem att sända när betongkonstruktioner hindrar utspridningen av radiovågorna och kräver speciell apparatur för att klara av att skicka data igenom sådana förhållanden \cite{11n}. Detta medför att trådlös kommunikation inte är lämplig för företaget, då de på förhand inte kan veta ifall deras kommunikation kommer att fungera på plats hos deras kunder. \bigskip
+
+    Ett lämpligare medium att kommunicera via är istället den fiberoptiska kabel som redan är dragen, då rummet lyses upp av just denna kabel. Med de svårigheter som den trådlösa kommunikationen medförde i kombination med att ett fungerande alternativt medium redan finns draget, valde projektet att fokusera på det senare. \bigskip
+
+    Genom att fokusera på det optiska alternativet leder detta in projektet till det fjärde steget i metoden, att föreslå en artefakt som löser det ställda problemet. Projektet föreslår då en lösning med en omvandlare från luxmätarens utdata till en optisk signal som sänds upp till taket för att där avkodas. Omvandlaren kan vara någon form av mikrokontroller så som till exempel en Arduino. Uppe på taken kan avkodaren även den vara en mikrokontroller, eller om det finns någon typ av ljussensor som direkt kan skicka sin data över USB till den programmerbara enhet som utför den algoritm som utvecklats.
+
 % section genomf_rande (end)
