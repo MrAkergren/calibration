@@ -28,7 +28,17 @@
 %%Links within the doc%%
 \usepackage[hidelinks]{hyperref}
 %%--GRAPHICS--%%  (Requires preamble)
-% \usepackage{tikz}
+\usepackage{tikz}
+\tikzset{
+    vertex/.style = {
+        circle,
+        fill            = black,
+        outer sep = 2pt,
+        inner sep = 1pt,
+    }
+}
+
+
 \usepackage{graphicx}
 \usepackage{caption}
 \usepackage[justification=centering]{caption}

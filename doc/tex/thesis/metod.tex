@@ -10,6 +10,47 @@
     	Dresch et al. rekommenderar, baserat på studier av flera metoder för DSR, en metod i 12 steg \cite[s.~118--126]{dsr}. De tre inledande stegen är en analys av de problem som ska lösas, problemidentifiering, problemförståelse och litteraturstudier. Denna inledande fas mynnar ut i att hitta eventuella befintliga lösningar som kan vara lämpliga och att sedan föreslå en vidareutveckling och tillämpning av denna eller att föreslå en ny lösning. Steg sex till åtta är sedan att utforma, utveckla och utvärdera lösningen. Därefter ska den kunskap som givits av tidigare steg tydliggöras och slutsatser dras. Tidigarenämnda steg itereras vid behov för att uppnå önskat resultat. Slutligen ska generalisering av lösningen utformas och resultatet presenteras. \bigskip
 
     	Ovan nämnda metodik har för detta projekt förenklats något för att anpassas till projektets storlek och omfattning.
+
+        \begin{figure}[hbt]
+            \begin{tikzpicture}
+              % Dialectics
+              \node[draw] (Thesis) at (0,0) {Thesis};
+              \node[draw,fill=black,text=white] (Antithesis) at (2.3,0) {Antithesis};
+              \node[draw,fill=gray,text=white] (Synthesis) at (1,2) {Synthesis};
+              
+              \draw node[vertex] (Joint) at (1,0) {};
+              
+              \draw[-,draw=blue] (Thesis) to (Joint);
+              \draw[-,draw=blue] (Antithesis) to (Joint);
+              \draw[->,draw=blue] (Joint) to (Synthesis);
+              \draw[->,draw=blue] (Synthesis) to[in=180,out=180] (Thesis);
+              
+              %\node at (1.0, -1.0) {\textit{a) Dialectics}};
+              
+              % Opposition
+              \node[draw] (ArgumentA) at (5,0) {Argument};
+              \node[draw,fill=black,text=white] (ArgumentB) at (7.5,0) {Opposition};
+              
+              \draw[->,draw=blue] (ArgumentA) to (ArgumentB);
+              
+              %\node at (6., -1.0) {\textit{b) Opposition}};
+              
+              % Innovation
+              \node[draw] (ArgumentA) at (10.1,0) {Argument};
+              \node[draw,fill=black,text=white] (ArgumentB) at (13,0) {Opposition};
+              \node[draw,fill=yellow] (ArgumentC) at (12,2) {Innovation};
+              
+              \draw node[vertex] (Joint) at (11.5,0) {};
+              
+              \draw[-] (ArgumentA) to (Joint);
+              \draw[-] (ArgumentB) to (Joint);
+              \draw[->,draw=blue] (Joint) to (ArgumentC);
+              
+              %\node at (11.5, -1.0) {\textit{c) Innovation}};
+            \end{tikzpicture}
+            \label{fig:method}\caption{Placeholder figure}
+        \end{figure}
+
     % subsection vetenskaplig_metod (end)
 
     \subsection{Arbetsmetodik} % (fold)
@@ -18,9 +59,9 @@
         för den mjukvara som projektet använde sig av. För att få tillgång 
         till en central hantering av dokumenten använde sig projektet av 'GitHub.com' vilket även bistod med ett grafiskt gränssnitt till git, då git i sig själv endast har ett textbaserat gränssnitt. \bigskip
 
-        Vidare var arbetsmetodiken inspirerad av 'Scrum' där större mål sattes upp och bröts ner till mindre så kallade 'issues' \cite{scrum}. Dessa issues sattes upp på en virtuell tavla med hjälp av verktyget 'Waffle.io' för att få en bättre överblick kring hur projektet utvecklades och vad som behövde göras. \bigskip
+        Vidare var arbetsmetodiken inspirerad av 'Scrum' där större mål sattes upp och bröts ner till mindre så kallade 'issues' \cite[kap.~8]{scrum}. Dessa issues sattes upp på en virtuell tavla med hjälp av verktyget 'Waffle.io' för att få en bättre överblick kring hur projektet utvecklades och vad som behövde göras. \bigskip
 
-        Anledningen till att inte hela Scrum-metodiken anammades var att projektet utfördes av få personer så den rollfördelning som hör till i Scrum gick ej att utföra, samt att ovanan vid denna typ av utveckling gjorde att kostnaderna för varje issue var svårt att bestämma. Vidare var projektets omfång väl avgränsat av uppdrags\-givaren så dessa användes som milstenar istället för de föreslagna användarberättelserna \cite{scrum}. 
+        Anledningen till att inte hela Scrum-metodiken anammades var att projektet utfördes av få personer så den rollfördelning som hör till i Scrum gick ej att utföra på något meningsfullt vis \cite[kap.~6]{scrum}, samt att ovanan vid denna typ av utveckling gjorde att kostnaderna för varje issue var svårt att bestämma. Vidare var projektets omfång väl avgränsat av uppdrags\-givaren så dessa användes som milstenar istället för de föreslagna användarberättelserna \cite[kap.~9]{scrum}. 
 
     % subsection arbetsmetodik (end)
 % section metod (end)
