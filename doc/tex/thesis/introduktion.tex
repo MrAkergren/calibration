@@ -3,15 +3,15 @@
 
     \subsection{Bakgrund} % (fold)
     \label{sub:bakgrund}
-        Parans har utvecklat en produkt som via optiska fibrer levererar naturligt solljus in i byggnader, som ett alternativ till traditionella ljuskällor. 
-        Som ett av få bolag i världen levererar de system globalt och deras för närvarande största installationer finns i Malaysia och Los Angeles. \bigskip
+        Parans är utvecklare av en produkt som via optiska fibrer levererar naturligt solljus in i byggnader, som ett alternativ till dagens traditionella ljuskällor. 
+        Bolaget är baserat i Göteborg men levererar systemen globalt och har flera installationer runt om i världen. \bigskip
 
-        Med hjälp av linser fokuseras solljus in i optiska fibrer och panelen styrs med hjälp av två stegmotorer. 
-        Styrningen sker på input dels från en algoritm som, baserat på position (longitud, latitud) och tid, ger en solposition i grader och dels från en solsensor med fotocell som ger data för en finstyrning av panelens positionering då solen är framme.
-        Detta för att alltid maximera solljusets fokusering in i fibern.\bigskip
+        Produkten fokuserar in solljus i optiska fibrer och styrs med hjälp av två stegmotorer för att följa solens bana. 
+        Styrningen sker dels med en algoritm som, baserat på geografisk position och tid, ger en solposition i grader och dels från en solsensor med fotocell som ger data för en finstyrning av panelens positionering då solen är framme.
+        Detta för att alltid maximera solljuset som levereras in i fibern.\bigskip
 
-        Själva panelen drivs av en spänning om tolv (12) volt och dess systemdesign bygger på en PIC32. 
-        Källkoden är till panelen är skriven i \texttt{C} och kommunikation till enheten sker via seriell förbindelse över en USB–port med hjälp av en terminalemulator. \bigskip
+        Styrkortet och motorerna till panelen drivs av en spänning om tolv (12) volt och kortet är en egen design kring mikrokontrollen PIC32. 
+        Källkoden till panelen är skriven i \texttt{C} och kommunikation till enheten sker via seriell förbindelse över USB, där en USB till RS-232 omvandlare är integrerad på styrkortet. För att skicka instruktioner till panelen används en terminalemulator. \bigskip
 
         Fotosensorn som används i solpanelen kan representeras som ett koordinatsystem, där sensorn förväntar sig att ljuset fokuseras till en punkt som träffar origo som standard. 
         Problemet som Parans har är tvådelat, det första problemet att i tillverkning av panelen kan linsen fokusera ner ljuset något vid sidan av origo på sensorn, vilket leder till sämre ljusintag i de optiska fibrerna. 
