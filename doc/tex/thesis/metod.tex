@@ -16,32 +16,37 @@
             \center
 
             \begin{tikzpicture}[scale=0.85]
+            \footnotesize
               % Dialectics
-              \node[draw] (Test1) at (-1,0) {Test1};
-              \node[draw,fill=black,text=white] (Test2) at (1.3,0) {Test2};
-              \node[draw,fill=gray,text=white] (Test3) at (0,2) {Test3};
+              \node[draw,align=center,text width=20mm] (PI) at (-2,1.5) {Problem-\\identifiering};
+              \node[draw,align=center,text width=20mm] (PF) at (-2,0) {Problem-\\förståelse};
+              \node[draw,align=center,text width=20mm] (LS) at (-2,-1.5) {Litteratur-\\studier};
+              
+              \node[draw,align=center,text width=24mm] (IaT) at (2,1.5) {Identifiering\\av tillämpningar};
+              \node[draw,align=center,text width=24mm] (VaT) at (2,0) {Val av\\tillämpningar};
               
               \draw node[vertex] (Joint) at (0,0) {};
               
-              \draw[-,draw=blue] (Test1) to (Joint);
-              \draw[-,draw=blue] (Test2) to (Joint);
-              \draw[->,draw=blue] (Joint) to (Test3);
-              \draw[->,draw=blue] (Test3) to[in=180,out=180] (Test1);
+              \draw[-,draw=blue] (PI) to (Joint);
+              \draw[-,draw=blue] (PF) to (Joint);
+              \draw[->,draw=blue] (Joint) to (LS);
+              \draw[->,draw=blue] (LS) to[in=180,out=180] (PI);
               
               %\node at (1.0, -1.0) {\textit{a) Dialectics}};
               
               % Opposition
-              \node[draw] (ArgumentA) at (3.7,0) {Argument};
-              \node[draw,fill=black,text=white] (ArgumentB) at (6.25,0) {Opposition};
+              \node[draw,align=center,text width=20mm,] (UF) at (6,1.5) {Utformning};
+              \node[draw,align=center,text width=20mm] (Utveck) at (6,0) {Utveckling};
+              \node[draw,align=center,text width=20mm] (Utvard) at (6,-1.5) {Utvärdering};
               
               \draw[->,draw=blue] (ArgumentA) to (ArgumentB);
               
               %\node at (6., -1.0) {\textit{b) Opposition}};
               
               % Innovation
-              \node[draw] (ArgumentA) at (9.1,0) {Argument};
-              \node[draw,fill=black,text=white] (ArgumentB) at (12,0) {Opposition};
-              \node[draw,fill=yellow] (ArgumentC) at (11,2) {Innovation};
+              \node[draw,align=center,text width=20mm] (TaK) at (10,1.5) {Tydliggörande\\av kunskap};
+              \node[draw,align=center,text width=20mm] (Slut) at (10,0) {Slutsats};
+              \node[draw,align=center,text width=20mm] (Pres) at (10,-1.5) {Presentation};
               
               \draw node[vertex] (Joint) at (10.5,0) {};
               
