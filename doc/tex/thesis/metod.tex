@@ -12,44 +12,43 @@
     	Ovan nämnda metodik har för detta projekt förenklats något för att anpassas till projektets storlek och omfattning.
 
         \begin{figure}[hbt]
-
-            \center
-
+            \centering
             \begin{tikzpicture}[scale=0.85]
-              % Dialectics
-              \node[draw] (Test1) at (-1,0) {Test1};
-              \node[draw,fill=black,text=white] (Test2) at (1.3,0) {Test2};
-              \node[draw,fill=gray,text=white] (Test3) at (0,2) {Test3};
-              
-              \draw node[vertex] (Joint) at (0,0) {};
-              
-              \draw[-,draw=blue] (Test1) to (Joint);
-              \draw[-,draw=blue] (Test2) to (Joint);
-              \draw[->,draw=blue] (Joint) to (Test3);
-              \draw[->,draw=blue] (Test3) to[in=180,out=180] (Test1);
-              
-              %\node at (1.0, -1.0) {\textit{a) Dialectics}};
-              
-              % Opposition
-              \node[draw] (ArgumentA) at (3.7,0) {Argument};
-              \node[draw,fill=black,text=white] (ArgumentB) at (6.25,0) {Opposition};
-              
-              \draw[->,draw=blue] (ArgumentA) to (ArgumentB);
-              
-              %\node at (6., -1.0) {\textit{b) Opposition}};
-              
-              % Innovation
-              \node[draw] (ArgumentA) at (9.1,0) {Argument};
-              \node[draw,fill=black,text=white] (ArgumentB) at (12,0) {Opposition};
-              \node[draw,fill=yellow] (ArgumentC) at (11,2) {Innovation};
-              
-              \draw node[vertex] (Joint) at (10.5,0) {};
-              
-              \draw[-] (ArgumentA) to (Joint);
-              \draw[-] (ArgumentB) to (Joint);
-              \draw[->,draw=blue] (Joint) to (ArgumentC);
-              
-              %\node at (11.5, -1.0) {\textit{c) Innovation}};
+                \footnotesize
+                % Dialectics
+                \node[draw] (Test1) at (-1,0) {Test1};
+                \node[draw,fill=black,text=white] (Test2) at (1.3,0) {Test2};
+                \node[draw,fill=gray,text=white] (Test3) at (0,2) {Test3};
+
+                \draw node[vertex] (Joint) at (0,0) {};
+
+                \draw[-,draw=blue] (Test1) to (Joint);
+                \draw[-,draw=blue] (Test2) to (Joint);
+                \draw[->,draw=blue] (Joint) to (Test3);
+                \draw[->,draw=blue] (Test3) to[in=180,out=180] (Test1);
+
+                %\node at (1.0, -1.0) {\textit{a) Dialectics}};
+
+                % Opposition
+                \node[draw] (ArgumentA) at (3.7,0) {Argument};
+                \node[draw,fill=black,text=white] (ArgumentB) at (6.25,0) {Opposition};
+
+                \draw[->,draw=blue] (ArgumentA) to (ArgumentB);
+
+                %\node at (6., -1.0) {\textit{b) Opposition}};
+
+                % Innovation
+                \node[draw] (ArgumentA) at (9.1,0) {Argument};
+                \node[draw,fill=black,text=white] (ArgumentB) at (12,0) {Opposition};
+                \node[draw,fill=yellow] (ArgumentC) at (11,2) {Innovation};
+
+                \draw node[vertex] (Joint) at (10.5,0) {};
+
+                \draw[-] (ArgumentA) to (Joint);
+                \draw[-] (ArgumentB) to (Joint);
+                \draw[->,draw=blue] (Joint) to (ArgumentC);
+
+                %\node at (11.5, -1.0) {\textit{c) Innovation}};
             \end{tikzpicture}
             \label{fig:method}\caption{Placeholder figure}
         \end{figure}
@@ -64,7 +63,7 @@
 
         Vidare var arbetsmetodiken inspirerad av 'Scrum' där större mål sattes upp och bröts ner till mindre så kallade 'issues' \cite[kap.~8]{scrum}. Dessa issues sattes upp på en virtuell tavla med hjälp av verktyget 'Waffle.io' för att få en bättre överblick kring hur projektet utvecklades och vad som behövde göras. \bigskip
 
-        Anledningen till att inte hela Scrum-metodiken anammades var att projektet utfördes av få personer så den rollfördelning som hör till i Scrum gick ej att utföra på något meningsfullt vis \cite[kap.~6]{scrum}, samt att ovanan vid denna typ av utveckling gjorde att kostnaderna för varje issue var svårt att bestämma. Vidare var projektets omfång väl avgränsat av uppdrags\-givaren så dessa användes som milstenar istället för de föreslagna användarberättelserna \cite[kap.~9]{scrum}. 
+        Anledningen till att inte hela Scrum-metodiken anammades var att projektet utfördes av få personer så den rollfördelning som hör till i Scrum gick ej att utföra på något meningsfullt vis \cite[kap.~6]{scrum}, samt att ovanan vid denna typ av utveckling gjorde att kostnaderna för varje issue var svårt att bestämma. Vidare var projektets omfång väl avgränsat av uppdrags\-givaren så de avgränsningarna användes som milstenar (inbyggd funktion i GitHub) istället för de föreslagna användarberättelserna \cite[kap.~9]{scrum}. 
 
     % subsection arbetsmetodik (end)
 % section metod (end)
