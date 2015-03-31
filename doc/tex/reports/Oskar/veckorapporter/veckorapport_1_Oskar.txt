@@ -37,6 +37,29 @@ kunna generera test fall.
 
 --------------
 
+Torsdag
+--------------
+
+Dagen upplevdes som en mellan-dag då vi väntade på mötet med Parans.
+
+Pär började på rapporten med teknisk bakgrund och referenser. 
+
+Jag kollade på lite olika algoritmer och bekantade mig mera med Python.
+
+--------------
+
+Fredag
+--------------
+
+Förmiddagen spenderades ute på Parans där ett möte hölls för att få en enhetlig
+bild av vad projektet ska avhandla. Vidare skrev vi om vår planeringsrapport för att passa det som vi kom fram till på mötet.
+
+Eftermiddagen spenderades till att leta fram vilken metod som projektet ska 
+luta sig mot. Vi bestämde oss för *Design Science Research* och valde att läsa 
+in oss på den metoden över helgen, från en källa vi hittade från biblioteket.
+
+--------------
+
  
 Tidsåtgång i timmar: 
-19
+33
