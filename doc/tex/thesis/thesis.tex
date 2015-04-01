@@ -29,6 +29,7 @@
 \usepackage[hidelinks]{hyperref}
 %%--GRAPHICS--%%  (Requires preamble)
 \usepackage{tikz}
+\usetikzlibrary{backgrounds,calc,positioning,shapes}
 \tikzset{
     vertex/.style = {
         circle,
@@ -37,7 +38,8 @@
         inner sep = 1pt,
     }
 }
-
+\tikzset{My Arrow Style/.style={single arrow, fill=blue!50, anchor=base, align=center,text width=11mm,text height=1mm}}
+\definecolor{light-gray}{gray}{0.95}
 
 \usepackage{graphicx}
 \usepackage{caption}

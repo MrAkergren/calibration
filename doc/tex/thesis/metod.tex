@@ -9,47 +9,64 @@
 
     	Dresch et al. rekommenderar, baserat på studier av flera metoder för DSR, en metod i 12 steg \cite[s.~118--126]{dsr}. De tre inledande stegen är en analys av de problem som ska lösas, problemidentifiering, problemförståelse och litteraturstudier. Denna inledande fas mynnar ut i att hitta eventuella befintliga lösningar som kan vara lämpliga och att sedan föreslå en vidareutveckling och tillämpning av denna eller att föreslå en ny lösning. Steg sex till åtta är sedan att utforma, utveckla och utvärdera lösningen. Därefter ska den kunskap som givits av tidigare steg tydliggöras och slutsatser dras. Tidigarenämnda steg itereras vid behov för att uppnå önskat resultat. Slutligen ska generalisering av lösningen utformas och resultatet presenteras. \bigskip
 
-    	Ovan nämnda metodik har för detta projekt förenklats något för att anpassas till projektets storlek och omfattning.
+    	Ovan nämnda metodik har för detta projekt förenklats något för att anpassas till projektets storlek och omfattning. Metoden indelas i fyra faser, enligt Figur ~\ref{fig:method}, där fas 1--3 itereras efter behov.
 
         \begin{figure}[b]
             \centering
 
-            \begin{tikzpicture}[scale=0.85]
-                \footnotesize
+            \begin{tikzpicture}[pil/.style={
+                                            thick,
+                                            ->,
+                                            draw=blue!50
+                                },
+                                block/.style={
+                                            draw,
+                                            fill=white,
+                                            rectangle,
+                                            align=center,
+                                            minimum width=25mm,
+                                            minimum height=10mm,
+                                            font=\small,
+                                            fill=light-gray
+                                }
+            ]
+                \node[block] (PI) at (0,3) {Problem-\\identifiering};
+                \node[block,below=5mm of PI] (PF) {Problem-\\förståelse};
+                \node[block,below=5mm of PF] (LS) {Litteratur-\\studier};
+
+                \node[block,minimum width=30mm,right=10mm of PI] (IaT) {Identifiering\\av tillämpningar};
+                \node[block,minimum width=30mm,below=5mm of IaT] (VaT) {Val av\\tillämpningar};
                 
-                \node[draw,align=center,text width=20mm] (PI) at (-2,1.5) {Problem-\\identifiering};
-                \node[draw,align=center,text width=20mm] (PF) at (-2,0) {Problem-\\förståelse};
-                \node[draw,align=center,text width=20mm] (LS) at (-2,-1.5) {Litteratur-\\studier};
-
-                \node[draw,align=center,text width=24mm] (IaT) at (2,1.5) {Identifiering\\av tillämpningar};
-                \node[draw,align=center,text width=24mm] (VaT) at (2,0) {Val av\\tillämpningar};
-
-                \draw node[vertex] (Joint) at (0,0) {};
-
-                \draw[-,draw=blue] (PI) to (Joint);
-                \draw[-,draw=blue] (PF) to (Joint);
-                \draw[->,draw=blue] (Joint) to (LS);
-                \draw[->,draw=blue] (LS) to[in=180,out=180] (PI);
-
-                %\node at (1.0, -1.0) {\textit{a) Dialectics}};
-
+                \node[block,right=10mm of IaT] (UF) {Utformning};
+                \node[block,below=5mm of UF] (Utveck) {Utveckling};
+                \node[block,below=5mm of Utveck] (Utvard) {Utvärdering};
                 
-                \node[draw,align=center,text width=20mm,] (UF) at (6,1.5) {Utformning};
-                \node[draw,align=center,text width=20mm] (Utveck) at (6,0) {Utveckling};
-                \node[draw,align=center,text width=20mm] (Utvard) at (6,-1.5) {Utvärdering};
+                \node[block,right=10mm of UF] (TaK) {Tydliggörande\\av kunskap};
+                \node[block,below=5mm of TaK] (Slut) {Slutsats};
+                \node[block,below=5mm of Slut] (Pres) {Presentation};
 
+                \draw[pil] (PI) to (PF);
+                \draw[pil] (PF) to (LS);
+                \draw[pil] (IaT) to (VaT);
+                \draw[pil] (UF) to (Utveck);
+                \draw[pil] (Utveck) to (Utvard);
+                \draw[pil] (TaK) to (Slut);
+                \draw[pil] (Slut) to (Pres);
 
-                %\node at (6., -1.0) {\textit{b) Opposition}};
+                \draw[pil] (LS.east) to [in=180,out=0] (IaT.west);
+                \draw[pil] (VaT.east) to [in=180,out=0] (UF.west);
+                \draw[pil] (Utvard.east) to [in=180,out=0] (TaK.west);
 
-                
-                \node[draw,align=center,text width=20mm] (TaK) at (10,1.5) {Tydliggörande\\av kunskap};
-                \node[draw,align=center,text width=20mm] (Slut) at (10,0) {Slutsats};
-                \node[draw,align=center,text width=20mm] (Pres) at (10,-1.5) {Presentation};
+                \node[below=5mm of LS] (F1) {\textit{Fas 1}};
+                \node[right=26mm of F1] (F2) {\textit{Fas 2}};
+                \node[right=25mm of F2] (F3) {\textit{Fas 3}};
+                \node[right=23mm of F3] (F4) {\textit{Fas 4}};
 
-                %\node at (11.5, -1.0) {\textit{c) Innovation}};
-
+                \node[My Arrow Style,right=4mm of F1] {};
+                \node[My Arrow Style,right=4mm of F2] {};
+                \node[My Arrow Style,right=3mm of F3] {};
             \end{tikzpicture}
-            \label{fig:method}\caption{Placeholder figure}
+            \label{fig:method}\caption{Utformning av metod}
         \end{figure}
 
     % subsection vetenskaplig_metod (end)
