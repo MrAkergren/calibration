@@ -1,0 +1,9 @@
+2015-03-25 Onsdag
+---
+
+Bibliotekskurs på Lindholmens bibliotek på förmiddagen.
+
+På eftermiddagen lite inledande kodning i python för att prova på matrisgenerering.
+
+---
+Tidsåtgång: 7h
