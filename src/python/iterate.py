@@ -14,7 +14,7 @@ class main():
         arr = numpy.zeros((ySize, xSize)).tolist()
         arr[yMax][xMax] = MAX_VALUE
 
-        for y in range(0, ySize):.
+        for y in range(0, ySize):
             for x in range(0, xSize):
                 if x == xMax and y == yMax:
                     continue
@@ -69,7 +69,7 @@ class main():
                     y = b+j
 
         #Check clockwise
-        while(1):
+        while(True):
             #EAST
             if(value < array[x+1][y]):
                 x += 1
