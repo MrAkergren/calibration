@@ -14,7 +14,7 @@ class main():
         arr = numpy.zeros((ySize, xSize)).tolist()
         arr[yMax][xMax] = MAX_VALUE
 
-        for y in range(0, ySize):
+        for y in range(0, ySize):.
             for x in range(0, xSize):
                 if x == xMax and y == yMax:
                     continue
@@ -44,7 +44,8 @@ class main():
                     yValue = y
                 y += 1
             x += 1
-        print("HIGHETS VALUES WAS:" + str(value) + " on coordinate: x=" + str(xValue) + " y=" + str(yValue))
+
+        self.printResults(value, xValue, yValue)
 
     def labyrinth(self,array):
 
@@ -114,7 +115,11 @@ class main():
             else:
                 break
 
-        print("HIGHETS VALUES WAS:" + str(value) + " on coordinate: x=" + str(x) + " y=" + str(y))
+        self.printResults(value, x, y)
+
+    # Prints the provided value and its coordinates
+    def printResults(self, valueFound, xPos, yPos):
+        print("HIGHEST VALUE WAS:" + str(valueFound) + " on coordinate: x: " + str(xPos) + ", y: " + str(yPos))
 
 main = main()
 array1 = main.createArray(1000, 1000, random.randint(0,999), random.randint(0,999))
