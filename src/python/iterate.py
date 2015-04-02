@@ -14,7 +14,7 @@ class main():
         arr = numpy.zeros((ySize, xSize)).tolist()
         arr[yMax][xMax] = MAX_VALUE
 
-        for y in range(0, ySize):
+        for y in range(0, ySize):.
             for x in range(0, xSize):
                 if x == xMax and y == yMax:
                     continue
@@ -44,7 +44,7 @@ class main():
                     yValue = y
                 y += 1
             x += 1
-        print("HIGHETS VALUES WAS:" + str(value) + " on coordinate: x=" + str(xValue) + " y=" + str(yValue))
+        print("HIGHEST VALUES WAS:" + str(value) + " on coordinate: x=" + str(xValue) + " y=" + str(yValue))
 
     def labyrinth(self,array):
 
