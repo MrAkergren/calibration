@@ -50,8 +50,8 @@ class main():
     def labyrinth(self,array):
 
         #values for the start position in the array
-        a = random.randint(0, len(array[0])-2)
-        b = random.randint(0, len(array)-2)
+        a = random.randint(0, len(array[0])-3)
+        b = random.randint(0, len(array)-3)
 
         #coordinates for 'value' in the array 
         x = 0
