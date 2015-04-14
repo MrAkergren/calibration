@@ -18,3 +18,4 @@ latex.out/
 *.lof
 *.lot
 thesis.blg
+*.fdb_latexmk
