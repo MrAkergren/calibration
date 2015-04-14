@@ -1,3 +1,5 @@
+#Style guide for Python source code 
+
 |Type  |  Public | Internal |
 |--- | --- | --- | 
 |Packages |   lower_with_under    ||
@@ -11,3 +13,5 @@
 |Method Names  |  lower_with_under() | _lower_with_under() (protected) or __lower_with_under() (private) |
 |Function/Method Parameters | lower_with_under    ||
 |Local Variables   |  lower_with_under    ||
+
+For more information see: https://google-styleguide.googlecode.com/svn/trunk/pyguide.html
