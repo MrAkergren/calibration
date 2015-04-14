@@ -1,4 +1,5 @@
 latex.out/
+__pycache__/*
 *.pdf
 *.aux
 *.log
