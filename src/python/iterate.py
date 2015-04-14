@@ -4,6 +4,7 @@
 import time
 import numpy
 import random
+import sys
 from colorama import Fore
 
 MAX_VALUE = 9
@@ -50,9 +51,8 @@ class main():
             print("")
 
     def labyrinth(self, array):
-        # Creates an empty array with the same size as the parameter to
-        # the function, used for keeping track of visited coordinates.
-        visited = numpy.zeros((len(array), len(array))).tolist()
+        # Create a set to be used for checking visited coordinates
+        visited = set()
 
         # Length of array
         x_length = len(array[0]) - 1
@@ -83,91 +83,74 @@ class main():
         # Check clockwise
         while(True):
             # EAST
-            if(x < x_length and not visited[x+1][y]):
+            if(x < x_length and (x+1, y) not in visited):
                 steps += 1
+                visited.add((x+1, y))
                 if value < array[x+1][y]:
                     x += 1
                     value = array[x][y]
-                    visited[x][y] = 1
-                else:
-                    visited[x+1][y] = 1
 
             # SOUTH EAST
-            elif(x < x_length and y < y_length and not visited[x+1][y+1]):
+            elif(x < x_length and y < y_length and (x+1, y+1) not in visited):
                 steps += 1
+                visited.add((x+1, y+1))
                 if value < array[x+1][y+1]:
                     x += 1
                     y += 1
                     value = array[x][y]
-                    visited[x][y] = 1
-                else:
-                    visited[x+1][y+1] = 1
 
             # SOUTH
-            elif(y < y_length and not visited[x][y+1]):
+            elif(y < y_length and (x, y+1) not in visited):
                 steps += 1
+                visited.add((x, y+1))
                 if value < array[x][y+1]:
                     y += 1
                     value = array[x][y]
-                    visited[x][y] = 1
-                else:
-                    visited[x][y+1] = 1
 
             # SOUTH WEST
-            elif(x > 0 and y < y_length and not visited[x-1][y+1]):
+            elif(x > 0 and y < y_length and (x-1, y+1) not in visited):
                 steps += 1
+                visited.add((x-1, y+1))
                 if value < array[x-1][y+1]:
                     x -= 1
                     y -= 1
                     value = array[x][y]
-                    visited[x][y] = 1
-                else:
-                    visited[x-1][y+1] = 1
 
             # WEST
-            elif(x > 0 and not visited[x-1][y]):
+            elif(x > 0 and (x-1, y) not in visited):
                 steps += 1
+                visited.add((x-1, y))
                 if value < array[x-1][y]:
                     x -= 1
                     value = array[x][y]
-                    visited[x][y] = 1
-                else:
-                    visited[x-1][y] = 1
 
             # NORTH WEST
-            elif(x > 0 and y > 0 and not visited[x-1][y-1]):
+            elif(x > 0 and y > 0 and (x-1, y-1) not in visited):
                 steps += 1
+                visited.add((x-1, y-1))
                 if value < array[x-1][y-1]:
                     x -= 1
                     y += 1
                     value = array[x][y]
-                    visited[x][y] = 1
-                else:
-                    visited[x-1][y-1] = 1
 
             # NORTH
-            elif(y > 0 and not visited[x][y-1]):
+            elif(y > 0 and (x, y-1) not in visited):
                 steps += 1
+                visited.add((x, y-1))
                 if value < array[x][y-1]:
                     y -= 1
                     value = array[x][y]
-                    visited[x][y] = 1
-                else:
-                    visited[x][y-1] = 1
 
             # NORTH EAST
-            elif(x < x_length and y > 0 and not visited[x+1][y-1]):
+            elif(x < x_length and y > 0 and (x+1, y-1) not in visited):
                 steps += 1
+                visited.add((x+1, y-1))
                 if value < array[x+1][y-1]:
                     x += 1
                     y -= 1
                     value = array[x][y]
-                    visited[x][y] = 1
-                else:
-                    visited[x+1][y-1] = 1
 
             else:
-                steps += 1
                 break
 
         # self.print_results(value, x, y, steps)
@@ -176,9 +159,8 @@ class main():
 
     # Same as labyrinth(), but without diagonal movement
     def labyrinth2(self, array):
-        # Creates an empty array with the same size as the parameter to
-        # the function, used for keeping track of visited coordinates.
-        visited = numpy.zeros((len(array), len(array))).tolist()
+        # Create a set to be used for checking visited coordinates
+        visited = set()
 
         # Length of array
         x_length = len(array[0]) - 1
@@ -209,47 +191,38 @@ class main():
         # Check clockwise
         while(True):
             # EAST
-            if(x < x_length and not visited[x+1][y]):
+            if(x < x_length and (x+1, y) not in visited):
                 steps += 1
+                visited.add((x+1, y))
                 if value < array[x+1][y]:
                     x += 1
                     value = array[x][y]
-                    visited[x][y] = 1
-                else:
-                    visited[x+1][y] = 1
 
             # SOUTH
-            elif(y < y_length and not visited[x][y+1]):
+            elif(y < y_length and (x, y+1) not in visited):
                 steps += 1
+                visited.add((x, y+1))
                 if value < array[x][y+1]:
                     y += 1
                     value = array[x][y]
-                    visited[x][y] = 1
-                else:
-                    visited[x][y+1] = 1
 
             # WEST
-            elif(x > 0 and not visited[x-1][y]):
+            elif(x > 0 and (x-1, y) not in visited):
                 steps += 1
+                visited.add((x-1, y))
                 if value < array[x-1][y]:
                     x -= 1
                     value = array[x][y]
-                    visited[x][y] = 1
-                else:
-                    visited[x-1][y] = 1
 
             # NORTH
-            elif(y > 0 and not visited[x][y-1]):
+            elif(y > 0 and (x, y-1) not in visited):
                 steps += 1
+                visited.add((x, y-1))
                 if value < array[x][y-1]:
                     y -= 1
                     value = array[x][y]
-                    visited[x][y] = 1
-                else:
-                    visited[x][y-1] = 1
 
             else:
-                steps += 1
                 break
 
         # self.print_results(value, x, y, steps)
@@ -262,24 +235,27 @@ class main():
               str(x_pos) + " y: " + str(y_pos) + " steps: " + str(steps))
 
     def test_labyrinth(self):
-        print("\nLABYRINTH: ")
+        print("LABYRINTH\t", end="")
         start_time = time.time()
         for i in range(0, self.num_arrays):
             self.labyrinth(self.arrays[i])
-        print("TOTAL TIME: %s seconds\n" % (time.time() - start_time))
+        print("Total time: %s seconds" % (time.time() - start_time))
 
     def test_labyrinth2(self):
-        print("\nLABYRINTH 2: ")
+        print("LABYRINTH 2\t", end="")
         start_time = time.time()
         for i in range(0, self.num_arrays):
             self.labyrinth2(self.arrays[i])
-        print("TOTAL TIME: %s seconds\n" % (time.time() - start_time))
+        print("Total time: %s seconds" % (time.time() - start_time))
 
     def test_all(self):
+        print("\nArray size: " + str(self.array_size) + "\t\tArrays used: " +
+              str(self.num_arrays) + "\n")
+
         self.test_labyrinth()
         self.test_labyrinth2()
 
-        print("\t\tLabyrinth\tLabyrinth2")
+        print("\n\t\tLabyrinth\tLabyrinth2")
         print("max steps\t" + str(max(self.labyrinth_steps)) + "\t\t" +
               str(max(self.labyrinth2_steps)))
         print("min steps\t" + str(min(self.labyrinth_steps)) + "\t\t" +
@@ -292,10 +268,22 @@ class main():
               str(max(self.labyrinth2_max_value)))
         print("min value\t" + str(min(self.labyrinth_max_value)) + "\t\t" +
               str(min(self.labyrinth2_max_value)))
+        print()
 
 
 # Main created with array size (square) and number of arrays
-main = main(500, 500)
+# Default is 500 for both, if nothing is given by sys arguments
+arr_size = 500
+arrays = 500
+
+if len(sys.argv) > 1:
+    if sys.argv[1].isdigit() and int(sys.argv[1]) > 0 and int(sys.argv[1]) < 600:
+        arr_size = int(sys.argv[1])
+if len(sys.argv) > 2:
+    if sys.argv[2].isdigit() and int(sys.argv[2]) > 0 and int(sys.argv[2]) < 600:
+        arrays = int(sys.argv[2])
+
+main = main(arr_size, arrays)
 main.create_arrays()
 
 main.test_all()
