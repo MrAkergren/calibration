@@ -8,78 +8,82 @@ from colorama import Fore
 
 MAX_VALUE = 9
 
+
 class main():
-    def __init__(self, arraySize, numberOfArrays):
-        self.arraySize = arraySize                  # Size of arrays to be generated
-        self.numberOfArrays = numberOfArrays        # Number of arrays to be generated
-        self.arrays = []                            # Holds the generated arrays
-                
-        self.labSteps = []                          # Holds number movements/steps for labyrinth()
-        self.lab2Steps = []                         # Holds number movements/steps for labyrinth2()
-        self.labMaxValue = set()                    # Holds max value(s) found in labyrinth()
-        self.lab2MaxValue = set()                   # Holds max value(s) found in labyrinth2()
+    def __init__(self, array_size, num_arrays):
+        self.array_size = array_size    # Size of arrays to be generated
+        self.num_arrays = num_arrays    # Number of arrays to generate
+        self.arrays = []                # Holds the generated arrays
 
-    def createArrays(self):
-        for loop in range(0, self.numberOfArrays):
-            self.arrays.append(main.createArray(self.arraySize, self.arraySize, random.randint(0,self.arraySize-1), random.randint(0,self.arraySize-1)))
+        self.labyrinth_steps = []   # Holds number of movements for labyrinth()
+        self.labyrinth2_steps = []  # Holds number of movements for labyrinth2()
+        self.labyrinth_max_value = set()   # Max value(s) found in labyrinth()
+        self.labyrinth2_max_value = set()  # Max value(s) found in labyrinth2()
 
-    def createArray(self, xSize, ySize, xMax, yMax):
-        arr = numpy.zeros((xSize, ySize)).tolist()
-        arr[xMax][yMax] = MAX_VALUE
+    def create_arrays(self):
+        for loop in range(0, self.num_arrays):
+            self.arrays.append(main.create_array(self.array_size,
+                               self.array_size,
+                               random.randint(0, self.array_size-1),
+                               random.randint(0, self.array_size-1)))
 
-        for x in range(0, xSize):
-            for y in range(0, ySize):
-                if x == xMax and y == yMax:
+    def create_array(self, x_size, y_size, x_max, y_max):
+        arr = numpy.zeros((x_size, y_size)).tolist()
+        arr[x_max][y_max] = MAX_VALUE
+
+        for x in range(0, x_size):
+            for y in range(0, y_size):
+                if x == x_max and y == y_max:
                     continue
-                arr[x][y] = MAX_VALUE - (abs(x - xMax) + abs(y - yMax))
+                arr[x][y] = MAX_VALUE - (abs(x - x_max) + abs(y - y_max))
 
-        # self.printArray(arr, xSize, ySize, xMax, yMax)
+        # self.print_array(arr, x_size, y_size, x_max, y_max)
         return arr
 
-    def printArray(self, arr, xSize, ySize, xMax, yMax):
-        for y in range(0, ySize):
-            for x in range(0, xSize):
-                if x == xMax and y == yMax:
+    def print_array(self, arr, x_size, y_size, x_max, y_max):
+        for y in range(0, y_size):
+            for x in range(0, x_size):
+                if x == x_max and y == y_max:
                     print(Fore.RED + "{:3d}".format(arr[y][x]), end=' ')
                     continue
                 print(Fore.RESET + "{:3d}".format(arr[y][x]), end=' ')
             print("")
 
     def labyrinth(self, array):
-        # Creates an empty array with the same size as the one provided to the function,
-        # used for keeping track of visited coordinates
+        # Creates an empty array with the same size as the parameter to
+        # the function, used for keeping track of visited coordinates.
         visited = numpy.zeros((len(array), len(array))).tolist()
 
         # Length of array
-        xLength = len(array[0]) - 1
-        yLength = len(array) - 1
+        x_length = len(array[0]) - 1
+        y_length = len(array) - 1
 
-        #values for the start position in the array
+        # values for the start position in the array
         a = random.randint(0, len(array[0])-3)
         b = random.randint(0, len(array)-3)
 
-        #coordinates for 'value' in the array 
+        # coordinates for 'value' in the array
         x = 0
         y = 0
 
-        #the highest value found
+        # the highest value found
         value = float("-inf")
 
         # Number of steps moved
         steps = 0
 
-        #iterate through 3x3 array for startpoint
-        for i in range(0,3):
-            for j in range(0,3):
+        # iterate through 3x3 array for startpoint
+        for i in range(0, 3):
+            for j in range(0, 3):
                 if(array[a+i][b+j] > value):
                     value = array[a+i][b+j]
                     x = a+i
                     y = b+j
 
-        #Check clockwise
+        # Check clockwise
         while(True):
-            #EAST
-            if(x < xLength and not visited[x+1][y]):
+            # EAST
+            if(x < x_length and not visited[x+1][y]):
                 steps += 1
                 if value < array[x+1][y]:
                     x += 1
@@ -88,8 +92,8 @@ class main():
                 else:
                     visited[x+1][y] = 1
 
-            #SOUTH EAST
-            elif(x < xLength and y < yLength and not visited[x+1][y+1]):
+            # SOUTH EAST
+            elif(x < x_length and y < y_length and not visited[x+1][y+1]):
                 steps += 1
                 if value < array[x+1][y+1]:
                     x += 1
@@ -99,8 +103,8 @@ class main():
                 else:
                     visited[x+1][y+1] = 1
 
-            #SOUTH
-            elif(y < yLength and not visited[x][y+1]):
+            # SOUTH
+            elif(y < y_length and not visited[x][y+1]):
                 steps += 1
                 if value < array[x][y+1]:
                     y += 1
@@ -109,18 +113,18 @@ class main():
                 else:
                     visited[x][y+1] = 1
 
-            #SOUTH WEST
-            elif(x > 0 and y < yLength and not visited[x-1][y+1]):
+            # SOUTH WEST
+            elif(x > 0 and y < y_length and not visited[x-1][y+1]):
                 steps += 1
                 if value < array[x-1][y+1]:
                     x -= 1
-                    y -= 1            
+                    y -= 1
                     value = array[x][y]
                     visited[x][y] = 1
                 else:
                     visited[x-1][y+1] = 1
 
-            #WEST
+            # WEST
             elif(x > 0 and not visited[x-1][y]):
                 steps += 1
                 if value < array[x-1][y]:
@@ -130,7 +134,7 @@ class main():
                 else:
                     visited[x-1][y] = 1
 
-            #NORTH WEST
+            # NORTH WEST
             elif(x > 0 and y > 0 and not visited[x-1][y-1]):
                 steps += 1
                 if value < array[x-1][y-1]:
@@ -141,7 +145,7 @@ class main():
                 else:
                     visited[x-1][y-1] = 1
 
-            #NORTH
+            # NORTH
             elif(y > 0 and not visited[x][y-1]):
                 steps += 1
                 if value < array[x][y-1]:
@@ -151,8 +155,8 @@ class main():
                 else:
                     visited[x][y-1] = 1
 
-            #NORTH EAST
-            elif(x < xLength and y > 0 and not visited[x+1][y-1]):
+            # NORTH EAST
+            elif(x < x_length and y > 0 and not visited[x+1][y-1]):
                 steps += 1
                 if value < array[x+1][y-1]:
                     x += 1
@@ -166,46 +170,46 @@ class main():
                 steps += 1
                 break
 
-        #self.printResults(value, x, y, steps)
-        self.labSteps.append(steps)
-        self.labMaxValue.add(value)
+        # self.print_results(value, x, y, steps)
+        self.labyrinth_steps.append(steps)
+        self.labyrinth_max_value.add(value)
 
     # Same as labyrinth(), but without diagonal movement
     def labyrinth2(self, array):
-        # Creates an empty array with the same size as the one provided to the function,
-        # used for keeping track of visited coordinates
+        # Creates an empty array with the same size as the parameter to
+        # the function, used for keeping track of visited coordinates.
         visited = numpy.zeros((len(array), len(array))).tolist()
 
         # Length of array
-        xLength = len(array[0]) - 1
-        yLength = len(array) - 1
+        x_length = len(array[0]) - 1
+        y_length = len(array) - 1
 
-        #values for the start position in the array
+        # values for the start position in the array
         a = random.randint(0, len(array[0])-3)
         b = random.randint(0, len(array)-3)
 
-        #coordinates for 'value' in the array 
+        # coordinates for 'value' in the array
         x = 0
         y = 0
 
-        #the highest value found
+        # the highest value found
         value = float("-inf")
 
         # Number of steps moved
         steps = 0
 
-        #iterate through 3x3 array for startpoint
-        for i in range(0,3 ):
-            for j in range(0,3):
+        # iterate through 3x3 array for startpoint
+        for i in range(0, 3):
+            for j in range(0, 3):
                 if(array[a+i][b+j] > value):
                     value = array[a+i][b+j]
                     x = a+i
                     y = b+j
 
-        #Check clockwise
+        # Check clockwise
         while(True):
-            #EAST
-            if(x < xLength and not visited[x+1][y]):
+            # EAST
+            if(x < x_length and not visited[x+1][y]):
                 steps += 1
                 if value < array[x+1][y]:
                     x += 1
@@ -214,8 +218,8 @@ class main():
                 else:
                     visited[x+1][y] = 1
 
-            #SOUTH
-            elif(y < yLength and not visited[x][y+1]):
+            # SOUTH
+            elif(y < y_length and not visited[x][y+1]):
                 steps += 1
                 if value < array[x][y+1]:
                     y += 1
@@ -224,7 +228,7 @@ class main():
                 else:
                     visited[x][y+1] = 1
 
-            #WEST
+            # WEST
             elif(x > 0 and not visited[x-1][y]):
                 steps += 1
                 if value < array[x-1][y]:
@@ -234,7 +238,7 @@ class main():
                 else:
                     visited[x-1][y] = 1
 
-            #NORTH
+            # NORTH
             elif(y > 0 and not visited[x][y-1]):
                 steps += 1
                 if value < array[x][y-1]:
@@ -248,50 +252,50 @@ class main():
                 steps += 1
                 break
 
-        #self.printResults(value, x, y, steps)
-        self.lab2Steps.append(steps)
-        self.lab2MaxValue.add(value)
+        # self.print_results(value, x, y, steps)
+        self.labyrinth2_steps.append(steps)
+        self.labyrinth2_max_value.add(value)
 
     # Prints the provided value and its coordinates
-    def printResults(self, valueFound, xPos, yPos, steps = 0):
-        print("HIGHEST VALUE WAS:" + str(valueFound) + " on coordinate: x: " + str(xPos) + " y: " + str(yPos) + " steps: " + str(steps))
+    def print_results(self, value_found, x_pos, y_pos, steps=0):
+        print("HIGHEST VALUE WAS:" + str(value_found) + " on coordinate: x: " +
+              str(x_pos) + " y: " + str(y_pos) + " steps: " + str(steps))
 
-    def testPrimitive(self):
-        print("\nPRIMITIVE: ")
-        start_time = time.time()
-        for i in range(0, min(3, self.numberOfArrays)):
-            self.primitive(self.arrays[i])
-        print("TOTAL TIME: %s seconds\n" % (time.time() - start_time))
-
-    def testLabyrinth(self):
+    def test_labyrinth(self):
         print("\nLABYRINTH: ")
         start_time = time.time()
-        for i in range(0, self.numberOfArrays):
+        for i in range(0, self.num_arrays):
             self.labyrinth(self.arrays[i])
         print("TOTAL TIME: %s seconds\n" % (time.time() - start_time))
 
-    def testLabyrinth2(self):
+    def test_labyrinth2(self):
         print("\nLABYRINTH 2: ")
         start_time = time.time()
-        for i in range(0, self.numberOfArrays):
+        for i in range(0, self.num_arrays):
             self.labyrinth2(self.arrays[i])
         print("TOTAL TIME: %s seconds\n" % (time.time() - start_time))
 
-    def testAll(self):
-        self.testPrimitive()
-        self.testLabyrinth()
-        self.testLabyrinth2()
+    def test_all(self):
+        self.test_labyrinth()
+        self.test_labyrinth2()
 
         print("\t\tLabyrinth\tLabyrinth2")
-        print("max steps\t" + str(max(self.labSteps)) + "\t\t" + str(max(self.lab2Steps)))
-        print("min steps\t" + str(min(self.labSteps)) + "\t\t" + str(min(self.lab2Steps)))
-        print("avg steps\t" + str(int(sum(self.labSteps)/len(self.labSteps))) + "\t\t" + str(int(sum(self.lab2Steps)/len(self.lab2Steps))))
-        print("max value\t" + str(max(self.labMaxValue)) + "\t\t" + str(max(self.lab2MaxValue)))
-        print("min value\t" + str(min(self.labMaxValue)) + "\t\t" + str(min(self.lab2MaxValue)))
+        print("max steps\t" + str(max(self.labyrinth_steps)) + "\t\t" +
+              str(max(self.labyrinth2_steps)))
+        print("min steps\t" + str(min(self.labyrinth_steps)) + "\t\t" +
+              str(min(self.labyrinth2_steps)))
+        print("avg steps\t" +
+              str(int(sum(self.labyrinth_steps)/len(self.labyrinth_steps))) +
+              "\t\t" +
+              str(int(sum(self.labyrinth2_steps)/len(self.labyrinth2_steps))))
+        print("max value\t" + str(max(self.labyrinth_max_value)) + "\t\t" +
+              str(max(self.labyrinth2_max_value)))
+        print("min value\t" + str(min(self.labyrinth_max_value)) + "\t\t" +
+              str(min(self.labyrinth2_max_value)))
 
 
 # Main created with array size (square) and number of arrays
 main = main(500, 500)
-main.createArrays()
+main.create_arrays()
 
-main.testAll()
+main.test_all()
