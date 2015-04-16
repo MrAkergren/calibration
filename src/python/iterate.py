@@ -50,13 +50,9 @@ class main():
                 print(Fore.RESET + "{:3d}".format(arr[y][x]), end=' ')
             print("")
 
-    def labyrinth(self, array):
+    def labyrinth_setup(self, array):
         # Create a set to be used for checking visited coordinates
         visited = set()
-
-        # Length of array
-        x_length = len(array[0]) - 1
-        y_length = len(array) - 1
 
         # values for the start position in the array
         a = random.randint(0, len(array[0])-3)
@@ -75,10 +71,17 @@ class main():
         # iterate through 3x3 array for startpoint
         for i in range(0, 3):
             for j in range(0, 3):
+                steps += 1
+                visited.add((a+i, b+j))
                 if(array[a+i][b+j] > value):
                     value = array[a+i][b+j]
                     x = a+i
                     y = b+j
+
+        return visited, x, y, len(array[0]) - 1, len(array) - 1, value, steps
+
+    def labyrinth(self, array):
+        visited, x, y, x_length, y_length, value, steps = self.labyrinth_setup(array)
 
         # Check clockwise
         while(True):
@@ -159,34 +162,7 @@ class main():
 
     # Same as labyrinth(), but without diagonal movement
     def labyrinth2(self, array):
-        # Create a set to be used for checking visited coordinates
-        visited = set()
-
-        # Length of array
-        x_length = len(array[0]) - 1
-        y_length = len(array) - 1
-
-        # values for the start position in the array
-        a = random.randint(0, len(array[0])-3)
-        b = random.randint(0, len(array)-3)
-
-        # coordinates for 'value' in the array
-        x = 0
-        y = 0
-
-        # the highest value found
-        value = float("-inf")
-
-        # Number of steps moved
-        steps = 0
-
-        # iterate through 3x3 array for startpoint
-        for i in range(0, 3):
-            for j in range(0, 3):
-                if(array[a+i][b+j] > value):
-                    value = array[a+i][b+j]
-                    x = a+i
-                    y = b+j
+        visited, x, y, x_length, y_length, value, steps = self.labyrinth_setup(array)
 
         # Check clockwise
         while(True):
