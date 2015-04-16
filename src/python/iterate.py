@@ -83,75 +83,88 @@ class main():
     def labyrinth(self, array):
         visited, x, y, x_length, y_length, value, steps = self.labyrinth_setup(array)
 
+        last_move = None
+
         # Check clockwise
         while(True):
             # EAST
-            if(x < x_length and (x+1, y) not in visited):
+            if(x < x_length and (last_move is None or last_move is 'E') and (x+1, y) not in visited):
                 steps += 1
                 visited.add((x+1, y))
                 if value < array[x+1][y]:
                     x += 1
                     value = array[x][y]
+                    last_move = 'E'
 
             # SOUTH EAST
-            elif(x < x_length and y < y_length and (x+1, y+1) not in visited):
+            elif(x < x_length and (last_move is None or last_move is 'SE') and y < y_length and (x+1, y+1) not in visited):
                 steps += 1
                 visited.add((x+1, y+1))
                 if value < array[x+1][y+1]:
                     x += 1
                     y += 1
                     value = array[x][y]
+                    last_move = 'SE'
 
             # SOUTH
-            elif(y < y_length and (x, y+1) not in visited):
+            elif(y < y_length and (last_move is None or last_move is 'S') and (x, y+1) not in visited):
                 steps += 1
                 visited.add((x, y+1))
                 if value < array[x][y+1]:
                     y += 1
                     value = array[x][y]
+                    last_move = 'S'
 
             # SOUTH WEST
-            elif(x > 0 and y < y_length and (x-1, y+1) not in visited):
+            elif(x > 0 and (last_move is None or last_move is 'SW') and y < y_length and (x-1, y+1) not in visited):
                 steps += 1
                 visited.add((x-1, y+1))
                 if value < array[x-1][y+1]:
                     x -= 1
                     y -= 1
                     value = array[x][y]
+                    last_move = 'SW'
 
             # WEST
-            elif(x > 0 and (x-1, y) not in visited):
+            elif(x > 0 and (last_move is None or last_move is 'W') and (x-1, y) not in visited):
                 steps += 1
                 visited.add((x-1, y))
                 if value < array[x-1][y]:
                     x -= 1
                     value = array[x][y]
+                    last_move = 'W'
 
             # NORTH WEST
-            elif(x > 0 and y > 0 and (x-1, y-1) not in visited):
+            elif(x > 0 and (last_move is None or last_move is 'NW') and y > 0 and (x-1, y-1) not in visited):
                 steps += 1
                 visited.add((x-1, y-1))
                 if value < array[x-1][y-1]:
                     x -= 1
                     y += 1
                     value = array[x][y]
+                    last_move = 'NW'
 
             # NORTH
-            elif(y > 0 and (x, y-1) not in visited):
+            elif(y > 0 and (last_move is None or last_move is 'N') and (x, y-1) not in visited):
                 steps += 1
                 visited.add((x, y-1))
                 if value < array[x][y-1]:
                     y -= 1
                     value = array[x][y]
+                    last_move = 'N'
 
             # NORTH EAST
-            elif(x < x_length and y > 0 and (x+1, y-1) not in visited):
+            elif(x < x_length and (last_move is None or last_move is 'NE') and y > 0 and (x+1, y-1) not in visited):
                 steps += 1
                 visited.add((x+1, y-1))
                 if value < array[x+1][y-1]:
                     x += 1
                     y -= 1
                     value = array[x][y]
+                    last_move = 'NE'
+
+            elif(last_move is not None):
+                last_move = None
 
             else:
                 break
@@ -164,39 +177,48 @@ class main():
     def labyrinth2(self, array):
         visited, x, y, x_length, y_length, value, steps = self.labyrinth_setup(array)
 
+        last_move = None
+
         # Check clockwise
         while(True):
             # EAST
-            if(x < x_length and (x+1, y) not in visited):
+            if(x < x_length and (last_move is None or last_move is 'EAST') and (x+1, y) not in visited):
                 steps += 1
                 visited.add((x+1, y))
                 if value < array[x+1][y]:
                     x += 1
                     value = array[x][y]
+                    last_move = 'EAST'
 
             # SOUTH
-            elif(y < y_length and (x, y+1) not in visited):
+            elif(y < y_length and (last_move is None or last_move is 'SOUTH') and (x, y+1) not in visited):
                 steps += 1
                 visited.add((x, y+1))
                 if value < array[x][y+1]:
                     y += 1
                     value = array[x][y]
+                    last_move = 'SOUTH'
 
             # WEST
-            elif(x > 0 and (x-1, y) not in visited):
+            elif(x > 0 and (last_move is None or last_move is 'WEST') and (x-1, y) not in visited):
                 steps += 1
                 visited.add((x-1, y))
                 if value < array[x-1][y]:
                     x -= 1
                     value = array[x][y]
+                    last_move = 'WEST'
 
             # NORTH
-            elif(y > 0 and (x, y-1) not in visited):
+            elif(y > 0 and (last_move is None or last_move is 'NORTH') and (x, y-1) not in visited):
                 steps += 1
                 visited.add((x, y-1))
                 if value < array[x][y-1]:
                     y -= 1
                     value = array[x][y]
+                    last_move = 'NORTH'
+
+            elif(last_move is not None):
+                last_move = None
 
             else:
                 break
