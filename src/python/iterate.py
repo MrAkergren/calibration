@@ -4,6 +4,8 @@
 import time
 import numpy
 import random
+from statistics import mean
+from statistics import median
 import sys
 from colorama import Fore
 
@@ -88,7 +90,7 @@ class main():
         # Check clockwise
         while True:
             # EAST
-            if x < x_length and (last_move is None or last_move is 'E') and (x+1, y) not in visited:
+            if x < x_length and (last_move == None or last_move == 'E') and (x+1, y) not in visited:
                 steps += 1
                 visited.add((x+1, y))
                 if value < array[x+1][y]:
@@ -97,7 +99,7 @@ class main():
                     last_move = 'E'
 
             # SOUTH EAST
-            elif x < x_length and (last_move is None or last_move is 'SE') and y < y_length and (x+1, y+1) not in visited:
+            elif x < x_length and (last_move == None or last_move == 'SE') and y < y_length and (x+1, y+1) not in visited:
                 steps += 1
                 visited.add((x+1, y+1))
                 if value < array[x+1][y+1]:
@@ -107,7 +109,7 @@ class main():
                     last_move = 'SE'
 
             # SOUTH
-            elif y < y_length and (last_move is None or last_move is 'S') and (x, y+1) not in visited:
+            elif y < y_length and (last_move == None or last_move == 'S') and (x, y+1) not in visited:
                 steps += 1
                 visited.add((x, y+1))
                 if value < array[x][y+1]:
@@ -116,7 +118,7 @@ class main():
                     last_move = 'S'
 
             # SOUTH WEST
-            elif x > 0 and (last_move is None or last_move is 'SW') and y < y_length and (x-1, y+1) not in visited:
+            elif x > 0 and (last_move == None or last_move == 'SW') and y < y_length and (x-1, y+1) not in visited:
                 steps += 1
                 visited.add((x-1, y+1))
                 if value < array[x-1][y+1]:
@@ -126,7 +128,7 @@ class main():
                     last_move = 'SW'
 
             # WEST
-            elif x > 0 and (last_move is None or last_move is 'W') and (x-1, y) not in visited:
+            elif x > 0 and (last_move == None or last_move == 'W') and (x-1, y) not in visited:
                 steps += 1
                 visited.add((x-1, y))
                 if value < array[x-1][y]:
@@ -135,7 +137,7 @@ class main():
                     last_move = 'W'
 
             # NORTH WEST
-            elif x > 0 and (last_move is None or last_move is 'NW') and y > 0 and (x-1, y-1) not in visited:
+            elif x > 0 and (last_move == None or last_move == 'NW') and y > 0 and (x-1, y-1) not in visited:
                 steps += 1
                 visited.add((x-1, y-1))
                 if value < array[x-1][y-1]:
@@ -145,7 +147,7 @@ class main():
                     last_move = 'NW'
 
             # NORTH
-            elif y > 0 and (last_move is None or last_move is 'N') and (x, y-1) not in visited:
+            elif y > 0 and (last_move == None or last_move == 'N') and (x, y-1) not in visited:
                 steps += 1
                 visited.add((x, y-1))
                 if value < array[x][y-1]:
@@ -154,7 +156,7 @@ class main():
                     last_move = 'N'
 
             # NORTH EAST
-            elif x < x_length and (last_move is None or last_move is 'NE') and y > 0 and (x+1, y-1) not in visited:
+            elif x < x_length and (last_move == None or last_move == 'NE') and y > 0 and (x+1, y-1) not in visited:
                 steps += 1
                 visited.add((x+1, y-1))
                 if value < array[x+1][y-1]:
@@ -163,7 +165,7 @@ class main():
                     value = array[x][y]
                     last_move = 'NE'
 
-            elif last_move is not None:
+            elif last_move != None:
                 last_move = None
 
             else:
@@ -182,7 +184,7 @@ class main():
         # Check clockwise
         while(True):
             # EAST
-            if x < x_length and (last_move is None or last_move is 'EAST') and (x+1, y) not in visited:
+            if x < x_length and (last_move == None or last_move == 'EAST') and (x+1, y) not in visited:
                 steps += 1
                 visited.add((x+1, y))
                 if value < array[x+1][y]:
@@ -191,7 +193,7 @@ class main():
                     last_move = 'EAST'
 
             # SOUTH
-            elif y < y_length and (last_move is None or last_move is 'SOUTH') and (x, y+1) not in visited:
+            elif y < y_length and (last_move == None or last_move == 'SOUTH') and (x, y+1) not in visited:
                 steps += 1
                 visited.add((x, y+1))
                 if value < array[x][y+1]:
@@ -200,7 +202,7 @@ class main():
                     last_move = 'SOUTH'
 
             # WEST
-            elif x > 0 and (last_move is None or last_move is 'WEST') and (x-1, y) not in visited:
+            elif x > 0 and (last_move == None or last_move == 'WEST') and (x-1, y) not in visited:
                 steps += 1
                 visited.add((x-1, y))
                 if value < array[x-1][y]:
@@ -209,7 +211,7 @@ class main():
                     last_move = 'WEST'
 
             # NORTH
-            elif y > 0 and (last_move is None or last_move is 'NORTH') and (x, y-1) not in visited:
+            elif y > 0 and (last_move == None or last_move == 'NORTH') and (x, y-1) not in visited:
                 steps += 1
                 visited.add((x, y-1))
                 if value < array[x][y-1]:
@@ -217,7 +219,7 @@ class main():
                     value = array[x][y]
                     last_move = 'NORTH'
 
-            elif last_move is not None:
+            elif last_move != None:
                 last_move = None
 
             else:
@@ -254,17 +256,17 @@ class main():
         self.test_labyrinth2()
 
         print("\n\t\tLabyrinth\tLabyrinth2")
-        print("max steps\t" + str(max(self.labyrinth_steps)) + "\t\t" +
+        print("steps\tmax\t" + str(max(self.labyrinth_steps)) + "\t\t" +
               str(max(self.labyrinth2_steps)))
-        print("min steps\t" + str(min(self.labyrinth_steps)) + "\t\t" +
+        print("\tmin\t" + str(min(self.labyrinth_steps)) + "\t\t" +
               str(min(self.labyrinth2_steps)))
-        print("avg steps\t" +
-              str(int(sum(self.labyrinth_steps)/len(self.labyrinth_steps))) +
-              "\t\t" +
-              str(int(sum(self.labyrinth2_steps)/len(self.labyrinth2_steps))))
-        print("max value\t" + str(max(self.labyrinth_max_value)) + "\t\t" +
+        print("\tmean\t" + str(int(mean(self.labyrinth_steps))) + "\t\t" +
+              str(int(mean(self.labyrinth2_steps))))
+        print("\tmedian\t" + str(int(median(self.labyrinth_steps))) + "\t\t" +
+              str(int(median(self.labyrinth2_steps))))
+        print("\nvalue\tmax\t" + str(max(self.labyrinth_max_value)) + "\t\t" +
               str(max(self.labyrinth2_max_value)))
-        print("min value\t" + str(min(self.labyrinth_max_value)) + "\t\t" +
+        print("\tmin\t" + str(min(self.labyrinth_max_value)) + "\t\t" +
               str(min(self.labyrinth2_max_value)))
         print()
 
