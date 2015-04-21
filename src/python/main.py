@@ -23,25 +23,10 @@ class Main():
         print("Start pos: " + str(x) + ", " + str(y))
 
         # The highest value found
-        value = self.com.get_value()
-        start_value = value
+        start_value = value = self.com.get_value()
 
-        # the highest value found
-        value = float("-inf")
-
-        # iterate through 3x3 array for startpoint
-        for i in range(0, 3):
-            for j in range(0, 3):
-                if(self.panel.get_this_value(i, j) > value):
-                    value = self.panel.get_this_value(i, j)
-                    self.panel.set_x_coordinate(i)
-                    self.panel.set_y_coordinate(j)
-
-        return value
-
-        steps = 0
+        steps = 0       # Checked for debugging
         last_move = None
-
 
         # Check clockwise
         # The array boundary checks are needed as long as an array is used as 
