@@ -8,8 +8,8 @@ class Arr():
         # super(Arr, self).__init__()
         # self.arg = arg
         self.MAX_VALUE = 100
-        self.y_size = 1000
         self.x_size = 1000
+        self.y_size = 1000
         self.a = random.randint(0, self.x_size-2)
         self.b = random.randint(0, self.y_size-2)
 
@@ -31,7 +31,11 @@ class Arr():
 
 
     def get_value(self):
-        return self.gen_arr[self.current_pos[0]][self.current_pos[1]]
+        x, y = self.current_pos
+        if x < 0 or x >= self.x_size or y < 0 or y >= self.y_size:
+            return float("-inf")
+        else:
+            return self.gen_arr[x][y]
 
     def pretty_print(self):
         for y in range(0, self.y_size):

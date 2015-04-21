@@ -35,7 +35,7 @@ class Main():
         # input to the Com class.
         while(True):
             # EAST
-            if x < len(self.panel.arr.gen_arr)-1 and (last_move == None or last_move == 'EAST') and (x+self.x_offset, y) not in visited:
+            if (last_move == None or last_move == 'EAST') and (x+self.x_offset, y) not in visited:
                 steps += 1      # Counted for debugging
                 value_read = self.panel.move((x,y), 'EAST')
                 visited.add((x+self.x_offset, y))
@@ -45,7 +45,7 @@ class Main():
                     last_move = 'EAST'
 
             # SOUTH
-            elif y > 0 and (last_move == None or last_move == 'SOUTH') and (x, y-self.y_offset) not in visited:
+            elif (last_move == None or last_move == 'SOUTH') and (x, y-self.y_offset) not in visited:
                 steps += 1      # Counted for debugging
                 value_read = self.panel.move((x,y), 'SOUTH')
                 visited.add((x, y-self.y_offset))
@@ -55,7 +55,7 @@ class Main():
                     last_move = 'SOUTH'
 
             # WEST
-            elif x > 0 and (last_move == None or last_move == 'WEST') and (x-self.x_offset, y) not in visited:
+            elif (last_move == None or last_move == 'WEST') and (x-self.x_offset, y) not in visited:
                 steps += 1      # Counted for debugging
                 value_read = self.panel.move((x,y), 'WEST')
                 visited.add((x-self.x_offset, y))
@@ -65,7 +65,7 @@ class Main():
                     last_move = 'WEST'
 
             # NORTH
-            elif y < len(self.panel.arr.gen_arr)-1 and (last_move == None or last_move == 'NORTH') and (x, y+self.y_offset) not in visited:
+            elif (last_move == None or last_move == 'NORTH') and (x, y+self.y_offset) not in visited:
                 steps += 1      # Counted for debugging
                 value_read = self.panel.move((x,y), 'NORTH')
                 visited.add((x, y+self.y_offset))
