@@ -8,10 +8,7 @@ class Com():
         self.y_offset = y
 
     def get_value(self):
-        return self.arr.getValue(self.x, self.y)
-
-    def get_this_value(self, x, y):
-        return self.arr.getValue(x, y)
+        return self.arr.get_value()
 
     def get_position(self):
         return self.arr.current_pos
@@ -32,7 +29,6 @@ class Com():
             y += self.y_offset
 
         self.set_position(x, y)
-
         return self.get_value()
 
 
