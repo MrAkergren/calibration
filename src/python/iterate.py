@@ -57,28 +57,14 @@ class main():
         visited = set()
 
         # values for the start position in the array
-        a = random.randint(0, len(array[0])-3)
-        b = random.randint(0, len(array)-3)
-
-        # coordinates for 'value' in the array
-        x = 0
-        y = 0
+        x = random.randint(0, len(array[0])-3)
+        y = random.randint(0, len(array)-3)
 
         # the highest value found
         value = float("-inf")
 
         # Number of steps moved
         steps = 0
-
-        # iterate through 3x3 array for startpoint
-        for i in range(0, 3):
-            for j in range(0, 3):
-                steps += 1
-                visited.add((a+i, b+j))
-                if(array[a+i][b+j] > value):
-                    value = array[a+i][b+j]
-                    x = a+i
-                    y = b+j
 
         return visited, x, y, len(array[0]) - 1, len(array) - 1, value, steps
 
@@ -277,10 +263,10 @@ arr_size = 500
 arrays = 500
 
 if len(sys.argv) > 1:
-    if sys.argv[1].isdigit() and int(sys.argv[1]) > 0 and int(sys.argv[1]) < 600:
+    if sys.argv[1].isdigit() and int(sys.argv[1]) > 0 and int(sys.argv[1]) < 1000:
         arr_size = int(sys.argv[1])
 if len(sys.argv) > 2:
-    if sys.argv[2].isdigit() and int(sys.argv[2]) > 0 and int(sys.argv[2]) < 600:
+    if sys.argv[2].isdigit() and int(sys.argv[2]) > 0 and int(sys.argv[2]) < 1000:
         arrays = int(sys.argv[2])
 
 main = main(arr_size, arrays)
