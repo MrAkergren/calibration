@@ -8,23 +8,28 @@ from com import Com
 
 class Main():
     def __init__(self):
-        super(Main, self).__init__()
-        self.panel = Com()
+        self.x_offset = 1
+        self.y_offset = 1
+        self.com = Com(self.x_offset, self.y_offset)
 
     def labyrinth(self):
+        # Create a set to be used for checking visited coordinates
+        visited = set()
 
-        # values for the start position in the array
-        a = random.randint(0, 997)
-        b = random.randint(0, 997)
+        # Initial coordinates
+        x, y = self.com.get_position()
+        
+        # Debug output
+        print("Start pos: " + str(x) + ", " + str(y))
 
-        # coordinates for 'value' in the array
-        x = 0
-        y = 0
+        # The highest value found
+        value = self.com.get_value()
+        start_value = value
 
         # the highest value found
         value = float("-inf")
 
-# iterate through 3x3 array for startpoint
+        # iterate through 3x3 array for startpoint
         for i in range(0, 3):
             for j in range(0, 3):
                 if(self.panel.get_this_value(i, j) > value):
@@ -34,55 +39,65 @@ class Main():
 
         return value
 
+        steps = 0
+        last_move = None
+
+
         # Check clockwise
-#          while(1):
-#              # EAST
-#              if(value < array[x+1][y]):
-#                  x += 1
-#                  value = array[x][y]
+        # The array boundary checks are needed as long as an array is used as 
+        # input to the Com class.
+        while(True):
+            # EAST
+            if (last_move == None or last_move == 'EAST') and (x+self.x_offset, y) not in visited:
+                steps += 1      # Counted for debugging
+                value_read = self.com.move((x,y), 'EAST')
+                visited.add((x+self.x_offset, y))
+                if value < value_read :
+                    x += self.x_offset
+                    value = value_read
+                    last_move = 'EAST'
 
-#              # SOUTH EAST
-#              elif(value < array[x+1][y+1]):
-#                  x += 1
-#                  y += 1
-#                  value = array[x][y]
+            # SOUTH
+            elif (last_move == None or last_move == 'SOUTH') and (x, y-self.y_offset) not in visited:
+                steps += 1      # Counted for debugging
+                value_read = self.com.move((x,y), 'SOUTH')
+                visited.add((x, y-self.y_offset))
+                if value < value_read:
+                    y -= self.y_offset
+                    value = value_read
+                    last_move = 'SOUTH'
 
-#              # SOUTH
-#              elif(value < array[x][y+1]):
-#                  y += 1
-#                  value = array[x][y]
+            # WEST
+            elif (last_move == None or last_move == 'WEST') and (x-self.x_offset, y) not in visited:
+                steps += 1      # Counted for debugging
+                value_read = self.com.move((x,y), 'WEST')
+                visited.add((x-self.x_offset, y))
+                if value < value_read:
+                    x -= self.x_offset
+                    value = value_read
+                    last_move = 'WEST'
 
-#              # SOUTH WEST
-#              elif(value < array[x-1][y+1]):
-#                  x -= 1
-#                  y -= 1
-#                  value = array[x][y]
+            # NORTH
+            elif (last_move == None or last_move == 'NORTH') and (x, y+self.y_offset) not in visited:
+                steps += 1      # Counted for debugging
+                value_read = self.com.move((x,y), 'NORTH')
+                visited.add((x, y+self.y_offset))
+                if value < value_read:
+                    y += self.y_offset
+                    value = value_read
+                    last_move = 'NORTH'
 
-#              # WEST
-#              elif(value < array[x-1][y]):
-#                  x -= 1
-#                  value = array[x][y]
+            elif last_move != None:
+                last_move = None
 
-#              # NORTH WEST
-#              elif(value < array[x-1][y-1]):
-#                  x -= 1
-#                  y += 1
-#                  value = array[x][y]
-#              # NORTH
-#              elif(value < array[x][y-1]):
-#                  y -= 1
-#                  value = array[x][y]
-#              # NORTH EAST
-#              elif(value < array[x+1][y-1]):
-#                  x += 1
-#                  y -= 1
-#                  value = array[x][y]
+            else:
+                break
 
-#              else:
-#                  break
-
-#          print("HIGHETS VALUES WAS:" + str(value) + " on coordinate: x=" + str(x) + " y=" + str(y))
+        # Debug output
+        print("End pos:\t" + str(x) + ", " + str(y))
+        print("Steps:\t" + str(steps))
+        print("Start value:\t" + str(start_value))
+        print("End value:\t" + str(value))
 
 main = Main()
-a = main.labyrinth()
-print(a)
+main.labyrinth()

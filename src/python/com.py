@@ -1,12 +1,11 @@
 from arr import Arr
 
 
-class Com(object):
-    def __init__(self):
-        super(Com, self).__init__()
+class Com():
+    def __init__(self, x, y):
         self.arr = Arr()
-        self.x = 0
-        self.y = 0
+        self.x_offset = x
+        self.y_offset = y
 
     def get_value(self):
         return self.arr.getValue(self.x, self.y)
@@ -14,42 +13,26 @@ class Com(object):
     def get_this_value(self, x, y):
         return self.arr.getValue(x, y)
 
-    def get_x_coordinate(self):
-        return self.x
+    def get_position(self):
+        return self.arr.current_pos
 
-    def get_y_coordinate(self):
-        return self.y
+    def set_position(self, x, y):
+        self.arr.current_pos = (x, y)
 
-    def set_x_coordinate(self, num):
-        self.x = num
+    def move(self, coordinates, direction):
+        x, y = coordinates
+        
+        if direction == 'EAST':
+            x += self.x_offset
+        elif direction == 'SOUTH':
+            y -= self.y_offset
+        elif direction == 'WEST':
+            x -= self.x_offset
+        elif direction == 'NORTH':
+            y += self.y_offset
 
-    def set_y_coordinate(self, num):
-        self.y = num
+        self.set_position(x, y)
 
-    def step_east(self):
-        self.x += 1
+        return self.get_value()
 
-    def step_south_east(self):
-        self.x += 1
-        self.y += 1
 
-    def step_south(self):
-        self.y += 1
-
-    def step_south_west(self):
-        self.x -= 1
-        self.y += 1
-
-    def step_west(self):
-        self.x -= 1
-
-    def step_north_west(self):
-        self.x -= 1
-        self.y += 1
-
-    def step_north(self):
-        self.y -= 1
-
-    def step_north_east(self):
-        self.x += 1
-        self.y -= 1
