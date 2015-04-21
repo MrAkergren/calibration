@@ -10,25 +10,24 @@ class Main():
     def __init__(self):
         self.x_offset = 1
         self.y_offset = 1
-        self.panel = Com(self.x_offset, self.y_offset)
+        self.com = Com(self.x_offset, self.y_offset)
 
     def labyrinth(self):
         # Create a set to be used for checking visited coordinates
         visited = set()
 
         # Initial coordinates
-        x, y = self.panel.get_position()
+        x, y = self.com.get_position()
         
         # Debug output
         print("Start pos: " + str(x) + ", " + str(y))
 
         # The highest value found
-        value = self.panel.get_value()
+        value = self.com.get_value()
         start_value = value
 
         steps = 0
         last_move = None
-        x_length = y_length = len(self.panel.arr.gen_arr)-1
 
         # Check clockwise
         # The array boundary checks are needed as long as an array is used as 
@@ -37,7 +36,7 @@ class Main():
             # EAST
             if (last_move == None or last_move == 'EAST') and (x+self.x_offset, y) not in visited:
                 steps += 1      # Counted for debugging
-                value_read = self.panel.move((x,y), 'EAST')
+                value_read = self.com.move((x,y), 'EAST')
                 visited.add((x+self.x_offset, y))
                 if value < value_read :
                     x += self.x_offset
@@ -47,7 +46,7 @@ class Main():
             # SOUTH
             elif (last_move == None or last_move == 'SOUTH') and (x, y-self.y_offset) not in visited:
                 steps += 1      # Counted for debugging
-                value_read = self.panel.move((x,y), 'SOUTH')
+                value_read = self.com.move((x,y), 'SOUTH')
                 visited.add((x, y-self.y_offset))
                 if value < value_read:
                     y -= self.y_offset
@@ -57,7 +56,7 @@ class Main():
             # WEST
             elif (last_move == None or last_move == 'WEST') and (x-self.x_offset, y) not in visited:
                 steps += 1      # Counted for debugging
-                value_read = self.panel.move((x,y), 'WEST')
+                value_read = self.com.move((x,y), 'WEST')
                 visited.add((x-self.x_offset, y))
                 if value < value_read:
                     x -= self.x_offset
@@ -67,7 +66,7 @@ class Main():
             # NORTH
             elif (last_move == None or last_move == 'NORTH') and (x, y+self.y_offset) not in visited:
                 steps += 1      # Counted for debugging
-                value_read = self.panel.move((x,y), 'NORTH')
+                value_read = self.com.move((x,y), 'NORTH')
                 visited.add((x, y+self.y_offset))
                 if value < value_read:
                     y += self.y_offset
