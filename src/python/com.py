@@ -8,8 +8,11 @@ class Com(object):
         self.x = 0
         self.y = 0
 
-    def get_value(self, a, b):
-        return self.arr.getValue(a, b)
+    def get_value(self):
+        return self.arr.getValue(self.x, self.y)
+
+    def get_this_value(self, x, y):
+        return self.arr.getValue(x, y)
 
     def get_x_coordinate(self):
         return self.x

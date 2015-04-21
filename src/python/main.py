@@ -24,11 +24,11 @@ class Main():
         # the highest value found
         value = float("-inf")
 
-        # iterate through 3x3 array for startpoint
+# iterate through 3x3 array for startpoint
         for i in range(0, 3):
             for j in range(0, 3):
-                if(self.panel.get_value(i, j) > value):
-                    value = self.panel.get_value(i, j)
+                if(self.panel.get_this_value(i, j) > value):
+                    value = self.panel.get_this_value(i, j)
                     self.panel.set_x_coordinate(i)
                     self.panel.set_y_coordinate(j)
 
