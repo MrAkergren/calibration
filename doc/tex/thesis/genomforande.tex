@@ -1,23 +1,52 @@
 \section{Genomförande} % (fold)
 \label{sec:genomf_rande}
+    \subsection{Steg 1} % (fold)
+    \label{sub:steg_1}
+        Projektet genomfördes med stöd av den valda metoden. I problemidentifikations-fasen, fas ett, hölls möten med uppdragsgivaren i syfte att få en enhällig uppfattning om vad företaget efterfrågade och formaliserade det praktiska problem som företaget sökte en lösning till. Vidare är det även i den här fasen som introduktionen till projektets rapport utvecklades för att fastslå vad projektet avser att utföra, som ett led i problemidentifieringen. \bigskip
 
-    Projektet genomfördes med stöd av den valda metoden. I problemidentifikations-fasen, fas ett, hölls möten med uppdragsgivaren i syfte att få en enhällig uppfattning om vad företaget efterfrågade och formaliserade det praktiska problem som företaget sökte en lösning till. Vidare är det även i den här fasen som frågeställningen utvecklades och fastslogs. \bigskip
+        Den initiala problemanalysen resulterade i att projektet i stort kommer vara uppdelat i två mindre delar, dels den algoritm som klarar av att kalibrera panelen och dels en kommunikationslösning mellan panelen och rummet som den levererar ljuset till. \bigskip
 
-    Under den första fasen genomfördes även litteratursökningar och diskussioner kring hur den tänkta lösningen skulle kunna utformas, vilket resulterade i att projektet kommer att utföras i två iterationer, en för algoritmen och en för kommunikationen. \bigskip
+        Förutsättningen vid litteraturstudien, gällande kommunikationen mellan taket och byggnadens innandöme, var att den trådlösa kommunikationen skall ske med standardiserade protokoll. Detta för att underlätta mottagandet av den trådlösa sändningen, i syfte att undvika tidssänken i felsökning då projektet har en relativt snäv tidsram.\bigskip
 
-    Förutsättningen vid litteraturstudien, gällande kommunikationen mellan taket och byggnadens innandöme, var att den trådlösa kommunikationen skall ske med standardiserade protokoll. Detta för att underlätta mottagandet av den trådlösa sändningen, i syfte att undvika tidssänken i felsökning då projektet har en relativt snäv tidsram.\bigskip
+        För kalibreringsalgoritmens del, bestod problemförståelse steget av att undersöktes vilka typer av datastrukturer som skulle komma att beröras. När problemet analyserades insågs att värdena som samlas in kan representeras som en tvådimensionell matris (eng. 'array') där det finns ett unikt maxvärde och kring detta, minskande värden som blir lägre ju längre från maxvärdet de befinner sig, se figur\ref{fig:array}. \bigskip
 
-    Det visade sig att trådlösa standarder för datakommunikation så som 802.11 standarderna har problem att sända när betongkonstruktioner hindrar utspridningen av radiovågorna och kräver speciell apparatur för att klara av att skicka data igenom sådana förhållanden \cite{11n}. Detta medför att trådlös kommunikation inte är lämplig för företaget, då de på förhand inte kan veta ifall deras kommunikation kommer att fungera på plats hos deras kunder. \bigskip
+        \begin{figure}[hbt]
+        \centering
+            \begin{subfigure}{0.2\textwidth}
+                \pgfplotstabletypeset[color cells={min=5,max=9}, /pgfplots/colormap={yellowred}{rgb255(0cm)=(255,255,105); rgb255(1cm)=(255,10,10)},]
+                {
+                    5   6   7   6
+                    6   7   8   7
+                    7   8   9   8
+                    6   7   8   7
+                }
+            \end{subfigure}
+            \begin{subfigure}{0.2\textwidth}
+                \pgfplotstabletypeset[color cells={min=3,max=9}, /pgfplots/colormap={yellowred}{rgb255(0cm)=(255,255,105); rgb255(1cm)=(255,10,10)},]
+                {
+                    6   7   8   9
+                    5   6   7   8
+                    4   5   6   7
+                    3   4   5   6
+                }
+            \end{subfigure}
+        \caption{\label{fig:array} Exempel på förväntade matriser}
+        \end{figure}
+    % subsection steg_1 (end)
+    \subsection{Steg 2} % (fold)
+    \label{sub:steg_2}
+        Litteraturstudien resulterade i en förståelse att trådlösa standarder för datakommunikation så som 802.11 standarderna har problem att sända när betongkonstruktioner hindrar utspridningen av radiovågorna och kräver speciell apparatur för att klara av att skicka data igenom sådana förhållanden \cite{11n}. Detta medför att trådlös kommunikation inte är lämplig för företaget, då de på förhand inte kan veta ifall deras kommunikation kommer att fungera på plats hos deras kunder. \bigskip
 
-    Ett lämpligare medium att kommunicera via är istället de fiberoptiska kablar som redan är dragna, då rummet lyses upp av just dessa kablar. Enligt företaget kommer det finnas mer än en fiberkabel dragen till varje rum, vilket öppnar upp för möjligheten att koppla in apparatur för kommunikation i en fiberkabel, medan den eller de andra kablarna kan fortsätta hämta in ljus till rummet. Med de svårigheter som den trådlösa kommunikationen medförde i kombination med att ett fungerande alternativt medium redan finns draget, valde projektet att fokusera på det senare. \bigskip
+        Ett lämpligare medium att kommunicera via är istället de fiberoptiska kablar som redan är dragna, då rummet lyses upp av just dessa kablar. Enligt företaget kommer det finnas mer än en fiberkabel dragen till varje rum, vilket öppnar upp för möjligheten att koppla in apparatur för kommunikation i en fiberkabel, medan den eller de andra kablarna kan fortsätta hämta in ljus till rummet. Med de svårigheter som den trådlösa kommunikationen medförde i kombination med att ett fungerande alternativt medium redan finns draget, valde projektet att fokusera på det senare. \bigskip
 
-    För kalibreringsalgoritmens del undersöktes vilka typer av datastrukturer som skulle komma att beröras. När problemet analyserades under problemförståelse fasen insågs att värdena som samlas in kan representeras som en matris (eng. array) där det finns ett unikt maxvärde och kring detta minskande värden som blir lägre ju längre från max värdet befinner sig.
+        Gällande kalibreringsalgoritmen framstod det vid datorkörningar att en algoritm som itererar över hela matrisen för att leta det högsta värdet kommer att vara väldigt ineffektiv. Ett beslut fattades att utveckla en algoritm som aktivt letar efter ett högre värde och som kräver så få steg som möjligt, detta då den praktiska implementationen kommer att innebära fördröjningssteg vid två punkter i körningen, dels när panelen flyttar på sig, och dels när ljuset ska hämtas in från lux-mätaren.
 
-    \texttt{INSERT MORE TEXT ABOUT ALGORITHM HERE} \bigskip
+        \texttt{INSERT MORE TEXT ABOUT ALGORITHM HERE} \bigskip
+    % subsection steg_2 (end)
 
-    I den andra fasen identifierades och presenterades två stycken artefakter som behöver utformas för att uppnå projektets mål, dels en algoritm som kan utföra själva kalibreringen och dels en enhet för att kommunicera mellan rummet och taket. Projektet genomfördes i två steg, där kommunikationen 
-    utvecklades först dels då denna tillämpning krävde mer efterforskning och dels då viktig hårdvara saknades för testning av algoritmen. \bigskip
 
-    Genom att fokusera på det optiska alternativet leder detta in projektet till det tredje steget i metoden, att föreslå en artefakt som löser det ställda problemet. Projektet föreslår då en lösning med en omvandlare från luxmätarens utdata till en optisk signal som sänds upp till taket för att där avkodas. Omvandlaren kan vara någon form av mikrokontroller så som till exempel en Arduino. Uppe på taken kan avkodaren även den vara en mikrokontroller, eller om det finns någon typ av ljussensor som direkt kan skicka sin data över USB till den programmerbara enhet som utför den algoritm som utvecklats.
-
+    \subsection{Steg 3} % (fold)
+    \label{sub:steg_3}
+        Genom att fokusera på det optiska alternativet leder detta in projektet till det tredje steget i metoden, att föreslå en artefakt som löser det ställda problemet. Projektet föreslår då en lösning med en omvandlare från luxmätarens utdata till en optisk signal som sänds upp till taket för att där avkodas. Omvandlaren kan vara någon form av mikrokontroller så som till exempel en Arduino. Uppe på taken kan avkodaren även den vara en mikrokontroller, eller om det finns någon typ av ljussensor som direkt kan skicka sin data över USB till den programmerbara enhet som utför den algoritm som utvecklats.
+    % subsection steg_3 (end)
 % section genomf_rande (end)

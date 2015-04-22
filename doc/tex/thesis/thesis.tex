@@ -27,9 +27,12 @@
 
 %%Links within the doc%%
 \usepackage[hidelinks]{hyperref}
+
 %%--GRAPHICS--%%  (Requires preamble)
 \usepackage{tikz}
 \usetikzlibrary{backgrounds,calc,positioning,shapes,arrows}
+
+% For use in method figure
 \tikzset{
     vertex/.style = {
         circle,
@@ -41,12 +44,79 @@
 \tikzset{My Arrow Style/.style={single arrow, fill=blue!50, anchor=base, align=center,text width=11mm,text height=1mm}}
 \definecolor{light-gray}{gray}{0.95}
 
-% Tikz for use in flow charts
+% For use in flow charts
 \tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black, fill=red!30]
 \tikzstyle{input} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=2cm, minimum height=1cm, text centered, draw=black, fill=blue!30]
 \tikzstyle{action} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=orange!30]
 \tikzstyle{decision} = [diamond, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=green!30]
 \tikzstyle{arrow} = [draw, thick,-latex',>=stealth]
+
+\usepackage{colortbl}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\pgfplotsset{compat=1.8}
+\pgfplotstableset{
+    every head row/.style={ 
+        output empty row,
+    },
+    /color cells/min/.initial=0,
+    /color cells/max/.initial=1000,
+    /color cells/textcolor/.initial=,
+    %
+    % Usage: 'color cells={min=<value which is mapped to lowest color>, 
+    %   max = <value which is mapped to largest>}
+    color cells/.code={%
+        \pgfqkeys{/color cells}{#1}%
+        \pgfkeysalso{%
+            postproc cell content/.code={%
+                %
+                \begingroup
+                %
+                % acquire the value before any number printer changed
+                % it:
+                \pgfkeysgetvalue{/pgfplots/table/@preprocessed cell content}\value
+                \ifx\value\empty
+                    \endgroup
+                \else
+                \pgfmathfloatparsenumber{\value}%
+                \pgfmathfloattofixed{\pgfmathresult}%
+                \let\value=\pgfmathresult
+                %
+                % map that value:
+                \pgfplotscolormapaccess
+                    [\pgfkeysvalueof{/color cells/min}:\pgfkeysvalueof{/color cells/max}]
+                    {\value}
+                    {\pgfkeysvalueof{/pgfplots/colormap name}}%
+                % now, \pgfmathresult contains {<R>,<G>,<B>}
+                % 
+                % acquire the value AFTER any preprocessor or
+                % typesetter (like number printer) worked on it:
+                \pgfkeysgetvalue{/pgfplots/table/@cell content}\typesetvalue
+                \pgfkeysgetvalue{/color cells/textcolor}\textcolorvalue
+                %
+                % tex-expansion control
+                % see http://tex.stackexchange.com/questions/12668/where-do-i-start-latex-programming/27589#27589
+                \toks0=\expandafter{\typesetvalue}%
+                \xdef\temp{%
+                    \noexpand\pgfkeysalso{%
+                        @cell content={%
+                            \noexpand\cellcolor[rgb]{\pgfmathresult}%
+                            \noexpand\definecolor{mapped color}{rgb}{\pgfmathresult}%
+                            \ifx\textcolorvalue\empty
+                            \else
+                                \noexpand\color{\textcolorvalue}%
+                            \fi
+                            \the\toks0 %
+                        }%
+                    }%
+                }%
+                \endgroup
+                \temp
+                \fi
+            }%
+        }%
+    }
+}
 
 \usepackage{graphicx}
 \usepackage{caption}
@@ -86,7 +156,7 @@
 \begin{document}
 \maketitle
 \begin{center}
-    Version 0.13    
+    Version 0.14    
 \end{center}
 
 \thispagestyle{empty}
