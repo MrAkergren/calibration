@@ -27,11 +27,12 @@ class Main():
 
         steps = 0       # Checked for debugging
         last_move = None
+        finished = False
 
         # Check clockwise
         # The array boundary checks are needed as long as an array is used as 
         # input to the Com class.
-        while(True):
+        while not finished:
             # EAST
             if (last_move == None or last_move == 'EAST') and (x+self.x_offset, y) not in visited:
                 steps += 1      # Counted for debugging
@@ -76,7 +77,7 @@ class Main():
                 last_move = None
 
             else:
-                break
+                finished = True
 
         # Debug output
         print("End pos:\t" + str(x) + ", " + str(y))

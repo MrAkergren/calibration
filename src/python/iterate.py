@@ -72,9 +72,10 @@ class main():
         visited, x, y, x_length, y_length, value, steps = self.labyrinth_setup(array)
 
         last_move = None
+        finished = False
 
         # Check clockwise
-        while True:
+        while not finished:
             # EAST
             if x < x_length and (last_move == None or last_move == 'E') and (x+1, y) not in visited:
                 steps += 1
@@ -155,7 +156,7 @@ class main():
                 last_move = None
 
             else:
-                break
+                finished = True
 
         # self.print_results(value, x, y, steps)
         self.labyrinth_steps.append(steps)
@@ -166,9 +167,10 @@ class main():
         visited, x, y, x_length, y_length, value, steps = self.labyrinth_setup(array)
 
         last_move = None
+        finished = False
 
         # Check clockwise
-        while(True):
+        while not finished:
             # EAST
             if x < x_length and (last_move == None or last_move == 'EAST') and (x+1, y) not in visited:
                 steps += 1
@@ -209,7 +211,7 @@ class main():
                 last_move = None
 
             else:
-                break
+                finished = True
 
         # self.print_results(value, x, y, steps)
         self.labyrinth2_steps.append(steps)
