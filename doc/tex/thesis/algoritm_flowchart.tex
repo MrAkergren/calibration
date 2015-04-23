@@ -1,34 +1,17 @@
-\documentclass[a4paper, 11pt]{article}
+\section*{Bilagor} % (fold)
+\label{sec:bilagor}
+\addcontentsline{toc}{section}{Bilagor}
 
-%%--LANGUAGE AND ENCODING--%%
-\usepackage[swedish]{babel}
-\usepackage[utf8]{inputenc}
-
-%%--SANS-SERIF FONTS FOR SECTIONS--%%
-\usepackage{sectsty}
-\usepackage{helvet}
-\allsectionsfont{\bfseries\sffamily}
-
-%%--GRAPHICS--%%  (Requires preamble)
-\usepackage{tikz}
-\usetikzlibrary{backgrounds,calc,positioning,shapes,arrows}
-
-% % Declaration of different types of figures for use in flow charts
-\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black, fill=red!30]
-\tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=2cm, minimum height=1cm, text centered, draw=black, fill=blue!30]
-\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=orange!30]
-\tikzstyle{decision} = [diamond, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=green!30]
-\tikzstyle{arrow} = [draw, thick,-latex',>=stealth]
-
-
-\begin{document}
-\section*{Sökalgoritm} % (fold)
+\section{Sökalgoritm} % (fold)
 \label{sec:sokalgoritm}
-
-\begin{tikzpicture}[node distance=2cm]
+\vspace{-0.9cm}
+\begin{figure}[h!]
+\centering
+\hspace{20mm}
+\begin{tikzpicture}[node distance=1.5cm]
     \tikzstyle{every node}=[font=\scriptsize]
-    \node (start) [startstop] {Start};
-    \node (inp1) [io, below=5mm of start, text width=20mm] {Läs position och värde};
+    %\node (start) [startstop] {Start};
+    \node (inp1) [startstop, text width=20mm] {Läs position och värde};
     \node (success) [decision, below=5mm of inp1, text width=20mm] {Nytt max funnet?};
     \node (iterate) [process, right of=success, text width=25mm, xshift=3cm] {Iterera riktningar (E, S, W, N)};
     \node (prev1) [decision, below=56mm of iterate, text width=20mm] {Tidigare undersökt?};
@@ -41,7 +24,7 @@
 
     \node (stop) [startstop, below=5mm of allprev] {Stopp};
 
-    \draw [arrow] (start) -- (inp1);
+  %  \draw [arrow] (start) -- (inp1);
     \draw [arrow] (inp1) -- (success);
     \draw [arrow] (success) -- node[anchor=south] {Nej} (iterate);
     \draw [arrow] (success) -- node[anchor=east] {Ja} (same);
@@ -64,5 +47,4 @@
     \draw [arrow] (update) -- +(-3,0) |- (success);
 
 \end{tikzpicture}
-% section sokalgoritm (end)
-\end{document}
+\end{figure}
