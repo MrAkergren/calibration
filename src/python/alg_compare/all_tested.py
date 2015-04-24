@@ -28,6 +28,11 @@ class main():
         self.old_labyrinth_max_value = set()   # Max value(s) found in labyrinth()
         self.old_labyrinth2_max_value = set()  # Max value(s) found in labyrinth2()
 
+        self.visit_labyrinth_steps = []   # Hvisits number of movements for labyrinth()
+        self.visit_labyrinth2_steps = []  # Hvisits number of movements for labyrinth2()
+        self.visit_labyrinth_max_value = set()   # Max value(s) found in labyrinth()
+        self.visit_labyrinth2_max_value = set()  # Max value(s) found in labyrinth2()
+
         self.primitive_steps = []
         self.primitive_max_value = set()
 
@@ -396,6 +401,185 @@ class main():
         self.old_labyrinth2_steps.append(steps)
         self.old_labyrinth2_max_value.add(value)
 
+    def visit_labyrinth(self, array):
+        # Create a set to be used for checking visited coordinates
+        visited = set()
+
+        # Length of array
+        x_length = len(array[0]) - 1
+        y_length = len(array) - 1
+
+        # values for the start position in the array
+        a = random.randint(0, len(array[0])-3)
+        b = random.randint(0, len(array)-3)
+
+        # coordinates for 'value' in the array
+        x = 0
+        y = 0
+
+        # the highest value found
+        value = float("-inf")
+
+        # Number of steps moved
+        steps = 0
+
+        # iterate through 3x3 array for startpoint
+        for i in range(0, 3):
+            for j in range(0, 3):
+                if(array[a+i][b+j] > value):
+                    value = array[a+i][b+j]
+                    x = a+i
+                    y = b+j
+
+        # Check clockwise
+        while(True):
+            # EAST
+            if(x < x_length and (x+1, y) not in visited):
+                steps += 1
+                visited.add((x+1, y))
+                if value < array[x+1][y]:
+                    x += 1
+                    value = array[x][y]
+
+            # SOUTH EAST
+            elif(x < x_length and y < y_length and (x+1, y+1) not in visited):
+                steps += 1
+                visited.add((x+1, y+1))
+                if value < array[x+1][y+1]:
+                    x += 1
+                    y += 1
+                    value = array[x][y]
+
+            # SOUTH
+            elif(y < y_length and (x, y+1) not in visited):
+                steps += 1
+                visited.add((x, y+1))
+                if value < array[x][y+1]:
+                    y += 1
+                    value = array[x][y]
+
+            # SOUTH WEST
+            elif(x > 0 and y < y_length and (x-1, y+1) not in visited):
+                steps += 1
+                visited.add((x-1, y+1))
+                if value < array[x-1][y+1]:
+                    x -= 1
+                    y -= 1
+                    value = array[x][y]
+
+            # WEST
+            elif(x > 0 and (x-1, y) not in visited):
+                steps += 1
+                visited.add((x-1, y))
+                if value < array[x-1][y]:
+                    x -= 1
+                    value = array[x][y]
+
+            # NORTH WEST
+            elif(x > 0 and y > 0 and (x-1, y-1) not in visited):
+                steps += 1
+                visited.add((x-1, y-1))
+                if value < array[x-1][y-1]:
+                    x -= 1
+                    y += 1
+                    value = array[x][y]
+
+            # NORTH
+            elif(y > 0 and (x, y-1) not in visited):
+                steps += 1
+                visited.add((x, y-1))
+                if value < array[x][y-1]:
+                    y -= 1
+                    value = array[x][y]
+
+            # NORTH EAST
+            elif(x < x_length and y > 0 and (x+1, y-1) not in visited):
+                steps += 1
+                visited.add((x+1, y-1))
+                if value < array[x+1][y-1]:
+                    x += 1
+                    y -= 1
+                    value = array[x][y]
+
+            else:
+                break
+
+        # self.print_results(value, x, y, steps)
+        self.visit_labyrinth_steps.append(steps)
+        self.visit_labyrinth_max_value.add(value)
+
+    # Same as labyrinth(), but without diagonal movement
+    def visit_labyrinth2(self, array):
+        # Create a set to be used for checking visited coordinates
+        visited = set()
+
+        # Length of array
+        x_length = len(array[0]) - 1
+        y_length = len(array) - 1
+
+        # values for the start position in the array
+        a = random.randint(0, len(array[0])-3)
+        b = random.randint(0, len(array)-3)
+
+        # coordinates for 'value' in the array
+        x = 0
+        y = 0
+
+        # the highest value found
+        value = float("-inf")
+
+        # Number of steps moved
+        steps = 0
+
+        # iterate through 3x3 array for startpoint
+        for i in range(0, 3):
+            for j in range(0, 3):
+                if(array[a+i][b+j] > value):
+                    value = array[a+i][b+j]
+                    x = a+i
+                    y = b+j
+
+        # Check clockwise
+        while(True):
+            # EAST
+            if(x < x_length and (x+1, y) not in visited):
+                steps += 1
+                visited.add((x+1, y))
+                if value < array[x+1][y]:
+                    x += 1
+                    value = array[x][y]
+
+            # SOUTH
+            elif(y < y_length and (x, y+1) not in visited):
+                steps += 1
+                visited.add((x, y+1))
+                if value < array[x][y+1]:
+                    y += 1
+                    value = array[x][y]
+
+            # WEST
+            elif(x > 0 and (x-1, y) not in visited):
+                steps += 1
+                visited.add((x-1, y))
+                if value < array[x-1][y]:
+                    x -= 1
+                    value = array[x][y]
+
+            # NORTH
+            elif(y > 0 and (x, y-1) not in visited):
+                steps += 1
+                visited.add((x, y-1))
+                if value < array[x][y-1]:
+                    y -= 1
+                    value = array[x][y]
+
+            else:
+                break
+
+        # self.print_results(value, x, y, steps)
+        self.visit_labyrinth2_steps.append(steps)
+        self.visit_labyrinth2_max_value.add(value)
+
     # Prints the provided value and its coordinates
     def print_results(self, value_found, x_pos, y_pos, steps=0):
         print("HIGHEST VALUE WAS:" + str(value_found) + " on coordinate: x: " +
@@ -436,49 +620,77 @@ class main():
             self.old_labyrinth2(self.arrays[i])
         print("Total time: %s seconds" % (time.time() - start_time))
 
+    def test_visit_labyrinth(self):
+        print("VISIT LABYRINTH\t", end="")
+        start_time = time.time()
+        for i in range(0, self.num_arrays):
+            self.visit_labyrinth(self.arrays[i])
+        print("Total time: %s seconds" % (time.time() - start_time))
+
+    def test_visit_labyrinth2(self):
+        print("VISIT LABYRINTH 2\t", end="")
+        start_time = time.time()
+        for i in range(0, self.num_arrays):
+            self.visit_labyrinth2(self.arrays[i])
+        print("Total time: %s seconds" % (time.time() - start_time))
+
     def test_all(self):
         print("\nArray size: " + str(self.array_size) + "\t\tArrays used: " +
               str(self.num_arrays) + "\n")
 
         self.test_labyrinth()
         self.test_labyrinth2()
+        self.test_visit_labyrinth()
+        self.test_visit_labyrinth2()
         self.test_old_labyrinth()
         self.test_old_labyrinth2()
         self.test_primitive()
 
-        print("\n\t\tLabyrinth\tLabyrinth2\tOld Labyrinth\tOld Labyrinth2\tPrimitive")
+        print("\n\t\tLabyrinth\tLabyrinth2\tVisit Labyrinth\t\tVisit Labyrinth2\tOld Labyrinth\tOld Labyrinth2\tPrimitive")
         print("steps\tmax\t" +  str(max(self.labyrinth_steps))      + "\t\t" +
                                 str(max(self.labyrinth2_steps))     + "\t\t" +
+                                str(max(self.visit_labyrinth_steps))  + "\t\t\t" +
+                                str(max(self.visit_labyrinth2_steps)) + "\t\t\t" +
                                 str(max(self.old_labyrinth_steps))  + "\t\t" +
                                 str(max(self.old_labyrinth2_steps)) + "\t\t" +
                                 str(max(self.primitive_steps)))
         
         print("\tmin\t" +       str(min(self.labyrinth_steps))      + "\t\t" +
                                 str(min(self.labyrinth2_steps))     + "\t\t" +
+                                str(min(self.visit_labyrinth_steps))  + "\t\t\t" +
+                                str(min(self.visit_labyrinth2_steps)) + "\t\t\t" +
                                 str(min(self.old_labyrinth_steps))  + "\t\t" +
                                 str(min(self.old_labyrinth2_steps)) + "\t\t" +
                                 str(min(self.primitive_steps)))
         
         print("\tmean\t" +      str(int(mean(self.labyrinth_steps)))        + "\t\t" +
                                 str(int(mean(self.labyrinth2_steps)))       + "\t\t" +
+                                str(int(mean(self.visit_labyrinth_steps)))    + "\t\t\t" +
+                                str(int(mean(self.visit_labyrinth2_steps)))   + "\t\t\t" +
                                 str(int(mean(self.old_labyrinth_steps)))    + "\t\t" +
                                 str(int(mean(self.old_labyrinth2_steps)))   + "\t\t" +
                                 str(int(mean(self.primitive_steps))))
         
         print("\tmedian\t" +    str(int(median(self.labyrinth_steps)))      + "\t\t" +
                                 str(int(median(self.labyrinth2_steps)))     + "\t\t" +
+                                str(int(median(self.visit_labyrinth_steps)))  + "\t\t\t" +
+                                str(int(median(self.visit_labyrinth2_steps))) + "\t\t\t" +
                                 str(int(median(self.old_labyrinth_steps)))  + "\t\t" +
                                 str(int(median(self.old_labyrinth2_steps))) + "\t\t" +
                                 str(int(median(self.primitive_steps))))
 
         print("\nvalue\tmax\t" +    str(max(self.labyrinth_max_value))      + "\t\t" +
                                     str(max(self.labyrinth2_max_value))     + "\t\t" +
+                                    str(max(self.visit_labyrinth_max_value))  + "\t\t\t" +
+                                    str(max(self.visit_labyrinth2_max_value)) + "\t\t\t" +
                                     str(max(self.old_labyrinth_max_value))  + "\t\t" +
                                     str(max(self.old_labyrinth2_max_value)) + "\t\t" +
                                     str(max(self.primitive_max_value)))
         
         print("\tmin\t" +       str(min(self.labyrinth_max_value))          + "\t\t" +
                                 str(min(self.labyrinth2_max_value))         + "\t\t" +
+                                str(min(self.visit_labyrinth_max_value))      + "\t\t\t" +
+                                str(min(self.visit_labyrinth2_max_value))     + "\t\t\t" +
                                 str(min(self.old_labyrinth_max_value))      + "\t\t" +
                                 str(min(self.old_labyrinth2_max_value))     + "\t\t" +
                                 str(min(self.primitive_max_value)))
