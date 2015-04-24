@@ -50,5 +50,17 @@
         Genom att fokusera på det optiska alternativet leder detta in projektet till det tredje steget i metoden, att föreslå en artefakt som löser det ställda problemet. Projektet föreslår då en lösning med en omvandlare från luxmätarens utdata till en optisk signal som sänds upp till taket för att där avkodas. Omvandlaren kan vara någon form av mikrokontroller så som till exempel en Arduino. Uppe på taken kan avkodaren även den vara en mikrokontroller, eller om det finns någon typ av ljussensor som direkt kan skicka sin data över USB till den programmerbara enhet som utför den algoritm som utvecklats. \bigskip
 
         Utformningen av algoritmen tog form genom flera iterationer av steg 3 i den valda metoden. Den slutgiltiga algoritmen arbetar enligt det flödesschema som finns presenterad i bilaga \ref{sec:sokalgoritm} 
+
+        \begin{table}[hb]
+            \caption{\label{tab:algoritmer}En jämförelse mellan de olika algoritmerna}
+            \centering
+            \begin{tabular}{@{}rccccc@{}}
+            \toprule
+                 & Primitiv & Lab1 & Lab2 &  &  \\ \midrule
+            Steg & 100       & 11   & 10   &  &  \\
+            Tid  & 10s       & 9s   & 8s   &  &  \\ \bottomrule
+            \end{tabular}
+        \end{table}
+
     % subsection steg_3 (end)
 % section genomf_rande (end)
