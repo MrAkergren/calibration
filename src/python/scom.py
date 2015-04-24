@@ -36,25 +36,36 @@ class SCom(object):
     def get_this_value(self, x, y):
         pass
 
+    def get_log(self):
+        self.serial_write('logga')
+        sleep(2)
+        while self.connection.inWaiting() > 0:
+            log = self.connection.readline()
+            log = log.decode(encoding='utf-8')
+        self.serial_write('logga')
+        info = self.regex.findall(log)
+        return info
+
     def get_coordinates(self):
         self.serial_write('zeroposx')
+        sleep(1)
 
-        for x in range(0, 2):
+        while self.connection.inWaiting() > 0:
             indata = self.connection.readline()
             indata = indata.decode(encoding='utf-8')
-            m = self.regex.findall(indata)
-
-        # print(m[0])
-        # print(m[1])
-        return m
+            coordinates = self.regex.findall(indata)
+            if(coordinates):
+                return coordinates
 
     def set_x_coordinate(self, num):
         self.serial_write('zeroposx ' + num)
         print('position set to: zeroposx ' + num)
+        sleep(2)
 
     def set_y_coordinate(self, num):
         self.serial_write('zeroposy ' + num)
         print('position set to: zeroposy ' + num)
+        sleep(2)
 
     def step_east(self):
         self.x += 1
@@ -83,6 +94,16 @@ class SCom(object):
         except serial.SerialException:
             print('Serial communication failed')
 
-a = SCom()
-a.connect_remote()
-a.get_coordinates()
+    def correct_position(self):
+        log = self.get_log()
+        if(abs(float(log[4]) < 0.01) and abs(float(log[5]) < 0.01)):
+            return True
+        return False
+
+# a = SCom()
+# a.connect_remote()
+# a.set_x_coordinate('-0.15')
+# b = a.get_log()
+# print(b[4], b[5])
+# print(a.correct_position())
+
