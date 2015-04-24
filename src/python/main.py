@@ -3,21 +3,21 @@
 
 import time
 import random
-from com import Com
+from scom import SCom
 
 
 class Main():
     def __init__(self):
-        self.x_offset = 1
-        self.y_offset = 1
-        self.com = Com(self.x_offset, self.y_offset)
+        self.x_offset = 0.01
+        self.y_offset = 0.01
+        self.com = SCom(self.x_offset, self.y_offset)
 
     def labyrinth(self):
         # Create a set to be used for checking visited coordinates
         visited = set()
 
         # Initial coordinates
-        x, y = self.com.get_position()
+        x, y = self.com.get_coordinates()
         
         # Debug output
         print("Start pos: " + str(x) + ", " + str(y))

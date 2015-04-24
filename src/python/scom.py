@@ -1,15 +1,17 @@
 import serial
 import re
+from mock_read import MockRead
 from time import sleep
 
-
 class SCom(object):
-    def __init__(self):
+    def __init__(self, x, y):
         super(SCom, self).__init__()
         self.connection = None
         self.regex = re.compile('[-+]?[0-9]*\.?[0-9]+')
-        self.x = 0
-        self.y = 0
+        self.x_offset = x
+        self.y_offset = y
+        self.mock = MockRead()
+        self.connect_remote()
 
     def serial_connect(self):
         if self.connection is not None:
@@ -31,7 +33,7 @@ class SCom(object):
                 print('Serial connection is not open')
 
     def get_value(self):
-        pass
+        return self.mock.get_value()
 
     def get_this_value(self, x, y):
         pass
@@ -44,18 +46,21 @@ class SCom(object):
             log = log.decode(encoding='utf-8')
         self.serial_write('logga')
         info = self.regex.findall(log)
+        print(info[4], info[5])
         return info
 
     def get_coordinates(self):
-        self.serial_write('zeroposx')
-        sleep(1)
+        for x in range(0, 10):
+            self.serial_write('zeroposx')
+            sleep(1)
 
-        while self.connection.inWaiting() > 0:
-            indata = self.connection.readline()
-            indata = indata.decode(encoding='utf-8')
-            coordinates = self.regex.findall(indata)
-            if(coordinates):
-                return coordinates
+            while self.connection.inWaiting() > 0:
+                indata = self.connection.readline()
+                indata = indata.decode(encoding='utf-8')
+                coordinates = self.regex.findall(indata)
+                if(coordinates):
+                    return (float(coordinates[0]), float(coordinates[1]))
+        return None
 
     def set_x_coordinate(self, num):
         self.serial_write('zeroposx ' + num)
@@ -67,17 +72,34 @@ class SCom(object):
         print('position set to: zeroposy ' + num)
         sleep(2)
 
-    def step_east(self):
-        self.x += 1
+    def move(self, coordinates, direction):
+        x, y = coordinates
+        check_x = False
+        check_y = False
 
-    def step_south(self):
-        self.y += 1
+        if direction == 'EAST':
+            x += self.x_offset
+            check_x = True
+        elif direction == 'SOUTH':
+            y -= self.y_offset
+            check_y = True
+        elif direction == 'WEST':
+            x -= self.x_offset
+            check_x = True
+        elif direction == 'NORTH':
+            y += self.y_offset
+            check_y = True
 
-    def step_west(self):
-        self.x -= 1
+        if(check_y):
+            self.set_y_coordinate(str(y))
+        if(check_x):
+            self.set_x_coordinate(str(x))
 
-    def step_north(self):
-        self.y -= 1
+        while not self.correct_position():
+            print(self.correct_position())
+            
+
+        return self.get_value()
 
     def serial_write(self, command):
 
