@@ -49,16 +49,35 @@
     \label{sub:steg_3}
         Genom att fokusera på det optiska alternativet leder detta in projektet till det tredje steget i metoden, att föreslå en artefakt som löser det ställda problemet. Projektet föreslår då en lösning med en omvandlare från luxmätarens utdata till en optisk signal som sänds upp till taket för att där avkodas. Omvandlaren kan vara någon form av mikrokontroller så som till exempel en Arduino. Uppe på taken kan avkodaren även den vara en mikrokontroller, eller om det finns någon typ av ljussensor som direkt kan skicka sin data över USB till den programmerbara enhet som utför den algoritm som utvecklats. \bigskip
 
-        Utformningen av algoritmen tog form genom flera iterationer av steg 3 i den valda metoden. I den första iterationen utvecklades en sökalgoritm som inledningsvis genomsöker en 3x3 matris i syfte att finna en inledande sökriktning. Därefter genomförs sökning i åtta riktningar medurs med utgångsriktning motsvarande österut. När ett större värde påträffas uppdateras utgångspunkten och sökningen återupprepas. För jämförelse utvecklades även en variant med fyra sökriktningar. Efterkommande iterationer var samtliga en vidareutveckling av den förra. Den andra iteration vidareutvecklade algoritmen så att den lagrar information om tidigare besökta koordinater, så att dessa ej undersöks vid upprepade tillfällen. Ytterligare förbättringar implementerades i den tredje iterationen, då riktningen på den senaste förflyttningen, då ett nytt större värde påträffats, registreras. Med hjälp av denna information undersöks först samma riktning som den senast lyckade förflyttningen innan medurs sökning. Här slopades också den inledande sökningen i 3x3 matris, då den inte kunde påvisas ha några märkbara fördelar. Samtliga iterationer innebar tydliga förbättringar vid simulering, enligt tabell \ref{tab:algoritmer}. Den slutgiltiga algoritmen arbetar enligt det flödesschema som finns presenterad i bilaga \ref{sec:sokalgoritm}.
+        Utformningen av algoritmen skedde genom flera iterationer av steg 3 i den valda metoden. I den första iterationen utvecklades en sökalgoritm som inledningsvis genomsöker en 3x3-matris i syfte att finna en inledande sökriktning. Därefter genomförs sökning medurs i åtta riktningar med utgångsriktning motsvarande österut. När ett större värde påträffas uppdateras nuvarande position och sökningen återupprepas. För jämförelse utvecklades även en variant med fyra sökriktningar. Efterkommande iterationer var samtliga en vidareutveckling av den förra. Den andra iteration vidareutvecklade algoritmen så att den lagrar information om tidigare besökta koordinater, så att dessa ej undersöks vid upprepade tillfällen. Ytterligare förbättringar implementerades i den tredje iterationen, då riktningen på den senaste förflyttningen, då ett nytt större värde påträffats, registreras. Med hjälp av denna information undersöks först samma riktning som den senast lyckade förflyttningen innan medurs sökning. Här slopades också den inledande sökningen i 3x3 matris, då den inte kunde påvisas ha några märkbara fördelar. Samtliga iterationer innebar märkbara förbättringar vid simulering. Den slutgiltiga algoritmen arbetar enligt det flödesschema som finns presenterad i bilaga \ref{sec:sokalgoritm}. \bigskip
+
+        För att jämföra sökalgoritmer genomfördes simuleringar för att mäta det antal steg som behövs för att ta sig från utgångspositionen till den position där det maximala värdet påträffades. Simuleringarna använde sig av 10000 100x100-matriser där varje matris hade slumpvist genererad utgångsposition och maximalt värde. Algoritmerna har alltså alla genomsökt samma matriser med samma utgångspositioner. Samtliga positioners värden var strängt avtagande i hänseende till avståndet från det maximala värdet. För varje iteration av algoritmen undersöktes sökning med både fyra och åtta sökriktningar. Sökning i fyra riktningar visade sig mer effektivt i samtliga fall, enligt \ref{tab:algoritm_steg}. Skillnaderna i antal steg mellan samma algoritm med olika antal sökriktningar vara störst i den första iterationen, med 54~\% fler steg, men de visade sig även i övriga iterationer. I den tredje och slutgiltiga iterationen var skillnaden 10~\% fler steg. Varje iteration av algoritmen minskade det antal steg som behövdes för att finna det största värdet. Största förändringen mellan iterationer skedde mellan iteration två och tre, där antalet steg minskades med 43~\%, se \ref{tab:algoritm_forbattring}. Minskningen mellan iteration ett och tre var 51~\%. \bigskip
+
+        % \begin{tabularx}{\textwidth}{@{}>{\bf \footnotesize}>{\footnotesize}lX}
+        %     Första iterationen & söker medurs i fyra/åtta riktningar \\
+        %     Andra iterationen & gör likadant som den första men undersöker ej redan kontrollerade koordinater \\
+        %     Tredje iterationen & gör likadant som den andra men undersöker i först samma riktning som den senast lyckade förflyttningen
+        % \end{tabularx} \bigskip
 
         \begin{table}[hb]
-            \caption{\label{tab:algoritmer}En jämförelse mellan de olika algoritmerna (MER TEXT BEHÖVS)}
+            \caption{\label{tab:algoritm_steg}Jämförelse av de olika algoritmiterationernas antal steg}
             \centering
-            \begin{tabular}{@{}rccccccc@{}}
+            \begin{tabular}{@{}>{\small}m{1.6cm}>{\small}m{1.6cm}>{\small}m{1.6cm}>{\small}m{1.6cm}>{\small}m{1.6cm}>{\small}m{1.6cm}>{\small}m{1.6cm}@{}}
             \toprule
-                 & Primitiv & Iter. 1:8     & Iter. 1:4 & Iter. 2:8 & Iter. 2:4 & Iter. 3:8 & Iter. 3:4  \\ \midrule
-            Steg & 10000    & 255           & 161       & 135       & 131       & 79        & 72 \\
-            Tid  & 10       & 9s   & 8s   &  &  \\ \bottomrule
+                                        & Iteration 1 8 rikt.     & Iteration 1 4 rikt. & Iteration 2 8 rikt. & Iteration 2 4 rikt. & Iteration 3 8 rikt. & Iteration 3 4 rikt.     \\ \midrule
+            % Antal steg, medel         & 261           & 163       & 136       & 132       & 79        & 72            \\
+            Antal steg \newline median  & 224           & 145       & 127       & 124       & 78        & 71            \\ \bottomrule
+            \end{tabular}
+        \end{table}
+
+        \begin{table}[h]
+            \caption{\label{tab:algoritm_forbattring}Minskning av antal steg mellan varje algoritmiteration}
+            \centering
+            \begin{tabular}{@{}>{\small}l>{\small}c>{\small}c@{}}
+            \toprule
+            Från        & \multicolumn{1}{l}{Till iteration 2} & \multicolumn{1}{l}{Till iteration 3} \\ \midrule
+            Iteration 1 & 14 \%                                & 51 \%                                \\
+            Iteration 2 & -                                    & 43 \%                               
             \end{tabular}
         \end{table}
 
