@@ -17,6 +17,7 @@ class main():
         self.array_size = array_size    # Size of arrays to be generated
         self.num_arrays = num_arrays    # Number of arrays to generate
         self.arrays = []                # Holds the generated arrays
+        self.start_pos = []             # Start position for each array
 
         self.labyrinth_steps = []   # Holds number of movements for labyrinth()
         self.labyrinth2_steps = []  # Holds number of movements for labyrinth2()
@@ -28,8 +29,8 @@ class main():
         self.old_labyrinth_max_value = set()   # Max value(s) found in labyrinth()
         self.old_labyrinth2_max_value = set()  # Max value(s) found in labyrinth2()
 
-        self.visit_labyrinth_steps = []   # Hvisits number of movements for labyrinth()
-        self.visit_labyrinth2_steps = []  # Hvisits number of movements for labyrinth2()
+        self.visit_labyrinth_steps = []   # Holds number of movements for labyrinth()
+        self.visit_labyrinth2_steps = []  # Holds number of movements for labyrinth2()
         self.visit_labyrinth_max_value = set()   # Max value(s) found in labyrinth()
         self.visit_labyrinth2_max_value = set()  # Max value(s) found in labyrinth2()
 
@@ -42,6 +43,7 @@ class main():
                                self.array_size,
                                random.randint(0, self.array_size-1),
                                random.randint(0, self.array_size-1)))
+            self.start_pos.append((random.randint(0, self.array_size-3), random.randint(0, self.array_size-3)))
 
     def create_array(self, x_size, y_size, x_max, y_max):
         arr = numpy.zeros((x_size, y_size)).tolist()
@@ -56,22 +58,21 @@ class main():
         # self.print_array(arr, x_size, y_size, x_max, y_max)
         return arr
 
-    def print_array(self, arr, x_size, y_size, x_max, y_max):
-        for y in range(0, y_size):
-            for x in range(0, x_size):
-                if x == x_max and y == y_max:
-                    print(Fore.RED + "{:3d}".format(arr[y][x]), end=' ')
-                    continue
-                print(Fore.RESET + "{:3d}".format(arr[y][x]), end=' ')
-            print("")
+    # def print_array(self, arr, x_size, y_size, x_max, y_max):
+    #     for y in range(0, y_size):
+    #         for x in range(0, x_size):
+    #             if x == x_max and y == y_max:
+    #                 print(Fore.RED + "{:3d}".format(arr[y][x]), end=' ')
+    #                 continue
+    #             print(Fore.RESET + "{:3d}".format(arr[y][x]), end=' ')
+    #         print("")
 
-    def labyrinth_setup(self, array):
+    def labyrinth_setup(self, array, start_pos):
         # Create a set to be used for checking visited coordinates
         visited = set()
 
         # values for the start position in the array
-        x = random.randint(0, len(array[0])-3)
-        y = random.randint(0, len(array)-3)
+        x, y = start_pos
 
         # the highest value found
         value = float("-inf")
@@ -81,8 +82,8 @@ class main():
 
         return visited, x, y, len(array[0]) - 1, len(array) - 1, value, steps
 
-    def labyrinth(self, array):
-        visited, x, y, x_length, y_length, value, steps = self.labyrinth_setup(array)
+    def labyrinth(self, array, start_pos):
+        visited, x, y, x_length, y_length, value, steps = self.labyrinth_setup(array, start_pos)
 
         last_move = None
         finished = False
@@ -176,8 +177,8 @@ class main():
         self.labyrinth_max_value.add(value)
 
     # Same as labyrinth(), but without diagonal movement
-    def labyrinth2(self, array):
-        visited, x, y, x_length, y_length, value, steps = self.labyrinth_setup(array)
+    def labyrinth2(self, array, start_pos):
+        visited, x, y, x_length, y_length, value, steps = self.labyrinth_setup(array, start_pos)
 
         last_move = None
         finished = False
@@ -251,14 +252,13 @@ class main():
         self.primitive_steps.append(steps)
         self.primitive_max_value.add(value)
 
-    def old_labyrinth(self,array):
+    def old_labyrinth(self, array, start_pos):
         # Length of array
         xLength = len(array[0]) - 1
         yLength = len(array) - 1
 
         #values for the start position in the array
-        a = random.randint(0, len(array[0])-3)
-        b = random.randint(0, len(array)-3)
+        a, b = start_pos
 
         #coordinates for 'value' in the array 
         x = 0
@@ -340,14 +340,13 @@ class main():
         self.old_labyrinth_steps.append(steps)
         self.old_labyrinth_max_value.add(value)
 
-    def old_labyrinth2(self,array):
+    def old_labyrinth2(self, array, start_pos):
         # Length of array
         xLength = len(array[0]) - 1
         yLength = len(array) - 1
 
         #values for the start position in the array
-        a = random.randint(0, len(array[0])-3)
-        b = random.randint(0, len(array)-3)
+        a, b = start_pos
 
         #coordinates for 'value' in the array 
         x = 0
@@ -401,7 +400,7 @@ class main():
         self.old_labyrinth2_steps.append(steps)
         self.old_labyrinth2_max_value.add(value)
 
-    def visit_labyrinth(self, array):
+    def visit_labyrinth(self, array, start_pos):
         # Create a set to be used for checking visited coordinates
         visited = set()
 
@@ -410,8 +409,7 @@ class main():
         y_length = len(array) - 1
 
         # values for the start position in the array
-        a = random.randint(0, len(array[0])-3)
-        b = random.randint(0, len(array)-3)
+        a, b = start_pos
 
         # coordinates for 'value' in the array
         x = 0
@@ -509,7 +507,7 @@ class main():
         self.visit_labyrinth_max_value.add(value)
 
     # Same as labyrinth(), but without diagonal movement
-    def visit_labyrinth2(self, array):
+    def visit_labyrinth2(self, array, start_pos):
         # Create a set to be used for checking visited coordinates
         visited = set()
 
@@ -518,8 +516,7 @@ class main():
         y_length = len(array) - 1
 
         # values for the start position in the array
-        a = random.randint(0, len(array[0])-3)
-        b = random.randint(0, len(array)-3)
+        a, b = start_pos
 
         # coordinates for 'value' in the array
         x = 0
@@ -596,42 +593,42 @@ class main():
         print("LABYRINTH\t", end="")
         start_time = time.time()
         for i in range(0, self.num_arrays):
-            self.labyrinth(self.arrays[i])
+            self.labyrinth(self.arrays[i], self.start_pos[i])
         print("Total time: %s seconds" % (time.time() - start_time))
 
     def test_labyrinth2(self):
         print("LABYRINTH 2\t", end="")
         start_time = time.time()
         for i in range(0, self.num_arrays):
-            self.labyrinth2(self.arrays[i])
+            self.labyrinth2(self.arrays[i], self.start_pos[i])
         print("Total time: %s seconds" % (time.time() - start_time))
 
     def test_old_labyrinth(self):
         print("OLD LABYRINTH\t", end="")
         start_time = time.time()
         for i in range(0, self.num_arrays):
-            self.old_labyrinth(self.arrays[i])
+            self.old_labyrinth(self.arrays[i], self.start_pos[i])
         print("Total time: %s seconds" % (time.time() - start_time))
 
     def test_old_labyrinth2(self):
         print("OLD LABYRINTH 2\t", end="")
         start_time = time.time()
         for i in range(0, self.num_arrays):
-            self.old_labyrinth2(self.arrays[i])
+            self.old_labyrinth2(self.arrays[i], self.start_pos[i])
         print("Total time: %s seconds" % (time.time() - start_time))
 
     def test_visit_labyrinth(self):
-        print("VISIT LABYRINTH\t", end="")
+        print("VISIT LAB\t", end="")
         start_time = time.time()
         for i in range(0, self.num_arrays):
-            self.visit_labyrinth(self.arrays[i])
+            self.visit_labyrinth(self.arrays[i], self.start_pos[i])
         print("Total time: %s seconds" % (time.time() - start_time))
 
     def test_visit_labyrinth2(self):
-        print("VISIT LABYRINTH 2\t", end="")
+        print("VISIT LAB 2\t", end="")
         start_time = time.time()
         for i in range(0, self.num_arrays):
-            self.visit_labyrinth2(self.arrays[i])
+            self.visit_labyrinth2(self.arrays[i], self.start_pos[i])
         print("Total time: %s seconds" % (time.time() - start_time))
 
     def test_all(self):
@@ -647,50 +644,50 @@ class main():
         self.test_primitive()
 
         print("\n\t\tLabyrinth\tLabyrinth2\tVisit Labyrinth\t\tVisit Labyrinth2\tOld Labyrinth\tOld Labyrinth2\tPrimitive")
-        print("steps\tmax\t" +  str(max(self.labyrinth_steps))      + "\t\t" +
-                                str(max(self.labyrinth2_steps))     + "\t\t" +
-                                str(max(self.visit_labyrinth_steps))  + "\t\t\t" +
-                                str(max(self.visit_labyrinth2_steps)) + "\t\t\t" +
-                                str(max(self.old_labyrinth_steps))  + "\t\t" +
-                                str(max(self.old_labyrinth2_steps)) + "\t\t" +
+        print("steps\tmax\t" +  str(max(self.labyrinth_steps))          + "\t\t" +
+                                str(max(self.labyrinth2_steps))         + "\t\t" +
+                                str(max(self.visit_labyrinth_steps))    + "\t\t\t" +
+                                str(max(self.visit_labyrinth2_steps))   + "\t\t\t" +
+                                str(max(self.old_labyrinth_steps))      + "\t\t" +
+                                str(max(self.old_labyrinth2_steps))     + "\t\t" +
                                 str(max(self.primitive_steps)))
         
-        print("\tmin\t" +       str(min(self.labyrinth_steps))      + "\t\t" +
-                                str(min(self.labyrinth2_steps))     + "\t\t" +
-                                str(min(self.visit_labyrinth_steps))  + "\t\t\t" +
-                                str(min(self.visit_labyrinth2_steps)) + "\t\t\t" +
-                                str(min(self.old_labyrinth_steps))  + "\t\t" +
-                                str(min(self.old_labyrinth2_steps)) + "\t\t" +
+        print("\tmin\t" +       str(min(self.labyrinth_steps))          + "\t\t" +
+                                str(min(self.labyrinth2_steps))         + "\t\t" +
+                                str(min(self.visit_labyrinth_steps))    + "\t\t\t" +
+                                str(min(self.visit_labyrinth2_steps))   + "\t\t\t" +
+                                str(min(self.old_labyrinth_steps))      + "\t\t" +
+                                str(min(self.old_labyrinth2_steps))     + "\t\t" +
                                 str(min(self.primitive_steps)))
         
         print("\tmean\t" +      str(int(mean(self.labyrinth_steps)))        + "\t\t" +
                                 str(int(mean(self.labyrinth2_steps)))       + "\t\t" +
-                                str(int(mean(self.visit_labyrinth_steps)))    + "\t\t\t" +
-                                str(int(mean(self.visit_labyrinth2_steps)))   + "\t\t\t" +
+                                str(int(mean(self.visit_labyrinth_steps)))  + "\t\t\t" +
+                                str(int(mean(self.visit_labyrinth2_steps))) + "\t\t\t" +
                                 str(int(mean(self.old_labyrinth_steps)))    + "\t\t" +
                                 str(int(mean(self.old_labyrinth2_steps)))   + "\t\t" +
                                 str(int(mean(self.primitive_steps))))
         
-        print("\tmedian\t" +    str(int(median(self.labyrinth_steps)))      + "\t\t" +
-                                str(int(median(self.labyrinth2_steps)))     + "\t\t" +
-                                str(int(median(self.visit_labyrinth_steps)))  + "\t\t\t" +
-                                str(int(median(self.visit_labyrinth2_steps))) + "\t\t\t" +
-                                str(int(median(self.old_labyrinth_steps)))  + "\t\t" +
-                                str(int(median(self.old_labyrinth2_steps))) + "\t\t" +
+        print("\tmedian\t" +    str(int(median(self.labyrinth_steps)))          + "\t\t" +
+                                str(int(median(self.labyrinth2_steps)))         + "\t\t" +
+                                str(int(median(self.visit_labyrinth_steps)))    + "\t\t\t" +
+                                str(int(median(self.visit_labyrinth2_steps)))   + "\t\t\t" +
+                                str(int(median(self.old_labyrinth_steps)))      + "\t\t" +
+                                str(int(median(self.old_labyrinth2_steps)))     + "\t\t" +
                                 str(int(median(self.primitive_steps))))
 
-        print("\nvalue\tmax\t" +    str(max(self.labyrinth_max_value))      + "\t\t" +
-                                    str(max(self.labyrinth2_max_value))     + "\t\t" +
-                                    str(max(self.visit_labyrinth_max_value))  + "\t\t\t" +
-                                    str(max(self.visit_labyrinth2_max_value)) + "\t\t\t" +
-                                    str(max(self.old_labyrinth_max_value))  + "\t\t" +
-                                    str(max(self.old_labyrinth2_max_value)) + "\t\t" +
+        print("\nvalue\tmax\t" +    str(max(self.labyrinth_max_value))          + "\t\t" +
+                                    str(max(self.labyrinth2_max_value))         + "\t\t" +
+                                    str(max(self.visit_labyrinth_max_value))    + "\t\t\t" +
+                                    str(max(self.visit_labyrinth2_max_value))   + "\t\t\t" +
+                                    str(max(self.old_labyrinth_max_value))      + "\t\t" +
+                                    str(max(self.old_labyrinth2_max_value))     + "\t\t" +
                                     str(max(self.primitive_max_value)))
         
         print("\tmin\t" +       str(min(self.labyrinth_max_value))          + "\t\t" +
                                 str(min(self.labyrinth2_max_value))         + "\t\t" +
-                                str(min(self.visit_labyrinth_max_value))      + "\t\t\t" +
-                                str(min(self.visit_labyrinth2_max_value))     + "\t\t\t" +
+                                str(min(self.visit_labyrinth_max_value))    + "\t\t\t" +
+                                str(min(self.visit_labyrinth2_max_value))   + "\t\t\t" +
                                 str(min(self.old_labyrinth_max_value))      + "\t\t" +
                                 str(min(self.old_labyrinth2_max_value))     + "\t\t" +
                                 str(min(self.primitive_max_value)))
