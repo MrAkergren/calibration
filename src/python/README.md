@@ -1,5 +1,18 @@
-#Style guide for Python source code 
+Code structure
+===
+Main files.
+---
+```main.py``` contains the algorithms and logic. 
+```scom.py``` contains the serial communication class for communication to the panel. 
+```mock_read.py``` file is used to pull values when the lux-meter is not available.
+```__init.py__``` is needed by the language.
 
+Legacy
+---
+Files used previous during the development
+
+Style guide for Python source code 
+===
 |Type  |  Public | Internal |
 |--- | --- | --- | 
 |Packages |   lower_with_under    ||
