@@ -132,7 +132,10 @@
 \usepackage[justification=centering]{caption}
 \usepackage{subcaption}
 \usepackage{threeparttable}
-
+\usepackage{mathrsfs}
+\makeatletter 
+\g@addto@macro\TPT@defaults{\footnotesize} 
+\makeatother
 %%--ADVANCE TABULARS--%%
 \usepackage{tabularx}
 \usepackage{booktabs}
