@@ -2,10 +2,12 @@ Code structure
 ===
 Main files.
 ---
-```main.py``` contains the algorithms and logic. 
-```scom.py``` contains the serial communication class for communication to the panel. 
-```mock_read.py``` file is used to pull values when the lux-meter is not available.
-```__init.py__``` is needed by the language.
+|File | Contains |
+| --- | --- |
+|```main.py``` | The algorithms and logic. |
+|```scom.py```| The serial communication class for communication to the panel. |
+|```mock_read.py``` | file is used to pull values when the lux-meter is not available. |
+|```__init.py__``` | is needed by the language. |
 
 Legacy
 ---
