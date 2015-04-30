@@ -6,6 +6,7 @@ import numpy
 import random
 from statistics import mean
 from statistics import median
+from statistics import pstdev
 import sys
 from colorama import Fore
 
@@ -660,21 +661,21 @@ class main():
                                 str(min(self.old_labyrinth2_steps))     + "\t\t" +
                                 str(min(self.primitive_steps)))
         
-        print("\tmean\t" +      str(int(mean(self.labyrinth_steps)))        + "\t\t" +
-                                str(int(mean(self.labyrinth2_steps)))       + "\t\t" +
-                                str(int(mean(self.visit_labyrinth_steps)))  + "\t\t\t" +
-                                str(int(mean(self.visit_labyrinth2_steps))) + "\t\t\t" +
-                                str(int(mean(self.old_labyrinth_steps)))    + "\t\t" +
-                                str(int(mean(self.old_labyrinth2_steps)))   + "\t\t" +
-                                str(int(mean(self.primitive_steps))))
+        print("\tmean\t" +      str(mean(self.labyrinth_steps))        + "\t\t" +
+                                str(mean(self.labyrinth2_steps))       + "\t\t" +
+                                str(mean(self.visit_labyrinth_steps))  + "\t\t" +
+                                str(mean(self.visit_labyrinth2_steps)) + "\t\t" +
+                                str(mean(self.old_labyrinth_steps))    + "\t" +
+                                str(mean(self.old_labyrinth2_steps))   + "\t\t" +
+                                str(mean(self.primitive_steps)))
         
-        print("\tmedian\t" +    str(int(median(self.labyrinth_steps)))          + "\t\t" +
-                                str(int(median(self.labyrinth2_steps)))         + "\t\t" +
-                                str(int(median(self.visit_labyrinth_steps)))    + "\t\t\t" +
-                                str(int(median(self.visit_labyrinth2_steps)))   + "\t\t\t" +
-                                str(int(median(self.old_labyrinth_steps)))      + "\t\t" +
-                                str(int(median(self.old_labyrinth2_steps)))     + "\t\t" +
-                                str(int(median(self.primitive_steps))))
+        print("\tmedian\t" +    str(median(self.labyrinth_steps))          + "\t\t" +
+                                str(median(self.labyrinth2_steps))         + "\t\t" +
+                                str(median(self.visit_labyrinth_steps))    + "\t\t\t" +
+                                str(median(self.visit_labyrinth2_steps))   + "\t\t\t" +
+                                str(median(self.old_labyrinth_steps))      + "\t\t" +
+                                str(median(self.old_labyrinth2_steps))     + "\t\t" +
+                                str(median(self.primitive_steps)))
 
         print("\nvalue\tmax\t" +    str(max(self.labyrinth_max_value))          + "\t\t" +
                                     str(max(self.labyrinth2_max_value))         + "\t\t" +
@@ -691,7 +692,14 @@ class main():
                                 str(min(self.old_labyrinth_max_value))      + "\t\t" +
                                 str(min(self.old_labyrinth2_max_value))     + "\t\t" +
                                 str(min(self.primitive_max_value)))
-        print()
+        
+        print("\nstd dev\t\t" + "%.3f" % pstdev(self.labyrinth_steps)          + "\t\t" +
+                                "%.3f" % pstdev(self.labyrinth2_steps)         + "\t\t" +
+                                "%.3f" % pstdev(self.visit_labyrinth_steps)    + "\t\t\t" +
+                                "%.3f" % pstdev(self.visit_labyrinth2_steps)   + "\t\t\t" +
+                                "%.3f" % pstdev(self.old_labyrinth_steps)      + "\t\t" +
+                                "%.3f" % pstdev(self.old_labyrinth2_steps)     + "\t\t" +
+                                "%.3f" % pstdev(self.primitive_steps))
 
 
 # Main created with array size (square) and number of arrays
