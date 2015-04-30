@@ -61,12 +61,17 @@
         \begin{table}[hb]
             \caption{\label{tab:algoritm_forbattring}Minskning av antal steg mellan varje version}
             \centering
-            \begin{tabular}{@{}>{\small}l>{\small}c>{\small}c@{}}
+            \begin{threeparttable}
+            \begin{tabular}{@{}lcc@{}}
             \toprule
-            Från        & \multicolumn{1}{l}{\small Till version 2} & \multicolumn{1}{l}{\small Till version 3} \\ \midrule
+            Från        & \multicolumn{1}{l}{Till version 2} & \multicolumn{1}{l}{Till version 3} \\ \midrule
             Version 1 & 14~\%                                & 51~\%                                \\
             Version 2 & -                                    & 43~\% \\ \bottomrule
             \end{tabular}
+            \begin{tablenotes}
+            \item Baserat på medianvärden, se bilaga~\ref{sec:sokalgoritm_sim}
+        \end{tablenotes}
+        \end{threeparttable}
         \end{table}
 
     % subsection steg_3 (end)
