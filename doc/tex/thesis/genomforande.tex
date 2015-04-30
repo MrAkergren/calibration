@@ -52,53 +52,7 @@
         Utformningen av algoritmen skedde genom flera iterationer av steg 3 i den valda metoden. I den första iterationen utvecklades en sökalgoritm, algoritm $\mathscr{A}$, som inledningsvis genomsöker en 3x3-matris i syfte att finna en inledande sökriktning. Därefter genomförs sökning medurs i åtta riktningar med utgångsriktning motsvarande österut. När ett större värde påträffas uppdateras nuvarande position och sökningen återupprepas. För jämförelse utvecklades även en variant med fyra sökriktningar, algoritm $\mathscr{B}$. Efterkommande iterationer var samtliga en vidareutveckling av den förra. Den andra iteration vidareutvecklade algoritmen så att den lagrar information om tidigare besökta koordinater, så att dessa ej undersöks vid upprepade tillfällen. Ytterligare förbättringar implementerades i den tredje iterationen, då riktningen på den senaste förflyttningen, då ett nytt större värde påträffats, registreras. Med hjälp av denna information undersöks först samma riktning som den senast lyckade förflyttningen innan medurs sökning. Här slopades också den inledande sökningen i 3x3 matris, då den inte kunde påvisas ha några märkbara fördelar. Samtliga iterationer innebar märkbara förbättringar vid simulering. Den slutgiltiga algoritmen arbetar enligt det flödesschema som finns presenterad i bilaga~\ref{sec:sokalgoritm_flow}. \bigskip
 
         \begin{figure}[hbt]
-            \pgfplotsset{width=8cm,compat=1.8}
-            \begin{tikzpicture}
-                \centering
-                \begin{axis}[
-                    ybar,
-                    axis on top,
-                    % title={Söksteg algoritmer},
-                    height=5cm, width=10cm,
-                    bar width=0.3cm,
-                    ymajorgrids, tick align=inside,
-                    major grid style={draw=white},
-                    enlarge y limits={value=.1,upper},
-                    ymin=0, ymax=200,
-                    axis x line*=bottom,
-                    axis y line*=left,
-                    y axis line style={opacity=0},
-                    tickwidth=0pt,
-                    enlarge x limits=true,
-                    legend style={
-                        at={(0.5,-0.25)},
-                        % font=\footnotesize,
-                        anchor=north,
-                        legend columns=2,
-                        /tikz/every even column/.append style={column sep=0.5cm}
-                    },
-                    ylabel={Söksteg, median},
-                    symbolic x coords={version 1, version 2, version 3},
-                    xtick=data,
-                    % tick label style={font=\footnotesize},
-                    ]
-                    
-                    %% Median 8 riktningar
-                    \addplot [draw=none,fill=blue!60] coordinates {
-                        (version 1,224)
-                        (version 2,127) 
-                        (version 3,78)
-                    };
-
-                    %% Median 4 riktningar
-                    \addplot [draw=none, fill=red!60] coordinates {
-                        (version 1,145)
-                        (version 2,124) 
-                        (version 3,71)
-                    };
-                    \legend{$\mathscr{A}$: 8 riktningar,$\mathscr{B}$: 4 riktningar}
-                \end{axis}
-            \end{tikzpicture}
+            \input{algoritm_stapeldiagram}
         \caption{\label{fig:algoritm_steg} Jämförelse algoritmernas antal söksteg}
         \end{figure}
 
