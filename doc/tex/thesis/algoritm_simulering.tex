@@ -1,0 +1,31 @@
+\section{Simuleringsresultat av kalibreringsalgoritm} % (fold)
+\label{sec:sokalgoritm_sim}
+    \begin{table}[ht]
+        % \caption{\label{tab:algoritm_steg}Jämförelse av algoritmernas antal söksteg}
+        \centering
+        \begin{threeparttable}
+        \begin{tabular}{rccccccc}\toprule
+            & \multicolumn{3}{c}{ $\mathscr{A}$: 8 riktningar} &  & \multicolumn{3}{c}{ $\mathscr{B}$: 4 riktingar} \\ %\cline{2-4} \cline{6-8} 
+            \hspace{5mm}    Steg        & v.1   & v.2   & v3    & \hspace{5mm}  & v.1   & v.2   & v3    \\  \midrule
+                            Medel       & 255,7 & 134,2 & 78,8  &               & 160,2 & 130,5 & 72,0  \\
+                            Median      & 215   & 124   & 76    &               & 140   & 120   & 69    \\
+                            Max         & 1065  & 450   & 195   &               & 621   & 448   & 186   \\
+                            Min         & 1     & 7     & 9     &               & 1     & 4     & 5     \\
+                            $\sigma$    & 176.3 & 73,5  & 33,1  &               & 101,1 & 73.4  & 32,9  \\  \bottomrule
+        \end{tabular}
+        \begin{tablenotes}
+            \item Varje version implementerar ny funktionalitet:
+            \item 1. Söker medurs i åtta alternativt fyra riktningar.
+            \item 2. Testa ej redan kontrollerade koordinater.
+            \item 3. Testa först den riktning som senast lyckad förflyttning.
+        \end{tablenotes}
+        \end{threeparttable}
+    \end{table} \bigskip
+
+%                 v3:8        v3:4        v2:8                   v2:4            v1:8            v1:4
+% steps   max     195         186          450                   448             1065             621
+%         min       9           5            7                     4                1               1
+%         mean     78.7549     72.0076     134.15                130.483          255.7382        160.1794
+%         median   76.0        69.0        124.0                 120.0            215.0           140.0
+
+% std dev          33.063      32.918       73.486                73.386          176.294         101.092

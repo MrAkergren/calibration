@@ -29,6 +29,9 @@
 \usepackage[hidelinks]{hyperref}
 
 %%--GRAPHICS--%%  (Requires preamble)
+\usepackage{floatrow}
+\newfloatcommand{capbtabbox}{table}[][\FBwidth]
+
 \usepackage{tikz}
 \usetikzlibrary{backgrounds,calc,positioning,shapes,arrows}
 
@@ -208,5 +211,9 @@
 \setcounter{page}{1}
 \pagenumbering{Roman}
 \appendix
-\input{algoritm_flowchart}
+\section*{Bilagor} % (fold)
+\label{sec:bilagor}
+\addcontentsline{toc}{section}{Bilagor}
+\input{algoritm_simulering}
+\include{algoritm_flowchart}
 \end{document}

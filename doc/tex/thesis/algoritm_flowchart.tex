@@ -1,51 +1,47 @@
-\section*{Bilagor} % (fold)
-\label{sec:bilagor}
-\addcontentsline{toc}{section}{Bilagor}
+\section{Flödesschema av kalibreringsalgoritmen} % (fold)
+\label{sec:sokalgoritm_flow}
+% \vspace{-1.3cm}
+\begin{figure}[h!]
+    \centering
+    \hspace{20mm}
+    \begin{tikzpicture}[node distance=1.5cm]
+        \tikzstyle{every node}=[font=\scriptsize]
+        %\node (start) [startstop] {Start};
+        \node (inp1) [startstop, text width=20mm] {Läs position och värde};
+        \node (success) [decision, below=5mm of inp1, text width=20mm] {Nytt max funnet?};
+        \node (iterate) [process, right of=success, text width=25mm, xshift=3cm] {Iterera riktningar (E, S, W, N)};
+        \node (prev1) [decision, below=56mm of iterate, text width=20mm] {Tidigare undersökt?};
+        \node (allprev) [decision, below=20mm of prev1, text width=20mm] {Alla riktningar kontrollerade?};
+        \node (same) [process, below=5mm of success, text width=25mm] {Fortsätt i \hbox{samma} riktning};
+        \node (prev2) [decision, below=5mm of same, text width=20mm] {Tidigare undersökt?};
+        \node (inp2) [io, below=5mm of prev2, text width=20mm] {Läs \hbox{aktuellt} värde};
+        \node (greater) [decision, below=5mm of inp2, text width=20mm] {Nytt max funnet?};
+        \node (update) [process, below=5mm of greater, text width=25mm] {Uppdatera max och position};
 
-    \section{Sökalgoritm} % (fold)
-    \label{sec:sokalgoritm}
-    \vspace{-1.3cm}
-        \begin{figure}[h!]
-            \centering
-            \hspace{20mm}
-            \begin{tikzpicture}[node distance=1.5cm]
-                \tikzstyle{every node}=[font=\scriptsize]
-                %\node (start) [startstop] {Start};
-                \node (inp1) [startstop, text width=20mm] {Läs position och värde};
-                \node (success) [decision, below=5mm of inp1, text width=20mm] {Nytt max funnet?};
-                \node (iterate) [process, right of=success, text width=25mm, xshift=3cm] {Iterera riktningar (E, S, W, N)};
-                \node (prev1) [decision, below=56mm of iterate, text width=20mm] {Tidigare undersökt?};
-                \node (allprev) [decision, below=20mm of prev1, text width=20mm] {Alla riktningar kontrollerade?};
-                \node (same) [process, below=5mm of success, text width=25mm] {Fortsätt i \hbox{samma} riktning};
-                \node (prev2) [decision, below=5mm of same, text width=20mm] {Tidigare undersökt?};
-                \node (inp2) [io, below=5mm of prev2, text width=20mm] {Läs \hbox{aktuellt} värde};
-                \node (greater) [decision, below=5mm of inp2, text width=20mm] {Nytt max funnet?};
-                \node (update) [process, below=5mm of greater, text width=25mm] {Uppdatera max och position};
+        \node (stop) [startstop, below=5mm of allprev] {Stopp};
 
-                \node (stop) [startstop, below=5mm of allprev] {Stopp};
+      %  \draw [arrow] (start) -- (inp1);
+        \draw [arrow] (inp1) -- (success);
+        \draw [arrow] (success) -- node[anchor=south] {Nej} (iterate);
+        \draw [arrow] (success) -- node[anchor=east] {Ja} (same);
+        \draw [arrow] (same) -- (prev2);
+        \draw [arrow] (iterate) -- (prev1);
+        \draw [arrow] (prev1) -- node[anchor=east] {Ja} (allprev);
+        % \draw [arrow] (prev1) -- node[anchor=south] {Nej} +(-2.25,0) |- (inp2);
+        \draw [arrow] (prev1) -- node[anchor=south] {Nej} (inp2);
+        \draw [arrow] (allprev) -- node[anchor=east] {Ja} (stop);
+        \draw [arrow] (allprev) -- node[anchor=south] {Nej} +(3,0) |- (iterate);
+        \draw [arrow] (prev2) -- node[anchor=east] {Nej} (inp2);
 
-              %  \draw [arrow] (start) -- (inp1);
-                \draw [arrow] (inp1) -- (success);
-                \draw [arrow] (success) -- node[anchor=south] {Nej} (iterate);
-                \draw [arrow] (success) -- node[anchor=east] {Ja} (same);
-                \draw [arrow] (same) -- (prev2);
-                \draw [arrow] (iterate) -- (prev1);
-                \draw [arrow] (prev1) -- node[anchor=east] {Ja} (allprev);
-                % \draw [arrow] (prev1) -- node[anchor=south] {Nej} +(-2.25,0) |- (inp2);
-                \draw [arrow] (prev1) -- node[anchor=south] {Nej} (inp2);
-                \draw [arrow] (allprev) -- node[anchor=east] {Ja} (stop);
-                \draw [arrow] (allprev) -- node[anchor=south] {Nej} +(3,0) |- (iterate);
-                \draw [arrow] (prev2) -- node[anchor=east] {Nej} (inp2);
+        \draw [arrow] (inp2) -- (greater);
 
-                \draw [arrow] (inp2) -- (greater);
+        \draw [arrow] (greater) -- node[anchor=east] {Ja} (update);
 
-                \draw [arrow] (greater) -- node[anchor=east] {Ja} (update);
+        \draw [draw, thick] (prev2) -- node[anchor=south] {Ja} +(-3,0);
+        \draw [draw, thick] (greater) -- node[anchor=south] {Nej} +(-3,0);
 
-                \draw [draw, thick] (prev2) -- node[anchor=south] {Ja} +(-3,0);
-                \draw [draw, thick] (greater) -- node[anchor=south] {Nej} +(-3,0);
+        \draw [arrow] (update) -- +(-3,0) |- (success);
 
-                \draw [arrow] (update) -- +(-3,0) |- (success);
-
-            \end{tikzpicture}
-            \caption{\label{fig:flow}Flödesschema av kalibreringsalgoritmen}
-        \end{figure}
+    \end{tikzpicture}
+    % \caption{\label{fig:flow}Flödesschema av kalibreringsalgoritmen}
+\end{figure}
