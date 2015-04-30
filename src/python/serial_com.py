@@ -1,14 +1,14 @@
 import serial
+from time import sleep
 
 
-class Serial(object):
+class SerialCommunication(object):
     """docstring for Serial
     """
 
-    def __init__(self, arg):
-        super(Panel, Arduino, self).__init__()
-        self.arg = arg
-        
+    def __init__(self):
+        self.connection = None
+
     def serial_connect(self, unit):
         """The method to handle the connection to the panel.
         """
@@ -19,6 +19,7 @@ class Serial(object):
             sleep(1)
         except serial.SerialException:
             print('Connection failed')
+            raise 
         else:
             if self.connection.isOpen():
                 self.connection.flushInput()

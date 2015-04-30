@@ -3,14 +3,14 @@
 
 import time
 import random
-from scom import SCom
+from serial_handler import SerialHandler
 
 
-class Main():
+class Main:
     def __init__(self):
         self.x_offset = 0.01
         self.y_offset = 0.01
-        self.com = SCom(self.x_offset, self.y_offset)
+        self.com = SerialHandler(self.x_offset, self.y_offset)
 
     def labyrinth(self):
         # Create a set to be used for checking visited coordinates
