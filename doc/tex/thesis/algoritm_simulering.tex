@@ -1,0 +1,22 @@
+\section{Simuleringsresultat av kalibreringsalgoritm} % (fold)
+\label{sec:sokalgoritm_sim}
+    \begin{table}[ht]
+        % \caption{\label{tab:algoritm_steg}Jämförelse av algoritmernas antal söksteg}
+        \centering
+        \begin{threeparttable}
+        \begin{tabular}{rccccccc}\toprule
+            & \multicolumn{3}{c}{ $\mathscr{A}$: 8 riktningar} &  & \multicolumn{3}{c}{ $\mathscr{B}$: 4 riktingar} \\ %\cline{2-4} \cline{6-8} 
+            \hspace{5mm}    Steg    & v.1   & v.2   & v3    & \hspace{5mm}  & v.1   & v.2   & v3    \\  \midrule
+                            Medel   & 261   & 136   & 79    &               & 163   & 132   & 72    \\
+                            Median  & 224   & 127   & 78    &               & 145   & 124   & 71    \\
+                            Max     & 1036  & 441   & 191   &               & 604   & 437   & 184   \\
+                            Min     & 1     & 5     & 9     &               & 1     & 3     & 5     \\  \bottomrule
+        \end{tabular}
+        \begin{tablenotes}[flushleft]
+            \item  Varje version implementerar ny funktionalitet:
+            \item 1. Söker medurs i åtta alternativt fyra riktningar.
+            \item 2. Testa ej redan kontrollerade koordinater.
+            \item 3. Testa först den riktning som senast lyckad förflyttning.
+        \end{tablenotes}
+        \end{threeparttable}
+    \end{table} \bigskip
