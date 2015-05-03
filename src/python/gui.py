@@ -1,3 +1,6 @@
+#! /usr/bin/env python3
+# -*- coding: UTF-8 -*-
+
 import tkinter as tk 
 
 
@@ -99,7 +102,7 @@ class ControlFrame(tk.Frame):
 
 root = tk.Tk()
 root.geometry('240x320')
-root.wm_title('Solar Panel Remote')
+root.wm_title('Parans Panel Calibration')
 gui_app = GUI(root)
 
 root.mainloop()
