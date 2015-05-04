@@ -19,7 +19,7 @@ class SerialCommunication(object):
             sleep(1)
         except serial.SerialException:
             print('Connection failed')
-           # raise 
+            raise 
         else:
             if self.connection.isOpen():
                 self.connection.flushInput()

@@ -81,11 +81,14 @@ class Panel(SerialCommunication):
             check_y = True
 
         if check_y:
-            self.set_y_coordinate(str(y))
-        if check_x:
-            self.set_x_coordinate(str(x))
+            print("New coordinates is: %f, %f" % (x, y))
+            #self.set_y_coordinate(str(y))
 
-        while not self._correct_position():
+        if check_x:
+            print("New coordinates is: %f, %f" % (x, y))
+            #self.set_x_coordinate(str(x))
+
+        #while not self._correct_position():
             pass
 
     def _correct_position(self):

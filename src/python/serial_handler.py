@@ -9,7 +9,7 @@ class SerialHandler:
     """docstring for SerialHandler
     """
     def __init__(self, x, y):
-        #  self.m = MockRead()
+        #self.m = MockRead()
         try:
             self.pan = Panel(x, y)
         except:
@@ -24,7 +24,7 @@ class SerialHandler:
 
     def get_value(self):
         return self.ard.get_value()
-        #  return self.m.get_value()
+        #return self.m.get_value()
 
     def get_log(self):
         return self.pan.get_log()

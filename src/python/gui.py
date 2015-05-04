@@ -1,7 +1,7 @@
 #! /usr/bin/env python3
 # -*- coding: UTF-8 -*-
 
-import tkinter as tk 
+import tkinter as tk
 
 
 # For ease of use and readability
@@ -11,14 +11,15 @@ E = tk.E
 W = tk.W
 
 
-
 class GUI(tk.Frame):
     """docstring for GUI
     """
-    def __init__(self, serial_handler, master=None):
-        self.tkRoot = tk.Tk()
+    def __init__(self, serial_handler, search, master=None):
+        self.search_alg = search
         self.sh = serial_handler
-        self.coordinates = (0, 0)
+        self.coordinates = self.sh.get_coordinates()
+        self.tkRoot = tk.Tk()
+
         tk.Frame.__init__(self, self.tkRoot)
         self.tkRoot.geometry('240x320')
         self.tkRoot.wm_title('Parans Panel Calibration')
@@ -28,27 +29,30 @@ class GUI(tk.Frame):
         self.rowconfigure(0, weight=100)
         self.rowconfigure(1, weight=1)
         self.columnconfigure(0, weight=1)
-        
-        self.control_frame = ControlFrame(self)
+
         # Initiate frames and start the first frame, the steering controls
+        self.control_frame = ControlFrame(self)
         self.control_frame.show_frame()
-        
+
         self.statusLabelText = tk.StringVar()
         self.statusLabelText.set('The calibration testing app \nApplication started')
         self.statusLabel = tk.Label(self, textvariable=self.statusLabelText, height=2)
         self.statusLabel.grid(row=1, column=0, sticky=(E, W))
         self.tkRoot.mainloop()
 
-    def updateStatusbar(self, text):
+    def update_statusbar(self, text):
         self.statusLabelText.set(text)
         print('Serial read:', text)
+
 
 class ControlFrame(tk.Frame):
     # Constructor
     def __init__(self, master=None):
         self.master = master
+        self.x, self.y = self.master.coordinates
         tk.Frame.__init__(self, self.master, bg='black')
         self.setup_control_buttons()
+        self.bind_buttons()
 
     def show_frame(self):
         self.grid(row=0, column=0, sticky=(N, S, E, W))
@@ -60,38 +64,52 @@ class ControlFrame(tk.Frame):
 
         self.btnLeft = tk.Button(self, text='LEFT', width=5, height=3)
         self.btnLeft.grid(row=1, column=0, pady=5, padx=5, sticky=(E, W))
-        
+
         self.btnStop = tk.Button(self, text='STOP', width=5, height=3)
         self.btnStop.grid(row=1, column=1, pady=5, padx=5, sticky=(E, W))
-        
+
         self.btnRight = tk.Button(self, text='RIGHT', width=5, height=3)
         self.btnRight.grid(row=1, column=2, pady=10, padx=5, sticky=(E, W))
-        
+
         self.btnDown = tk.Button(self, text='DOWN', width=5, height=3)
         self.btnDown.grid(row=2, column=1, pady=5, padx=5, sticky=(E, W))
 
-     #   self.btnCon = tk.Button(self, text='CONNECT', width=5, \
-     #       command=self.master.connectRemote)
-     #   self.btnCon.grid(row=3, column=0, pady=30, padx=5, sticky=(E, W))
+        #   self.btnCon = tk.Button(self, text='CONNECT', width=5, \
+        #       command=self.master.connectRemote)
+        #   self.btnCon.grid(row=3, column=0, pady=30, padx=5, sticky=(E, W))
 
-     #   self.btnCommands = tk.Button(self, text='COMMAND', width=5, \
-     #       command=lambda:self.master.switchFrame('launchCommand'))
-     #   self.btnCommands.grid(row=3, column=2, pady=30, padx=5, sticky=(E, W))
+        #   self.btnCommands = tk.Button(self, text='COMMAND', width=5, \
+        #       command=lambda:self.master.switchFrame('launchCommand'))
+        #   self.btnCommands.grid(row=3, column=2, pady=30, padx=5, sticky=(E, W))
 
-    # Bind the control buttons to commands
+    #  Bind the control buttons to commands
     def bind_buttons(self):
-        # Lambda function to use for 'run stop' on button release
         stopCommand = lambda x:self.master.runCommand('run stop')
 
-        self.btnUp.bind('<Button-1>', lambda x:self.master.runCommand('run u'))
-        self.btnUp.bind('<ButtonRelease-1>', stopCommand)
-        self.btnLeft.bind('<Button-1>', lambda x:self.master.runCommand('run l'))
-        self.btnLeft.bind('<ButtonRelease-1>', stopCommand)
-        self.btnStop.bind('<Button-1>', stopCommand)
-        self.btnRight.bind('<Button-1>', lambda x:self.master.runCommand('run r'))
-        self.btnRight.bind('<ButtonRelease-1>', stopCommand)
-        self.btnDown.bind('<Button-1>', lambda x:self.master.runCommand('run d'))
-        self.btnDown.bind('<ButtonRelease-1>', stopCommand)
+        self.btnUp.bind(
+            '<Button-1>',
+            lambda x: self.master.sh.move(self.master.coordinates, 'NORTH'))
+
+        self.btnUp.bind(
+            '<ButtonRelease-1>',
+            lambda x: self.master.update_statusbar(self.inc_coord(self.y)))
+
+        self.btnLeft.bind(
+            '<Button-1>', 
+            lambda x: self.master.sh.move(self.master.coordinates, 'EAST'))
+        # self.btnLeft.bind('<ButtonRelease-1>', stopCommand)
+
+        # self.btnStop.bind('<Button-1>', stopCommand)
+
+        self.btnRight.bind(
+            '<Button-1>', 
+            lambda x: self.master.sh.move(self.master.coordinates, 'WEST'))
+        # self.btnRight.bind('<ButtonRelease-1>', stopCommand)
+
+        self.btnDown.bind(
+            '<Button-1>', 
+            lambda x: self.master.sh.move(self.master.coordinates, 'SOUTH'))
+        # self.btnDown.bind('<ButtonRelease-1>', stopCommand)
 
     # Unbind the commands from the control buttons
     def unbind_buttons(self):
@@ -105,3 +123,6 @@ class ControlFrame(tk.Frame):
         self.btnDown.unbind('<Button-1>')
         self.btnDown.unbind('<ButtonRelease-1>')
 
+    def inc_coord(self, num):
+        num += 1
+        return num
