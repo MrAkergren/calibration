@@ -25,7 +25,7 @@ void loop() {
   int i=0;
 
   if (mySerial.available()) {
-    delay(600); //allows all serial sent to be received together
+    delay(500); //allows all serial sent to be received together
     while(mySerial.available() && i<2) {
       //str[i++] = mySerial.read();
       indata[i++] = mySerial.read();
