@@ -10,13 +10,18 @@ S = tk.S
 E = tk.E
 W = tk.W
 
+
+
 class GUI(tk.Frame):
     """docstring for GUI
     """
-    def __init__(self, master=None):
-        self.tkRoot = master
-
+    def __init__(self, serial_handler, master=None):
+        self.tkRoot = tk.Tk()
+        self.sh = serial_handler
+        self.coordinates = (0, 0)
         tk.Frame.__init__(self, self.tkRoot)
+        self.tkRoot.geometry('240x320')
+        self.tkRoot.wm_title('Parans Panel Calibration')
         self.tkRoot.rowconfigure(0, weight=1)
         self.tkRoot.columnconfigure(0, weight=1)
         self.grid(sticky=(N, S, E, W))
@@ -26,13 +31,13 @@ class GUI(tk.Frame):
         
         self.control_frame = ControlFrame(self)
         # Initiate frames and start the first frame, the steering controls
-        self.control_frame.showFrame()
+        self.control_frame.show_frame()
         
         self.statusLabelText = tk.StringVar()
         self.statusLabelText.set('The calibration testing app \nApplication started')
         self.statusLabel = tk.Label(self, textvariable=self.statusLabelText, height=2)
         self.statusLabel.grid(row=1, column=0, sticky=(E, W))
-
+        self.tkRoot.mainloop()
 
     def updateStatusbar(self, text):
         self.statusLabelText.set(text)
@@ -43,13 +48,13 @@ class ControlFrame(tk.Frame):
     def __init__(self, master=None):
         self.master = master
         tk.Frame.__init__(self, self.master, bg='black')
-        self.setupControlButtons()
+        self.setup_control_buttons()
 
-    def showFrame(self):
+    def show_frame(self):
         self.grid(row=0, column=0, sticky=(N, S, E, W))
 
     # Setup of control buttons
-    def setupControlButtons(self):
+    def setup_control_buttons(self):
         self.btnUp = tk.Button(self, text='UP', width=5, height=3)
         self.btnUp.grid(row=0, column=1, pady=5, padx=5, sticky=(E, W))
 
@@ -74,7 +79,7 @@ class ControlFrame(tk.Frame):
      #   self.btnCommands.grid(row=3, column=2, pady=30, padx=5, sticky=(E, W))
 
     # Bind the control buttons to commands
-    def bindButtons(self):
+    def bind_buttons(self):
         # Lambda function to use for 'run stop' on button release
         stopCommand = lambda x:self.master.runCommand('run stop')
 
@@ -89,7 +94,7 @@ class ControlFrame(tk.Frame):
         self.btnDown.bind('<ButtonRelease-1>', stopCommand)
 
     # Unbind the commands from the control buttons
-    def unbindButtons(self):
+    def unbind_buttons(self):
         self.btnUp.unbind('<Button-1>')
         self.btnUp.unbind('<ButtonRelease-1>')
         self.btnLeft.unbind('<Button-1>')
@@ -100,9 +105,3 @@ class ControlFrame(tk.Frame):
         self.btnDown.unbind('<Button-1>')
         self.btnDown.unbind('<ButtonRelease-1>')
 
-root = tk.Tk()
-root.geometry('240x320')
-root.wm_title('Parans Panel Calibration')
-gui_app = GUI(root)
-
-root.mainloop()

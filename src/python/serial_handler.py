@@ -42,6 +42,3 @@ class SerialHandler:
     def set_y_coordinate(self, num):
         self.pan.set_y_coordinate(num)
 
-
-sh = SerialHandler(0.01, 0.01)
-print(sh.get_coordinates())
