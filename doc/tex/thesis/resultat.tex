@@ -15,6 +15,17 @@
 
         Den data som avses skickas i denna kommunikation består av ett 16 bitars värde, det vill säga två byte. Med en överföringshastighet om 300 baud ger det en teoretisk möjlighet att skicka $\frac{300 \,\textit{baud}}{8 \, bit \cdot 2} = 18,75 \, \text{värden per sekund}$. Den faktiska hastigheten blir något lägre då extra bitar skickas enligt RS-232 protokollet, men överföringshastigheten är inte att anses som ett hinder i denna implementation.
 
+        \begin{figure}[h]
+        \centering
+            \begin{subfigure}[hbt]{0.35\textwidth}
+                \includegraphics[width=\textwidth]{res/img/led}    
+            \end{subfigure}
+            \begin{subfigure}[hbt]{0.35\textwidth}
+                \includegraphics[width=\textwidth]{res/img/resistor}    
+            \end{subfigure}
+        \caption{Schema över sändare/mottagare}\label{fig:schem}
+        \end{figure}
+
 
     % subsection optisk_kommunikation (end)
     
