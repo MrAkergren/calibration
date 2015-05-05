@@ -52,7 +52,7 @@
         Utformningen av algoritmen skedde genom flera iterationer av steg 3 i den valda metoden. I den första iterationen utvecklades en sökalgoritm, algoritm $\mathscr{A}$, som inledningsvis genomsöker en 3x3-matris i syfte att finna en inledande sökriktning. Därefter genomförs sökning medurs i åtta riktningar med utgångsriktning motsvarande österut. När ett större värde påträffas uppdateras nuvarande position och sökningen återupprepas. För jämförelse utvecklades även en variant med fyra sökriktningar, algoritm $\mathscr{B}$. Efterkommande iterationer var samtliga en vidareutveckling av den förra. Den andra iteration vidareutvecklade algoritmen så att den lagrar information om tidigare besökta koordinater, så att dessa ej undersöks vid upprepade tillfällen. Ytterligare förbättringar implementerades i den tredje iterationen, då riktningen på den senaste förflyttningen, då ett nytt större värde påträffats, registreras. Med hjälp av denna information undersöks först samma riktning som den senast lyckade förflyttningen innan medurs sökning. Här slopades också den inledande sökningen i 3x3 matris, då den inte kunde påvisas ha några märkbara fördelar. Samtliga iterationer innebar märkbara förbättringar vid simulering. Den slutgiltiga algoritmen arbetar enligt det flödesschema som finns presenterad i bilaga~\ref{sec:sokalgoritm_flow}. \bigskip
 
         \begin{figure}[hbt]
-            \input{algoritm_stapeldiagram}
+            \input{res/img/algoritm_stapeldiagram}
         \caption{\label{fig:algoritm_steg} Jämförelse algoritmernas antal söksteg}
         \end{figure}
 
