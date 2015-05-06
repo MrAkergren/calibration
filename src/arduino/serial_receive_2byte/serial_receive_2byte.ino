@@ -9,9 +9,7 @@
 
 //Receiver Code
 
-char str[4];
 byte indata[2];
-unsigned int test;
 SoftwareSerial mySerial(10, 11); // RX, TX
 
 void setup() {
@@ -25,16 +23,13 @@ void loop() {
   int i=0;
 
   if (mySerial.available()) {
-    delay(600); //allows all serial sent to be received together
+    delay(500); //allows all serial sent to be received together
     while(mySerial.available() && i<2) {
-      //str[i++] = mySerial.read();
       indata[i++] = mySerial.read();
-  }
-    //str[i]='\0';
+    }
   }
 
   if(i>0) {
-    //int ut = indata[0] * 256 + indata[1];
     unsigned int ut = word(indata[0], indata[1]);
     Serial.println(ut, DEC);
   }
