@@ -8,7 +8,6 @@
 #include <SoftwareSerial.h>
 
 //Receiver Code
-
 byte indata[2];
 SoftwareSerial mySerial(10, 11); // RX, TX
 
