@@ -8,12 +8,11 @@ class Arduino(SerialCommunication):
     def __init__(self):
         self.connection = None
         self.EXIT_CONSTANT = 20
-        device = self._serial_device() 
-        unit = [device, '9600', '1']
-        print(device)
+        #device = self._serial_device() 
+        unit = ['/dev/tty.usbmodem1411', '9600', '1']
         try:
             SerialCommunication.serial_connect(self, unit)
-            print("Connected to lux-meter on \'" + device + "\'")
+            #print("Connected to lux-meter on \'" + device + "\'")
         except:
             raise
 
