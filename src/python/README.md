@@ -5,7 +5,10 @@ Main files.
 |File | Contains |
 | --- | --- |
 |```main.py``` | The algorithms and logic. |
-|```scom.py```| The serial communication class for communication to the panel. |
+|```serial_handler.py```| The class that acts as an interface between the serial communication and ```main.py```
+|```serial_com.py```| The class for communication over the serial interface. |
+|```arduino.py``` | inherit form  ```serial_com.py```, holds the methods specific for the lux-meter, such as "get_value" |
+|```panel.py```|  inherit form  ```serial_com.py```, holds the methods specific for panel, such as "move" |
 |```mock_read.py``` | file is used to pull values when the lux-meter is not available. |
 |```__init.py__``` | is needed by the language. |
 

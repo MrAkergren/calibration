@@ -1,56 +1,42 @@
-import serial
 import re
-from mock_read import MockRead
 from time import sleep
+from serial_com import SerialCommunication
 
 
-class SCom(object):
-    """The class that handles the serial communication to the SP3 panel.
+class Panel(SerialCommunication):
+    """docstring for Panel
     """
+
     def __init__(self, x, y):
-        super(SCom, self).__init__()
-        if args[0] = 'panel':
         self.connection = None
-        unit1 = ['/dev/tty.usbmodem1411', '9600', '1']
-        unit2 = ['/dev/tty.SLAB_USBtoUART', '38400', '1']
+        unit = ['/dev/tty.SLAB_USBtoUART', '38400', '1']
         self.regex = re.compile('[-+]?[0-9]*\.?[0-9]+')  # regex to extract float
         self.x_offset = x       # determines the size of adj. steps in the sensor
         self.y_offset = y       # determines the size of adj. steps in the sensor
-        self.mock = MockRead()  # when lightvalue can't be read, use mock
-        self.serial_connect(unit1)   # auto connect when object is created
-        self.serial_connect(unit2)   # auto connect when object is created
+
+        try:
+            SerialCommunication.serial_connect(self, unit)
+            self._logga_off()
+        except:
+            raise
+
         
 
-
-    def serial_connect(self, unit):
-        """The method to handle the connection to the panel.
-        """
-        try:
-            if self.connection is not None:
-                self.connection.close()
-            self.connection = serial.Serial(str(unit[0]),int(unit[1]), timeout=int(unit[2]))
-            sleep(1)
-        except serial.SerialException:
-            print('Connection failed')
+    def _logga_off(self):
+        # turns off logga for the panel if it is on
+        sleep(2)
+        if self.connection.inWaiting() > 0:
+            self._serial_write('logga')
+            self.connection.flushInput()
+            print("\'logga\' has been turned Off")
         else:
-            if self.connection.isOpen():
-                self.connection.flushInput()
-                self.connection.flushOutput()
-                print("Connection open")
-            else:
-                print('Serial connection is not open')
-
-    def get_value(self):
-        print(self._serial_read())
-
-    def get_this_value(self, x, y):
-        pass
+            print("\'logga\' was Off from begining")
 
     def get_log(self):
         """Returns a 'logga'-string from the panel as a list of strings.
         """
         self._serial_write('logga')
-        sleep(2)
+        sleep(1)
         while self.connection.inWaiting() > 0:
             log = self._serial_read()
         self._serial_write('logga')
@@ -58,7 +44,7 @@ class SCom(object):
         return info
 
     def get_coordinates(self):
-        """ Tries to return the coordinates 10 times, if it failes it returns 
+        """ Tries to return the coordinates 10 times, if it failes it returns
         None.
 
         Retrns a tuple of the two floats that is the coordinates.
@@ -108,36 +94,19 @@ class SCom(object):
             check_y = True
 
         if check_y:
+            print("New coordinates is: %f, %f" % (x, y))
             self.set_y_coordinate(str(y))
+
         if check_x:
+            print("New coordinates is: %f, %f" % (x, y))
             self.set_x_coordinate(str(x))
 
         while not self._correct_position():
             pass
+            
 
-        return self.get_value()
-
-    def _serial_write(self, command):
-
-        command += '\r'  # Append to the command so the panel to executes it
-        try:
-            if self.connection.write(command.encode('utf-8')) > 0:
-                pass
-            else:
-                print('Serial write failed')
-
-        except serial.SerialTimeoutException:
-            print('Timeout on serial write')
-
-        except serial.SerialException:
-            print('Serial communication failed')
-
-    def _serial_read(self):
-        # To decode the information from the panel to a utf-8 string
-
-        text = self.connection.readline()
-        text = text.decode(encoding='utf-8')
-        return text
+    def stop_panel(self):
+        self._serial_write('run stop')
 
     def _correct_position(self):
         # The index 4&5 contains the difference between the set value and
@@ -147,15 +116,8 @@ class SCom(object):
         # is in the right place, according to empirical evidence.
 
         log = self.get_log()
+        if (float(log[0])+float(log[1])+float(log[2])+float(log[4])) < 504 :
+            raise  EnvironmentError
         if(abs(float(log[4]) < 0.01) and abs(float(log[5]) < 0.01)):
             return True
         return False
-
-a = SCom()
-for x in range(0, 3):
-    a.get_value()
-# a.connect_remote()
-# a.set_x_coordinate('-0.15')
-# b = a.get_log()
-# print(b[4], b[5])
-# print(a._correct_position())
