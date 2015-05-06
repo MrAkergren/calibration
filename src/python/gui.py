@@ -42,9 +42,13 @@ class GUI(tk.Frame):
         print('Statusbar text: \n', str(text).strip())
 
     def move(self, direction):
-        self.sh.move(self.coordinates, direction)
-        self.coordinates = self.sh.get_coordinates()
-        self.update_statusbar("Current coordinates:\n %.4f, %.4f" %self.coordinates)
+        try:
+            self.sh.move(self.coordinates, direction)
+            self.coordinates = self.sh.get_coordinates()
+            self.update_statusbar("Current coordinates:\n %.4f, %.4f" %self.coordinates)
+        except:
+            print("Sun sensor not active")
+        
 
     def value(self):
         self.update_statusbar(str(self.sh.get_value()))

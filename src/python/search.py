@@ -7,6 +7,7 @@ class Search:
         self.timeout = False
         self.com = serial_handler
         self.x_offset, self.y_offset = self.com.get_offset()
+        self.sun_sensor = True
 
     def labyrinth(self):
         # Create a set to be used for checking visited coordinates
@@ -38,7 +39,7 @@ class Search:
             # EAST
             elif (last_move is None or last_move == 'EAST') and (x+self.x_offset, y) not in visited:
                 steps += 1      # Counted for debugging
-                value_read = self.com.move((x, y), 'EAST')
+                value_read = self._read_value((x, y), 'EAST')  #self.com.move((x, y), 'EAST')
                 visited.add((x+self.x_offset, y))
                 if value < value_read:
                     x += self.x_offset
@@ -75,6 +76,10 @@ class Search:
                     value = value_read
                     last_move = 'NORTH'
 
+            elif not sun_sensor :
+                print("Sun sensor not active")
+                break
+
             elif last_move is not None:
                 last_move = None
 
@@ -82,7 +87,7 @@ class Search:
                 finished = True
 
         # Search did not finish (x or y went out of bounds, or search timeout occured)
-        if not finished:
+        if not finished and sun_sensor:
             com.set_x_coordinate(start_x)
             com.set_y_coordinate(start_y)
             if self.timeout:
@@ -103,3 +108,11 @@ class Search:
 
     def _search_timeout(self, start_time):
         return time()-start_time > self._MAX_TIME
+
+    def _read_value(self, coor, dir):
+        try:
+            return self.com.move(coor, dir)
+        except:
+            self.sun_sensor = False
+            return 0
+
