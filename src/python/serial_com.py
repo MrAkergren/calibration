@@ -1,5 +1,7 @@
 import serial
 from time import sleep
+import sys
+import glob
 
 
 class SerialCommunication(object):
@@ -24,7 +26,7 @@ class SerialCommunication(object):
             if self.connection.isOpen():
                 self.connection.flushInput()
                 self.connection.flushOutput()
-                print("Connection open")
+                print('Connection open')
             else:
                 print('Serial connection is not open')
 
@@ -48,3 +50,27 @@ class SerialCommunication(object):
             text = self.connection.readline()
             text = text.decode(encoding='utf-8')
             return text
+
+    def serial_port_list():
+        """ Returns a list of available serial ports on a linux or darwin based system
+        """
+        if sys.platform.startswith('darwin'):
+            ports = glob.glob('/dev/tty.*')
+            platform = 'darwin'
+        
+        elif sys.platform.startswith('linux'):
+            ports = glob.glob('/dev/tty[A-Za-z]*')
+            platform = 'linux'
+
+        else:
+            raise EnvironmentError('System not supported')
+
+        serial_ports = []
+        for port in ports:
+            try:
+                s = serial.Serial(port)
+                s.close()
+                serial_ports.append(port)
+            except (OSError, serial.SerialException):
+                pass
+        return platform, serial_ports

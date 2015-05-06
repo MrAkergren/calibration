@@ -8,19 +8,29 @@ class Arduino(SerialCommunication):
     def __init__(self):
         self.connection = None
         self.EXIT_CONSTANT = 20
-        unit = ['/dev/tty.usbmodem1421', '9600', '1']
-        connect_bool = False
+        device = self._serial_device() 
+        unit = [device, '9600', '1']
 
         try:
             SerialCommunication.serial_connect(self, unit)
-            print("Connected to lux-meter on \'usbmodem1421\'")
+            print("Connected to lux-meter on \'" + device + "\'")
         except:
-            try:
-                unit[0] = '/dev/tty.usbmodem1411'
-                SerialCommunication.serial_connect(self, unit)
-                print("Connected to lux-meter on \'usbmodem1411\'")
-            except:
-                raise
+            raise
+
+
+    def _serial_device(self):
+        platform, ports = self.serial_port_list()
+        matching = []
+        if platform == 'darwin':
+            matching = [p for p in ports if '/dev/tty.usbmodem14' in p]
+        elif platform == 'linux':
+            matching = [p for p in ports if '/dev/ttyACM' in p]
+        
+        if len(matching) > 0:
+            return matching[0]
+        else:
+            print("No matching serial device found")
+
 
 
     def get_value(self, arg=0):
