@@ -45,3 +45,13 @@ class Arr():
                     continue
                 print(Fore.RESET + "{:3d}".format(self.gen_arr[y][x]), end=' ')
             print("")
+
+    def set_x(self, num):
+        x, y = self.current_pos
+        x = num
+        self.current_pos = (x, y)
+
+    def set_y(self, num):
+        x, y = self.current_pos
+        y = num
+        self.current_pos = (x, y)
