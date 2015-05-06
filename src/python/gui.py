@@ -81,8 +81,8 @@ class ControlFrame(tk.Frame):
         self.btnDown = tk.Button(self, text='DOWN', width=5, height=3)
         self.btnDown.grid(row=2, column=1, pady=5, padx=5, sticky=(E, W))
 
-        self.btnSearch = tk.Button(self, text='SEARCH', width=6,)
-        self.btnSearch.grid(row=3, column=1, pady=30, padx=5, sticky=(E, W))
+        self.btnSearch = tk.Button(self, text='SEARCH', width=5,)
+        self.btnSearch.grid(row=3, column=1, pady=30, padx=2, sticky=(E, W))
 
         #   self.btnCommands = tk.Button(self, text='COMMAND', width=5, \
         #       command=lambda:self.master.switchFrame('launchCommand'))
