@@ -56,9 +56,11 @@ class SerialCommunication(object):
         """
         if sys.platform.startswith('darwin'):
             ports = glob.glob('/dev/tty.*')
+            platform = 'darwin'
         
         elif sys.platform.startswith('linux'):
             ports = glob.glob('/dev/tty[A-Za-z]*')
+            platform = 'linux'
 
         else:
             raise EnvironmentError('System not supported')
@@ -71,4 +73,4 @@ class SerialCommunication(object):
                 serial_ports.append(port)
             except (OSError, serial.SerialException):
                 pass
-        return serial_ports
+        return platform, serial_ports
