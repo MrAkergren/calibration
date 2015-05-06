@@ -16,14 +16,27 @@ class Panel(SerialCommunication):
 
         try:
             SerialCommunication.serial_connect(self, unit)
+            self._logga_off()
         except:
             raise
+
+        
+
+    def _logga_off(self):
+        # turns off logga for the panel if it is on
+        sleep(2)
+        if self.connection.inWaiting() > 0:
+            self._serial_write('logga')
+            self.connection.flushInput()
+            print("\'logga\' has been turned Off")
+        else:
+            print("\'logga\' was Off from begining")
 
     def get_log(self):
         """Returns a 'logga'-string from the panel as a list of strings.
         """
         self._serial_write('logga')
-        sleep(2)
+        sleep(1)
         while self.connection.inWaiting() > 0:
             log = self._serial_read()
         self._serial_write('logga')
@@ -82,14 +95,17 @@ class Panel(SerialCommunication):
 
         if check_y:
             print("New coordinates is: %f, %f" % (x, y))
-            #self.set_y_coordinate(str(y))
+            self.set_y_coordinate(str(y))
 
         if check_x:
             print("New coordinates is: %f, %f" % (x, y))
-            #self.set_x_coordinate(str(x))
+            self.set_x_coordinate(str(x))
 
-        #while not self._correct_position():
+        while not self._correct_position():
             pass
+
+    def stop_panel(self):
+        self._serial_write('run stop')
 
     def _correct_position(self):
         # The index 4&5 contains the difference between the set value and

@@ -6,12 +6,11 @@ from time import time
 
 class Search:
     def __init__(self, serial_handler):
-        #self.x_offset = 0.01
-        #self.y_offset = 0.01
         self._SENSOR_BOUND = 1.0
         self._MAX_TIME = 300.0
         self.timeout = False
         self.com = serial_handler
+        self.x_offset, self.y_offset = self.com.get_offset()
 
     def labyrinth(self):
         # Create a set to be used for checking visited coordinates

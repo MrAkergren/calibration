@@ -41,15 +41,22 @@ class GUI(tk.Frame):
         self.tkRoot.mainloop()
 
     def update_statusbar(self, text):
-        self.statusLabelText.set(text)
-        print('Serial read:', text)
+        self.statusLabelText.set(str(text))
+        print('Statusbar text: \n', str(text).strip())
 
+    def move(self, direction):
+        self.sh.move(self.coordinates, direction)
+        self.coordinates = self.sh.get_coordinates()
+        self.update_statusbar("Current coordinates:\n %.4f, %.4f" %self.coordinates)
+
+    def value(self):
+        self.update_statusbar(str(self.sh.get_value()))
 
 class ControlFrame(tk.Frame):
     # Constructor
     def __init__(self, master=None):
         self.master = master
-        self.x, self.y = self.master.coordinates
+
         tk.Frame.__init__(self, self.master, bg='black')
         self.setup_control_buttons()
         self.bind_buttons()
@@ -65,8 +72,8 @@ class ControlFrame(tk.Frame):
         self.btnLeft = tk.Button(self, text='LEFT', width=5, height=3)
         self.btnLeft.grid(row=1, column=0, pady=5, padx=5, sticky=(E, W))
 
-        self.btnStop = tk.Button(self, text='STOP', width=5, height=3)
-        self.btnStop.grid(row=1, column=1, pady=5, padx=5, sticky=(E, W))
+        self.vluBtn = tk.Button(self, text='VALUE', width=5, height=3)
+        self.vluBtn.grid(row=1, column=1, pady=5, padx=5, sticky=(E, W))
 
         self.btnRight = tk.Button(self, text='RIGHT', width=5, height=3)
         self.btnRight.grid(row=1, column=2, pady=10, padx=5, sticky=(E, W))
@@ -74,55 +81,33 @@ class ControlFrame(tk.Frame):
         self.btnDown = tk.Button(self, text='DOWN', width=5, height=3)
         self.btnDown.grid(row=2, column=1, pady=5, padx=5, sticky=(E, W))
 
-        #   self.btnCon = tk.Button(self, text='CONNECT', width=5, \
-        #       command=self.master.connectRemote)
-        #   self.btnCon.grid(row=3, column=0, pady=30, padx=5, sticky=(E, W))
+        self.btnSearch = tk.Button(self, text='SEARCH', width=6,)
+        self.btnSearch.grid(row=3, column=1, pady=30, padx=5, sticky=(E, W))
 
         #   self.btnCommands = tk.Button(self, text='COMMAND', width=5, \
         #       command=lambda:self.master.switchFrame('launchCommand'))
         #   self.btnCommands.grid(row=3, column=2, pady=30, padx=5, sticky=(E, W))
 
-    #  Bind the control buttons to commands
+    
     def bind_buttons(self):
-        stopCommand = lambda x:self.master.runCommand('run stop')
+        #  Bind the control buttons to commands
+        self.btnUp.bind('<Button-1>', lambda x: self.master.move('NORTH'))
 
-        self.btnUp.bind(
-            '<Button-1>',
-            lambda x: self.master.sh.move(self.master.coordinates, 'NORTH'))
+        self.btnDown.bind('<Button-1>', lambda x: self.master.move('SOUTH'))
 
-        self.btnUp.bind(
-            '<ButtonRelease-1>',
-            lambda x: self.master.update_statusbar(self.inc_coord(self.y)))
+        self.btnLeft.bind('<Button-1>', lambda x: self.master.move('WEST'))
 
-        self.btnLeft.bind(
-            '<Button-1>', 
-            lambda x: self.master.sh.move(self.master.coordinates, 'EAST'))
-        # self.btnLeft.bind('<ButtonRelease-1>', stopCommand)
+        self.btnRight.bind('<Button-1>', lambda x: self.master.move('EAST'))
 
-        # self.btnStop.bind('<Button-1>', stopCommand)
+        self.vluBtn.bind('<Button-1>', lambda x: print(self.master.value()))
 
-        self.btnRight.bind(
-            '<Button-1>', 
-            lambda x: self.master.sh.move(self.master.coordinates, 'WEST'))
-        # self.btnRight.bind('<ButtonRelease-1>', stopCommand)
+        self.btnSearch.bind('<Button-1>', lambda x: self.master.search_alg.labyrinth())
 
-        self.btnDown.bind(
-            '<Button-1>', 
-            lambda x: self.master.sh.move(self.master.coordinates, 'SOUTH'))
-        # self.btnDown.bind('<ButtonRelease-1>', stopCommand)
-
-    # Unbind the commands from the control buttons
     def unbind_buttons(self):
+        # Unbind the commands from the control buttons
         self.btnUp.unbind('<Button-1>')
-        self.btnUp.unbind('<ButtonRelease-1>')
         self.btnLeft.unbind('<Button-1>')
-        self.btnLeft.unbind('<ButtonRelease-1>')
-        self.btnStop.unbind('<Button-1>')
+        self.vluBtn.unbind('<Button-1>')
         self.btnRight.unbind('<Button-1>')
-        self.btnRight.unbind('<ButtonRelease-1>')
         self.btnDown.unbind('<Button-1>')
-        self.btnDown.unbind('<ButtonRelease-1>')
 
-    def inc_coord(self, num):
-        num += 1
-        return num

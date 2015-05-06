@@ -18,7 +18,7 @@ class SerialCommunication(object):
             self.connection = serial.Serial(str(unit[0]),int(unit[1]), timeout=int(unit[2]))
             sleep(1)
         except serial.SerialException:
-            print('Connection failed')
+            print('Connection failed to: ' + str(unit[0]))
             raise 
         else:
             if self.connection.isOpen():
@@ -30,6 +30,7 @@ class SerialCommunication(object):
 
     def _serial_write(self, command):
         command += '\r'  # Append to the command so the panel to executes it
+        self.connection.flushInput()
         try:
             if self.connection.write(command.encode('utf-8')) > 0:
                 pass
@@ -44,7 +45,6 @@ class SerialCommunication(object):
 
     def _serial_read(self):
             # To decode the information from the panel to a utf-8 string
-
             text = self.connection.readline()
             text = text.decode(encoding='utf-8')
             return text

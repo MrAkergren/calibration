@@ -9,7 +9,7 @@ class SerialHandler:
     """docstring for SerialHandler
     """
     def __init__(self, x, y):
-        #self.m = MockRead()
+        self.m = MockRead()
         try:
             self.pan = Panel(x, y)
         except:
@@ -22,9 +22,11 @@ class SerialHandler:
             print("Lux meter failed")
             sys.exit(0)
 
+        self.offset = (x, y)
+
     def get_value(self):
-        return self.ard.get_value()
-        #return self.m.get_value()
+        #return self.ard.get_value()
+        return self.m.get_value()
 
     def get_log(self):
         return self.pan.get_log()
@@ -41,4 +43,7 @@ class SerialHandler:
 
     def set_y_coordinate(self, num):
         self.pan.set_y_coordinate(num)
+
+    def get_offset(self):
+        return self.offset
 
