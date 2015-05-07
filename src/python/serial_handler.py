@@ -21,7 +21,8 @@ class SerialHandler:
 
         try:
             self.ard = Arduino()
-        except:
+        except Exception as e:
+            print(e)
             print("Lux meter failed")
             sys.exit(0)
 
