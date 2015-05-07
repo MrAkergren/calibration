@@ -117,6 +117,7 @@ class Panel(SerialCommunication):
 
         while not self._correct_position():
             pass
+            
 
     def stop_panel(self):
         self._serial_write('run stop')
@@ -129,6 +130,8 @@ class Panel(SerialCommunication):
         # is in the right place, according to empirical evidence.
 
         log = self.get_log()
+        if (float(log[0])+float(log[1])+float(log[2])+float(log[4])) < 504 :
+            raise  EnvironmentError
         if(abs(float(log[4]) < 0.01) and abs(float(log[5]) < 0.01)):
             return True
         return False

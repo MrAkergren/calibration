@@ -10,7 +10,7 @@ class Arduino(SerialCommunication):
         self.EXIT_CONSTANT = 20
         device = self._serial_device() 
         unit = [device, '9600', '1']
-
+        print(device)
         try:
             self.serial_connect(unit)
             print("Connected to lux-meter on \'" + device + "\'")
@@ -19,7 +19,7 @@ class Arduino(SerialCommunication):
 
 
     def _serial_device(self):
-        platform, ports = self.serial_port_list()
+        platform, ports = SerialCommunication.serial_port_list()
         matching = []
         if platform == 'darwin':
             matching = [p for p in ports if '/dev/tty.usbmodem14' in p]

@@ -1,6 +1,3 @@
-#! /usr/bin/env python3
-# -*- coding: UTF-8 -*-
-
 import tkinter as tk
 
 
@@ -45,9 +42,13 @@ class GUI(tk.Frame):
         print('Statusbar text: \n', str(text).strip())
 
     def move(self, direction):
-        self.sh.move(self.coordinates, direction)
-        self.coordinates = self.sh.get_coordinates()
-        self.update_statusbar("Current coordinates:\n %.4f, %.4f" %self.coordinates)
+        try:
+            self.sh.move(self.coordinates, direction)
+            self.coordinates = self.sh.get_coordinates()
+            self.update_statusbar("Current coordinates:\n %.4f, %.4f" %self.coordinates)
+        except:
+            print("Sun sensor not active")
+        
 
     def value(self):
         self.update_statusbar(str(self.sh.get_value()))
@@ -81,8 +82,8 @@ class ControlFrame(tk.Frame):
         self.btnDown = tk.Button(self, text='DOWN', width=5, height=3)
         self.btnDown.grid(row=2, column=1, pady=5, padx=5, sticky=(E, W))
 
-        self.btnSearch = tk.Button(self, text='SEARCH', width=6,)
-        self.btnSearch.grid(row=3, column=1, pady=30, padx=5, sticky=(E, W))
+        self.btnSearch = tk.Button(self, text='SEARCH', width=5,)
+        self.btnSearch.grid(row=3, column=1, pady=30, padx=2, sticky=(E, W))
 
         #   self.btnCommands = tk.Button(self, text='COMMAND', width=5, \
         #       command=lambda:self.master.switchFrame('launchCommand'))
