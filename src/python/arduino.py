@@ -19,7 +19,7 @@ class Arduino(SerialCommunication):
 
 
     def _serial_device(self):
-        platform, ports = SerialCommunication.serial_port_list()
+        platform, ports = self.serial_port_list()
         matching = []
         if platform == 'darwin':
             matching = [p for p in ports if '/dev/tty.usbmodem14' in p]
