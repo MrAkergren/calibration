@@ -65,7 +65,7 @@ class SerialCommunication(object):
         else:
             raise EnvironmentError('System not supported')
 
-        serial_ports = []
-        for port in ports:
-            serial_ports.append(port)
-        return platform, serial_ports
+        # serial_ports = []
+        # for port in ports:
+        #     serial_ports.append(port)
+        return platform, ports

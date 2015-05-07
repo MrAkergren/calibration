@@ -131,7 +131,7 @@ class Panel(SerialCommunication):
 
         log = self.get_log()
         if (float(log[0])+float(log[1])+float(log[2])+float(log[4])) < 504 :
-            raise  EnvironmentError
+            raise  EnvironmentError('Sun sensor not active')
         if(abs(float(log[4]) < 0.01) and abs(float(log[5]) < 0.01)):
             return True
         return False
