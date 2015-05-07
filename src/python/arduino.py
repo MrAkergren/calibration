@@ -8,7 +8,7 @@ class Arduino(SerialCommunication):
     def __init__(self):
         SerialCommunication.__init__(self)
         self.EXIT_CONSTANT = 20
-        device = self._serial_device() 
+        device = self._serial_device()
         unit = [device, '9600', '1']
         print(device)
         try:
@@ -17,7 +17,6 @@ class Arduino(SerialCommunication):
         except:
             raise
 
-
     def _serial_device(self):
         platform, ports = self.serial_port_list()
         matching = []
@@ -25,13 +24,10 @@ class Arduino(SerialCommunication):
             matching = [p for p in ports if '/dev/tty.usbmodem14' in p]
         elif platform == 'linux':
             matching = [p for p in ports if '/dev/ttyACM' in p]
-        
         if len(matching) > 0:
             return matching[0]
         else:
             print("No matching serial device found")
-
-
 
     def get_value(self, arg=0):
         sleep(0.1)

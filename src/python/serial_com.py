@@ -17,11 +17,11 @@ class SerialCommunication(object):
         try:
             if self.connection is not None:
                 self.connection.close()
-            self.connection = serial.Serial(str(unit[0]),int(unit[1]), timeout=int(unit[2]))
+            self.connection = serial.Serial(str(unit[0]), int(unit[1]), timeout=int(unit[2]))
             sleep(1)
         except serial.SerialException:
             print('Connection failed to: ' + str(unit[0]))
-            raise 
+            raise
         else:
             if self.connection.isOpen():
                 self.connection.flushInput()
@@ -57,12 +57,12 @@ class SerialCommunication(object):
         if sys.platform.startswith('darwin'):
             ports = glob.glob('/dev/tty.*')
             platform = 'darwin'
-        
+
         elif sys.platform.startswith('linux'):
             ports = glob.glob('/dev/tty[A-Za-z]*')
             platform = 'linux'
 
         else:
             raise EnvironmentError('System not supported')
-        
+
         return platform, ports

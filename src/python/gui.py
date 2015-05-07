@@ -1,6 +1,5 @@
 import tkinter as tk
 
-
 # For ease of use and readability
 N = tk.N
 S = tk.S
@@ -45,13 +44,13 @@ class GUI(tk.Frame):
         try:
             self.sh.move(self.coordinates, direction)
             self.coordinates = self.sh.get_coordinates()
-            self.update_statusbar("Current coordinates:\n %.4f, %.4f" %self.coordinates)
+            self.update_statusbar("Current coordinates:\n %.4f, %.4f" % self.coordinates)
         except:
             print("Sun sensor not active")
-        
 
     def value(self):
         self.update_statusbar(str(self.sh.get_value()))
+
 
 class ControlFrame(tk.Frame):
     # Constructor
@@ -89,7 +88,6 @@ class ControlFrame(tk.Frame):
         #       command=lambda:self.master.switchFrame('launchCommand'))
         #   self.btnCommands.grid(row=3, column=2, pady=30, padx=5, sticky=(E, W))
 
-    
     def bind_buttons(self):
         #  Bind the control buttons to commands
         self.btnUp.bind('<Button-1>', lambda x: self.master.move('NORTH'))
@@ -111,4 +109,3 @@ class ControlFrame(tk.Frame):
         self.vluBtn.unbind('<Button-1>')
         self.btnRight.unbind('<Button-1>')
         self.btnDown.unbind('<Button-1>')
-

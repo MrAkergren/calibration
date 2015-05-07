@@ -1,18 +1,19 @@
 import re
 import sys
-from time import sleep
+from time import sleep, time
 from serial_com import SerialCommunication
 
 
 class Panel(SerialCommunication):
-    """docstring for Panel
+    """The class responsible for the communication to the panel,
+    contains the specific methods for the panel and inherits from
+    SerialCommunication
     """
 
     def __init__(self, x, y):
         SerialCommunication.__init__(self)
         device = self._serial_device()
         unit = [self._serial_device(), '38400', '1']
-        # unit[0] = self._serial_device()
         self.regex = re.compile('[-+]?[0-9]*\.?[0-9]+')  # regex to extract float
         self.x_offset = x       # determines the size of adj. steps in the sensor
         self.y_offset = y       # determines the size of adj. steps in the sensor
@@ -24,17 +25,16 @@ class Panel(SerialCommunication):
         except:
             raise
 
-        
     def _serial_device(self):
+        #  detects OS and returns the correct pathway to the panel
         if sys.platform.startswith('darwin'):
             return '/dev/tty.SLAB_USBtoUART'
-        
+
         elif sys.platform.startswith('linux'):
             return '/dev/ttyUSB0'
 
         else:
             raise EnvironmentError('System not supported')
-
 
     def _logga_off(self):
         # turns off logga for the panel if it is on
@@ -89,6 +89,7 @@ class Panel(SerialCommunication):
 
     def move(self, coordinates, direction):
         """The method that sends the move command to the panel.
+        coordinates is a tuple and direction a string.
         """
         x, y = coordinates
         check_x = False  # If the x-value is changed, set the x coordinate
@@ -115,9 +116,12 @@ class Panel(SerialCommunication):
             print("New coordinates is: %f, %f" % (x, y))
             self.set_x_coordinate(str(x))
 
+        start_time = time()
         while not self._correct_position():
+            if time() - start_time > 30.0:
+                print("Something went wrong, not \'run auto\'?")
+                raise EnvironmentError('Panel not turning')
             pass
-            
 
     def stop_panel(self):
         self._serial_write('run stop')
@@ -126,12 +130,15 @@ class Panel(SerialCommunication):
         # The index 4&5 contains the difference between the set value and
         # current position of the panel.
 
+        # If the current out from the sensor is below 504, the sensor does
+        # not controll the panel
+
         # If the values are below 0.01 it is to be considered that the panel
         # is in the right place, according to empirical evidence.
 
         log = self.get_log()
-        if (float(log[0])+float(log[1])+float(log[2])+float(log[4])) < 504 :
-            raise  EnvironmentError('Sun sensor not active')
+        if (float(log[0])+float(log[1])+float(log[2])+float(log[4])) < 504:
+            raise EnvironmentError('Sun sensor not active')
         if(abs(float(log[4]) < 0.01) and abs(float(log[5]) < 0.01)):
             return True
         return False

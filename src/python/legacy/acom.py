@@ -39,6 +39,7 @@ class Com():
 
     def get_offset(self):
         offset = (self.x_offset, self.y_offset)
+        print(offset)
         return offset
 
 
