@@ -1,4 +1,5 @@
 import re
+import sys
 from time import sleep
 from serial_com import SerialCommunication
 
@@ -8,19 +9,32 @@ class Panel(SerialCommunication):
     """
 
     def __init__(self, x, y):
-        self.connection = None
-        unit = ['/dev/tty.SLAB_USBtoUART', '38400', '1']
+        SerialCommunication.__init__(self)
+        device = self._serial_device()
+        unit = [self._serial_device(), '38400', '1']
+        # unit[0] = self._serial_device()
         self.regex = re.compile('[-+]?[0-9]*\.?[0-9]+')  # regex to extract float
         self.x_offset = x       # determines the size of adj. steps in the sensor
         self.y_offset = y       # determines the size of adj. steps in the sensor
 
         try:
-            SerialCommunication.serial_connect(self, unit)
+            self.serial_connect(unit)
+            print("Connected to panel on \'" + device + "\'")
             self._logga_off()
         except:
             raise
 
         
+    def _serial_device(self):
+        if sys.platform.startswith('darwin'):
+            return '/dev/tty.SLAB_USBtoUART'
+        
+        elif sys.platform.startswith('linux'):
+            return '/dev/ttyUSB0'
+
+        else:
+            raise EnvironmentError('System not supported')
+
 
     def _logga_off(self):
         # turns off logga for the panel if it is on
