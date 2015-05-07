@@ -1,4 +1,5 @@
 import tkinter as tk
+from win_com import WinCom
 
 # For ease of use and readability
 N = tk.N
@@ -10,10 +11,10 @@ W = tk.W
 class GUI(tk.Frame):
     """docstring for GUI
     """
-    def __init__(self, serial_handler, search, master=None):
+    def __init__(self, serial_handler, search, master=None, windows=False):
         self.search_alg = search
         self.sh = serial_handler
-        self.coordinates = self.sh.get_coordinates()
+        self.coordinates = None
         self.tkRoot = tk.Tk()
 
         tk.Frame.__init__(self, self.tkRoot)
@@ -26,15 +27,31 @@ class GUI(tk.Frame):
         self.rowconfigure(1, weight=1)
         self.columnconfigure(0, weight=1)
 
-        # Initiate frames and start the first frame, the steering controls
-        self.control_frame = ControlFrame(self)
-        self.control_frame.show_frame()
+        self.panel_port = None
+        self.ard_port = None
+        if windows:
+            self.win_com = WinCom(self)
+            self.win_com.show_frame()
+        else:
+            self.start_controls()
 
         self.statusLabelText = tk.StringVar()
         self.statusLabelText.set('The calibration testing app \nApplication started')
         self.statusLabel = tk.Label(self, textvariable=self.statusLabelText, height=2)
         self.statusLabel.grid(row=1, column=0, sticky=(E, W))
         self.tkRoot.mainloop()
+
+    def start_controls(self):
+        self.sh.connect_devices(self.panel_port, self.ard_port)        
+        self.coordinates = self.sh.get_coordinates()
+
+        # Initiate and start the control frame (steering controls)
+        if self.win_com is not None:
+            print("GUI panel port: " + self.panel_port) #debug
+            print("GUI arduino port: " + self.ard_port) #debug
+            self.win_com.grid_forget()
+        self.control_frame = ControlFrame(self)
+        self.control_frame.show_frame()
 
     def update_statusbar(self, text):
         self.statusLabelText.set(str(text))

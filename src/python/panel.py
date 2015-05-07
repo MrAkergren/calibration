@@ -10,9 +10,12 @@ class Panel(SerialCommunication):
     SerialCommunication
     """
 
-    def __init__(self, x, y):
+    def __init__(self, x, y, win_panel_com):
         SerialCommunication.__init__(self)
-        device = self._serial_device()
+        if win_panel_com is not None:
+            device = "COM" + win_panel_com
+        else:
+            device = self._serial_device()
         unit = [self._serial_device(), '38400', '1']
         self.regex = re.compile('[-+]?[0-9]*\.?[0-9]+')  # regex to extract float
         self.x_offset = x       # determines the size of adj. steps in the sensor
