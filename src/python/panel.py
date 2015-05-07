@@ -9,7 +9,7 @@ class Panel(SerialCommunication):
     """
 
     def __init__(self, x, y):
-        self.connection = None
+        SerialCommunication.__init__(self)
         device = self._serial_device()
         unit = [self._serial_device(), '38400', '1']
         # unit[0] = self._serial_device()
@@ -18,7 +18,8 @@ class Panel(SerialCommunication):
         self.y_offset = y       # determines the size of adj. steps in the sensor
 
         try:
-            SerialCommunication.serial_connect(self, unit)
+            self.serial_connect(unit)
+            print("Connected to panel on \'" + device + "\'")
             self._logga_off()
         except:
             raise

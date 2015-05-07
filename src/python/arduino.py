@@ -6,13 +6,13 @@ class Arduino(SerialCommunication):
     """docstring for Arduino
     """
     def __init__(self):
-        self.connection = None
+        SerialCommunication.__init__(self)
         self.EXIT_CONSTANT = 20
         device = self._serial_device() 
         unit = [device, '9600', '1']
 
         try:
-            SerialCommunication.serial_connect(self, unit)
+            self.serial_connect(unit)
             print("Connected to lux-meter on \'" + device + "\'")
         except:
             raise

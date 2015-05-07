@@ -51,7 +51,7 @@ class SerialCommunication(object):
             text = text.decode(encoding='utf-8')
             return text
 
-    def serial_port_list():
+    def serial_port_list(self):
         """ Returns a list of available serial ports on a linux or darwin based system
         """
         if sys.platform.startswith('darwin'):
@@ -67,10 +67,5 @@ class SerialCommunication(object):
 
         serial_ports = []
         for port in ports:
-            try:
-                s = serial.Serial(port)
-                s.close()
-                serial_ports.append(port)
-            except (OSError, serial.SerialException):
-                pass
+            serial_ports.append(port)
         return platform, serial_ports
