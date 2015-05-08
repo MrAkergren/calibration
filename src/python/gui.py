@@ -59,12 +59,15 @@ class GUI(tk.Frame):
         print('Statusbar text: \n', str(text).strip())
 
     def move(self, direction):
+        last_x, last_y = self.coordinates
         try:
             self.sh.move(self.coordinates, direction)
             self.coordinates = self.sh.get_coordinates()
             self.update_statusbar("Current coordinates:\n %.4f, %.4f" % self.coordinates)
         except:
-            print("Sun sensor not active")
+            print("Sun sensor not active, reseting to %.4f, %.4f" % (last_x, last_y))
+            self.sh.set_x_coordinate(str(last_x))
+            self.sh.set_y_coordinate(str(last_y))
 
     def value(self):
         self.update_statusbar(str(self.sh.get_value()))
