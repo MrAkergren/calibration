@@ -14,7 +14,7 @@ class SerialHandler:
 
     def connect_devices(self, win_panel_com=None, win_ard_com=None):
         try:
-            self.pan = Panel(x, y, win_panel_com)
+            self.pan = Panel(self.offset, win_panel_com)
         except:
             print("Panel failed")
             sys.exit(0)
