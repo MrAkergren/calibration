@@ -5,10 +5,13 @@ from time import sleep
 class Arduino(SerialCommunication):
     """docstring for Arduino
     """
-    def __init__(self):
+    def __init__(self, win_ard_com):
         SerialCommunication.__init__(self)
         self.EXIT_CONSTANT = 20
-        device = self._serial_device()
+        if win_ard_com is not None:
+            device = "COM" + win_ard_com
+        else:
+            device = self._serial_device()
         unit = [device, '9600', '1']
         print(device)
         try:

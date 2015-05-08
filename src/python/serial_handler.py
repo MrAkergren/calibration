@@ -10,17 +10,17 @@ class SerialHandler:
     for communication to and between those objects.
     """
     def __init__(self, x, y):
-        self.m = Com(1, 1)
         self.offset = (x, y)
 
+    def connect_devices(self, win_panel_com=None, win_ard_com=None):
         try:
-            self.pan = Panel(x, y)
+            self.pan = Panel(self.offset, win_panel_com)
         except:
             print("Panel failed")
             sys.exit(0)
 
         try:
-            self.ard = Arduino()
+            self.ard = Arduino(win_ard_com)
         except Exception:
             print("Lux meter failed")
             sys.exit(0)
