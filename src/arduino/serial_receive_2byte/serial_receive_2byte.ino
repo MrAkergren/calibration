@@ -28,8 +28,8 @@ void loop() {
     }
   }
 
-  if(i>0) {
-    unsigned int ut = word(indata[0], indata[1]);
+  if(i>1) {
+    uint16_t ut = word(indata[0], indata[1]);
     Serial.println(ut, DEC);
   }
 }

@@ -10,7 +10,6 @@ class SerialHandler:
     for communication to and between those objects.
     """
     def __init__(self, x, y):
-        self.m = Com(1, 1)
         self.offset = (x, y)
 
         try:

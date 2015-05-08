@@ -14,7 +14,8 @@
 // connect GROUND to common ground
 
 Adafruit_TSL2591 tsl = Adafruit_TSL2591(2591); // pass in a number for the sensor identifier (for your use later)
-
+byte buf[2]; //byte buffer to send the data over serial
+#define BAUDRATE 300
 
 /**************************************************************************/
 /*
@@ -24,8 +25,8 @@ Adafruit_TSL2591 tsl = Adafruit_TSL2591(2591); // pass in a number for the senso
 void configureSensor(void)
 {
   // You can change the gain on the fly, to adapt to brighter/dimmer light situations
-  tsl.setGain(TSL2591_GAIN_LOW);    // 1x gain (bright light)
-  //tsl.setGain(TSL2591_GAIN_MED);      // 25x gain
+  //tsl.setGain(TSL2591_GAIN_LOW);    // 1x gain (bright light)
+  tsl.setGain(TSL2591_GAIN_MED);      // 25x gain
   //tsl.setGain(TSL2591_GAIN_HIGH);   // 428x gain
   
   // Changing the integration time gives you a longer time over which to sense light
@@ -70,7 +71,7 @@ void configureSensor(void)
 /**************************************************************************/
 void setup(void) 
 {
-  Serial.begin(9600);
+  Serial.begin(BAUDRATE);
   
   /* Serial.println("Starting Adafruit TSL2591 Test!");
   
@@ -99,7 +100,7 @@ void setup(void)
     infrared light (returns raw 16-bit ADC values)
 */
 /**************************************************************************/
-void simpleRead(void)
+uint16_t simpleRead(void)
 {
   // Simple data read example. Just read the infrared, fullspecrtrum diode 
   // or 'visible' (difference between the two) channels.
@@ -110,7 +111,8 @@ void simpleRead(void)
 
  // Serial.print("[ "); Serial.print(millis()); Serial.print(" ms ] ");
  // Serial.print("Luminosity: ");
-  Serial.println(x, DEC);
+  //Serial.println(x, DEC);
+  return x;
 }
 
 /**************************************************************************/
@@ -169,9 +171,12 @@ void unifiedSensorAPIRead(void)
 /**************************************************************************/
 void loop(void) 
 { 
-  simpleRead(); 
+  uint16_t lux = simpleRead(); 
   // advancedRead();
   // unifiedSensorAPIRead();
-  
-  delay(250);
+  buf[0] = highByte(lux);
+  buf[1] = lowByte(lux);
+  Serial.write(buf, 2);             
+  //Serial.println(lux, DEC);
+  delay(500);
 }
