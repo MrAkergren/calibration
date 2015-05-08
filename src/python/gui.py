@@ -29,6 +29,7 @@ class GUI(tk.Frame):
 
         self.panel_port = None
         self.ard_port = None
+        self.win_com = None
         if windows:
             self.win_com = WinCom(self)
             self.win_com.show_frame()
