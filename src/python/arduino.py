@@ -3,7 +3,19 @@ from time import sleep
 
 
 class Arduino(SerialCommunication):
-    """docstring for Arduino
+    """The class responsible for the communication to the Arduino lux-meter.
+
+    Inherits from SerialCommunication.
+
+    Automatically tries connects to the unit during init.
+
+    Attributes:
+        win_ard_com (str):  a string of the integer that is the port on the 
+                            windows machine to the Arduino
+
+    Raises:
+        SerialException:    raises the error from SerialCommunication if the
+                            device cannot connect
     """
     def __init__(self, win_ard_com):
         SerialCommunication.__init__(self)
@@ -21,6 +33,7 @@ class Arduino(SerialCommunication):
             raise
 
     def _serial_device(self):
+        #Connects to linux or darwin automatically 
         platform, ports = self.serial_port_list()
         matching = []
         if platform == 'darwin':
@@ -33,11 +46,21 @@ class Arduino(SerialCommunication):
             print("No matching serial device found")
 
     def get_value(self, arg=0):
+        """ Recursively tries to get a value from the Arduino.
+
+            Attributes:
+                arg (int):  Stop measurement, if higher then EXIT_CONSTANT, 
+                            the recursion will stop. Set to 0 if not given.
+
+            Returns: 
+                value (int):    The value from the lux-meter or None if value is
+                                not available
+        """
         sleep(0.1)
         while self.connection.inWaiting() > 0:
-            text = self._serial_read()
-            if(text is not None):
-                return int(text)
+            value = self._serial_read()
+            if(value is not None):
+                return int(value)
 
         if(arg < self.EXIT_CONSTANT):
             return self.get_value(arg+1)

@@ -3,7 +3,7 @@
 
 from search import Search
 from serial_handler import SerialHandler
-from gui import GUI
+from gui.gui import GUI
 import sys
 
 def is_windows():

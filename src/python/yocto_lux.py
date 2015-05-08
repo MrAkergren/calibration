@@ -1,7 +1,7 @@
-#!/usr/bin/python
+#! /usr/bin/env python3
 # -*- coding: utf-8 -*-
 import os,sys
-# add ../../Sources to the PYTHONPATH
+
 sys.path.append(os.path.join("..","..","lib","Yocto_light_meter"))
 from yocto_api import *
 from yocto_lightsensor import *
@@ -18,9 +18,6 @@ def die(msg):
     sys.exit(msg+' (check USB cable)')
 
 errmsg=YRefParam()
-
-#if len(sys.argv)<2 :  usage()
-
 
 target='LIGHTMK3-36011'
 
