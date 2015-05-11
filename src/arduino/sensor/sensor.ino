@@ -15,7 +15,7 @@
 
 Adafruit_TSL2591 tsl = Adafruit_TSL2591(2591); // pass in a number for the sensor identifier (for your use later)
 byte buf[2]; //byte buffer to send the data over serial
-#define BAUDRATE 300
+#define BAUDRATE 9600
 
 /**************************************************************************/
 /*
@@ -174,9 +174,9 @@ void loop(void)
   uint16_t lux = simpleRead(); 
   // advancedRead();
   // unifiedSensorAPIRead();
-  buf[0] = highByte(lux);
+ /* buf[0] = highByte(lux);
   buf[1] = lowByte(lux);
-  Serial.write(buf, 2);             
-  //Serial.println(lux, DEC);
+  Serial.write(buf, 2); */
+  Serial.println(lux, DEC);
   delay(500);
 }
