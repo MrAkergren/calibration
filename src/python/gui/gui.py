@@ -81,7 +81,7 @@ class GUI(tk.Frame):
 
 class ControlFrame(tk.Frame):
     # Constructor
-    def __init__(self, master=None):
+    def __init__(self, master):
         self.master = master
 
         tk.Frame.__init__(self, self.master, bg='black')
@@ -99,8 +99,8 @@ class ControlFrame(tk.Frame):
         self.btnLeft = tk.Button(self, text='LEFT', width=5, height=3)
         self.btnLeft.grid(row=1, column=0, pady=5, padx=5, sticky=(E, W))
 
-        self.vluBtn = tk.Button(self, text='VALUE', width=5, height=3)
-        self.vluBtn.grid(row=1, column=1, pady=5, padx=5, sticky=(E, W))
+        self.btnValue = tk.Button(self, text='VALUE', width=5, height=3)
+        self.btnValue.grid(row=1, column=1, pady=5, padx=5, sticky=(E, W))
 
         self.btnRight = tk.Button(self, text='RIGHT', width=5, height=3)
         self.btnRight.grid(row=1, column=2, pady=10, padx=5, sticky=(E, W))
@@ -125,7 +125,7 @@ class ControlFrame(tk.Frame):
 
         self.btnRight.bind('<Button-1>', lambda x: self.master.move('EAST'))
 
-        self.vluBtn.bind('<Button-1>', lambda x: print(self.master.value()))
+        self.btnValue.bind('<Button-1>', lambda x: print(self.master.value()))
 
         self.btnSearch.bind('<Button-1>', lambda x: self.master.search_alg.labyrinth())
 
@@ -133,6 +133,6 @@ class ControlFrame(tk.Frame):
         # Unbind the commands from the control buttons
         self.btnUp.unbind('<Button-1>')
         self.btnLeft.unbind('<Button-1>')
-        self.vluBtn.unbind('<Button-1>')
+        self.btnValue.unbind('<Button-1>')
         self.btnRight.unbind('<Button-1>')
         self.btnDown.unbind('<Button-1>')
