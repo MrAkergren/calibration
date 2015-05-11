@@ -57,7 +57,7 @@ class Panel(SerialCommunication):
             self.connection.flushInput()
             print("\'logga\' has been turned Off")
         else:
-            print("\'logga\' was Off from begining")
+            print("\'logga\' was Off from start")
 
     def get_log(self):
         """Returns a 'logga'-string from the panel as a list of strings.
@@ -71,7 +71,7 @@ class Panel(SerialCommunication):
         return info
 
     def get_coordinates(self):
-        """ Tries to return the coordinates 10 times, if it failes it returns
+        """ Tries to return the coordinates 10 times, if it fails it returns
         None.
 
         Returns a tuple of the two floats that is the coordinates.
