@@ -71,7 +71,7 @@ class GUI(tk.Frame):
             self.coordinates = self.sh.get_coordinates()
             self.update_statusbar("Current coordinates:\n %.4f, %.4f" % self.coordinates)
         except:
-            print("Sun sensor not active, reseting to %.4f, %.4f" % (last_x, last_y))
+            print("Reseting to %.4f, %.4f" % (last_x, last_y))
             self.sh.set_x_coordinate(str(last_x))
             self.sh.set_y_coordinate(str(last_y))
 
