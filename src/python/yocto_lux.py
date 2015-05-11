@@ -1,7 +1,7 @@
 #! /usr/bin/env python3
 # -*- coding: utf-8 -*-
 import os,sys
-
+#The path to the library
 sys.path.append(os.path.join("..","..","lib","Yocto_light_meter"))
 from yocto_api import *
 from yocto_lightsensor import *

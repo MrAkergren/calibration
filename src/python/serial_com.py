@@ -53,6 +53,7 @@ class SerialCommunication(object):
 
     def serial_port_list(self):
         """ Returns a list of available serial ports on a linux or darwin based system
+            windows not affected, that OS is dealt with earlier.
         """
         if sys.platform.startswith('darwin'):
             ports = glob.glob('/dev/tty.*')

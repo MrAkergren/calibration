@@ -40,6 +40,7 @@ class Panel(SerialCommunication):
 
     def _serial_device(self):
         #  detects OS and returns the correct pathway to the panel
+        #  windows not affected, that OS is dealt with earlier.
         if sys.platform.startswith('darwin'):
             return '/dev/tty.SLAB_USBtoUART'
 
@@ -131,7 +132,7 @@ class Panel(SerialCommunication):
 
         start_time = time()
         while not self._correct_position():
-            if time() - start_time > 30.0:
+            if time() - start_time > 15.0:
                 print("Something went wrong, not \'run auto\'?")
                 raise EnvironmentError('Panel not turning')
             pass
