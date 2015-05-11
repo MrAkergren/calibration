@@ -134,7 +134,7 @@ class Panel(SerialCommunication):
         # current position of the panel.
 
         # If the current out from the sensor is below 504, the sensor does
-        # not controll the panel
+        # not control the panel
 
         # If the values are below 0.01 it is to be considered that the panel
         # is in the right place, according to empirical evidence.
