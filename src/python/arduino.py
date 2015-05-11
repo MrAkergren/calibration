@@ -58,11 +58,13 @@ class Arduino(SerialCommunication):
         """
         sleep(0.1)
         while self.connection.inWaiting() > 0:
+            self.connection.flushInput()
             value = self._serial_read()
-            if(value is not None):
+            if(value is not None and int(value) < 65200):
                 return int(value)
 
         if(arg < self.EXIT_CONSTANT):
+            self.connection.flushInput()
             return self.get_value(arg+1)
         else:
             return None
