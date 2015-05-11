@@ -31,9 +31,10 @@ class SerialHandler:
         """
         try:
             self.pan = Panel(self.offset, win_panel_com)
-        except:
+        except Exception as e:
+            print(e.strerror)
             print("Panel failed")
-           # sys.exit(0)
+            sys.exit(0)
 
         try:
             self.lux = Arduino(win_ard_com)
@@ -41,9 +42,11 @@ class SerialHandler:
             print("Ada lux meter failed")
             try: 
                 self.lux = Yocto()
-            except:
+                print("Yocto lux meter connected")
+            except Exception as e:
+                print(e)
                 print("Yocto lux meter failed")
-                sys.exit(0)
+               # sys.exit(0)
 
     def get_value(self):
         """Returns the value give by the lux-meter
@@ -80,7 +83,8 @@ class SerialHandler:
         try:
             self.pan.move(coordinates, direction)
             return self.get_value()
-        except:
+        except Exception as e:
+            print(e)
             raise
 
     def get_coordinates(self):
