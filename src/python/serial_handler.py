@@ -1,6 +1,7 @@
 from serial_com import SerialCommunication
 from panel import Panel
 from arduino import Arduino
+from yocto_lux import Yocto
 import sys
 
 
@@ -25,20 +26,24 @@ class SerialHandler:
         """Tries to connect the panel and arduino.
 
         Attributes:
-            win_panel_com (str): Default None if not windows OS
-            win_ard_com (str): Default None if not windows OS
+            win_panel_com (str): If not on windows OS, defaults to None
+            win_ard_com (str): If not on windows OS, defaults to None
         """
         try:
             self.pan = Panel(self.offset, win_panel_com)
         except:
             print("Panel failed")
-            sys.exit(0)
+           # sys.exit(0)
 
         try:
-            self.ard = Arduino(win_ard_com)
-        except Exception:
-            print("Lux meter failed")
-            sys.exit(0)
+            self.lux = Arduino(win_ard_com)
+        except:
+            print("Ada lux meter failed")
+            try: 
+                self.lux = Yocto()
+            except:
+                print("Yocto lux meter failed")
+                sys.exit(0)
 
     def get_value(self):
         """Returns the value give by the lux-meter
@@ -46,7 +51,7 @@ class SerialHandler:
         Returns:    
             value (int)
         """
-        return self.ard.get_value()
+        return self.lux.get_value()
 
     def get_log(self):
         """Returns the log-string from the panel. 
@@ -64,12 +69,13 @@ class SerialHandler:
             coordinates (tuple[float]): two floats to represent the x,y coord.
             direction (str): The direction in caps as north, west, south, east
 
+        Returns:    
+            value (int)
+
         Raises:
         EnvironmentError    raises the error from Panel if the device do not 
                             move, most likely due to inactive sun sensor
 
-        Returns:    
-            value (int)
         """
         try:
             self.pan.move(coordinates, direction)
