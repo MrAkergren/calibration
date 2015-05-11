@@ -63,6 +63,7 @@ class SerialCommunication(object):
             platform = 'linux'
 
         else:
-            raise EnvironmentError('System not supported')
+            raise EnvironmentError('System not supported. \
+            The project is open source so you are welcome to implement it')
 
         return platform, ports
