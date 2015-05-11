@@ -25,7 +25,6 @@ class Arduino(SerialCommunication):
         else:
             device = self._serial_device()
         unit = [device, '9600', '1']
-        print(device)
         try:
             self.serial_connect(unit)
             print("Connected to lux-meter on \'" + device + "\'")
@@ -60,7 +59,6 @@ class Arduino(SerialCommunication):
         while self.connection.inWaiting() > 0:
             self.connection.flushInput()
             value = self._serial_read().strip()
-            print(isinstance(value, str))
             if value is not None and value.isdigit() and int(value) < 65200:
                 return int(value)
 
