@@ -11,7 +11,7 @@ class SerialHandler:
     This class will create the serial objects and contain the logic needed
     for communication to and between those objects.
 
-    Attributes:
+    Arguments:
         x (float): The offset "how far will the panel move" on the x axis
         y (float): The offset "how far will the panel move" on the y axis
 
@@ -25,7 +25,7 @@ class SerialHandler:
     def connect_devices(self, win_panel_com=None, win_ard_com=None):
         """Tries to connect the panel and arduino.
 
-        Attributes:
+        Arguments:
             win_panel_com (str): If not on windows OS, defaults to None
             win_ard_com (str): If not on windows OS, defaults to None
         """
@@ -73,8 +73,8 @@ class SerialHandler:
             value (int)
 
         Raises:
-        EnvironmentError    raises the error from Panel if the device do not 
-                            move, most likely due to inactive sun sensor
+            EnvironmentError:   raises the error from Panel if the device do not 
+                                move, most likely due to inactive sun sensor
 
         """
         try:

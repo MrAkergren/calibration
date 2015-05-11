@@ -6,8 +6,18 @@ from serial_com import SerialCommunication
 
 class Panel(SerialCommunication):
     """The class responsible for the communication to the panel,
-    contains the specific methods for the panel and inherits from
-    SerialCommunication
+    contains the specific methods for the panel.
+    Inherits:
+        SerialCommunication
+
+    Arguments:
+        offset (tuple[float]):  the offsets in x and y, how big steps it should
+                                be taking
+        win_panel_com (str):    If it's not None it should contain the digit on
+                                which COM-port the panel is connected to.
+
+    Raises:
+        SerialException:    if the panel can't connect.
     """
 
     def __init__(self, offset, win_panel_com):
@@ -64,7 +74,7 @@ class Panel(SerialCommunication):
         """ Tries to return the coordinates 10 times, if it failes it returns
         None.
 
-        Retrns a tuple of the two floats that is the coordinates.
+        Returns a tuple of the two floats that is the coordinates.
         """
         for x in range(0, 10):
             self._serial_write('zeroposx')
