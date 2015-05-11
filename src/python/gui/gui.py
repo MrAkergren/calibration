@@ -21,6 +21,8 @@ class GUI(tk.Frame):
         self.search_alg = search
         self.sh = serial_handler
         self.coordinates = None
+        self.start_x = None
+        self.start_y = None
         self.tkRoot = tk.Tk()
 
         tk.Frame.__init__(self, self.tkRoot)
@@ -51,6 +53,7 @@ class GUI(tk.Frame):
     def start_controls(self):
         self.sh.connect_devices(self.panel_port, self.ard_port)        
         self.coordinates = self.sh.get_coordinates()
+        self.start_x, self.start_y = self.coordinates
 
         # Initiate and start the control frame (steering controls)
         if self.win_com is not None:
@@ -71,12 +74,17 @@ class GUI(tk.Frame):
             self.coordinates = self.sh.get_coordinates()
             self.update_statusbar("Current coordinates:\n %.4f, %.4f" % self.coordinates)
         except:
-            print("Reseting to %.4f, %.4f" % (last_x, last_y))
+            print("Reseting to: %.4f, %.4f" % (last_x, last_y))
             self.sh.set_x_coordinate(str(last_x))
             self.sh.set_y_coordinate(str(last_y))
 
     def value(self):
         self.update_statusbar(str(self.sh.get_value()))
+
+    def reset(self):
+        print("Reseting to start values: %.4f, %.4f " % (self.start_x, self.start_y))
+        self.sh.set_x_coordinate(str(self.start_x))
+        self.sh.set_y_coordinate(str(self.start_y))
 
 
 class ControlFrame(tk.Frame):
@@ -109,11 +117,10 @@ class ControlFrame(tk.Frame):
         self.btnDown.grid(row=2, column=1, pady=5, padx=5, sticky=(E, W))
 
         self.btnSearch = tk.Button(self, text='SEARCH', width=5,)
-        self.btnSearch.grid(row=3, column=1, pady=30, padx=2, sticky=(E, W))
+        self.btnSearch.grid(row=3, column=0, pady=30, padx=2, sticky=(E, W))
 
-        #   self.btnCommands = tk.Button(self, text='COMMAND', width=5, \
-        #       command=lambda:self.master.switchFrame('launchCommand'))
-        #   self.btnCommands.grid(row=3, column=2, pady=30, padx=5, sticky=(E, W))
+        self.btnReset = tk.Button(self, text='RESET', width=5,)
+        self.btnReset.grid(row=3, column=2, pady=30, padx=5, sticky=(E, W))
 
     def bind_buttons(self):
         #  Bind the control buttons to commands
@@ -128,6 +135,8 @@ class ControlFrame(tk.Frame):
         self.btnValue.bind('<Button-1>', lambda x: self.master.value())
 
         self.btnSearch.bind('<Button-1>', lambda x: self.master.search_alg.labyrinth())
+
+        self.btnReset.bind('<Button-1>', lambda x: self.master.reset())
 
     def unbind_buttons(self):
         # Unbind the commands from the control buttons
