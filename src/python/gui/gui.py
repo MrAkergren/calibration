@@ -61,8 +61,8 @@ class GUI(tk.Frame):
         self.control_frame.show_frame()
 
     def update_statusbar(self, text):
-        self.statusLabelText.set(str(text))
-        print('Statusbar text: \n', str(text).strip())
+        self.statusLabelText.set(text)
+        print('Statusbar text: \n', text.strip())
 
     def move(self, direction):
         last_x, last_y = self.coordinates
@@ -125,7 +125,7 @@ class ControlFrame(tk.Frame):
 
         self.btnRight.bind('<Button-1>', lambda x: self.master.move('EAST'))
 
-        self.btnValue.bind('<Button-1>', lambda x: print(self.master.value()))
+        self.btnValue.bind('<Button-1>', lambda x: self.master.value())
 
         self.btnSearch.bind('<Button-1>', lambda x: self.master.search_alg.labyrinth())
 

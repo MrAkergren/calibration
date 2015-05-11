@@ -9,7 +9,7 @@ class Arduino(SerialCommunication):
 
     Automatically tries connects to the unit during init.
 
-    Attributes:
+    Arguments:
         win_ard_com (str):  a string of the integer that is the port on the 
                             windows machine to the Arduino
 
@@ -48,7 +48,7 @@ class Arduino(SerialCommunication):
     def get_value(self, arg=0):
         """ Recursively tries to get a value from the Arduino.
 
-            Attributes:
+            Arguments:
                 arg (int):  Stop measurement, if higher then EXIT_CONSTANT, 
                             the recursion will stop. Set to 0 if not given.
 
@@ -59,12 +59,12 @@ class Arduino(SerialCommunication):
         sleep(0.1)
         while self.connection.inWaiting() > 0:
             self.connection.flushInput()
-            value = self._serial_read()
-            if(value is not None and int(value) < 65200):
+            value = self._serial_read().strip()
+            print(isinstance(value, str))
+            if value is not None and value.isdigit() and int(value) < 65200:
                 return int(value)
 
-        if(arg < self.EXIT_CONSTANT):
-            self.connection.flushInput()
+        if arg < self.EXIT_CONSTANT:
             return self.get_value(arg+1)
         else:
             return None
