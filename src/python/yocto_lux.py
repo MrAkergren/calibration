@@ -14,12 +14,10 @@ class Yocto():
         if YAPI.RegisterHub("usb", errmsg)!= YAPI.SUCCESS:
             raise EnvironmentError("init error"+errmsg.value)
         self.sensor= YLightSensor.FindLightSensor(target + '.lightSensor')
-        if self.sensor is None:
+        if self.sensor is None or not self.sensor.isOnline():
+            print("connection failed")
             raise EnvironmentError("No Yocto sensor detected")
 
     def get_value(self):
         return int(self.sensor.get_currentValue())
 
-# y = Yocto()
-# for x in range(0, 10):
-#     print(y.get_value())
