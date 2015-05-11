@@ -11,7 +11,7 @@ Main files.
 |```arduino.py``` | inherit form  ```serial_com.py```, holds the methods specific for the lux-meter, such as "get_value" |
 |```panel.py```|  inherit form  ```serial_com.py```, holds the methods specific for panel, such as "move" |
 |```yocto_lux.py``` | contains the methods for the Yocto lux-meter, does not inherit from ```serial_com``` as it doesn't require RS-232 |
-|```seatch.py```| The class for the search algorithm |
+|```search.py```| The class for the search algorithm |
 |```gui``` | package containing the two gui files, one for the controls and one to check if the application is running on windows|
 |```mock_read.py``` | file is used to pull values when the lux-meter is not available. |
 |```__init.py__``` | is needed by the language. |
