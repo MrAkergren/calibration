@@ -20,8 +20,15 @@
         % subsubsection ljussensor (end)
     % subsection parans_sp3 (end)
 
-    \subsection{Arduino Uno R3} % (fold)
-    \label{sub:arduino_uno}
-        Arduino Uno är ett mikrokontrollerkort som innehåller mikrokontrollern ATMega328, USB-anslutning och 20 pins, 6 analoga och 14 digitala, för att ansluta externa enheter och kringutrustning \cite[kap.~1]{ard_internals}. Mikrokontrollern är en del av AVR-serien från Atmel och den har en RISC-baserad processor, 32 KB flashminne för lagring av programkod och 2 KB internminne. ATMega328 har också en UART som möjliggör seriell kommunikation enligt RS-232. Plattformen för Arduino, där Uno är en implementering, är öppen och det är fritt för var och en att bygga sina egna mikrokontrollerkort enligt tillgängliga scheman. Till Arduino tillhandahålls även en tillhörande utvecklingsmiljö som möjliggör programmering via en dator och ger tillgång till exempelkod och färdigskrivna kodbibliotek. Kod till Arduinoenheter skrivs i Arduinos egen implementation av språken C och C++ \cites[kap.~2]{ard_c}{ard_cplusplus}.
-    % subsection arduino_uno (end)
+    \subsection{Arduino} % (fold)
+        \subsubsection{Arduino Uno R3} % (fold)
+        \label{ssub:arduino_uno}
+            Arduino Uno är ett mikrokontrollerkort som innehåller mikrokontrollern ATMega328, USB-anslutning och 20 pins, 6 analoga och 14 digitala, för att ansluta externa enheter och kringutrustning \cite[kap.~1]{ard_internals}. Mikrokontrollern är en del av AVR-serien från Atmel och den har en RISC-baserad processor, 32 KB flashminne för lagring av programkod och 2 KB internminne. ATMega328 har också en UART som möjliggör seriell kommunikation enligt RS-232. Plattformen för Arduino, där Uno är en implementering, är öppen och det är fritt för var och en att bygga sina egna mikrokontrollerkort enligt tillgängliga scheman. Till Arduino tillhandahålls även en tillhörande utvecklingsmiljö som möjliggör programmering via en dator och ger tillgång till exempelkod och färdigskrivna kodbibliotek. Kod till Arduinoenheter skrivs i Arduinos egen implementation av språken C och C++ \cites[kap.~2]{ard_c}{ard_cplusplus}.
+        % subsubsection arduino_uno (end)
+
+        \subsubsection{Adafruit TSL2591 Digital Light Sensor}
+        \label{ssub:ada_tsl2591}
+            Sensorkortet från Adafruit innehåller ljussensorn TSL2591 från ams och används till att uppmäta ljusintensitet upp till 88000 lux och kan anslutas till en mikrokontroller via I²C. På sensorn finns två fotodioder, där den ena reagerar på IR-ljus och den andra reagerar på fullspektrumjus \cite{TSL2591}. Fotodiodernas avläsning kan ske oberoende av varandra eller kombineras vilket möjliggör avläsning av endast synligt ljus. Sensorns värden avläses digitalt.
+        % subsubsection ada_tsl2591 (end)
+    % subsection arduino (end)
 % section teknisk_bakgrund (end)
