@@ -1,6 +1,6 @@
 \section{Genomförande} % (fold)
 \label{sec:genomf_rande}
-    \subsection{Steg 1} % (fold)
+    \subsection{Fas 1} % (fold)
     \label{sub:steg_1}
         Projektet genomfördes med stöd av den valda metoden. I problemidentifikations-fasen, fas ett, hölls möten med uppdragsgivaren i syfte att få en enhällig uppfattning om vad företaget efterfrågade och formaliserade det praktiska problem som företaget sökte en lösning till. Vidare är det även i den här fasen som introduktionen till projektets rapport utvecklades för att fastslå vad projektet avser att utföra, som ett led i problemidentifieringen. \bigskip
 
@@ -33,7 +33,7 @@
         \caption{\label{fig:array} Exempel på förväntade matriser}
         \end{figure}
     % subsection steg_1 (end)
-    \subsection{Steg 2} % (fold)
+    \subsection{Fas 2} % (fold)
     \label{sub:steg_2}
         Litteraturstudien resulterade i en förståelse att trådlösa standarder för datakommunikation så som 802.11 standarderna har problem att sända när betongkonstruktioner hindrar utspridningen av radiovågorna och kräver speciell apparatur för att klara av att skicka data igenom sådana förhållanden \cite{11n}. Detta medför att trådlös kommunikation inte är lämplig för företaget, då de på förhand inte kan veta ifall deras kommunikation kommer att fungera på plats hos deras kunder. Inköp av nämnda apparatur är inte aktuellt. \bigskip
 
@@ -43,11 +43,11 @@
     % subsection steg_2 (end)
 
 
-    \subsection{Steg 3} % (fold)
+    \subsection{Fas 3} % (fold)
     \label{sub:steg_3}
         Genom att fokusera på det optiska alternativet vid kommunikation mellan panelen och rummet, leder detta in projektet till det tredje steget i metoden, att föreslå en artefakt som löser det ställda problemet. Projektet föreslår då en lösning med en omvandlare från luxmätarens utdata till en optisk signal som sänds upp till taket för att där avkodas. Omvandlaren kan vara någon form av mikrokontroller så som till exempel en Arduino. Uppe på taken kan avkodaren även den vara en mikrokontroller, eller om det finns någon typ av ljussensor som direkt kan skicka sin data över USB till den programmerbara enhet som utför den algoritm som utvecklats. \bigskip
 
-        För utvecklingen av algoritmen valdes \texttt{Python} som programmeringsspråk och valet hade stöd av flera motiveringar. Den första anledningen till att språket valdes var att företaget har kompetens och erfarenhet att utveckla i detta språk, då den nya panelen SP4 kommer att drivas av en källkod skriven i just \texttt{Python}. Vidare har företaget sedan tidigare produkter utvecklade i detta programmeringsspråk, så att utveckla algoritmen i samma språk underlättar för en eventuell implementering av algoritmen i de existerande produkterna. Mer generella fördelar att utveckla i \texttt{Python} är att språket är plattformsoberoende och är enkel att utveckla grafiska gränssnitt i. Nackdelar med språket är att det är långsamt i förhållande till andra språk så som \texttt{C} eller \texttt{Java}, men då algoritmen kommer att kommunicera med mekanik vilket leder till flertalet inbyggda fördröjningar för inhämtning- och sändning av information, ser projektet att språkets åverkan på hur snabbt algoritmen kan utföras som försumbar.\cite{python_speed}\bigskip
+        För utvecklingen av algoritmen valdes \texttt{Python} som programmeringsspråk och valet hade stöd av flera motiveringar. Den första anledningen till att språket valdes var att företaget har kompetens och erfarenhet att utveckla i detta språk, då den nya panelen SP4 kommer att drivas av en källkod skriven i just \texttt{Python}. Vidare har företaget sedan tidigare produkter utvecklade i detta programmeringsspråk, så att utveckla algoritmen i samma språk underlättar för en eventuell implementering av algoritmen i de existerande produkterna. Mer generella fördelar att utveckla i \texttt{Python} är att språket är plattformsoberoende och är enkel att utveckla grafiska gränssnitt i. Nackdelar med språket är att det är långsamt i förhållande till andra språk så som \texttt{C} eller \texttt{Java}, men då algoritmen kommer att kommunicera med mekanik vilket leder till flertalet inbyggda fördröjningar för inhämtning- och sändning av information, ser projektet att språkets åverkan på hur snabbt algoritmen kan utföras som försumbar\cite{python_speed}.\bigskip
 
         Utformningen av algoritmen skedde genom flera iterationer av steg 3 i den valda metoden. 
         I den första iterationen utvecklades en sökalgoritm, algoritm $\mathscr{A}$, som inledningsvis genomsöker en 3x3-matris i syfte att finna en inledande sökriktning. Därefter genomförs sökning medurs i åtta riktningar med utgångsriktning motsvarande österut. När ett större värde påträffas uppdateras nuvarande position och sökningen återupprepas. För jämförelse utvecklades även en variant med fyra sökriktningar, algoritm $\mathscr{B}$. Efterkommande iterationer var samtliga en vidareutveckling av den förra. Den andra iteration vidareutvecklade algoritmen så att den lagrar information om tidigare besökta koordinater, så att dessa ej undersöks vid upprepade tillfällen. Ytterligare förbättringar implementerades i den tredje iterationen, då riktningen på den senaste förflyttningen, då ett nytt större värde påträffats, registreras. Med hjälp av denna information undersöks först samma riktning som den senast lyckade förflyttningen innan medurs sökning. Här slopades också den inledande sökningen i 3x3 matris, då den inte kunde påvisas ha några märkbara fördelar. Samtliga iterationer innebar märkbara förbättringar vid simulering. Den slutgiltiga algoritmen arbetar enligt det flödesschema som finns presenterad i bilaga~\ref{sec:sokalgoritm_flow}. \bigskip
@@ -59,21 +59,26 @@
 
         För att jämföra sökalgoritmer genomfördes simuleringar för att mäta det antal steg som behövs för att ta sig från utgångspositionen till den position där det maximala värdet påträffades. Simuleringarna använde sig av 10000 100x100-matriser där varje matris hade slumpvist genererad utgångsposition och maximalt värde. Algoritmerna har alltså alla genomsökt samma matriser med samma utgångspositioner. Samtliga positioners värden var strängt avtagande i hänseende till avståndet från det maximala värdet. För varje iteration av algoritmen undersöktes sökning med både fyra och åtta sökriktningar. Sökning i fyra riktningar visade sig mer effektivt i samtliga fall, enligt figur~\ref{fig:algoritm_steg} och bilaga~\ref{sec:sokalgoritm_sim}. Skillnaderna i antal steg mellan samma algoritm med olika antal sökriktningar vara störst i den första iterationen, med 54~\% fler steg, men de visade sig även i övriga iterationer. I den tredje och slutgiltiga iterationen var skillnaden 10~\% fler steg. Varje iteration av algoritmen minskade det antal steg som behövdes för att finna det största värdet. Största förändringen mellan iterationer skedde mellan iteration två och tre, där antalet steg minskades med 43~\%, se tabell~\ref{tab:algoritm_forbattring}. Minskningen mellan iteration ett och tre var 51~\%. \bigskip
 
-        \begin{table}[hb]
-            \caption{\label{tab:algoritm_forbattring}Minskning av antal steg mellan varje version}
-            \centering
-            \begin{threeparttable}
-            \begin{tabular}{@{}lcc@{}}
-            \toprule
-            Från        & \multicolumn{1}{l}{Till version 2} & \multicolumn{1}{l}{Till version 3} \\ \midrule
-            Version 1 & 14~\%                                & 51~\%                                \\
-            Version 2 & -                                    & 43~\% \\ \bottomrule
-            \end{tabular}
-            \begin{tablenotes}
-            \item Baserat på medianvärden, se bilaga~\ref{sec:sokalgoritm_sim}
-        \end{tablenotes}
-        \end{threeparttable}
-        \end{table}
-
+            \begin{table}[hb]
+                \caption{\label{tab:algoritm_forbattring}Minskning av antal steg mellan varje version}
+                \centering
+                \begin{threeparttable}
+                \begin{tabular}{@{}lcc@{}}
+                \toprule
+                Från        & \multicolumn{1}{l}{Till version 2} & \multicolumn{1}{l}{Till version 3} \\ \midrule
+                Version 1 & 14~\%                                & 51~\%                                \\
+                Version 2 & -                                    & 43~\% \\ \bottomrule
+                \end{tabular}
+                \begin{tablenotes}
+                \item Baserat på medianvärden, se bilaga~\ref{sec:sokalgoritm_sim}
+            \end{tablenotes}
+            \end{threeparttable}
+            \end{table}
     % subsection steg_3 (end)
+
+    \subsection{Fas 4} % (fold)
+    \label{sub:fas_4}
+        Den fjärde fasen i den valda metoden avhandlar inte arbetsgången som sådan, utan visar på att resultatet ska analyseras och delges i syfte att sprida kunskapen vidare i vad som har uppnåtts. 
+        För detta projekt innebär fas fyra att skriva denna rapport vilket förtydligar och sammanfattar det resultat som har uppnåtts. Vidare hålls en presentation av resultatet inom ramen för den kurs som genomförs, vilket även är en del av metoden.
+    % subsection fas_4 (end)
 % section genomf_rande (end)
