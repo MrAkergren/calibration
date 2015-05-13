@@ -19,7 +19,7 @@ class Arduino(SerialCommunication):
     """
     def __init__(self, win_ard_com):
         SerialCommunication.__init__(self)
-        self.EXIT_CONSTANT = 20
+        self._EXIT_CONSTANT = 20
         if win_ard_com is not None:
             device = "COM" + win_ard_com
         else:
