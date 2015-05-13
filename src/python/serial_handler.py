@@ -1,4 +1,4 @@
-from serial_com import SerialCommunication
+# from serial_com import SerialCommunication
 from panel import Panel
 from arduino import Arduino
 from yocto_lux import Yocto
