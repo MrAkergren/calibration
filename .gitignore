@@ -20,3 +20,4 @@ __pycache__/
 *.lot
 thesis.blg
 *.fdb_latexmk
+.clean
