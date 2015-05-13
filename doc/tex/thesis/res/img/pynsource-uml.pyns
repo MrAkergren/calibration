@@ -1,27 +1,12 @@
 # PynSource Version 1.1
 {'type':'meta', 'info1':'Lorem ipsum dolor sit amet, consectetur adipiscing elit is latin.'}
 {'type':'umlshape', 'id':'Arduino', 'x':443, 'y':240, 'width':76, 'height':62, 'attrs':'', 'meths':'get_value()'}
-{'type':'umlshape', 'id':'SerialCommunication', 'x':555, 'y':91, 'width':170, 'height':98, 'attrs':'connetion: None', 'meths':'serial_connect()|seial_port_list()'}
+{'type':'umlshape', 'id':'SerialCommunication', 'x':555, 'y':91, 'width':170, 'height':98, 'attrs':'connetion', 'meths':'serial_connect()|serial_port_list()'}
 {'type':'umlshape', 'id':'Panel', 'x':754, 'y':186, 'width':118, 'height':176, 'attrs':'regex|x_offset|y_offset', 'meths':'get_log()|get_coordinates()|set_x_coordinate()|set_y_coordinate()|move()|stop_panel()'}
 {'type':'umlshape', 'id':'Search', 'x':145, 'y':167, 'width':76, 'height':111, 'attrs':'timeout|com|x_offset', 'meths':'labyrinth()'}
 {'type':'umlshape', 'id':'serial.Serial', 'x':581, 'y':16, 'width':119, 'height':29, 'attrs':'', 'meths':''}
 {'type':'umlshape', 'id':'SerialHandler', 'x':586, 'y':299, 'width':119, 'height':202, 'attrs':'offset|pan|lux', 'meths':'connect_devices()|get_value()|get_log()|move()|get_coordinates()|set_x_coordinate()|set_y_coordinate()|get_offset()'}
 {'type':'umlshape', 'id':'Yocto', 'x':602, 'y':209, 'width':76, 'height':62, 'attrs':'', 'meths':'get_value()'}
-{'type':'edge', 'id':'Arduino_to_SerialCommunication', 'source':'Arduino', 'target':'SerialCommunication', 'uml_edge_type':'generalisation'}
-{'type':'edge', 'id':'Arduino_to_SerialCommunication', 'source':'Arduino', 'target':'SerialCommunication', 'uml_edge_type':'generalisation'}
-{'type':'edge', 'id':'Arduino_to_SerialCommunication', 'source':'Arduino', 'target':'SerialCommunication', 'uml_edge_type':'generalisation'}
-{'type':'edge', 'id':'Panel_to_SerialCommunication', 'source':'Panel', 'target':'SerialCommunication', 'uml_edge_type':'generalisation'}
-{'type':'edge', 'id':'Arduino_to_SerialCommunication', 'source':'Arduino', 'target':'SerialCommunication', 'uml_edge_type':'generalisation'}
-{'type':'edge', 'id':'Panel_to_SerialCommunication', 'source':'Panel', 'target':'SerialCommunication', 'uml_edge_type':'generalisation'}
-{'type':'edge', 'id':'Arduino_to_SerialCommunication', 'source':'Arduino', 'target':'SerialCommunication', 'uml_edge_type':'generalisation'}
-{'type':'edge', 'id':'Panel_to_SerialCommunication', 'source':'Panel', 'target':'SerialCommunication', 'uml_edge_type':'generalisation'}
-{'type':'edge', 'id':'serial.Serial_to_SerialCommunication', 'source':'serial.Serial', 'target':'SerialCommunication', 'uml_edge_type':'composition'}
-{'type':'edge', 'id':'Arduino_to_SerialCommunication', 'source':'Arduino', 'target':'SerialCommunication', 'uml_edge_type':'generalisation'}
-{'type':'edge', 'id':'Panel_to_SerialCommunication', 'source':'Panel', 'target':'SerialCommunication', 'uml_edge_type':'generalisation'}
-{'type':'edge', 'id':'serial.Serial_to_SerialCommunication', 'source':'serial.Serial', 'target':'SerialCommunication', 'uml_edge_type':'composition'}
-{'type':'edge', 'id':'Panel_to_SerialHandler', 'source':'Panel', 'target':'SerialHandler', 'uml_edge_type':'composition'}
-{'type':'edge', 'id':'Arduino_to_SerialHandler', 'source':'Arduino', 'target':'SerialHandler', 'uml_edge_type':'composition'}
-{'type':'edge', 'id':'Yocto_to_SerialHandler', 'source':'Yocto', 'target':'SerialHandler', 'uml_edge_type':'composition'}
 {'type':'edge', 'id':'Arduino_to_SerialCommunication', 'source':'Arduino', 'target':'SerialCommunication', 'uml_edge_type':'generalisation'}
 {'type':'edge', 'id':'Panel_to_SerialCommunication', 'source':'Panel', 'target':'SerialCommunication', 'uml_edge_type':'generalisation'}
 {'type':'edge', 'id':'serial.Serial_to_SerialCommunication', 'source':'serial.Serial', 'target':'SerialCommunication', 'uml_edge_type':'composition'}
