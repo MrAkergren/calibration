@@ -11,31 +11,40 @@
     % subsection algoritm (end)
     \subsection{Optisk kommunikation} % (fold)
     \label{sub:optisk_kommunikation}
+        \subsubsection{Förutsättningar} % (fold)
+        \label{sub:forutsattningar}
+                
+            Frågeställningen "[v]ilka förutsättningar för kommunikation finns det mellan solpanelen och det upplysta rummet" har resulterat i en undersökning som visade att trådlös kommunikation inte är att anses som lämplig, utan nyttjande av den redan dragna optiska fiberkabeln är det kommunikationsmedia som bör nyttjas. Projektet föreslår två olika metoder för att nyttja fibern som databärare, dels en metod där asynkron seriell data skickas och en annan metod där två optiska fibrer kopplas samman, för att på sådant sätt skicka ut ljusintaget genom panelens linser och där mäta upp ljusstyrkan.\bigskip
 
-        Kommunikationen mellan det upplysta rummet och solpanelen på taket kan upprättas med hjälp av två mikrokontroller, en för sändning av data och en för mottagande.\bigskip
+            En lösning som detta projekt presenterar består av mikrokontrollerkortet Arduino Uno revision 3 (för fullständig specifikation se bilaga \ref{sub:arduino_spec})\cite{ardu}. Till sändaren kopplas en lysdiod till det gränssnitt som skickar data via den seriella standarden, vilket då omvandlar från RS-232 standardens höga och låga läge, till ljus på och ljus av. Till mottagaren kopplas en fotoresistor, en resistor som ändrar motståndet när den träffas av ljus, vilket gör att när den kopplas in till det seriella gränssnittet skapar resistorn spänningsförändringar som registreras som högt eller lågt värde av standarden, för en enkel översikt av kopplingen se figur~\ref{fig:schema}. \bigskip
 
-        Den lösning som detta projekt presenterar består mikrokontrollerkortet av Arduino Uno revision 3 (för fullständig specifikation se bilaga \ref{sub:arduino_spec})\cite{ardu}. Till sändaren kopplas en lysdiod till det gränssnitt som skickar data via den seriella standarden, vilket då omvandlar från RS-232 standardens höga och låga läge, till ljus på och ljus av. Till mottagaren kopplas en fotoresistor, en resistor som ändrar motståndet när den träffas av ljus, vilket gör att när den kopplas in till det seriella gränssnittet skapar resistorn spänningsförändringar som registreras som högt eller lågt värde av standarden. \bigskip
+            För att möjliggöra överföringen används den i förhållandevis låga överföringshastigheten om 300 baud, vilket gör att komponenterna (fotoresistorn och lysdioden), hinner ändra sina värden under den tid de förväntas göra det på, då dessa komponenter inte är särskilt utformade för denna uppgift och innehåller vissa fördröjningar vid skifte av tillstånd. \bigskip
 
-        För att möjliggöra överföringen används den i förhållandevis låga överföringshastigheten om 300 baud, vilket gör att komponenterna (fotoresistorn och lysdioden), hinner ändra sina värden under den tid de förväntas göra det på, då dessa komponenter inte är särskilt utformade för denna uppgift och innehåller vissa fördröjningar vid skifte av tillstånd. \bigskip
+            Den data som avses skickas i denna kommunikation består av ett 16 bitars värde, det vill säga två byte. Med en överföringshastighet om 300 baud ger det en teoretisk möjlighet att skicka $\frac{300 \,\textit{baud}}{8 \, bit \cdot 2} = 18,75 \, \text{värden per sekund}$. Den faktiska hastigheten blir något lägre då extra bitar skickas enligt RS-232 protokollet, men överföringshastigheten är inte att anses som ett hinder i denna implementation. \bigskip
+            
 
-        Den data som avses skickas i denna kommunikation består av ett 16 bitars värde, det vill säga två byte. Med en överföringshastighet om 300 baud ger det en teoretisk möjlighet att skicka $\frac{300 \,\textit{baud}}{8 \, bit \cdot 2} = 18,75 \, \text{värden per sekund}$. Den faktiska hastigheten blir något lägre då extra bitar skickas enligt RS-232 protokollet, men överföringshastigheten är inte att anses som ett hinder i denna implementation.
+            \begin{figure}
+            \centering
+                \begin{subfigure}[b]{0.35\textwidth}
+                    \includegraphics[width=\textwidth]{res/img/led}    
+                \end{subfigure}
+                \begin{subfigure}[b]{0.35\textwidth}
+                    \includegraphics[width=\textwidth]{res/img/resistor}    
+                \end{subfigure}
+            \caption{Schema över sändare/mottagare}\label{fig:schema}
+            \end{figure}
 
-        \begin{figure}[h]
-        \centering
-            \begin{subfigure}[hbt]{0.35\textwidth}
-                \includegraphics[width=\textwidth]{res/img/led}    
-            \end{subfigure}
-            \begin{subfigure}[hbt]{0.35\textwidth}
-                \includegraphics[width=\textwidth]{res/img/resistor}    
-            \end{subfigure}
-        \caption{Schema över sändare/mottagare}\label{fig:schem}
-        \end{figure}
+            Den andra lösningen använder sig endast av en lux-mätare upp på taket för att hämta in den data som efterfrågas. Genom att koppla samman två fibrer nere i rummet kommer ljuset att skickas upp till taket igen. För att nyttja den här metoden behöver samtliga linser som tillhör en fiberkabel täckas över på panelen, för att förhindra att solljus från ett dubbelt ljusintag transporteras i de båda fiberkablarna. Kablarna är anpassade för att hantera den värme som produceras av det ljus som normalt transporteras vid fullt dagsljus, skulle den dubbla mängden transporteras så riskerar fibrerna att smälta över överhettning. Den här lösningen använder sig inte av fiber som bärare av data utan endast av det solljus som panelen tar in, vilket minskar komplexiteten i systemet och minskar risken för störningar av data. 
+            % subsection förutsättningar (end)
 
+        \subsubsection{Tillförlitlighet} % (fold)
+        \label{sub:tillf_rlitlighet}
+            Genom att använda de fördragna fiberoptiska kablarna säkerställs att det ljus som skickas från rummet upp till panelen alltid kommer att levereras, förutsatt att ljuskällan är tillräckligt stark. Detta är i skarp kontrast mot en trådlös lösning, där flera lager betong mellan rummet och panelen inte är en osannolik företeelse vilket då skulle resultera att datan aldrig når till panelen.
+        % subsection tillf_rlitlighet (end)
     % subsection optisk_kommunikation (end)
 
     \subsection{Applikation} % (fold)
     \label{sub:applikation}
         Den utvecklade algoritmen implementerades i en Pythonapplikation med grafisk gränssnitt och applikationen stödjer inhämtning av ljusvärden från antingen en till samma dator direkt ansluten luxmätare, Yocto-Light-V3, eller seriell mottagning från en annan enhet. För seriell kommunikation används biblioteket pySerial som kan hantera seriell kommunikation på de flesta vanligt förekommande operativsystem \cite{pyserial}. Hos Parans finns sedan tidigare en Pythonapplikation med grafiskt gränssnitt anpassat till en pekskärm på en Raspberry Pi, där det grafiska gränssnittet är implementerat med biblioteket TkInter som medföljer standardinstallationer av Python \cite{solarremote}. TkInter och samma grafiska upplägg som tidigarenämnda applikation har använts till den applikation som utvecklats av projektet. Detta upplägg underlättar framtida hantering och utveckling av applikationerna och möjliggör en eventuell framtida integrering av de båda.
     % subsection applikation % (end)
-    
 % section resultat (end)
