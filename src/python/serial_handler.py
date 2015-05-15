@@ -54,7 +54,10 @@ class SerialHandler:
         Returns:    
             value (int)
         """
-        return self.lux.get_value()
+        result = 0
+        for x in range(0, 4):
+            result += self.lux.get_value()
+        return result / 4
 
     def get_log(self):
         """Returns the log-string from the panel. 
