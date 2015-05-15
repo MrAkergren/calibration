@@ -3,6 +3,7 @@ from panel import Panel
 from arduino import Arduino
 from yocto_lux import Yocto
 import sys
+from statistics import median
 
 
 class SerialHandler:
@@ -54,7 +55,10 @@ class SerialHandler:
         Returns:    
             value (int)
         """
-        return self.lux.get_value()
+        results = []
+        for x in range(0, 3):
+            results.append(self.lux.get_value())
+        return round(median(results), -2)
 
     def get_log(self):
         """Returns the log-string from the panel. 
@@ -91,6 +95,9 @@ class SerialHandler:
         """Returns the current coordinates of the panel as a tuple of floats,
         x, y"""
         return self.pan.get_coordinates()
+
+    def set_coordinates(self, x, y):
+        self.pan.set_coordinates(x, y)
 
     def set_x_coordinate(self, num):
         """Set the desired x coordinate, as a float in num"""

@@ -83,8 +83,9 @@ class GUI(tk.Frame):
 
     def reset(self):
         print("Reseting to start values: %.4f, %.4f " % (self.start_x, self.start_y))
-        self.sh.set_x_coordinate(str(self.start_x))
-        self.sh.set_y_coordinate(str(self.start_y))
+        self.sh.set_coordinates(str(self.start_x), str(self.start_y))
+        self.coordinates = self.sh.get_coordinates()
+        self.update_statusbar("Current coordinates:\n %.4f, %.4f" % self.coordinates)
 
 
 class ControlFrame(tk.Frame):

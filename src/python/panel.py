@@ -64,9 +64,20 @@ class Panel(SerialCommunication):
         """Returns a 'logga'-string from the panel as a list of strings.
         """
         self._serial_write('logga')
-        sleep(1)
-        while self.connection.inWaiting() > 0:
+        sleep(0.5)
+        log = ""
+        log_length = 0
+        timeout = 0
+        while self.connection.inWaiting() > 0 or timeout < 5:
             log = self._serial_read()
+            log_length = len(log)
+            if log_length < 100:
+                sleep(0.2)
+                timeout += 1
+            else:
+                break
+        if log_length < 100:
+            print("Logga could not be read...")
         self._serial_write('logga')
         info = self.regex.findall(log)
         return info
@@ -87,18 +98,23 @@ class Panel(SerialCommunication):
                     return (float(coordinates[0]), float(coordinates[1]))
         return None
 
+    def set_coordinates(self, x, y):
+        self.set_x_coordinate(x)
+        self.set_y_coordinate(y)
+        self._wait_for_correct_position()
+
     def set_x_coordinate(self, num):
         """'num' needs to be a string.
         """
         self._serial_write('zeroposx ' + num)
-        print('position set to: zeroposx ' + num)  # Debug print
+        print('Position set to: zeroposx ' + num)  # Debug print
         sleep(2)
 
     def set_y_coordinate(self, num):
         """'num' needs to be a string.
         """
         self._serial_write('zeroposy ' + num)
-        print('position set to: zeroposy ' + num)  # Debug print
+        print('Position set to: zeroposy ' + num)  # Debug print
         sleep(2)
 
     def move(self, coordinates, direction):
@@ -122,20 +138,14 @@ class Panel(SerialCommunication):
             y += self.y_offset
             check_y = True
 
+        print("New coordinates are: %f, %f" % (x, y))
         if check_y:
-            print("New coordinates is: %f, %f" % (x, y))
             self.set_y_coordinate(str(y))
 
         if check_x:
-            print("New coordinates is: %f, %f" % (x, y))
             self.set_x_coordinate(str(x))
 
-        start_time = time()
-        while not self._correct_position():
-            if time() - start_time > 15.0:
-                print("Something went wrong, not \'run auto\'?")
-                raise EnvironmentError('Panel not turning')
-            pass
+        self._wait_for_correct_position()
 
     def stop_panel(self):
         self._serial_write('run stop')
@@ -156,3 +166,11 @@ class Panel(SerialCommunication):
         if(abs(float(log[4]) < 0.01) and abs(float(log[5]) < 0.01)):
             return True
         return False
+
+    def _wait_for_correct_position(self):
+        start_time = time()
+        while not self._correct_position():
+            if time() - start_time > 30.0:
+                print("Something went wrong, not \'run auto\'?")
+                raise EnvironmentError('Panel not turning')
+            sleep(0.1)
