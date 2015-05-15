@@ -19,8 +19,8 @@ class SerialHandler:
         EnvironmentError    raises the error from Panel if the device do not 
                             move, most likely due to inactive sun sensor
     """
-    def __init__(self, x, y):
-        self.offset = (x, y)
+    def __init__(self):
+        pass
 
     def connect_devices(self, win_panel_com=None, win_ard_com=None):
         """Tries to connect the panel and arduino.
@@ -34,7 +34,7 @@ class SerialHandler:
         except Exception as e:
             print(e.strerror)
             print("Panel failed")
-            sys.exit(0)
+            #sys.exit(0)
 
         try:
             self.lux = Arduino(win_ard_com)
@@ -103,4 +103,4 @@ class SerialHandler:
     def get_offset(self):
         """Return the offset-argument given when creating the SerialHandler obj
         """
-        return self.offset
+        return self.pan.get_offset()
