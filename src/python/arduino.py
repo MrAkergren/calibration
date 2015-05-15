@@ -62,7 +62,7 @@ class Arduino(SerialCommunication):
             if value is not None and value.isdigit() and int(value) < 65200:
                 return int(value)
 
-        if arg < self.EXIT_CONSTANT:
+        if arg < self._EXIT_CONSTANT:
             return self.get_value(arg+1)
         else:
             return None
