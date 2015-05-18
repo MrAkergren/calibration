@@ -33,11 +33,13 @@
         \caption{\label{fig:array} Exempel på förväntade matriser}
         \end{figure}
     % subsection steg_1 (end)
+
+
     \subsection{Fas 2} % (fold)
     \label{sub:steg_2}
         Litteraturstudien resulterade i en förståelse att trådlösa standarder för datakommunikation så som 802.11 standarderna har problem att sända när betongkonstruktioner hindrar utspridningen av radiovågorna och kräver speciell apparatur för att klara av att skicka data igenom sådana förhållanden \cite{11n}. Detta medför att trådlös kommunikation inte är lämplig för företaget, då de på förhand inte kan veta ifall deras kommunikation kommer att fungera på plats hos deras kunder. Inköp av nämnda apparatur är inte aktuellt. \bigskip
 
-        Ett lämpligare medium att kommunicera via är istället de fiberoptiska kablar som redan är dragna, då rummet lyses upp av just dessa kablar. Enligt företaget kommer det finnas mer än en fiberkabel dragen till varje rum, vilket öppnar upp för möjligheten att koppla in apparatur för kommunikation i en fiberkabel, medan den eller de andra kablarna kan fortsätta hämta in ljus till rummet. Med de svårigheter som den trådlösa kommunikationen medförde i kombination med att ett fungerande alternativt medium redan finns draget, valde projektet att fokusera på det senare. När ''val av tillämpningar'' genomfördes för kommunikationen, konstaterades det att panelens fiberändar har ett reflekterande skydd mot infrarött ljus, enligt \ref{ssub:fiberoptik} och att ultraviolett ljus inte leds genom linserna, vilket leder till att kommunikationen över fiberkabeln måste ske med ljus i det synliga spektrumet. \bigskip
+        Ett lämpligare medium att kommunicera via är istället de fiberoptiska kablar som redan är dragna, då rummet lyses upp av just dessa kablar. Enligt företaget kommer det finnas mer än en fiberkabel dragen till varje rum, vilket öppnar upp för möjligheten att koppla in apparatur för kommunikation i en fiberkabel, medan den eller de andra kablarna kan fortsätta hämta in ljus till rummet. Med de svårigheter som den trådlösa kommunikationen medförde i kombination med att ett fungerande alternativt medium redan finns draget, valde projektet att fokusera på det senare. När ''val av tillämpningar'' genomfördes för kommunikationen, konstaterades det att panelens fiberändar har ett reflekterande skydd mot infrarött ljus, enligt \ref{ssub:fiberoptik}, och att ultraviolett ljus inte leds genom panelens yttre glasskiva, vilket leder till att kommunikationen över fiberkabeln måste ske med ljus i det synliga spektrumet. \bigskip
 
         Gällande kalibreringsalgoritmen framstod det vid datorkörningar att en algoritm som itererar över hela matrisen för att leta det högsta värdet kommer att vara väldigt ineffektiv. Ett beslut fattades om att utveckla en algoritm som kräver så få steg som möjligt, detta då den praktiska implementationen kommer att innebära fördröjningssteg vid två punkter i körningen, dels när panelen flyttar på sig, och dels när ljuset ska hämtas in från luxmätaren. Algoritmen ska kontinuerligt söka efter ett högre värde tills det maximala värdet är funnet, likt figur~\ref{fig:array}.
     % subsection steg_2 (end)
@@ -45,24 +47,39 @@
 
     \subsection{Fas 3} % (fold)
     \label{sub:steg_3}
-        Genom att fokusera på det optiska alternativet vid kommunikation mellan panelen och rummet, leder detta in projektet till det tredje steget i metoden, att föreslå en artefakt som löser det ställda problemet. Kommunikationsdelen i projektet har genomgått flera iterationer av fas 3 och två huvudlösningar presenterades.\bigskip 
+        Genom att fokusera på det optiska alternativet vid kommunikation mellan panelen och rummet, ledde detta in projektet till det tredje steget i metoden, att föreslå en artefakt som löser det ställda problemet. 
 
-        Den första lösningen som projektet föreslog är en en lösning med en mikrokontroller inne i det upplysa rummet som omvandlar från en luxmätares utdata till en optisk signal, som sänds upp till panelen  för att där avkodas. När signalerna skickas via fibrerna kommer ljuset att stråla ut ur solpanelens linser, vilket då en mottagare kan analysera. Monterad på panelen är mottagaren även den en mikrokontroller, med en ljuskänslig sensor som omvandlar de optiska signaler från sändaren, till digitala signaler. Mottagaren skickar då vidare den digitala datan till den enhet som utför den algoritm som avser kalibrera solsensorn. \bigskip
+        \subsubsection{Utformning av kommunikationslösning} % (fold)
+        \label{ssub:utformning_av_kommunikationslosning}
+            Kommunikationsdelen i projektet har genomgått flera iterationer av fas 3 och två huvudlösningar presenterades.\bigskip 
 
-        Den andra lösningen är att istället för att mäta upp ljusstyrkan i rummet, koppla ihop två stycken optiska fibrer från samma panel i rummet, vilket då skickar upp ljusintaget tillbaka till panelen. Genom att täcka över de linser som förser den ena fiberkabeln med ljus, kommer den andra fiberkabeln att skicka ut dess ljusintag, via de nu täckta linserna. I detta förslag kan en luxmätare sitta i den övertäckningsanordning och där mäta upp hur mycket ljus panelen tar emot, via omvägen till det upplysta rummet och tillbaka. Då luxmätaren nu befinner sig på panelen, kan den direkt skicka sin data till den enhet som förväntas utföra algoritmen.\bigskip
+            Den första lösningen som projektet föreslog är en en lösning med en mikrokontroller inne i det upplysa rummet som omvandlar från en luxmätares utdata till en optisk signal, som sänds upp till panelen  för att där avkodas. När signalerna skickas via fibrerna kommer ljuset att stråla ut ur solpanelens linser, vilket då en mottagare kan analysera. Monterad på panelen är mottagaren även den en mikrokontroller, med en ljuskänslig sensor som omvandlar de optiska signaler från sändaren, till digitala signaler. Mottagaren skickar då vidare den digitala datan till den enhet som utför den algoritm som avser kalibrera solsensorn. \bigskip
 
-        För utvecklingen av algoritmen valdes \texttt{Python} som programmeringsspråk och valet hade stöd av flera motiveringar. Den första anledningen till att språket valdes var att företaget har kompetens och erfarenhet att utveckla i detta språk, då den nya panelen SP4 kommer att drivas av en källkod skriven i just \texttt{Python}. Vidare har företaget sedan tidigare produkter utvecklade i detta programmeringsspråk, så att utveckla algoritmen i samma språk underlättar för en eventuell implementering av algoritmen i de existerande produkterna. Mer generella fördelar att utveckla i \texttt{Python} är att språket är plattformsoberoende och är enkel att utveckla grafiska gränssnitt i. Nackdelar med språket är att det är långsamt i förhållande till andra språk så som \texttt{C} eller \texttt{Java}, men då algoritmen kommer att kommunicera med mekanik vilket leder till flertalet inbyggda fördröjningar för inhämtning och sändning av information, ser projektet att språkets åverkan på hur snabbt algoritmen kan utföras som försumbar\cite{python_speed}.\bigskip
+            Den andra lösningen är att istället för att mäta upp ljusstyrkan i rummet, koppla ihop två stycken optiska fibrer från samma panel i rummet, vilket då skickar upp ljusintaget tillbaka till panelen. Genom att täcka över de linser som förser den ena fiberkabeln med ljus, kommer den andra fiberkabeln att skicka ut dess ljusintag, via de nu täckta linserna. I detta förslag kan en luxmätare sitta i den övertäckningsanordning och där mäta upp hur mycket ljus panelen tar emot, via omvägen till det upplysta rummet och tillbaka. Då luxmätaren nu befinner sig på panelen, kan den direkt skicka sin data till den enhet som förväntas utföra algoritmen. %\bigskip
+        % subsubsection utformning_av_kommunikationslosning (end)
 
-        Utformningen av algoritmen skedde genom flera iterationer av steg 3 i den valda metoden. 
-        I den första iterationen utvecklades en sökalgoritm, algoritm $\mathscr{A}$, som inledningsvis genomsöker en 3x3-matris i syfte att finna en inledande sökriktning. Därefter genomförs sökning medurs i åtta riktningar med utgångsriktning motsvarande österut. När ett större värde påträffas uppdateras nuvarande position och sökningen återupprepas. För jämförelse utvecklades även en variant med fyra sökriktningar, algoritm $\mathscr{B}$. Efterkommande iterationer var samtliga en vidareutveckling av den förra. Den andra iteration vidareutvecklade algoritmen så att den lagrar information om tidigare besökta koordinater, så att dessa ej undersöks vid upprepade tillfällen. Ytterligare förbättringar implementerades i den tredje iterationen, då riktningen på den senaste förflyttningen, då ett nytt större värde påträffats, registreras. Med hjälp av denna information undersöks först samma riktning som den senast lyckade förflyttningen innan medurs sökning. Här slopades också den inledande sökningen i 3x3 matris, då den inte kunde påvisas ha några märkbara fördelar. Samtliga iterationer innebar märkbara förbättringar vid simulering. Den slutgiltiga algoritmen arbetar enligt det flödesschema som finns presenterad i bilaga~\ref{sec:sokalgoritm_flow}. \bigskip
+        \subsubsection{Programmeringsspråk} % (fold)
+        \label{ssub:programmeringssprak}
+            Programmeringsspråket som valdes för utveckling av algoritmen var \texttt{Python} och valet hade stöd av flera motiveringar. Den första anledningen till att språket valdes var att företaget har kompetens och erfarenhet att utveckla i detta språk, då den nya panelen SP4 kommer att drivas av en källkod skriven i just \texttt{Python}. Vidare har företaget sedan tidigare produkter utvecklade i detta programmeringsspråk, så att utveckla algoritmen i samma språk underlättar för en eventuell implementering av algoritmen i de existerande produkterna. Mer generella fördelar med att utveckla i \texttt{Python} är att språket är plattformsoberoende och är enkelt att utveckla grafiska gränssnitt i. Nackdelar med språket är att det är långsamt i förhållande till andra språk så som \texttt{C} eller \texttt{Java} men då algoritmen kommer att kommunicera med mekanik, vilket leder till flertalet inbyggda fördröjningar för rotation av panelen och inhämtning och sändning av information, ser projektet att språkets åverkan på hur snabbt algoritmen kan utföras som försumbar \cite{python_speed}. %\bigskip
+        % subsubsection programmeringssprak (end)
 
-        \begin{figure}[hbt]
-            \input{res/img/algoritm_stapeldiagram}
-        \caption{\label{fig:algoritm_steg} Jämförelse algoritmernas antal söksteg}
-        \end{figure}
-        För att jämföra sökalgoritmer genomfördes simuleringar för att mäta det antal steg som behövs för att ta sig från utgångspositionen till den position där det maximala värdet påträffades. Simuleringarna använde sig av 10\thinspace000 100x100-matriser där varje matris hade slumpvist genererad utgångsposition och maximalt värde. Algoritmerna har alltså alla genomsökt samma matriser med samma utgångspositioner. Samtliga positioners värden var strängt avtagande i hänseende till avståndet från det maximala värdet. För varje iteration av algoritmen undersöktes sökning med både fyra och åtta sökriktningar. Sökning i fyra riktningar visade sig mer effektivt i samtliga fall, enligt figur~\ref{fig:algoritm_steg} och bilaga~\ref{sec:sokalgoritm_sim}. Skillnaderna i antal steg mellan samma algoritm med olika antal sökriktningar vara störst i den första iterationen, med 54~\% fler steg, men de visade sig även i övriga iterationer. I den tredje och slutgiltiga iterationen var skillnaden 10~\% fler steg. Varje iteration av algoritmen minskade det antal steg som behövdes för att finna det största värdet. Största förändringen mellan iterationer skedde mellan iteration två och tre, där antalet steg minskades med 43~\%, se tabell~\ref{tab:algoritm_forbattring}. Minskningen mellan iteration ett och tre var 51~\%. \bigskip
+        \subsubsection{Utveckling av algoritm} % (fold)
+        \label{ssub:utveckling_av_algoritm}
+            Utformningen av algoritmen skedde genom flera iterationer av steg 3 i den valda metoden. I den första iterationen utvecklades en sökalgoritm, algoritm $\mathscr{A}$, som inledningsvis genomsöker en 3x3-matris i syfte att finna en inledande sökriktning. Därefter genomförs sökning medurs i åtta riktningar med utgångsriktning motsvarande österut. När ett större värde påträffas uppdateras nuvarande position och sökningen återupprepas. För jämförelse utvecklades även en variant med fyra sökriktningar, algoritm $\mathscr{B}$. Efterkommande iterationer var samtliga en vidareutveckling av den förra. Den andra iteration vidareutvecklade algoritmen så att den lagrar information om tidigare besökta koordinater, så att dessa ej undersöks vid upprepade tillfällen. Ytterligare förbättringar implementerades i den tredje iterationen, då riktningen på den senaste förflyttningen, då ett nytt större värde påträffats, registreras. Med hjälp av denna information undersöks först samma riktning som den senast lyckade förflyttningen innan medurs sökning. Här slopades också den inledande sökningen i 3x3 matris, då den inte kunde påvisas ha några märkbara fördelar. Samtliga iterationer innebar märkbara förbättringar vid simulering. Den slutgiltiga algoritmen arbetar enligt det flödesschema som finns presenterad i bilaga~\ref{sec:sokalgoritm_flow}. %\bigskip
+        % subsubsection utveckling_av_algoritm (end)
 
-            \begin{table}
+        
+
+        \subsubsection{Utvärdering av algoritm} % (fold)
+        \label{ssub:utvardering_av_algoritm}
+            \begin{figure}[ht!]
+                \input{res/img/algoritm_stapeldiagram}
+            \caption{\label{fig:algoritm_steg} Jämförelse algoritmernas antal söksteg}
+            \end{figure}
+
+            För att jämföra sökalgoritmer genomfördes simuleringar för att mäta det antal steg som behövs för att ta sig från utgångspositionen till den position där det maximala värdet påträffades. Simuleringarna använde sig av 10\thinspace000 100x100-matriser där varje matris hade en slumpvis genererad utgångsposition och maximalt värde. Algoritmerna har alltså alla genomsökt samma matriser med samma utgångspositioner. Samtliga positioners värden var strängt avtagande i hänseende till avståndet från det maximala värdet. För varje iteration av algoritmen undersöktes sökning med både fyra och åtta sökriktningar. Sökning i fyra riktningar visade sig mer effektivt i samtliga fall, enligt figur~\ref{fig:algoritm_steg} och bilaga~\ref{sec:sokalgoritm_sim}. Skillnaderna i antal steg mellan samma algoritm med olika antal sökriktningar vara störst i den första iterationen, med 54~\% fler steg, men de visade sig även i övriga iterationer. I den tredje och slutgiltiga iterationen var skillnaden 10~\% fler steg. Varje iteration av algoritmen minskade det antal steg som behövdes för att finna det största värdet. Största förändringen mellan iterationer skedde mellan iteration två och tre, där antalet steg minskades med 43~\%, se tabell~\ref{tab:algoritm_forbattring}. Minskningen mellan iteration ett och tre var 51~\%. \bigskip
+
+            \begin{table}[b]
                 \caption{\label{tab:algoritm_forbattring}Minskning av antal steg mellan varje version}
                 \centering
                 \begin{threeparttable}
@@ -78,12 +95,24 @@
             \end{threeparttable}
             \end{table}
 
-        För att testa algoritmen på solpanelen genomfördes en genomsökning av panelens solintag genererades en matris, för att undersöka ifall utformningen  av panelens fokuspunkt överensstämmer med projektets antagande i figur~\ref{fig:array}. Resultatet av denna sökning gav en annorlunda bild av hur fokuspunkten ser ut från panelen, vilket visas i figur~\ref{fig:array1}. För fullständig data av denna sökning, se bilaga~\ref{sec:heatmap}. Trots att fokuspunkten inte är utformad på samma sätt som förutspått, fungerar sökalgoritmen så pass att den riktar in sig till det högsta funna värdet, dock finns det inget exakt högsta värde utan algoritmen stannar i en punkt i den cirkel som panelen genererar, vilket ger ett högt värde ut även om det finns en sannolikhet att ett något högre värde existerar på motsatt sida av cirkeln, dock rör det sig om små värdeskillnader så dessa kan ligga inom felmarginalen.
-        \begin{figure}
-        \centering
-            \includegraphics[scale=0.125]{res/img/heatmap1}
-            \caption{\label{fig:array1}Översikt av uppmätt fokuspunkt}
-        \end{figure}
+            För att testa algoritmen på solpanelen genomfördes en genomsökning av panelens solintag genererades en matris, för att undersöka ifall utformningen  av panelens fokuspunkt överensstämmer med projektets antagande i figur~\ref{fig:array}. Resultatet av denna sökning gav en annorlunda bild av hur fokuspunkten ser ut från panelen, vilket visas i figur~\ref{fig:array1}. För fullständig data av denna sökning, se bilaga~\ref{sec:heatmap}. Trots att fokuspunkten inte är utformad på samma sätt som förutspått, fungerar sökalgoritmen så pass att den riktar in sig till det högsta funna värdet, dock finns det inget exakt högsta värde utan algoritmen stannar i en punkt i den cirkel som panelen genererar, vilket ger ett högt värde ut även om det finns en sannolikhet att ett något högre värde existerar på motsatt sida av cirkeln, dock rör det sig om små värdeskillnader så dessa kan ligga inom felmarginalen.
+        
+
+            \begin{figure}
+            \centering
+                \includegraphics[scale=0.125]{res/img/heatmap1}
+                \caption{\label{fig:array1}Översikt av uppmätt fokuspunkt}
+            \end{figure}
+        % subsubsection utvardering_av_algoritm (end)
+
+        \subsubsection{Utveckling av kommunikationslösning} % (fold)
+        \label{ssub:utveckling_av_kommunikationslosning}
+        % subsubsection utveckling_av_kommunikationslosning (end)
+
+        \subsubsection{Utveckling av applikation} % (fold)
+        \label{ssub:utveckling_av_applikation}
+        % subsubsection utveckling_av_applikation (end)
+
     % subsection steg_3 (end)
 
     \subsection{Fas 4} % (fold)
