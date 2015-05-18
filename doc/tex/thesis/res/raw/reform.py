@@ -17,10 +17,20 @@ for x in range(0, 20):
         string = float(string)/1000
         arr[19 - y][x] = string  # because +/- is inverted in source
 
+
+max_value = 0
+for row in arr:
+    if max(row) > max_value:
+        max_value = max(row)
+
 for row in arr:
     for value in row:
+        value = round(value/max_value * 100)
         file1.write(str(value) + "  ")
     file1.write('\n')
+    
 
 file0.close()
 file1.close()
+
+print(max_value)
