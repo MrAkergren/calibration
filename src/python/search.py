@@ -89,7 +89,7 @@ class Search:
                     finished = True
 
             except IndexError:
-                print("Poped to many values from list")
+                print("Popped to many values from list")
                 break
 
             except Exception as e:
@@ -99,8 +99,7 @@ class Search:
 
         # Search did not finish (x or y went out of bounds, or search timeout occured)
         if not finished or not sun_sensor:
-            self.com.set_x_coordinate(str(start_x))
-            self.com.set_y_coordinate(str(start_y))
+            self.com.set_coordinates(str(start_x), str(start_y))
             if self.timeout:
                 print("Search timed out (> 5 minutes)")
             elif not sun_sensor:
@@ -108,6 +107,9 @@ class Search:
             else:
                 print("Calibration went out of bounds")
             print("Sensor values are reset")
+        else:
+            self.com.set_coordinates(str(x), str(y))
+            print("Panel calibration finished.")
 
         # Debug output
         print("End pos:\t" + str(x) + ", " + str(y))
