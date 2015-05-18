@@ -15,9 +15,12 @@ for x in range(0, 20):
         string = regex0.sub('', string)  # removes the pos
         string = regex1.sub('', string)  # removes the ) and \n that's left
         string = float(string)/1000
-        arr[y][x] = string
+        arr[19 - y][x] = string  # because +/- is inverted in source
 
 for row in arr:
     for value in row:
         file1.write(str(value) + "  ")
     file1.write('\n')
+
+file0.close()
+file1.close()
