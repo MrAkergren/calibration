@@ -37,7 +37,7 @@
     \label{sub:steg_2}
         Litteraturstudien resulterade i en förståelse att trådlösa standarder för datakommunikation så som 802.11 standarderna har problem att sända när betongkonstruktioner hindrar utspridningen av radiovågorna och kräver speciell apparatur för att klara av att skicka data igenom sådana förhållanden \cite{11n}. Detta medför att trådlös kommunikation inte är lämplig för företaget, då de på förhand inte kan veta ifall deras kommunikation kommer att fungera på plats hos deras kunder. Inköp av nämnda apparatur är inte aktuellt. \bigskip
 
-        Ett lämpligare medium att kommunicera via är istället de fiberoptiska kablar som redan är dragna, då rummet lyses upp av just dessa kablar. Enligt företaget kommer det finnas mer än en fiberkabel dragen till varje rum, vilket öppnar upp för möjligheten att koppla in apparatur för kommunikation i en fiberkabel, medan den eller de andra kablarna kan fortsätta hämta in ljus till rummet. Med de svårigheter som den trådlösa kommunikationen medförde i kombination med att ett fungerande alternativt medium redan finns draget, valde projektet att fokusera på det senare. Då panelens fiberändar har ett reflekterande skydd mot infrarött ljus, enligt \ref{ssub:fiberoptik}, så måste kommunikationen över fiberkabeln ske med synligt ljus. \bigskip
+        Ett lämpligare medium att kommunicera via är istället de fiberoptiska kablar som redan är dragna, då rummet lyses upp av just dessa kablar. Enligt företaget kommer det finnas mer än en fiberkabel dragen till varje rum, vilket öppnar upp för möjligheten att koppla in apparatur för kommunikation i en fiberkabel, medan den eller de andra kablarna kan fortsätta hämta in ljus till rummet. Med de svårigheter som den trådlösa kommunikationen medförde i kombination med att ett fungerande alternativt medium redan finns draget, valde projektet att fokusera på det senare. När ''val av tillämpningar'' genomfördes för kommunikationen, konstaterades det att panelens fiberändar har ett reflekterande skydd mot infrarött ljus, enligt \ref{ssub:fiberoptik} och att ultraviolett ljus inte leds genom linserna, vilket leder till att kommunikationen över fiberkabeln måste ske med ljus i det synliga spektrumet. \bigskip
 
         Gällande kalibreringsalgoritmen framstod det vid datorkörningar att en algoritm som itererar över hela matrisen för att leta det högsta värdet kommer att vara väldigt ineffektiv. Ett beslut fattades om att utveckla en algoritm som kräver så få steg som möjligt, detta då den praktiska implementationen kommer att innebära fördröjningssteg vid två punkter i körningen, dels när panelen flyttar på sig, och dels när ljuset ska hämtas in från luxmätaren. Algoritmen ska kontinuerligt söka efter ett högre värde tills det maximala värdet är funnet, likt figur~\ref{fig:array}.
     % subsection steg_2 (end)
@@ -60,10 +60,10 @@
             \input{res/img/algoritm_stapeldiagram}
         \caption{\label{fig:algoritm_steg} Jämförelse algoritmernas antal söksteg}
         \end{figure}
-
+        \newpage
         För att jämföra sökalgoritmer genomfördes simuleringar för att mäta det antal steg som behövs för att ta sig från utgångspositionen till den position där det maximala värdet påträffades. Simuleringarna använde sig av 10\thinspace000 100x100-matriser där varje matris hade slumpvist genererad utgångsposition och maximalt värde. Algoritmerna har alltså alla genomsökt samma matriser med samma utgångspositioner. Samtliga positioners värden var strängt avtagande i hänseende till avståndet från det maximala värdet. För varje iteration av algoritmen undersöktes sökning med både fyra och åtta sökriktningar. Sökning i fyra riktningar visade sig mer effektivt i samtliga fall, enligt figur~\ref{fig:algoritm_steg} och bilaga~\ref{sec:sokalgoritm_sim}. Skillnaderna i antal steg mellan samma algoritm med olika antal sökriktningar vara störst i den första iterationen, med 54~\% fler steg, men de visade sig även i övriga iterationer. I den tredje och slutgiltiga iterationen var skillnaden 10~\% fler steg. Varje iteration av algoritmen minskade det antal steg som behövdes för att finna det största värdet. Största förändringen mellan iterationer skedde mellan iteration två och tre, där antalet steg minskades med 43~\%, se tabell~\ref{tab:algoritm_forbattring}. Minskningen mellan iteration ett och tre var 51~\%. \bigskip
 
-            \begin{table}[hb]
+            \begin{table}
                 \caption{\label{tab:algoritm_forbattring}Minskning av antal steg mellan varje version}
                 \centering
                 \begin{threeparttable}
@@ -78,11 +78,18 @@
             \end{tablenotes}
             \end{threeparttable}
             \end{table}
+
+        För att testa algoritmen på solpanelen genomfördes en genomsökning av panelens solintag genererades en matris, för att undersöka ifall utformningen  av panelens fokuspunkt överensstämmer med projektets antagande i figur~\ref{fig:array}. Resultatet av denna sökning gav en annorlunda bild av hur fokuspunkten ser ut från panelen, vilket visas i figur~\ref{fig:array1}. För fullständig data av denna sökning, se bilaga~\ref{sec:heatmap}. Trots att fokuspunkten inte är utformad på samma sätt som förutspått, fungerar sökalgoritmen så pass att den riktar in sig till det högsta funna värdet, dock finns det inget exakt högsta värde utan algoritmen stannar i en punkt i den cirkel som panelen genererar, vilket ger ett högt värde ut även om det finns en sannolikhet att ett något högre värde existerar på motsatt sida av cirkeln, dock rör det sig om små värdeskillnader så dessa kan ligga inom felmarginalen.
+        \begin{figure}
+        \centering
+            \includegraphics[scale=0.25]{res/img/heatmap1}
+            \caption{\label{fig:array1}Översikt av uppmätt fokuspunkt}
+        \end{figure}
     % subsection steg_3 (end)
 
     \subsection{Fas 4} % (fold)
     \label{sub:fas_4}
-        Den fjärde fasen i den valda metoden avhandlar inte arbetsgången som sådan, utan visar på att resultatet ska analyseras och delges i syfte att sprida kunskapen vidare i vad som har uppnåtts. 
-        För detta projekt innebär fas fyra att skriva denna rapport vilket förtydligar och sammanfattar det resultat som har uppnåtts. Vidare hålls en presentation av resultatet inom ramen för den kurs som genomförs, vilket även är en del av metoden.
+        Den fjärde fasen i den valda metoden avhandlar inte arbetsgången som sådan, utan visar på att resultatet från den tredje fasen ska analyseras och delges i syfte att sprida kunskapen vidare i vad som har uppnåtts. 
+        För detta projekt innebär fas fyra att skriva denna rapport vilket förtydligar och sammanfattar det resultat som har uppnåtts genom de iterationer som genomförts. Vidare hålls en presentation av resultatet inom ramen för den kurs som genomförs, vilket även är en del av metoden.
     % subsection fas_4 (end)
 % section genomf_rande (end)
