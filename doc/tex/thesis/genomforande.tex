@@ -30,7 +30,7 @@
                     3   4   5   6
                 }
             \end{subfigure}
-        \caption{\label{fig:array} Exempel på förväntade matriser}
+        \caption{\label{fig:array} Exempel på förväntade fokuspunkter}
         \end{figure}
     % subsection steg_1 (end)
 
@@ -47,9 +47,9 @@
 
     \subsection{Fas 3} % (fold)
     \label{sub:steg_3}
-        Genom att fokusera på det optiska alternativet vid kommunikation mellan panelen och rummet, ledde detta in projektet till det tredje steget i metoden, att föreslå en artefakt som löser det ställda problemet. 
+        Den tredje fasen i metoden syftar till själva utvecklingen artefakter, det vill säga att faktiskt framställa någonting som går att använda. Projektet spenderade största delen av den projekttiden i denna fas, då varje artefakt utvecklades genom iterationer av de tre delstegen utforming, utveckling och utvärdering. Utveckla en del i artefakten och sedan utvärdera delen för att undersöka hur den beter sig och vad som kan göras bättre.
 
-        \subsubsection{Utformning av kommunikationslösning} % (fold)
+        \subsubsection{Utveckling av kommunikationslösning} % (fold)
         \label{ssub:utformning_av_kommunikationslosning}
             Kommunikationsdelen i projektet har genomgått flera iterationer av fas 3 och två huvudlösningar presenterades.\bigskip 
 
@@ -58,28 +58,18 @@
             Den andra lösningen är att istället för att mäta upp ljusstyrkan i rummet, koppla ihop två stycken optiska fibrer från samma panel i rummet, vilket då skickar upp ljusintaget tillbaka till panelen. Genom att täcka över de linser som förser den ena fiberkabeln med ljus, kommer den andra fiberkabeln att skicka ut dess ljusintag, via de nu täckta linserna. I detta förslag kan en luxmätare sitta i övertäckningsanordningen och där mäta upp hur mycket ljus panelen tar emot, via omvägen till det upplysta rummet och tillbaka. Då luxmätaren nu befinner sig på panelen, kan den direkt skicka sin data till den enhet som förväntas utföra algoritmen. %\bigskip
         % subsubsection utformning_av_kommunikationslosning (end)
 
-        \subsubsection{Programmeringsspråk} % (fold)
-        \label{ssub:programmeringssprak}
-            Programmeringsspråket som valdes för utveckling av algoritmen var \texttt{Python} och valet hade stöd av flera motiveringar. Den första anledningen till att språket valdes var att företaget har kompetens och erfarenhet att utveckla i detta språk, då den nya panelen SP4 kommer att drivas av en källkod skriven i just \texttt{Python}. Att kompetens och kunskap finns inom företaget medför att applikationen kan underhållas av företaget själv och modifieras vid framtida behov. Vidare har företaget sedan tidigare produkter utvecklade i detta programmeringsspråk, så att utveckla algoritmen i samma språk underlättar för en eventuell implementering av algoritmen i de existerande produkterna. Mer generella fördelar med att utveckla i \texttt{Python} är att språket är plattformsoberoende och är enkelt att utveckla grafiska gränssnitt i. Nackdelar med språket är att det är långsamt i förhållande till andra språk så som \texttt{C} eller \texttt{Java} men då algoritmen kommer att kommunicera med mekanik, vilket leder till flertalet inbyggda fördröjningar för rotation av panelen och inhämtning och sändning av information, ser projektet att språkets åverkan på hur snabbt algoritmen kan utföras som försumbar \cite{python_speed}. %\bigskip
-        % subsubsection programmeringssprak (end)
-
         \subsubsection{Utveckling av algoritm} % (fold)
         \label{ssub:utveckling_av_algoritm}
-            Utformningen av algoritmen skedde genom flera iterationer av steg 3 i den valda metoden. I den första iterationen utvecklades en sökalgoritm, algoritm $\mathscr{A}$, som inledningsvis genomsöker en 3x3-matris i syfte att finna en inledande sökriktning. Därefter genomförs sökning medurs i åtta riktningar med utgångsriktning motsvarande österut. När ett större värde påträffas uppdateras nuvarande position och sökningen återupprepas. För jämförelse utvecklades även en variant med fyra sökriktningar, algoritm $\mathscr{B}$. Efterkommande iterationer var samtliga en vidareutveckling av den förra. Den andra iteration vidareutvecklade algoritmen så att den lagrar information om tidigare besökta koordinater, så att dessa ej undersöks vid upprepade tillfällen. Ytterligare förbättringar implementerades i den tredje iterationen, då riktningen på den senaste förflyttningen, då ett nytt större värde påträffats, registreras. Med hjälp av denna information undersöks först samma riktning som den senast lyckade förflyttningen innan medurs sökning. Här slopades också den inledande sökningen i 3x3 matris, då den inte kunde påvisas ha några märkbara fördelar. Samtliga iterationer innebar märkbara förbättringar vid simulering. Den slutgiltiga algoritmen arbetar enligt det flödesschema som finns presenterad i bilaga~\ref{sec:sokalgoritm_flow}. %\bigskip
-        % subsubsection utveckling_av_algoritm (end)
+            Utformningen av algoritmen skedde genom flera iterationer av steg 3 i den valda metoden. I den första iterationen utvecklades en sökalgoritm, algoritm $\mathscr{A}$, som inledningsvis genomsöker en 3x3-matris i syfte att finna en inledande sökriktning. Därefter genomförs sökning medurs i åtta riktningar med utgångsriktning motsvarande österut. När ett större värde påträffas uppdateras nuvarande position och sökningen återupprepas. För jämförelse utvecklades även en variant med fyra sökriktningar, algoritm $\mathscr{B}$. Efterkommande iterationer var samtliga en vidareutveckling av den förra. Den andra iteration vidareutvecklade algoritmen så att den lagrar information om tidigare besökta koordinater, så att dessa ej undersöks vid upprepade tillfällen. Ytterligare förbättringar implementerades i den tredje iterationen, då riktningen på den senaste förflyttningen, då ett nytt större värde påträffats, registreras. Med hjälp av denna information undersöks först samma riktning som den senast lyckade förflyttningen innan medurs sökning. Här slopades också den inledande sökningen i 3x3 matris, då den inte kunde påvisas ha några märkbara fördelar. Samtliga iterationer innebar märkbara förbättringar vid simulering. Den slutgiltiga algoritmen arbetar enligt det flödesschema som finns presenterad i bilaga~\ref{sec:sokalgoritm_flow}.\bigskip
 
-        
-
-        \subsubsection{Utvärdering av algoritm} % (fold)
-        \label{ssub:utvardering_av_algoritm}
-            \begin{figure}[ht!]
+            \begin{figure}[b]
                 \input{res/img/algoritm_stapeldiagram}
             \caption{\label{fig:algoritm_steg} Jämförelse algoritmernas antal söksteg}
-            \end{figure}
+            \end{figure} 
 
             För att jämföra sökalgoritmer genomfördes simuleringar för att mäta det antal steg som behövs för att ta sig från utgångspositionen till den position där det maximala värdet påträffades. Simuleringarna använde sig av 10\thinspace000 100x100-matriser där varje matris hade en slumpvis genererad utgångsposition och maximalt värde. Algoritmerna har alltså alla genomsökt samma matriser med samma utgångspositioner. Samtliga positioners värden var strängt avtagande i hänseende till avståndet från det maximala värdet. För varje iteration av algoritmen undersöktes sökning med både fyra och åtta sökriktningar. Sökning i fyra riktningar visade sig mer effektivt i samtliga fall, enligt figur~\ref{fig:algoritm_steg} och bilaga~\ref{sec:sokalgoritm_sim}. Skillnaderna i antal steg mellan samma algoritm med olika antal sökriktningar vara störst i den första iterationen, med 54~\% fler steg, men de visade sig även i övriga iterationer. I den tredje och slutgiltiga iterationen var skillnaden 10~\% fler steg. Varje iteration av algoritmen minskade det antal steg som behövdes för att finna det största värdet. Största förändringen mellan iterationer skedde mellan iteration två och tre, där antalet steg minskades med 43~\%, se tabell~\ref{tab:algoritm_forbattring}. Minskningen mellan iteration ett och tre var 51~\%. \bigskip
 
-            \begin{table}[b]
+            \begin{table}
                 \caption{\label{tab:algoritm_forbattring}Minskning av antal steg mellan varje version}
                 \centering
                 \begin{threeparttable}
@@ -104,7 +94,7 @@
                 \fbox{\includegraphics[scale=0.25]{res/img/heatmap1}}
                 \caption{\label{fig:array1}Översikt av uppmätt fokuspunkt}
             \end{figure}
-        % subsubsection utvardering_av_algoritm (end)
+        % subsubsection utveckling_av_algoritm (end)
 
         % \subsubsection{Utveckling av kommunikationslösning} % (fold)
         % \label{ssub:utveckling_av_kommunikationslosning}
@@ -121,7 +111,7 @@
 
         \subsubsection{Utveckling av applikation} % (fold)
         \label{ssub:utveckling_av_applikation}
-            Efter att ha implementerat en algoritm som i simuleringar uppfyllde önskvärd funktion påbörjades utveckling av en applikation där den kan tillämpas. Förutom själva kalibreringsalgoritmen skulle applikationen ha egenskaper som kommunikation med panelen, ett användarvänligt grafiskt gränssnitt och inhämtning av värden från luxmätare. Applikationen utvecklades i version 3.4 av programmeringsspråket \texttt{Python} av anledningar nämnda i \ref{ssub:programmeringssprak}. \bigskip
+            Efter att ha implementerat en algoritm som i simuleringar uppfyllde önskvärd funktion påbörjades utveckling av en applikation där den kan tillämpas. Förutom själva kalibreringsalgoritmen skulle applikationen ha egenskaper som kommunikation med panelen, ett användarvänligt grafiskt gränssnitt och inhämtning av värden från luxmätare. Programmeringsspråket som valdes för utveckling av applikationen var \texttt{Python} och valet hade stöd av flera motiveringar. Den första anledningen till att språket valdes var att företaget har kompetens och erfarenhet att utveckla i detta språk, då den nya panelen SP4 kommer att drivas av en källkod skriven i just \texttt{Python}. Att kompetens och kunskap finns inom företaget medför att applikationen kan underhållas av företaget själv och modifieras vid framtida behov. Vidare har företaget sedan tidigare produkter utvecklade i detta programmeringsspråk, så att utveckla applikationen i samma språk underlättar för en eventuell implementering av mjukvaran i de existerande produkterna. Mer generella fördelar med att utveckla i \texttt{Python} är att språket är plattformsoberoende och är enkelt att utveckla grafiska gränssnitt i. Nackdelar med språket är att det är långsamt i förhållande till andra språk så som \texttt{C} eller \texttt{Java} men då applikationen kommer att kommunicera med mekanik, vilket leder till flertalet inbyggda fördröjningar för rotation av panelen och inhämtning och sändning av information, ser projektet att språkets åverkan på hur snabb applikationen upplevs som försumbar \cite{python_speed}. \bigskip
 
             För att kommunicera med panelen och den Arduino som mottar värden från luxmätaren Adafruit TSL2591 behövdes stöd för seriell kommunikation. Ett bibliotek som möjliggjorde seriell kommunikation med enheter anslutna till en dator var pySerial. Eftersom pySerial har stöd för operativsystem baserade på Windows, Linux och BSD är biblioteket i praktiken plattformsoberoende \cite{pyserial}. \bigskip
 
