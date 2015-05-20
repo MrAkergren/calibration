@@ -124,20 +124,12 @@
 
             Till luxmätaren Yocto-Light-V3, som anslöts direkt till den dator som kör applikationen, fanns kodbibliotek för \texttt{Python} att tillgå från tillverkaren Yoctopuce. \bigskip
 
-            För att underlätta framtida hantering av den producerade koden eftersträvades en modulär uppbyggnad applikationen. Inledningsvis isolerades den framtagna algoritmen i en egen klass, \texttt{Search}. Anslutningarna till panelen och de olika luxmätarna implementerades i separata klasser med specifik kod för att hantera varje enskild enhet. För att hantera de olika anslutningarna skapades klassen \texttt{SerialHandler} som ett mellanliggande gränssnitt till applikationens övriga komponenter. Det grafiska gränssnittet hanteras av klassen \texttt{GUI} och där skapades tryckknappar för att aktivera applikationens funktioner och ett fält för återkoppling och presentation av information. De tre klasserna \texttt{Search}, \texttt{SerialHandler} och \texttt{GUI} fick tillsammans utgöra grundstommen i applikationen och utformades för att vara plattformsoberoende. Genom att sökalgoritmen och det grafiska gränssnittet endast använder sig av det mellanliggande gränssnittet i \texttt{SerialHandler} och ej de underliggande anslutningarna uppnåddes en mer modulär design och ett oberoende av de implementationsspecifika delarna av applikationen. En översikt av klasserna finns i bilaga~\ref{sec:uml_diagram}.
+            För att underlätta framtida hantering av den producerade koden eftersträvades en modulär uppbyggnad av applikationen. Inledningsvis isolerades den framtagna algoritmen i en egen klass, \texttt{Search}. Anslutningarna till panelen och de olika luxmätarna implementerades i separata klasser med specifik kod för att hantera varje enskild enhet. För att hantera de olika anslutningarna skapades klassen \texttt{SerialHandler} som ett mellanliggande gränssnitt till applikationens övriga komponenter. Det grafiska gränssnittet hanteras av klassen \texttt{GUI} och där skapades tryckknappar för att aktivera applikationens funktioner och ett fält för återkoppling och presentation av information. De tre klasserna \texttt{Search}, \texttt{SerialHandler} och \texttt{GUI} fick tillsammans utgöra grundstommen i applikationen och utformades för att vara plattformsoberoende. Genom att sökalgoritmen och det grafiska gränssnittet endast använder sig av det mellanliggande gränssnittet i \texttt{SerialHandler} och ej de underliggande anslutningarna uppnåddes en mer modulär design och ett oberoende av de implementationsspecifika delarna av applikationen. En översikt av klasserna finns i bilaga~\ref{sec:uml_diagram}. \bigskip
 
+            Då applikationen är beroende av anslutning till externa enheter lades funktionalitet till för att underlätta anslutningen. Applikationen kan användas på olika plattformar och olika förfaranden framställdes för olika operativsystem. Stöd för automatisk identifiering av ansluten panel och Arduino implementerades till Mac OS X och Linux. Förutsättningen för detta var att inga fler externa enheter av samma typ anslutna är anslutna till den aktuella datorn. För Windowssystem utvecklades en dialogruta som vid applikationsstart frågar användaren efter de aktuella COM-portarna för respektive enhet. Om ingen Arduino är tillkopplad försöker applikationen använda sig av Yocto-Lux-V3. \bigskip
 
-            \begin{itemize}
-                \item Användning
-                \item id av anslutna enheter
-                \item GUI
-                \begin{itemize}
-                    \item Windows COM
-                    \item utseende
-                    \item knappar
-                \end{itemize}
+            Det grafiska gränssnittet gavs en enkel design och baserades på det utseende som används i företagets kringutrustning \cite{solarremote}. Nämnda kringutrustning var utformad för att kunna användas med pekskärm och således beaktades detta även här. Fyra knappar lades till i form av ett styrkors för att manuellt ändra panelens justeringsvärden för ljussensorn i x- och y-led. I mitten av styrkorset placerades en knapp för manuell avläsning av den anslutna luxmätaren. Nedanför styrkorset placerades en knapp som startar automatisk kalibrering och en knapp som återställer panelens justeringsvärden till de som var aktuella vid applikationens starttillfälle. Ett fält som kan förmedla aktuell information placerades i applikationens nederkant.
 
-            \end{itemize}
         % subsubsection utveckling_av_applikation (end)
 
     % subsection steg_3 (end)
