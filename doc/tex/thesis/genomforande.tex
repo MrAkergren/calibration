@@ -109,8 +109,34 @@
         \label{ssub:utveckling_av_kommunikationslosning}
         % subsubsection utveckling_av_kommunikationslosning (end)
 
+        \subsubsection{Avläsning av luxmätare} % (fold)
+        \label{ssub:avlasning_av_luxmatare}
+        % subsubsection avlasning_av_luxmatare (end)
+
         \subsubsection{Utveckling av applikation} % (fold)
         \label{ssub:utveckling_av_applikation}
+            Efter att ha implementerat en algoritm som i simuleringar uppfyllde önskvärd funktion påbörjades utveckling av en applikation där den kan tillämpas. Förutom själva kalibreringsalgoritmen skulle applikationen ha egenskaper som kommunikation med panelen, ett användarvänligt grafiskt gränssnitt och inhämtning av värden från luxmätare. Applikationen utvecklades i version 3.4 av programmeringsspråket \texttt{Python} av anledningar nämnda i \ref{ssub:programmeringssprak}. \bigskip
+
+            För att kommunicera med panelen och den Arduino som mottar värden från luxmätaren Adafruit TSL2591 behövdes stöd för seriell kommunikation. Ett bibliotek som möjliggjorde seriell kommunikation med enheter anslutna till en dator var pySerial. Eftersom pySerial har stöd för operativsystem baserade på Windows, Linux och BSD är biblioteket i praktiken plattformsoberoende \cite{pyserial}. \bigskip
+
+            Ett beslut behövdes tas om ramverk för grafiskt gränssnitt. Till ändamålet fanns flera ramverk utvecklade och anpassade till \texttt{Python}. Det som ansågs mest lämpligt för applikation var TkInter, där en anledning är att Parans sedan tidigare har kringutrustning som använder TkInter \cite{solarremote}. Hänsyn togs till att underlätta både framtida hantering av koden för bolaget och en eventuell integrering av tidigare produkter med den av projektet utvecklade applikationen. En annan anledning är att ramverket distribueras med standardinstallationer av \texttt{Python} till Windows och Mac OS X \cite{tkinter}. Till Linuxsystem installeras TkInter separat och det finns tillgängligt i flera stora Linuxdistributioners pakethanterare. Behovet av extra installationer för ett ramverk kunde minimeras och det grafiska gränssnittet kunde göras plattformsoberoende. \bigskip
+
+            Till luxmätaren Yocto-Light-V3, som anslöts direkt till den dator som kör applikationen, fanns kodbibliotek för \texttt{Python} att tillgå från tillverkaren Yoctopuce. \bigskip
+
+            För att underlätta framtida hantering av den producerade koden eftersträvades en modulär uppbyggnad applikationen. Inledningsvis isolerades den framtagna algoritmen i en egen klass, \texttt{Search}. Anslutningarna till panelen och de olika luxmätarna implementerades i separata klasser med specifik kod för att hantera varje enskild enhet. För att hantera de olika anslutningarna skapades klassen \texttt{SerialHandler} som ett mellanliggande gränssnitt till applikationens övriga komponenter. Det grafiska gränssnittet hanteras av klassen \texttt{GUI} och där skapades tryckknappar för att aktivera applikationens funktioner och ett fält för återkoppling och presentation av information. De tre klasserna \texttt{Search}, \texttt{SerialHandler} och \texttt{GUI} fick tillsammans utgöra grundstommen i applikationen och utformades för att vara plattformsoberoende. Genom att sökalgoritmen och det grafiska gränssnittet endast använder sig av det mellanliggande gränssnittet i \texttt{SerialHandler} och ej de underliggande anslutningarna uppnåddes en mer modulär design och ett oberoende av de implementationsspecifika delarna av applikationen. En översikt av klasserna finns i bilaga~\ref{sec:uml_diagram}.
+
+
+            \begin{itemize}
+                \item Användning
+                \item id av anslutna enheter
+                \item GUI
+                \begin{itemize}
+                    \item Windows COM
+                    \item utseende
+                    \item knappar
+                \end{itemize}
+
+            \end{itemize}
         % subsubsection utveckling_av_applikation (end)
 
     % subsection steg_3 (end)
