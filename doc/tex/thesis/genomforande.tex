@@ -106,15 +106,17 @@
             \end{figure}
         % subsubsection utvardering_av_algoritm (end)
 
-        \subsubsection{Utveckling av kommunikationslösning} % (fold)
-        \label{ssub:utveckling_av_kommunikationslosning}
-        % subsubsection utveckling_av_kommunikationslosning (end)
+        % \subsubsection{Utveckling av kommunikationslösning} % (fold)
+        % \label{ssub:utveckling_av_kommunikationslosning}
+        % % subsubsection utveckling_av_kommunikationslosning (end)
 
         \subsubsection{Avläsning av luxmätare} % (fold)
         \label{ssub:avlasning_av_luxmatare}
-            De båda luxmätarna skiljer sig åt gällande det gränssnitt som de rapporterar data över, där mätaren från Adafruit kräver en koppling till mikrokontroller för tolkning av rapporterad data, medan mätaren från Yoctopuce kopplas in direkt till en enhet via USB, vilket då underlättar för inkoppling till en persondator. \bigskip
+            De båda luxmätarna skiljer sig åt gällande det gränssnitt som de rapporterar data över, där mätaren från Adafruit kräver en koppling till mikrokontroller för tolkning av rapporterad data, medan mätaren från Yoctopuce kopplas in direkt till en enhet via USB, vilket då underlättar för inkoppling till en persondator. Även om luxmätarnas gränssnitt skiljer sig åt, beter sig de båda luxmätarna väldigt lika vid användning. De båda generar ett positivt heltal som representerar det luxvärde som uppmätts och skickar ut denna data när en metod i respektives bibliotek anropas. Från en programmerares perspektiv är resultatet från- och användningen av de båda mätarna i praktiken identisk.\bigskip
 
-            Vid testning av dessa luxmätares inrapporterade värden upptäcktes det att resultaten inte är konstanta från solpanelen, så vid rapporteringen av värdet tas fyra värden in och medelvärdet rapporteras vidare, för att få en bättre uppskattning av det nu gällande värdet.
+            För avläsning av luxvärdet för kalibrering av panelen är det av intresse att samla in så mycket ljus som möjligt från en panel, men undvika bakgrundsljus från andra eventuella ljuskällor. Detta för att skapa mätbara skillnader mellan de olika kalibreringsstegen hos panelen. För att säkerställa maximalt ljusintag från den panel som ska kalibreras, placeras luxmätaren så nära fiberändan som möjligt, vilket i praktiken i detta projekt innebär tre till fyra centimeter från fibern. För att hålla mätaren stabil används olika metoder beroende på mätare, där den ena har monterats in i ett metallhölje som skruvas fast på fiberändan, medan den andra vilar i en armatur. Att metoderna skiljer sig åt beror på de olika utformningarna av mönsterkorten för luxmätarna och leder till att de absoluta värden som läses in av mätarna inte direkt kan jämföras.\bigskip 
+
+            Vid testning av luxmätarnas inrapporterade värden upptäcktes det att resultaten från solpanelen fluktuerar, detta kan bero på flera orsaker så som att panelen ständigt justerar för att följa solen, eller att något färdas förbi panelen som skuggar den momentant. Denna skiftning i värde är inget som uppfattas det mänskliga ögat, men syns på mätningarna. För att kompensera för detta när luxvärdet hämtas så registrerar applikationen fyra värden och medianvärdet rapporteras vidare, för att få en bättre uppskattning av värdet vid den nuvarande kalibreringen.
         % subsubsection avlasning_av_luxmatare (end)
 
         \subsubsection{Utveckling av applikation} % (fold)
