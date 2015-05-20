@@ -112,6 +112,9 @@
 
         \subsubsection{Avläsning av luxmätare} % (fold)
         \label{ssub:avlasning_av_luxmatare}
+            De båda luxmätarna skiljer sig åt gällande det gränssnitt som de rapporterar data över, där mätaren från Adafruit kräver en koppling till mikrokontroller för tolkning av rapporterad data, medan mätaren från Yoctopuce kopplas in direkt till en enhet via USB, vilket då underlättar för inkoppling till en persondator. \bigskip
+
+            Vid testning av dessa luxmätares inrapporterade värden upptäcktes det att resultaten inte är konstanta från solpanelen, så vid rapporteringen av värdet tas fyra värden in och medelvärdet rapporteras vidare, för att få en bättre uppskattning av det nu gällande värdet.
         % subsubsection avlasning_av_luxmatare (end)
 
         \subsubsection{Utveckling av applikation} % (fold)
