@@ -28,7 +28,7 @@
 \allsectionsfont{\bfseries\sffamily}
 
 %%Links within the doc%%
-\usepackage[hidelinks]{hyperref}
+%\usepackage[hidelinks]{hyperref}
 
 %%--GRAPHICS--%%  (Requires preamble)
 \usepackage{floatrow}
@@ -164,13 +164,14 @@
 
 %%-DOCUMENT INFORMATION-%%
 %Header/Footer%
-\author{Svedberg, Pär\\ \texttt{svpar@student.chalmers.se}  \\ 
-            19821112--7652 \and
-            Åkergren, Oskar\\ \texttt{akergren@student.chalmers.se}  \\ 19880508--7114
-}
-\title{\underline{UTKAST} \\ Kalibrering av ljussensor \\ för Parans solpanel \vspace{1cm}}
-
-\date{\vspace{8cm}\today}
+\usepackage[pdftex,
+            pdfauthor={P. Svedberg \& O. Åkergren},
+            pdftitle={Kalibrering av ljussensor för Parans solpanel},
+            pdfsubject={Examensarbete},
+            pdfkeywords={Kalibrering, RS-232, seriell kommunikation, optisk kommunikation, fiberoptik, mikrokonroller, belysning, Parans, ljussensor},
+            pdfproducer={Latex with hyperref},
+            pdfcreator={pdflatex},
+            hidelinks]{hyperref}
 
 \begin{document}
 \setcounter{page}{-4}
