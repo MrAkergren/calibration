@@ -22,22 +22,22 @@
 
     \subsection{Luxmätare} % (fold)
     \label{sub:luxm_tare}
-    För att mäta upp ljusstyrkan från panelen används en lux-mätare kopplat till en av de fiberkablar som leder ner till det upplysta rummet. De luxmätare som stöds av projektet är mätare  som är till för privatbruk och är inte att avse som professionella i det avseendet att ljusmiljön i ett rum kan bestämmas med dem. Syftet med mätarna är istället att registrera skillnaden i ljusstyrkan från panelen, när panelen är rätt kalibrerad kommer luxmätaren leverera ett högre värde än vid en felkalibrerad panel. Det exakta värdet är inte av intresse i detta fall, utan endast möjligheten att hitta den inställning på panelen som ger det maximala luxvärdet hos mätaren.
+    För att mäta upp ljusstyrkan från panelen används en lux-mätare kopplat till en av de fiberkablar som leder ner till det upplysta rummet. De luxmätare som stöds av projektet är mätare som är till för privatbruk och är inte att anses som professionella i det avseendet att ljusmiljön i ett rum kan bestämmas med hjälp av dem. Syftet med mätarna är istället att registrera skillnaden i ljusstyrkan från panelen, när panelen är rätt kalibrerad kommer luxmätaren leverera ett högre värde än vid en felkalibrerad panel. Det exakta värdet är inte av intresse i detta fall, utan endast möjligheten att hitta den inställning på panelen som ger det maximala luxvärdet hos mätaren.
 
-    \subsubsection{Adafruit TSL2591 Digital Light Sensor}
-        \label{ssub:ada_tsl2591}
-        Sensorkortet från Adafruit innehåller ljussensorn TSL2591 från ams och används till att uppmäta ljusintensitet upp till 88\thinspace000 lux och kan anslutas till en mikrokontroller via I²C. På sensorn finns två fotodioder, där den ena reagerar på IR-ljus och den andra reagerar på fullspektrumljus \cite{TSL2591}. Fotodiodernas avläsning kan ske oberoende av varandra eller kombineras vilket möjliggör avläsning av endast synligt ljus. Sensorns värden avläses digitalt.
-        % subsubsection ada_tsl2591 (end)
-    % subsection arduino (end)
+        \subsubsection{Adafruit TSL2591 Digital Light Sensor}
+            \label{ssub:ada_tsl2591}
+            Sensorkortet från Adafruit innehåller ljussensorn TSL2591 från ams och används till att uppmäta ljusintensitet upp till 88\thinspace000 lux och kan anslutas till en mikrokontroller via I²C. På sensorn finns två fotodioder, där den ena reagerar på IR-ljus och den andra reagerar på fullspektrumljus \cite{TSL2591}. Fotodiodernas avläsning kan ske oberoende av varandra eller kombineras vilket möjliggör avläsning av endast synligt ljus. Sensorns värden avläses digitalt.
+            % subsubsection ada_tsl2591 (end)
+        % subsection arduino (end)
 
-    \subsubsection{Yoctopuce Yocto-Light-V3} % (fold)
-    \label{sub:yocto}
-        Yocto-Light-V3 är en luxmätare i form av ett kretskort, baserad på ljussensorn BH1751FVI från ROHM, som är avsedd att mäta synligt ljus upp till 100\thinspace000 lux \cite{yocto}. Kretskortet har en USB-port för anslutning till dator och kräver ingen extra drivrutin mer än de som medföljer vanliga operativsystem för att användas. Tillverkaren Yoctopuce tillhandahåller kodbibliotek till flera vanligt förekommande programmeringsspråk som möjliggör avläsning av sensorvärden.
-    % subsection yocto (end)
+        \subsubsection{Yoctopuce Yocto-Light-V3} % (fold)
+        \label{sub:yocto}
+            Yocto-Light-V3 är en luxmätare i form av ett kretskort, baserad på ljussensorn BH1751FVI från ROHM, som är avsedd att mäta synligt ljus upp till 100\thinspace000 lux \cite{yocto}. Kretskortet har en USB-port för anslutning till dator och kräver ingen extra drivrutin mer än de som medföljer vanliga operativsystem för att användas. Tillverkaren Yoctopuce tillhandahåller kodbibliotek till flera vanligt förekommande programmeringsspråk som möjliggör avläsning av sensorvärden.
+        % subsection yocto (end)
     % subsection luxm_tare (end)
-        \newpage
-        \subsection{Arduino} % (fold)
-        \label{ssub:arduino_uno}
-            Arduino Uno är ett mikrokontrollerkort som innehåller mikrokontrollern ATMega328, USB-anslutning och 20 pins, 6 analoga och 14 digitala, för att ansluta externa enheter och kringutrustning \cite[kap.~1]{ard_internals}. Mikrokontrollern är en del av AVR-serien från Atmel och den har en RISC-baserad processor, 32 KB flashminne för lagring av programkod och 2 KB internminne. ATMega328 har också en UART som möjliggör seriell kommunikation enligt RS-232. Plattformen för Arduino, där Uno är en implementering, är öppen och det är fritt för var och en att bygga sina egna mikrokontrollerkort enligt tillgängliga scheman. Till Arduino tillhandahålls även en tillhörande utvecklingsmiljö som möjliggör programmering via en dator och ger tillgång till exempelkod och färdigskrivna kodbibliotek. Kod till Arduinoenheter skrivs i Arduinos egen implementation av språken C och C++ \cites[kap.~2]{ard_c}{ard_cplusplus}. För fullständig specifikation, se bilaga~\ref{sub:arduino_spec}
-        % subsection arduino_uno (end)
+    \newpage
+    \subsection{Arduino} % (fold)
+    \label{ssub:arduino_uno}
+        Arduino Uno är ett mikrokontrollerkort som innehåller mikrokontrollern ATMega328, USB-anslutning och 20 pins, 6 analoga och 14 digitala, för att ansluta externa enheter och kringutrustning \cite[kap.~1]{ard_internals}. Mikrokontrollern är en del av AVR-serien från Atmel och den har en RISC-baserad processor, 32 KB flashminne för lagring av programkod och 2 KB internminne. ATMega328 har också en UART som möjliggör seriell kommunikation enligt RS-232. Plattformen för Arduino, där Uno är en implementering, är öppen och det är fritt för var och en att bygga sina egna mikrokontrollerkort enligt tillgängliga scheman. Till Arduino tillhandahålls även en tillhörande utvecklingsmiljö som möjliggör programmering via en dator och ger tillgång till exempelkod och färdigskrivna kodbibliotek. Kod till Arduinoenheter skrivs i Arduinos egen implementation av språken \texttt{C} och \texttt{C++} \cites[kap.~2]{ard_c}{ard_cplusplus}. För fullständig specifikation, se bilaga~\ref{sub:arduino_spec}.
+    % subsection arduino_uno (end)
 % section teknisk_bakgrund (end)

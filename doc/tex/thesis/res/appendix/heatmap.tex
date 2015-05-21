@@ -78,11 +78,13 @@
 
 \setlength\tabcolsep{1 pt}
 \def\arraystretch{2}
- \centering
-                \pgfplotstabletypeset[color cells={min=48.0 , max=110.0}, /pgfplots/colormap={yellowred}{rgb255(0cm)=(255,255,105); rgb255(2cm)=(255,10,10)},font=\tiny,
-                     begin table = \begin{tabular}{>{\centering}p{0.5cm}>{\centering}p{0.5cm}>{\centering}p{0.5cm}>{\centering}p{0.5cm}>{\centering}p{0.5cm}>{\centering}p{0.5cm}>{\centering}p{0.5cm}>{\centering}p{0.5cm}>{\centering}p{0.5cm}>{\centering}p{0.5cm}>{\centering}p{0.5cm}>{\centering}p{0.5cm}>{\centering}p{0.5cm}>{\centering}p{0.5cm}>{\centering}p{0.5cm}>{\centering}p{0.5cm}>{\centering}p{0.5cm}>{\centering}p{0.5cm}>{\centering}p{0.5cm}p{0.5cm}},
-    end table = \end{tabular},]
-                {
+\centering
+    \pgfplotstabletypeset[color cells={min=48.0 , max=110.0}, /pgfplots/colormap={yellowred}{rgb255(0cm)=(255,255,105); rgb255(2cm)=(255,10,10)},
+    font=\tiny,
+    begin table = \begin{tabular}{>{\centering}p{0.5cm}>{\centering}p{0.5cm}
+            >{\centering}p{0.5cm}>{\centering}p{0.5cm}>{\centering}p{0.5cm}>{\centering}p{0.5cm}>{\centering}p{0.5cm}>{\centering}p{0.5cm}>{\centering}p{0.5cm}>{\centering}p{0.5cm}>{\centering}p{0.5cm}>{\centering}p{0.5cm}>{\centering}p{0.5cm}>{\centering}p{0.5cm}>{\centering}p{0.5cm}>{\centering}p{0.5cm}>{\centering}p{0.5cm}>{\centering}p{0.5cm}>{\centering}p{0.5cm}p{0.5cm}},
+    end table = \end{tabular}]
+{
 5  6  7  9  9  10  12  13  14  15  16  16  15  15  14  13  11  9  8  7  
 7  8  10  11  13  14  17  18  18  19  20  21  21  21  20  18  16  13  12  11  
 9  11  13  14  17  20  21  24  25  28  30  32  31  30  28  24  23  20  16  15  
@@ -103,8 +105,7 @@
 48  59  76  97  97  92  83  73  66  61  56  54  53  54  57  63  73  86  97  99  
 46  49  66  84  99  94  91  95  89  85  84  84  82  82  85  92  89  87  96  93  
 43  9  10  12  14  15  17  20  21  22  22  24  25  23  22  20  18  16  13  11
-
-                }
+}
 \end{figure}
 
 Tabell över normerade värden uppmätta från Parans solpanel SP3. Värderna utgör procent från det maximalt uppmätta värdet, avrundat till närmsta heltal. Anledningen till normeringen är att  visa på storleksändring mellan talen, då de faktiska värderna är intetsägande då de inte direkt kan representera lux, på grund av felmarginal av luxmätaren och uppmätningsmetoden.
