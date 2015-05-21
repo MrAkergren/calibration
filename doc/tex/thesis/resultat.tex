@@ -2,7 +2,7 @@
 \label{sec:resultat}
     \subsection{Algoritm} % (fold)
     \label{sub:algoritm}
-        För att möjliggöra automatisk kalibrering av panelens ljussensor har projektet utvecklat en sökalgoritm med positionsregistrering och stegreducering. \bigskip
+        För att möjliggöra automatisk kalibrering av panelens ljussensor har projektet utvecklat en sökalgoritm med positionsregistrering och stegreducering. Den utvecklade algoritmen gav svar på den första av projektets tre frågeställningar, ''Vilken algoritm kan anses vara lämplig för kalibreringen?''. Algoritmen uppsöker ett lokalt maximum i ljusstyrka, beskrivet i avsnitt~\ref{ssub:utveckling_av_algoritm}, och fanns lämplig för ändamålet.\bigskip
 
         Algoritmen söker kontinuerligt stegvis efter det maximala inlästa värdet tills inga kringliggande större värden påträffas och justerar i varje söksteg panelens korrigeringsvärde för ljussensorn, vilket får panelen att vrida sig till den position som ger solljusets fokus i ljussensors korrigerade mittpunkt. Sökning sker i fyra riktningar, representerade av väderstrecksuttryck motsvarande den koordinatsystemsrepresentation panelen har för korrigeringsvärden där positiva x och y är öst respektive nord, och sker medurs med utgångsriktning österut. Om ett lika stort eller större värde avläses efter en vridning av panelen så kommer nästkommande undersökta position vara i samma riktning som den senast utförda, då avlästa värden kan representeras enligt figur~\ref{fig:array}. Algoritmen registrerar besökta positioner så att samma position ej undersöks upprepade gånger. Flödesschema för algoritmen finnes i bilaga \ref{sec:sokalgoritm_flow}. \bigskip
 
