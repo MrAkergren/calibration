@@ -1,23 +1,23 @@
 \renewcommand{\abstractname}{Abstract}
 \begin{abstract}
-    \noindent The aim of this project is to automatically calibrate a photo sensor on a sun panel that is following the sun in its path, to maximize the light intake that is to be used as a light source in doors, a calibration that was originally made by hand. The project was performed in iterations according to a design science research method and has two main focus tasks. The first is to develop a calibration algorithm and the second is suggest a communication solution between the room and the panel. The result of the project is a fully functioning calibration application, and two suggestions for the communication where the fibre optic cables is used to transport the data. \medskip
+    \noindent The aim of this project was to automatically calibrate a photo sensor mounted on a sun panel developed by Parans Solar Lighting and is used in a solution to provide indoors daylight. In order to enable the intake of light, the sun panel follows the path of the sun and the photo sensor is used to maximize the intake, of which the calibration originally was performed manually. The project was conducted in iterations according to a design science research method and was focused on two main tasks. The first was to develop a calibration algorithm and the second was to suggest a solution of the communication between the room and the panel. The result of the project was a calibration software application, and two suggestions regarding the communication where the fibre optic cables are used to transport data. \medskip
 
     \noindent \textbf{Keywords:} Calibration, RS-232, serial communication, optical commication, fibreoptics, microcontroller, indoor lighting, Parans, light sensor
 \end{abstract}
 
 \renewcommand{\abstractname}{Sammandrag}
 \begin{abstract}
-    \noindent Detta projekt syftar till att möjliggöra en automatisk kalibrering av fotosensorn på en solpanel som aktivt följer solen för att maximera dess solintag som nyttjas till belysning, en kalibrering som tidigare utförts manuellt. Projektet har genomförts i iterationer med stöd av en 'design science research'-metod och är fokuserat på två huvudsakliga områden, dels en effektiv kalibreringsalgoritm och dels en kommunikationslösning mellan solpanelen och det rum som panelen lyser upp. Projektet har resulterat i en färdig mjukvarulösning som kalibrerar panelen och projektet har lämnat två förslag på lösningar gällande kommunikationen, där vi rekommenderar att använda panelens egna fiberkablar som datamedium. \medskip
+    \noindent Detta projekt syftade till att möjliggöra en automatisk kalibrering av fotosensorn på en solpanel utvecklad av Parans Solar Lighting och nyttjad till inomhusbelysning. Solpanelen, som aktivt följer solen, använder fotosensorn för att maximera dess solintag och kalibrering av denna utfördes tidigare manuellt. Projektet genomfördes i iterationer med stöd av en 'design science research'-metod och var fokuserat på två huvudsakliga områden, dels en effektiv kalibreringsalgoritm och dels en kommunikationslösning mellan solpanelen och det rum som panelen lyser upp. Projektet resulterade i en mjukvarulösning som kalibrerar panelen och projektet lämnade två förslag på lösningar gällande kommunikationen, där det rekommenderades att använda panelens egna fiberkablar som datamedium. \medskip
 
-    \noindent \textbf{Nyckelord:} Kalibrering, RS-232, seriell kommunikation, optisk kommunikation, fiberoptik, mikrokonroller, belysning, Parans, ljussensor
+    \noindent \textbf{Nyckelord:} Kalibrering, RS-232, seriell kommunikation, optisk kommunikation, fiberoptik, mikrokontroller, belysning, Parans, ljussensor
 \end{abstract}
 
 \newpage
 \subsection*{Förord} % (fold)
 \label{sub:f_rord}
-    Detta examensarbete skrivs inom ramen för kursen LMTX38, Examensarbete vid Data- och informationsteknik vårterminen 2015 på Chalmers tekniska högskola. \bigskip
+    Detta examensarbete skrevs inom ramen för kursen LMTX38, Examensarbete vid Data- och informationsteknik vårterminen 2015 på Chalmers tekniska högskola. \bigskip
 
-    Författarna vill rikta ett stort tack till Parans Solar Lighting AB för tillhandahållande av materiel som projektet nyttjat sig av, lokal att arbeta i och stöd vid arbetet. Ett särskilt tack riktas till handledare Karl Nilsson vid Parans för förslaget till examensarbetets problemområde och avsatt tid för handledning av projektet. Vi riktar även ett tack till Simon Larsson vid Parans för bollande av idéer och stöttande vid utvecklingsarbetet. Vidare vill vi tacka handledare Lennart Hansson vid Chalmers för hans stöd vid skrivande av denna rapport och förslag för att driva arbetet framåt. Ett avslutande tack skickas till Sakib Sistek vid Chalmers för hans förmedling av kontakten till Parans och hans hjälp vid förberedningen till detta examensarbete.
+    Författarna vill rikta ett stort tack till Parans Solar Lighting AB för tillhandahållande av materiel, arbetsytor och stöd under projektets gång. Ett särskilt tack riktas till vår handledare från Parans, Karl Nilsson, för förslaget till examensarbetets problemområde och avsatt tid för handledning. Vi riktar även ett tack till Simon Larsson hos Parans för bollande av idéer och stöd under utvecklingsarbetet. Vidare vill vi tacka handledare Lennart Hansson vid Chalmers för hans stöd under denna rapports framställning och förslag om att driva arbetet framåt. Ett avslutande tack skickas till Sakib Sistek vid Chalmers för hans förmedling av kontakten till Parans och för hans hjälp vid förberedelsen till detta examensarbete.
 
 % subsection f_rord (end)
 
