@@ -4,7 +4,7 @@
 from time import sleep
 from serial_handler import SerialHandler
 
-start_x = -0.3
+start_x = -0.045
 start_y = -0.1
 offset = 0.01
 square_size = 20
@@ -34,7 +34,7 @@ x_pos, y_pos = current_pos
 #         values[(round(x_pos, 3), round(y_pos, 3))] = sh.get_value()
 
 for x in range(0, square_size):
-    print("\t--- New x set: %d ---", x)
+    print("\t--- New x set: %d ---" % x)
     x_pos = start_x + offset * x
     sh.set_x_coordinate(str(x_pos))
     x_arr = []
@@ -43,7 +43,7 @@ for x in range(0, square_size):
         y_pos = start_y + offset * y
         sh.set_y_coordinate(str(y_pos))
         current_value = sh.get_value
-        print("Value read: " + current_value)
+        print("Value read: " + str(current_value))
         x_arr.append( ((round(x_pos, 3), round(y_pos, 3)), current_value) )
 
 print(values)
