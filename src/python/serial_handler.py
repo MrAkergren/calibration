@@ -56,7 +56,7 @@ class SerialHandler:
             value (int)
         """
         results = []
-        for x in range(0, 3):
+        for x in range(0, 4):
             results.append(self.lux.get_value())
         return round(median(results), -2)
 

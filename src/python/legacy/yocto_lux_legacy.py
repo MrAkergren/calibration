@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import os,sys
 
-sys.path.append(os.path.join("..","..","lib","Yocto_light_meter"))
+sys.path.append(os.path.join("..","..","..","lib","Yocto_light_meter"))
 from yocto_api import *
 from yocto_lightsensor import *
 
