@@ -12,23 +12,22 @@
 
 \usepackage{xfrac}
 \usepackage{lscape}
+
 %%--BIBLIOPGRAPHY--%%
 \usepackage[backend=biber, natbib=true, urldate=iso8601, maxnames=2, minnames=1, maxbibnames=10, minbibnames=6, citestyle=numeric-comp, sorting=none, firstinits=true]{biblatex}
 
 %%--SPACING AND MARGIN--%
 \usepackage[textwidth=140mm]{geometry}
-%\usepackage[margin=3.5cm, top=2.5cm]{geometry}
 \setlength{\parindent}{0mm}
 
 
 %%--SANS-SERIF FONTS FOR SECTIONS--%%
-\usepackage{microtype}
 \usepackage{sectsty}
 \usepackage{helvet}
 \allsectionsfont{\bfseries\sffamily}
 
-%%Links within the doc%%
-%\usepackage[hidelinks]{hyperref}
+%% --BETTER TYPESETTING-- %%
+\usepackage{microtype}
 
 %%--GRAPHICS--%%  (Requires preamble)
 \usepackage{floatrow}
@@ -37,100 +36,9 @@
 \usepackage{tikz}
 \usetikzlibrary{backgrounds,calc,positioning,shapes,arrows,patterns}
 
-
-% % Declaration of different types of figures for use in flow charts
-\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black, fill=red!30]
-\tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=2cm, minimum height=1cm, text centered, draw=black, fill=blue!30]
-\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=orange!30]
-\tikzstyle{decision} = [diamond, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=green!30]
-\tikzstyle{arrow} = [draw, thick,-latex',>=stealth]
-
-
-% For use in method figure
-\tikzset{
-    vertex/.style = {
-        circle,
-        fill            = black,
-        outer sep = 2pt,
-        inner sep = 1pt,
-    }
-}
-\tikzset{My Arrow Style/.style={single arrow, fill=blue!50, anchor=base, align=center,text width=11mm,text height=1mm}}
-\definecolor{light-gray}{gray}{0.95}
-
-% For use in flow charts
-\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black, fill=red!30]
-\tikzstyle{input} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=2cm, minimum height=1cm, text centered, draw=black, fill=blue!30]
-\tikzstyle{action} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=orange!30]
-\tikzstyle{decision} = [diamond, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=green!30]
-\tikzstyle{arrow} = [draw, thick,-latex',>=stealth]
-
-\usepackage{colortbl}
-\usepackage{pgfplots}
-\usepackage{pgfplotstable}
-\pgfplotsset{compat=1.8}
-\pgfplotstableset{
-    every head row/.style={ 
-        output empty row,
-    },
-    /color cells/min/.initial=0,
-    /color cells/max/.initial=1000,
-    /color cells/textcolor/.initial=,
-    %
-    % Usage: 'color cells={min=<value which is mapped to lowest color>, 
-    %   max = <value which is mapped to largest>}
-    color cells/.code={%
-        \pgfqkeys{/color cells}{#1}%
-        \pgfkeysalso{%
-            postproc cell content/.code={%
-                %
-                \begingroup
-                %
-                % acquire the value before any number printer changed
-                % it:
-                \pgfkeysgetvalue{/pgfplots/table/@preprocessed cell content}\value
-                \ifx\value\empty
-                    \endgroup
-                \else
-                \pgfmathfloatparsenumber{\value}%
-                \pgfmathfloattofixed{\pgfmathresult}%
-                \let\value=\pgfmathresult
-                %
-                % map that value:
-                \pgfplotscolormapaccess
-                    [\pgfkeysvalueof{/color cells/min}:\pgfkeysvalueof{/color cells/max}]
-                    {\value}
-                    {\pgfkeysvalueof{/pgfplots/colormap name}}%
-                % now, \pgfmathresult contains {<R>,<G>,<B>}
-                % 
-                % acquire the value AFTER any preprocessor or
-                % typesetter (like number printer) worked on it:
-                \pgfkeysgetvalue{/pgfplots/table/@cell content}\typesetvalue
-                \pgfkeysgetvalue{/color cells/textcolor}\textcolorvalue
-                %
-                % tex-expansion control
-                % see http://tex.stackexchange.com/questions/12668/where-do-i-start-latex-programming/27589#27589
-                \toks0=\expandafter{\typesetvalue}%
-                \xdef\temp{%
-                    \noexpand\pgfkeysalso{%
-                        @cell content={%
-                            \noexpand\cellcolor[rgb]{\pgfmathresult}%
-                            \noexpand\definecolor{mapped color}{rgb}{\pgfmathresult}%
-                            \ifx\textcolorvalue\empty
-                            \else
-                                \noexpand\color{\textcolorvalue}%
-                            \fi
-                            \the\toks0 %
-                        }%
-                    }%
-                }%
-                \endgroup
-                \temp
-                \fi
-            }%
-        }%
-    }
-}
+\input{res/settings/flowchart_settings}
+\input{res/settings/method_fig_settings}
+\input{res/settings/heatmap_settings}
 
 \usepackage{graphicx}
 \usepackage{caption}
@@ -138,17 +46,13 @@
 \usepackage{subcaption}
 \usepackage{threeparttable}
 \usepackage{mathrsfs}
-\makeatletter 
-\g@addto@macro\TPT@defaults{\footnotesize} 
-\makeatother
+
 %%--ADVANCED TABULARS--%%
 \usepackage{tabularx}
 \usepackage{booktabs}
 \def\arraystretch{1.3}
 
 %PREAMBLE%
-%%-SECTION NUMMBERING DEPTH-%%
-%\setcounter{secnumdepth}{3} %3=Default
 
 \hyphenation{över-förings-hastig-heten pa-nel-en instruktion-er sol-panel-en fatt-ades anse nu-varande av-sedda fungera-nde  kommunikations-stand-ard-er version-er mot-svarande enkorts-dator enhet-ens exempel-vis operativ-system doku-ment-ation platt-forms-oberoende system-utvecklings-metoden} 
 
@@ -163,7 +67,7 @@
 %\DeclareNameAlias{sortname}{last-first} 
 
 %%-DOCUMENT INFORMATION-%%
-%Header/Footer%
+%% Links within the doc and meta info %%
 \usepackage[pdftex,
             pdfauthor={P. Svedberg \& O. Åkergren},
             pdftitle={Kalibrering av ljussensor för Parans solpanel},
@@ -172,6 +76,8 @@
             pdfproducer={Latex with hyperref},
             pdfcreator={pdflatex},
             hidelinks]{hyperref}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
 \setcounter{page}{-4}
@@ -183,6 +89,7 @@
 \input{preface}
 
 \newpage
+
 \tableofcontents
 \listoffigures
 \listoftables
@@ -191,7 +98,6 @@
 
 \setcounter{page}{1}
 \pagenumbering{arabic}
-
 \input{introduktion}
 \include{metod}
 \include{teknisk_bakgrund}
@@ -200,9 +106,9 @@
 \include{slutsats}
 
 \newpage
+
 \addcontentsline{toc}{section}{Referenser}
 \printbibliography
-
 
 \newpage
 
@@ -218,5 +124,7 @@
 \include{res/appendix/specs}
 \include{res/appendix/heatmap}
 \include{res/appendix/tidsplan}
-\newpage\thispagestyle{empty}\hbox{}
+
+\newpage\thispagestyle{empty}\hbox{} %  Blank lastpage
+
 \end{document}
