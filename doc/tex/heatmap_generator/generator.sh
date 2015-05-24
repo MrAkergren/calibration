@@ -17,6 +17,7 @@ read x_start
 echo 'Y starting position? '
 read y_start
 
+clear
 ./$panel_mover $square_size $x_start $y_start $panelname
 
 rm $panel_mover
@@ -45,7 +46,7 @@ rm *.log
 rm *.aux
 mkdir -p output
 mv heatmap_of_$panelname.pdf $rawfile $reformfile ./output
-echo ""
-echo ""
+clear
+printf '\a'
 echo "If you see this, then the script is finished. The pdf-file is located in the output folder"
 echo ""

@@ -1,10 +1,8 @@
 #! /usr/bin/env python3
 # -*- coding: UTF-8 -*-
-from time import sleep, strftime
+from time import sleep
 from serial_handler import SerialHandler
 import sys
-
-d = strftime("%Y-%m-%d_%H.%M")
 
 
 args = sys.argv
@@ -70,7 +68,5 @@ values = []
 
 # sh.set_coordinates(str(original_coords[0]), str(original_coords[1]))
 # fh.close()
-
-
 fh = open("test_results.txt", "w+")
 fh.close()
