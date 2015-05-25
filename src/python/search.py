@@ -139,7 +139,7 @@ class Search:
         print("End value:\t" + str(value))
 
         # Return final values to caller
-        return x, y
+        return (x, y)
 
     def _out_of_bounds(self, x, y):
         # Checks if the sensor adjustment values has gone out bounds

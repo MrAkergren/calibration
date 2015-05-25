@@ -88,8 +88,8 @@ class GUI(tk.Frame):
         self.update_statusbar("Current coordinates:\n %.4f, %.4f" % self.coordinates)
 
     def search(self):
-        end_x, end_y = self.search_alg.labyrinth()
-        self.update_statusbar("Calibration finished\nCoordinates set to: %.4f, %.4f" % end_x, end_y)
+        end_values = self.search_alg.labyrinth()
+        self.update_statusbar("Calibration finished\nCoordinates set to: %.4f, %.4f" % end_values)
 
 class ControlFrame(tk.Frame):
     # Constructor
