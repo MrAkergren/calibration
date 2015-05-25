@@ -1,0 +1,131 @@
+% \documentclass[a4paper]{article}
+% \usepackage[swedish]{babel}
+% \usepackage[T1]{fontenc}
+% \usepackage[utf8]{inputenc}
+% \usepackage{colortbl}
+% \usepackage{pgfplots}
+% \usepackage{pgfplotstable}
+% \usepackage{graphicx}
+% \usepackage{adjustbox}
+% \pgfplotsset{compat=1.8}
+% \pgfplotstableset{
+%     every head row/.style={ 
+%         output empty row,
+%     },
+%     /color cells/min/.initial=0,
+%     /color cells/max/.initial=1000,
+%     /color cells/textcolor/.initial=,
+%     %
+%     % Usage: 'color cells={min=<value which is mapped to lowest color>, 
+%     %   max = <value which is mapped to largest>}
+%     color cells/.code={%
+%         \pgfqkeys{/color cells}{#1}%
+%         \pgfkeysalso{%
+%             postproc cell content/.code={%
+%                 %
+%                 \begingroup
+%                 %
+%                 % acquire the value before any number printer changed
+%                 % it:
+%                 \pgfkeysgetvalue{/pgfplots/table/@preprocessed cell content}\value
+%                 \ifx\value\empty
+%                     \endgroup
+%                 \else
+%                 \pgfmathfloatparsenumber{\value}%
+%                 \pgfmathfloattofixed{\pgfmathresult}%
+%                 \let\value=\pgfmathresult
+%                 %
+%                 % map that value:
+%                 \pgfplotscolormapaccess
+%                     [\pgfkeysvalueof{/color cells/min}:\pgfkeysvalueof{/color cells/max}]
+%                     {\value}
+%                     {\pgfkeysvalueof{/pgfplots/colormap name}}%
+%                 % now, \pgfmathresult contains {<R>,<G>,<B>}
+%                 % 
+%                 % acquire the value AFTER any preprocessor or
+%                 % typesetter (like number printer) worked on it:
+%                 \pgfkeysgetvalue{/pgfplots/table/@cell content}\typesetvalue
+%                 \pgfkeysgetvalue{/color cells/textcolor}\textcolorvalue
+%                 %
+%                 % tex-expansion control
+%                 % see http://tex.stackexchange.com/questions/12668/where-do-i-start-latex-programming/27589#27589
+%                 \toks0=\expandafter{\typesetvalue}%
+%                 \xdef\temp{%
+%                     \noexpand\pgfkeysalso{%
+%                         @cell content={%
+%                             \noexpand\cellcolor[rgb]{\pgfmathresult}%
+%                             \noexpand\definecolor{mapped color}{rgb}{\pgfmathresult}%
+%                             \ifx\textcolorvalue\empty
+%                             \else
+%                                 \noexpand\color{\textcolorvalue}%
+%                             \fi
+%                             \the\toks0 %
+%                         }%
+%                     }%
+%                 }%
+%                 \endgroup
+%                 \temp
+%                 \fi
+%             }%
+%         }%
+%     }
+% }
+% 
+%\begin{document}
+\section{Uppmätt fokuspunkt från panel} % (fold)
+\label{sec:heatmap}
+Tabeller över normerade värden uppmätta från Parans solpanel SP3. Värderna utgör procent från det maximalt uppmätta värdet, avrundat till närmsta heltal. Anledningen till normeringen är att visa på storleksändring mellan talen, då de faktiska värderna är intetsägande då de inte direkt kan representera lux, på grund av felmarginal av luxmätaren och uppmätningsmetoden.
+
+\begin{figure}[hbt]
+\setlength\tabcolsep{3 pt}
+\def\arraystretch{2}
+\centering
+    \begin{subfigure}{0.9\textwidth}
+        \pgfplotstabletypeset[
+        color cells={min=48.0 , max=110.0}, 
+        /pgf/number format/fixed,
+        /pgf/number format/precision=1,
+        /pgfplots/colormap={yellowred}{rgb255(0cm)=(255,255,105); rgb255(2cm)=(255,10,10)},
+        font=\tiny,
+        ]
+        {res/raw/reform_result_old_yocto_15-05-25_15.35.txt}
+        \caption{\label{fig:arr_old_yocto}Yoctopuce luxmätare, panel nummer 1}
+    \end{subfigure}
+\end{figure} 
+
+\begin{figure}[hbt]
+\setlength\tabcolsep{4.25 pt}
+\def\arraystretch{2}
+\centering
+    \begin{subfigure}{0.9\textwidth}
+    \setcounter{subfigure}{1}
+        \pgfplotstabletypeset[
+        color cells={min=48.0 , max=110.0}, 
+        /pgf/number format/fixed,
+        /pgf/number format/precision=1,
+        /pgfplots/colormap={yellowred}{rgb255(0cm)=(255,255,105); rgb255(2cm)=(255,10,10)},
+        font=\tiny,
+        ]
+        {res/raw/reform_result_new_yocto_15-05-25_15.36.txt}
+        \caption{\label{fig:arr_new_yocto}Yoctopuce luxmätare, panel nummer 2}
+    \end{subfigure}
+
+
+
+\setlength\tabcolsep{4 pt}
+\def\arraystretch{2}
+\centering
+    \begin{subfigure}{0.9\textwidth}
+        \pgfplotstabletypeset[
+        color cells={min=48.0 , max=110.0}, 
+        /pgf/number format/fixed,
+        /pgf/number format/precision=1,
+        /pgfplots/colormap={yellowred}{rgb255(0cm)=(255,255,105); rgb255(2cm)=(255,10,10)},
+        font=\tiny,
+        ]
+        {res/raw/reform_result_new_ada_15-05-25_15.35.txt}
+        \caption{\label{fig:arr_new_yocto}Adafruit luxmätare, panel nummer 2}
+    \end{subfigure}
+\end{figure}
+
+% \end{document}
