@@ -32,6 +32,7 @@
 \usepackage{microtype}
 
 %%--GRAPHICS--%%  (Requires preamble)
+\usepackage{graphicx}
 \usepackage{floatrow}
 \newfloatcommand{capbtabbox}{table}[][\FBwidth]
 
@@ -42,11 +43,13 @@
 \input{res/settings/method_fig_settings}
 \input{res/settings/heatmap_settings}
 
-\usepackage{graphicx}
+%%-- CAPTION AND NUMBERING RELATED --%%
 \usepackage{caption}
 \usepackage[justification=centering]{caption}
 \usepackage{subcaption}
 \usepackage{threeparttable}
+\usepackage{chngcntr}
+\counterwithin{figure}{section}
 
 %%--ADVANCED TABULARS--%%
 \usepackage{tabularx}

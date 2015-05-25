@@ -100,13 +100,21 @@
             \end{threeparttable}
             \end{table}
 
-            För att testa algoritmen på solpanelen genomfördes först en simpel genomsökning av panelens solintag till en tvådimensionell matris, i syfte att undersöka ifall utformningen av panelens fokuspunkt överensstämmer med projektets antagande i figur~\ref{fig:array}. Resultatet av denna sökning gav en annorlunda bild av hur fokuspunkten ser ut från panelen, vilket visas i figur~\ref{fig:array1}. För fullständig data av denna sökning, se bilaga~\ref{sec:heatmap}. Trots att fokuspunkten inte är utformad på samma sätt som förutspått, fungerar sökalgoritmen så pass att den riktar in sig till det högsta funna värdet, dock på grund av panelens utformning av fokuspunkten finns det inget exakt högsta värde, utan algoritmen stannar i en punkt i den cirkel som panelen genererar. Algoritmen är inte utformad för att söka igenom hela cirkeln och sätta det högsta värdet, utan lokaliserar ett lokalt maximum. Detta ger ett högt belysningsvärde ut från panelen även om det kan finnas ett något högre värde existerar på motsatt sida av cirkeln. Skillnaden inom denna cirkel är dock så pass små att det rör sig om så små värdeskillnader att dessa kan anses ligga inom felmarginalen. Att utveckla en algoritm som arbetar sig igenom hela cirkeln är fullt möjlig, men det handlar om en avvägning om hur lång tid kalibreringen kommer ta, den nu gällande algoritmen är utvecklad för att hitta ett lokalt maximum på så få steg som möjligt.
+            För att testa algoritmen på solpanelen genomfördes först en simpel genomsökning av panelens solintag till en tvådimensionell matris, i syfte att undersöka ifall utformningen av panelens fokuspunkt överensstämmer med projektets antagande i figur~\ref{fig:array}. Resultatet av denna sökning gav en annorlunda bild av hur fokuspunkten ser ut från panelen, vilket visas i figur~\ref{fig:luxcomp}. För fullständig data av denna sökning, se bilaga~\ref{sec:heatmap}. Trots att fokuspunkten inte är utformad på samma sätt som förutspått, fungerar sökalgoritmen så pass att den riktar in sig till det högsta funna värdet, dock på grund av panelens utformning av fokuspunkten finns det inget exakt högsta värde, utan algoritmen stannar i en punkt i den cirkel som panelen genererar. Algoritmen är inte utformad för att söka igenom hela cirkeln och sätta det högsta värdet, utan lokaliserar ett lokalt maximum. Detta ger ett högt belysningsvärde ut från panelen även om det kan finnas ett något högre värde existerar på motsatt sida av cirkeln. Skillnaden inom denna cirkel är dock så pass små att det rör sig om så små värdeskillnader att dessa kan anses ligga inom felmarginalen. Att utveckla en algoritm som arbetar sig igenom hela cirkeln är fullt möjlig, men det handlar om en avvägning om hur lång tid kalibreringen kommer ta, den nu gällande algoritmen är utvecklad för att hitta ett lokalt maximum på så få steg som möjligt.
 
             \begin{figure}[hb]
             \centering
-                \setlength{\fboxsep}{0pt}
-                \fbox{\includegraphics[scale=0.25]{res/img/heatmap1}}
-                \caption{\label{fig:array1}Översikt av uppmätt fokuspunkt}
+                \begin{subfigure}{0.35\textwidth}
+                    \setlength{\fboxsep}{0pt}
+                    \fbox{\includegraphics[width=\textwidth]{res/img/new_ada_23}}
+                    \caption{\label{fig:ada}Luxmätare från Adafruit}
+                \end{subfigure}
+                \begin{subfigure}{0.35\textwidth}
+                    \setlength{\fboxsep}{0pt}
+                    \fbox{\includegraphics[width=\textwidth]{res/img/old_yocto_23}}
+                    \caption{\label{fig:yocto}Luxmätare från Yoctopuce}
+                \end{subfigure}
+            \caption{\label{fig:luxcomp}Uppmätt ljusstyrka}
             \end{figure}
         % subsubsection utveckling_av_algoritm (end)
 
