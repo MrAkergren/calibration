@@ -101,7 +101,7 @@ class Panel(SerialCommunication):
     def set_coordinates(self, x, y):
         self.set_x_coordinate(x)
         self.set_y_coordinate(y)
-        self._wait_for_correct_position()
+        self.wait_for_correct_position()
 
     def set_x_coordinate(self, num):
         """'num' needs to be a string.
@@ -109,7 +109,6 @@ class Panel(SerialCommunication):
         self._serial_write('zeroposx ' + num)
         print('Position set to: zeroposx ' + num)  # Debug print
         sleep(2)
-        self._wait_for_correct_position()
 
     def set_y_coordinate(self, num):
         """'num' needs to be a string.
@@ -117,7 +116,6 @@ class Panel(SerialCommunication):
         self._serial_write('zeroposy ' + num)
         print('Position set to: zeroposy ' + num)  # Debug print
         sleep(2)
-        self._wait_for_correct_position()
 
     def move(self, coordinates, direction):
         """The method that sends the move command to the panel.
@@ -147,6 +145,8 @@ class Panel(SerialCommunication):
         if check_x:
             self.set_x_coordinate(str(x))
 
+        self.wait_for_correct_position()
+
     def stop_panel(self):
         self._serial_write('run stop')
 
@@ -167,7 +167,9 @@ class Panel(SerialCommunication):
             return True
         return False
 
-    def _wait_for_correct_position(self):
+    def wait_for_correct_position(self):
+        """ Waits for the panel arrive at the set position, for max 30 seconds
+        """
         start_time = time()
         while not self._correct_position():
             if time() - start_time > 30.0:
