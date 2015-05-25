@@ -52,6 +52,7 @@ values = []
 #     for y in range(0, square_size):
 #         y_pos = start_y + offset * y
 #         sh.set_y_coordinate(str(y_pos))
+#         sh.wait_for_panel_position()
 #         current_value = sh.get_value
 #         print("Value read: " + str(current_value))
 #         x_arr.append( ((round(x_pos, 3), round(y_pos, 3)), current_value) )

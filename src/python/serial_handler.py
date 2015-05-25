@@ -111,3 +111,8 @@ class SerialHandler:
         """Return the offset-argument given when creating the SerialHandler obj
         """
         return self.offset
+
+    def wait_for_panel_position(self):
+        """ Waits for the panel arrive at a set position
+        """
+        self.pan.wait_for_correct_position
