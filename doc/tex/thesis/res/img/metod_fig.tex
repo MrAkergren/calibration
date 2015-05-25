@@ -1,0 +1,53 @@
+\begin{tikzpicture}[pil/.style={
+                                thick,
+                                ->,
+                                draw=blue!50
+                                },
+                                block/.style={
+                                            draw,
+                                            fill=white,
+                                            rectangle,
+                                            align=center,
+                                            minimum width=25mm,
+                                            minimum height=10mm,
+                                            font=\small,
+                                            fill=light-gray,
+                                            rounded corners
+                                }
+                    ]
+    \node[block] (PI) at (0,3) {Problem-\\identifiering};
+    \node[block,below=5mm of PI] (PF) {Problem-\\förståelse};
+    \node[block,below=5mm of PF] (LS) {Litteratur-\\studier};
+
+    \node[block,minimum width=30mm,right=10mm of PI] (IaT) {Identifiering\\av tillämpningar};
+    \node[block,minimum width=30mm,below=5mm of IaT] (VaT) {Val av\\tillämpningar};
+    
+    \node[block,right=10mm of IaT] (UF) {Utformning};
+    \node[block,below=5mm of UF] (Utveck) {Utveckling};
+    \node[block,below=5mm of Utveck] (Utvard) {Utvärdering};
+    
+    \node[block,right=10mm of UF] (TaK) {Tydliggörande\\av kunskap};
+    \node[block,below=5mm of TaK] (Slut) {Slutsats};
+    \node[block,below=5mm of Slut] (Pres) {Presentation};
+
+    \draw[pil] (PI) to (PF);
+    \draw[pil] (PF) to (LS);
+    \draw[pil] (IaT) to (VaT);
+    \draw[pil] (UF) to (Utveck);
+    \draw[pil] (Utveck) to (Utvard);
+    \draw[pil] (TaK) to (Slut);
+    \draw[pil] (Slut) to (Pres);
+
+    \draw[pil] (LS.east) to [in=180,out=0] (IaT.west);
+    \draw[pil] (VaT.east) to [in=180,out=0] (UF.west);
+    \draw[pil] (Utvard.east) to [in=180,out=0] (TaK.west);
+
+    \node[below=5mm of LS] (F1) {\textit{Fas 1}};
+    \node[right=26mm of F1] (F2) {\textit{Fas 2}};
+    \node[right=25mm of F2] (F3) {\textit{Fas 3}};
+    \node[right=23mm of F3] (F4) {\textit{Fas 4}};
+
+    \node[My Arrow Style,right=4mm of F1] {};
+    \node[My Arrow Style,right=4mm of F2] {};
+    \node[My Arrow Style,right=3mm of F3] {};
+\end{tikzpicture}
