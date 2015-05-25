@@ -87,6 +87,9 @@ class GUI(tk.Frame):
         self.coordinates = self.sh.get_coordinates()
         self.update_statusbar("Current coordinates:\n %.4f, %.4f" % self.coordinates)
 
+    def search(self):
+        end_x, end_y = self.search_alg.labyrinth()
+        self.update_statusbar("Calibration finished\nCoordinates set to: %.4f, %.4f" % end_x, end_y)
 
 class ControlFrame(tk.Frame):
     # Constructor
@@ -135,7 +138,7 @@ class ControlFrame(tk.Frame):
 
         self.btnValue.bind('<Button-1>', lambda x: self.master.value())
 
-        self.btnSearch.bind('<Button-1>', lambda x: self.master.search_alg.labyrinth())
+        self.btnSearch.bind('<Button-1>', lambda x: self.master.search())
 
         self.btnReset.bind('<Button-1>', lambda x: self.master.reset())
 

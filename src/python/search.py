@@ -2,14 +2,34 @@ from time import time
 
 
 class Search:
+    """ This class implements an algorithm that continiously searches,
+        step by step, for a maximum value. The search is conducted in
+        four directions and remembers visited positions. If a higher
+        value is found, the next direction checked is the same as
+        the last successful move. Each visited position is stored in
+        order to not check the same position multiple times.
+
+        Arguments:
+            serial_handler: a reference to the applications SerialHandler
+                            object. Used for moving the panel during 
+                            execution of the algorithm.
+
+        Raises:
+
+    """
     def __init__(self, serial_handler):
-        self._SENSOR_BOUND = 1000.0
-        self._MAX_TIME = 300.0
-        self.timeout = False
-        self.com = serial_handler
+        self._SENSOR_BOUND = 10.0           # Max sensor adj. value
+        self._MAX_TIME = 300.0              # Search timeout in seconds
+        self.timeout = False                # Flagged if timeout occurs
+        self.com = serial_handler           # Reference to the SerialHandler
+        # Offset used for movement
         self.x_offset, self.y_offset = self.com.get_offset()
 
     def labyrinth(self):
+        """ This method performs the search algorithm. If the search is aborted
+            and/or an error has occured, the coordinates is reset to initial
+            values.
+        """
         # Create a set to be used for checking visited coordinates
         visited = set()
 
@@ -88,9 +108,10 @@ class Search:
                 else:
                     finished = True
 
-            except IndexError:
-                print("Popped to many values from list")
-                break
+            # Used for running tests with an array
+            # except IndexError:
+            #     print("Popped too many values from list")
+            #     break
 
             except Exception as e:
                 print(e)
@@ -108,8 +129,8 @@ class Search:
                 print("Calibration went out of bounds")
             print("Sensor values are reset")
         else:
-            self.com.set_coordinates(str(x), str(y))
             print("Panel calibration finished.")
+            self.com.set_coordinates(str(x), str(y))
 
         # Debug output
         print("End pos:\t" + str(x) + ", " + str(y))
@@ -117,8 +138,13 @@ class Search:
         print("Start value:\t" + str(start_value))
         print("End value:\t" + str(value))
 
+        # Return final values to caller
+        return x, y
+
     def _out_of_bounds(self, x, y):
+        # Checks if the sensor adjustment values has gone out bounds
         return abs(x) > self._SENSOR_BOUND or abs(y) > self._SENSOR_BOUND
 
     def _search_timeout(self, start_time):
+        # Checks if the search has taken too long
         return time() - start_time > self._MAX_TIME
