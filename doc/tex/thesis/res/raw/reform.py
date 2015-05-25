@@ -8,7 +8,7 @@ arr = numpy.zeros((arr_size, arr_size)).tolist()
 regex0 = re.compile('\(\([-+]?[0-9]*\.?[0-9]+, [-+]?[0-9]*\.?[0-9]+\)\, ')
 regex1 = re.compile('[^0-9 ]')
 today = date.today()  #for naming
-file0 = open('saturday_panel2.txt', 'r')
+file0 = open('saturday.txt', 'r')
 file1 = open('gen_arr_%s.txt' %(today), 'w+')
 for x in range(0, arr_size):
     for y in range(0, arr_size):

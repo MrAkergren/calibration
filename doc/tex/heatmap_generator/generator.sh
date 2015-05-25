@@ -25,29 +25,29 @@ rm $panel_mover
 
 dt="$(date +%y-%m-%d_%H.%M)"
 rawfile=raw_result_$panelname"_"$dt.txt
-reformfile=reform_result_$panelname"_"$dt.txt
+reformfile=reform_result_$panelname"_"$dt
 
 mv -v test_results.txt $docpath/$rawfile
 cd $docpath
 
 #Change panel_array... to $rawfile when panel and luxmeter are available
-./$regex_script $square_size panel_array_test.txt $reformfile
+./$regex_script $square_size panel_array_test.txt $reformfile.txt
 
 start="$(less a.tex)"
 end="$(less b.tex)"
 
-cp a.tex ga.tex
+cp a.tex $reformfile.tex
 
-printf '{'$reformfile'}\n' >> ga.tex && echo $end >> ga.tex
+printf '{'$reformfile'.txt}\n' >> $reformfile.tex && echo $end >> $reformfile.tex
 
 
-pdflatex ga
-mv ga.pdf heatmap_of_$panelname.pdf 
-rm ga.tex
+pdflatex $reformfile
+mv $reformfile.pdf heatmap_of_$panelname.pdf 
+
 rm *.log
 rm *.aux
 mkdir -p output
-mv heatmap_of_$panelname.pdf $rawfile $reformfile ./output
+mv heatmap_of_$panelname.pdf $rawfile $reformfile.* ./output
 clear
 printf '\a'
 echo "If you see this, then the script is finished. The pdf-file is located in the output folder"
