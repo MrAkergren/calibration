@@ -18,15 +18,17 @@ echo 'Y starting position? '
 read y_start
 
 clear
+
 ./$panel_mover $square_size $x_start $y_start $panelname
 
 rm $panel_mover
 
-dt="$(date +%y-%m-%d_%k.%M)"
+dt="$(date +%y-%m-%d_%H.%M)"
 rawfile=raw_result_$panelname"_"$dt.txt
 reformfile=reform_result_$panelname"_"$dt.txt
 
-mv -v test_results.txt $docpath/$rawfile && cd $docpath
+mv -v test_results.txt $docpath/$rawfile
+cd $docpath
 
 #Change panel_array... to $rawfile when panel and luxmeter are available
 ./$regex_script $square_size panel_array_test.txt $reformfile
