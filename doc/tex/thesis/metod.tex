@@ -5,7 +5,7 @@
     \label{sub:vetenskaplig_metod}
     	Detta projekt har tillämpat en variant av den vetenskapliga metoden Design Science Research (DSR). Metoden anses lämplig till problemlösande forskning där redan existerande produkter ska vidareutvecklas \cite{dsr}. Målet med DSR är att skapa artefakter, exempelvis en praktisk lösning, metod eller lösningsförslag, som löser de problem som identifierats inom projektet. \bigskip
 
-        Design Science valdes då dess mål stämmer bra överens med det som projektet syftar till att göra. Detta kan sättas i kontrast med mer traditionella vetenskaper som snarare syftar till att utforska, förklara eller förutse fenomen \cite[s.~13]{dsr}. Att DSR valdes som metod över fallstudier eller 'action research' är återigen att målen överensstämmer med projektet, men även att typen av kunskap som anskaffas stämmer bättre överens än de andra två alternativen \cite[s.~95]{dsr}.\bigskip
+        Design Science valdes då dess mål stämmer bra överens med det som projektet syftar till att göra. Detta kan sättas i kontrast med mer traditionella vetenskaper som snarare syftar till att utforska, förklara eller förutse fenomen \cite[s.~13]{dsr}. Att DSR valdes som metod över fallstudier eller 'action research' är återigen att målen överensstämmer med projektet och även att typen av kunskap som anskaffas stämmer bättre överens än de andra två alternativen \cite[s.~95]{dsr}.\bigskip
 
     	Dresch et al. rekommenderar, baserat på studier av flera metoder för DSR, en metod i 12 steg \cite[s.~118--126]{dsr}. De tre inledande stegen är en analys av de problem som ska lösas, problemidentifiering, problemförståelse och litteraturstudier. Denna inledande fas mynnar ut i att hitta eventuella befintliga lösningar som kan vara lämpliga och att sedan föreslå en vidareutveckling och tillämpning av denna eller att föreslå en ny lösning. Steg sex till åtta är sedan att utforma, utveckla och utvärdera lösningen. Därefter ska den kunskap som givits av tidigare steg tydliggöras och slutsatser dras. Tidigarenämnda steg itereras vid behov för att uppnå önskat resultat. Slutligen ska generalisering av lösningen utformas och resultatet presenteras. \bigskip
 
@@ -13,60 +13,7 @@
 
         \begin{figure}[b]
             \centering
-
-            \begin{tikzpicture}[pil/.style={
-                                            thick,
-                                            ->,
-                                            draw=blue!50
-                                },
-                                block/.style={
-                                            draw,
-                                            fill=white,
-                                            rectangle,
-                                            align=center,
-                                            minimum width=25mm,
-                                            minimum height=10mm,
-                                            font=\small,
-                                            fill=light-gray,
-                                            rounded corners
-                                }
-            ]
-                \node[block] (PI) at (0,3) {Problem-\\identifiering};
-                \node[block,below=5mm of PI] (PF) {Problem-\\förståelse};
-                \node[block,below=5mm of PF] (LS) {Litteratur-\\studier};
-
-                \node[block,minimum width=30mm,right=10mm of PI] (IaT) {Identifiering\\av tillämpningar};
-                \node[block,minimum width=30mm,below=5mm of IaT] (VaT) {Val av\\tillämpningar};
-                
-                \node[block,right=10mm of IaT] (UF) {Utformning};
-                \node[block,below=5mm of UF] (Utveck) {Utveckling};
-                \node[block,below=5mm of Utveck] (Utvard) {Utvärdering};
-                
-                \node[block,right=10mm of UF] (TaK) {Tydliggörande\\av kunskap};
-                \node[block,below=5mm of TaK] (Slut) {Slutsats};
-                \node[block,below=5mm of Slut] (Pres) {Presentation};
-
-                \draw[pil] (PI) to (PF);
-                \draw[pil] (PF) to (LS);
-                \draw[pil] (IaT) to (VaT);
-                \draw[pil] (UF) to (Utveck);
-                \draw[pil] (Utveck) to (Utvard);
-                \draw[pil] (TaK) to (Slut);
-                \draw[pil] (Slut) to (Pres);
-
-                \draw[pil] (LS.east) to [in=180,out=0] (IaT.west);
-                \draw[pil] (VaT.east) to [in=180,out=0] (UF.west);
-                \draw[pil] (Utvard.east) to [in=180,out=0] (TaK.west);
-
-                \node[below=5mm of LS] (F1) {\textit{Fas 1}};
-                \node[right=26mm of F1] (F2) {\textit{Fas 2}};
-                \node[right=25mm of F2] (F3) {\textit{Fas 3}};
-                \node[right=23mm of F3] (F4) {\textit{Fas 4}};
-
-                \node[My Arrow Style,right=4mm of F1] {};
-                \node[My Arrow Style,right=4mm of F2] {};
-                \node[My Arrow Style,right=3mm of F3] {};
-            \end{tikzpicture}
+            \input{res/img/metod_fig}
             \caption{\label{fig:method} Utformning av metod}
         \end{figure}
 
@@ -78,11 +25,11 @@
     \label{sub:arbetsmetodik}
         Projektet arbetsmetodik utgick ifrån versionshanteringsverktyget 'git' 
         för den mjukvara som projektet använde sig av. För att få tillgång 
-        till en central hantering av dokumenten använde sig projektet av 'GitHub.com' vilket även bistod med ett grafiskt gränssnitt till git, då git i sig själv endast har ett textbaserat gränssnitt. \bigskip
+        till en central hantering av dokumenten använde sig projektet av 'GitHub.com' vilket även bistod med ett grafiskt gränssnitt till git, som i sig självt endast har ett textbaserat gränssnitt. \bigskip
 
         Vidare var arbetsmetodiken inspirerad av 'Scrum' där större mål sattes upp och bröts ner till mindre så kallade 'issues' \cite[kap.~8]{scrum}. Dessa issues sattes upp på en virtuell tavla med hjälp av verktyget 'Waffle.io' för att få en bättre överblick kring hur projektet utvecklades och vad som behövde göras. \bigskip
 
-        Anledningen till att inte hela Scrum-metodiken anammades var att projektet utfördes av få personer så den rollfördelning som hör till i Scrum gick ej att utföra på något meningsfullt vis \cite[kap.~6]{scrum}, samt att ovanan vid denna typ av utveckling gjorde att kostnaderna för varje issue var svårt att bestämma. Vidare var projektets omfång väl avgränsat av uppdrags\-givaren så de avgränsningarna användes som milstenar (inbyggd funktion i GitHub) istället för de föreslagna användarberättelserna \cite[kap.~9]{scrum}. 
+        Anledningen till att inte hela Scrum-metodiken anammades var att projektet utfördes av få personer så den rollfördelning som hör till i Scrum gick ej att utföra på ett meningsfullt vis \cite[kap.~6]{scrum}, samt att ovanan vid denna typ av utveckling gjorde att kostnaderna för varje issue var svårt att bestämma. Vidare var projektets omfång väl avgränsat av uppdrags\-givaren så istället för de föreslagna användarberättelserna användes avgränsningarna som milstenar (inbyggd funktion i GitHub) \cite[kap.~9]{scrum}.
 
     % subsection arbetsmetodik (end)
 % section metod (end)
