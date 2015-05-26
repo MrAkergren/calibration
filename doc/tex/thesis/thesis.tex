@@ -59,6 +59,7 @@
 %PREAMBLE%
 \hyphenation{över-förings-hastigheten panel-en instruktion-er sol-panel-en fatt-ad-es anse nu-varande av-sedda funger-ande kommunikations-standard-er version-er mot-svarande enkorts-dator enhet-ens exempel-vis operativ-system dokumentation platt-forms-oberoende system-utvecklings-metoden lux-mät-are lux-mät-ar-en kommunikation helhets-lös-ning-ar Yocto-puce kommunikations-lös-ning standard-is-er-ade data-kommunikation be-tong-konstruktion-er spännings-förändringar lys-diod-en genom-förde ut-form-ning-en kalibrerings-steg-en e-ven-tu-el-la applikation-en algo-ritm algo-ritm-en grund-stommen in-form-ation korrigerings-värde represent-er-ade kommu-nikations-sättet bi-fogad programmer-ings-språk-et kalibrerings-applikation-en kommu-nikations-möjlig-het-en minska} 
 
+\newcommand{\blankpage}{\newpage\thispagestyle{empty}\hbox{}\newpage}
 %%-GRAPHICS-%%
 \DeclareGraphicsExtensions{.pdf,.png,.jpg}
 
@@ -95,13 +96,14 @@
 \listoffigures
 \listoftables
 
-\newpage
+\blankpage
 
 \setcounter{page}{1}
 \pagenumbering{arabic}
 \input{introduktion}
 \include{metod}
 \include{teknisk_bakgrund}
+\blankpage
 \include{genomforande}
 \include{resultat}
 \include{slutsats}
@@ -126,6 +128,6 @@
 \include{res/appendix/three_heatmaps}
 \include{res/appendix/tidsplan}
 
-\newpage\thispagestyle{empty}\hbox{} %  Blank lastpage
+\blankpage %  Blank lastpage
 
 \end{document}
