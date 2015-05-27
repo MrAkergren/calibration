@@ -30,7 +30,7 @@ class SerialHandler:
             win_ard_com (str): If not on windows OS, defaults to None
         """
         try:
-            self.pan = Panel(self.offset, win_panel_com)
+            self.pan = Panel(win_panel_com)
         except Exception as e:
             print(e.strerror)
             print("Panel failed")
@@ -101,6 +101,11 @@ class SerialHandler:
         self.pan.set_y_coordinate(num)
 
     def get_offset(self):
-        """Return the offset-argument given when creating the SerialHandler obj
+        """Return the offset-argument currently set on the panel.
         """
         return self.pan.get_offset()
+
+    def set_offset(self, x, y):
+        """Sets the offset for the search steps on the panel.
+        """
+        self.pan.set_offset(x, y)

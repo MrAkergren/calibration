@@ -28,8 +28,7 @@ class Panel(SerialCommunication):
             device = self._serial_device()
         unit = [device, '38400', '1']
         self.regex = re.compile('[-+]?[0-9]*\.?[0-9]+')  # regex to extract float
-        self.x_offset = offset[0]       # determines the size of adj. steps in the sensor
-        self.y_offset = offset[1]       # determines the size of adj. steps in the sensor
+        self.x_offset, self.y_offset = offset  # determines the size of adj. steps in the sensor
 
         try:
             self.serial_connect(unit)

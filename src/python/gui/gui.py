@@ -52,7 +52,7 @@ class GUI(tk.Frame):
 
     def start_controls(self):
         self.sh.connect_devices(self.panel_port, self.ard_port)        
-        self.coordinates = (0,0) #self.sh.get_coordinates()
+        self.coordinates = self.sh.get_coordinates()
         self.start_x, self.start_y = self.coordinates
 
         # Initiate and start the control frame (steering controls)

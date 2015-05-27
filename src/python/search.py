@@ -7,9 +7,9 @@ class Search:
         self._MAX_TIME = 300.0
         self.timeout = False
         self.com = serial_handler
-        self.x_offset, self.y_offset = self.com.get_offset()
 
     def labyrinth(self):
+        self.x_offset, self.y_offset = self.com.get_offset()
         # Create a set to be used for checking visited coordinates
         visited = set()
 
