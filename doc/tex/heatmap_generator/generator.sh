@@ -33,13 +33,19 @@ cd $docpath
 #Change panel_array... to $rawfile when panel and luxmeter are available
 ./$regex_script $square_size panel_array_test.txt $reformfile.txt
 
-start="$(less a.tex)"
-end="$(less b.tex)"
+template=a.tex
+step_size=$(python3 -c "print ($square_size / 100)")
+x_start=$(python3 -c "print('%.4f' %(float($x_start)))") 
+y_start=$(python3 -c "print('%.4f' %(float($y_start)))")
+x_end=$(python3 -c "print('%.4f' %($x_start + $step_size))") 
+y_end=$(python3 -c "print('%.4f' %($y_start + $step_size))")
 
-cp a.tex $reformfile.tex
+echo "$(sed -n '1,89p' < $template)" > c.txt && echo "{"$reformfile".txt}" >> c.txt && \
+echo "$(sed -n '90,93p' < $template)">> c.txt && echo "" >> c.txt && \
+printf "\\\textbf{Koordinater (x, y)} \\\newline Längst ner till vänster: %s, %s. Högst upp till höger: %s, %s." $x_start $y_start $x_end $y_end >> c.txt \
+&& echo "$(tail -n 2 $template)" >> c.txt 
 
-printf '{'$reformfile'.txt}\n' >> $reformfile.tex && echo $end >> $reformfile.tex
-
+mv c.txt $reformfile.tex
 
 pdflatex $reformfile
 mv $reformfile.pdf heatmap_of_$panelname.pdf 
