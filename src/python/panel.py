@@ -20,7 +20,7 @@ class Panel(SerialCommunication):
         SerialException:    if the panel can't connect.
     """
 
-    def __init__(self, offset, win_panel_com):
+    def __init__(self, win_panel_com, offset=(0.01, 0.01)):
         SerialCommunication.__init__(self)
         if win_panel_com is not None:
             device = "COM" + win_panel_com
@@ -28,8 +28,7 @@ class Panel(SerialCommunication):
             device = self._serial_device()
         unit = [device, '38400', '1']
         self.regex = re.compile('[-+]?[0-9]*\.?[0-9]+')  # regex to extract float
-        self.x_offset = offset[0]       # determines the size of adj. steps in the sensor
-        self.y_offset = offset[1]       # determines the size of adj. steps in the sensor
+        self.x_offset, self.y_offset = offset  # determines the size of adj. steps in the sensor
 
         try:
             self.serial_connect(unit)
@@ -59,6 +58,14 @@ class Panel(SerialCommunication):
             print("\'logga\' has been turned Off")
         else:
             print("\'logga\' was Off from start")
+
+    def set_offset(self, x, y):
+        self.x_offset = x
+        self.y_offset = y
+        print("New offset is set to: %.4f %.4f" % (self.x_offset, self.y_offset))
+
+    def get_offset(self):
+        return (self.x_offset, self.y_offset)
 
     def get_log(self):
         """Returns a 'logga'-string from the panel as a list of strings.

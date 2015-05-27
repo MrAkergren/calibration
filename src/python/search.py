@@ -22,14 +22,13 @@ class Search:
         self._MAX_TIME = 300.0              # Search timeout in seconds
         self.timeout = False                # Flagged if timeout occurs
         self.com = serial_handler           # Reference to the SerialHandler
-        # Offset used for movement
-        self.x_offset, self.y_offset = self.com.get_offset()
 
     def labyrinth(self):
         """ This method performs the search algorithm. If the search is aborted
             and/or an error has occured, the coordinates is reset to initial
             values.
         """
+        self.x_offset, self.y_offset = self.com.get_offset()
         # Create a set to be used for checking visited coordinates
         visited = set()
 
