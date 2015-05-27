@@ -40,12 +40,10 @@ y_start=$(python3 -c "print('%.4f' %(float($y_start)))")
 x_end=$(python3 -c "print('%.4f' %($x_start + $step_size))") 
 y_end=$(python3 -c "print('%.4f' %($y_start + $step_size))")
 
-echo "$(sed -n '1,89p' < $template)" > c.txt && echo "{"$reformfile".txt}" >> c.txt && \
-echo "$(sed -n '90,93p' < $template)">> c.txt && echo "" >> c.txt && \
-printf "\\\textbf{Koordinater (x, y)} \\\newline Längst ner till vänster: %s, %s. Högst upp till höger: %s, %s." $x_start $y_start $x_end $y_end >> c.txt \
-&& echo "$(tail -n 2 $template)" >> c.txt 
-
-mv c.txt $reformfile.tex
+echo "$(sed -n '1,89p' < $template)" > $reformfile.tex && echo "{"$reformfile".txt}" >> $reformfile.tex && \
+echo "$(sed -n '90,94p' < $template)">> $reformfile.tex && echo "" >> $reformfile.tex && \
+printf "Längst ner till vänster: %s, %s. Högst upp till höger: %s, %s." $x_start $y_start $x_end $y_end >> $reformfile.tex \
+&& echo "$(tail -n 2 $template)" >> $reformfile.tex 
 
 pdflatex $reformfile
 mv $reformfile.pdf heatmap_of_$panelname.pdf 
