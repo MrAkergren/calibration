@@ -31,7 +31,7 @@ mv -v test_results.txt $docpath/$rawfile
 cd $docpath
 
 #Change panel_array... to $rawfile when panel and luxmeter are available
-./$regex_script $square_size panel_array_test.txt $reformfile.txt
+./$regex_script $square_size $rawfile $reformfile.txt
 
 start="$(less a.tex)"
 end="$(less b.tex)"
