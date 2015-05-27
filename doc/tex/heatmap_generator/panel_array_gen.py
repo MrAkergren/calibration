@@ -49,8 +49,6 @@ for x in range(0, square_size):
 print(values)
 
 fh = open("test_results.txt", "w+")
-for pos, value in values:
-    fh.write("" + str(pos) + "\t" + value + "\n")
 
 for row in values:
     for value in row:
