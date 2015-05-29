@@ -6,7 +6,7 @@
 
         \subsubsection{SP3 mikrokontrollerkort} % (fold)
         \label{ssub:sp3_mikrokontrollerkort}
-            Mikrokontrollerkortet som används i panelen är formgivet av Parans och är baserat på en PIC32 mikrokontroller. PIC32 är en kategori mikrokontroller tillverkade av Microchip Technology för användning i inbyggda system och ger tillgång till bland annat I/O-anslutningar och UART för seriell kommunikation \cite[s.~42--44]{PIC32}. För att kommunicera med mikrokontrollerkortet med en dator finns en USB-port som ger en seriell anslutning som hanteras av en UART-krets från Silicon Laboratories, CP2102. Detta kräver att den anslutna datorn har en drivrutin för CP2102 installerad och möjliggör anslutning via en terminalemulator för installation, diagnostik och underhåll.
+            Mikrokontrollerkortet som används i panelen är formgivet av Parans och är baserat på en PIC32-mikrokontroller. PIC32 är en kategori mikrokontroller tillverkade av Microchip Technology för användning i inbyggda system och ger tillgång till bland annat I/O-anslutningar och UART för seriell kommunikation \cite[s.~42--44]{PIC32}. För att kommunicera med mikrokontrollerkortet med en dator finns en USB-port som ger en seriell anslutning som hanteras av en UART-krets från Silicon Laboratories, CP2102. Detta kräver att den anslutna datorn har en drivrutin för CP2102 installerad och möjliggör anslutning via en terminalemulator för installation, diagnostik och underhåll.
         % subsubsection sp3_mikrokontrollerkort (end)
 
         \subsubsection{Fiberoptik} % (fold)
@@ -16,7 +16,7 @@
 
         \subsubsection{Ljussensor} % (fold)
         \label{ssub:ljussensor}
-            För att optimera ljusintaget i panelens fibrer finjusteras vinkeln till solen med hjälp av en ljuskänslig krets monterad på panelens front. Kretsen skyddas av ett gråfilter med 10 \% ljusgenomsläpp för att dämpa solljusets intensitet. Via en lins fokuseras genomträngande ljus till en fokuspunkt på sensorn som ger ett utslag och kretsen omvandlar denna data till fyra strömmar, vilkas värden representerar avståndet från sensorns mittpunkt. Strömmarna omvandlas och representeras som x- och y-värden i ett koordinatsystem som sedan kan avläsas och justeras manuellt vid kommunikation med panelen. Själva ljussensorn är tillverkad av Hamamatsu, med beteckningen S5901, och sitter integrerad på en egendesignat mönsterkort. Det exakta databladet för den använda sensorn har ej kunnat lokaliserats men enligt den information som finns inom Parans kan den antas arbeta efter samma princip som sensorerna S5990-01 och S5991-01 \cite{hama}.
+            För att optimera ljusintaget i panelens fibrer finjusteras vinkeln till solen med hjälp av en ljuskänslig krets monterad på panelens front. Kretsen skyddas av ett gråfilter med 10 \% ljusgenomsläpp för att dämpa solljusets intensitet. Via en lins fokuseras genomträngande ljus till en fokuspunkt på sensorn som ger ett utslag och kretsen omvandlar denna data till fyra strömmar, vilkas värden representerar avståndet från sensorns mittpunkt. Strömmarna omvandlas och representeras som x- och y-värden i ett koordinatsystem som sedan kan avläsas och justeras manuellt vid kommunikation med panelen. Själva ljussensorn är tillverkad av Hamamatsu, med beteckningen S5901, och sitter integrerad på ett egendesignat mönsterkort. Databladet för den använda sensorn har ej kunnat lokaliseras men enligt information inom Parans kan den antas arbeta efter samma princip som sensorerna S5990-01 och S5991-01 \cite{hama}.
         % subsubsection ljussensor (end)
     % subsection parans_sp3 (end)
 
@@ -26,7 +26,7 @@
 
         \subsubsection{Adafruit TSL2591 Digital Light Sensor}
             \label{ssub:ada_tsl2591}
-            Sensorkortet från Adafruit innehåller ljussensorn TSL2591 från ams och används till att uppmäta ljusintensitet upp till 88\thinspace000 lux och kan anslutas till en mikrokontroller via I²C. På sensorn finns två fotodioder, där den ena reagerar på IR-ljus och den andra reagerar på fullspektrumljus \cite{TSL2591}. Fotodiodernas avläsning kan ske oberoende av varandra eller kombineras vilket möjliggör avläsning av endast synligt ljus. Sensorns värden avläses digitalt.
+            Sensorkortet från Adafruit innehåller ljussensorn TSL2591 från tillverkaren ams och används till att uppmäta ljusintensitet upp till 88\thinspace000 lux och kan anslutas till en mikrokontroller via I²C. På sensorn finns två fotodioder, där den ena reagerar på IR-ljus och den andra reagerar på fullspektrumljus \cite{TSL2591}. Fotodiodernas avläsning kan ske oberoende av varandra eller kombineras vilket möjliggör avläsning av endast synligt ljus. Sensorns värden avläses digitalt.
             % subsubsection ada_tsl2591 (end)
         % subsection arduino (end)
 
