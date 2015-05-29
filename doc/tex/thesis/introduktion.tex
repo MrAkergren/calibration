@@ -7,25 +7,23 @@
         Bolaget är baserat i Göteborg men levererar systemen globalt och har flera installationer runt om i världen. \bigskip
 
         Produkten fokuserar in solljus i optiska fibrer och styrs med hjälp av två stegmotorer för att följa solens bana. 
-        Styrningen sker dels med en algoritm som, baserat på geografisk position och tid, ger en solposition i grader och dels från en solsensor med fotocell som ger data för en finstyrning av panelens positionering då solen är framme.
-        Detta för att alltid maximera solljuset som levereras in i fibern.\bigskip
+        Styrningen sker med en algoritm som ger solposition i grader, baserat på installationsplatsens geografiska position och tid, och för finare styrning av panelen då solen är framme inhämtas data från en ljussensor med fotocell.
+        Detta för att alltid maximera det solljus som fokuseras in i fibern.\bigskip
 
         Styrkortet och motorerna till panelen drivs av en spänning om tolv (12) volt och kortet är en egen design kring mikrokontrollen PIC32. 
-        Källkoden till panelen är skriven i \texttt{C} och kommunikation till enheten sker via seriell förbindelse över USB, där en USB till RS-232 omvandlare är integrerad på styrkortet. För att skicka instruktioner till panelen används en terminalemulator. \bigskip
+        Källkoden till panelen är skriven i \texttt{C} och kommunikation till enheten sker via seriell förbindelse över USB, där en USB till RS-232-omvandlare är integrerad på styrkortet. För att skicka instruktioner till panelen används en terminalemulator. \bigskip
 
-        Fotosensorn som används i solpanelen kan representeras som ett koordinatsystem, där sensorn förväntar sig att ljuset fokuseras till en punkt som träffar origo som standard. 
-        Problemet som Parans har är tudelat, det första problemet att i tillverkning av panelen kan linsen fokusera ner ljuset något vid sidan av origo på sensorn, vilket leder till sämre ljusintag i de optiska fibrerna. 
-        Det andra problemet är att solen inte går att fokusera ner till en punkt, utan kommer alltid att representeras som en disk, vilket kan förvirra sensorn något och då även leda till sämre ljusintag i de optiska fibrerna. \bigskip
+        Ljussensorn som används i solpanelen kan representeras som ett koordinatsystem där sensorn som standard förväntar sig att ljuset fokuseras till en punkt som träffar origo. 
+        Problemet som Parans har är tudelat. Det första problemet är att linsen vid tillverkning av panelen kan fokusera ljuset något vid sidan av origo på sensorn, vilket leder till sämre ljusintag till de optiska fibrerna. 
+        Det andra problemet är att solen inte går att fokusera ned till en punkt, utan kommer alltid att representeras som en disk, vilket kan leda till en mätosäkerhet hos sensorn och då även sämre ljusintag till de optiska fibrerna. \bigskip
 
-        
-
-        Sensorn kalibreras genom att flytta den punkt på det koordinatsystem som ljuset fokuseras ned till. Idag använder Parans en manuell metod en där en terminalemulator används för att ange kommandon som vrider solpanelen och sedan kontrolleras värdet på en separat luxmätare.
+        Sensorn kalibreras genom att flytta punkten på det koordinatsystem som ljuset fokuseras ned till. Idag använder Parans en manuell metod där en terminalemulator används för att ange kommandon som vrider solpanelen och sedan kontrolleras värdet på en separat luxmätare.
     % subsection bakgrund (end)
 
     \subsection{Syfte} % (fold)
     \label{sub:syfte}
-          Syftet med projektet är att ta fram en helt automatisk process som kan kalibrera fotosensorn i Parans solpaneler så att maximalt ljusflöde från panelen kan uppnås. Detta med en lägre tidsåtgång och högre precision än dagens manuella metod. 
-          Vidare syftar projektet till att möjliggöra kommunikation mellan panelen och en luxmätare inne i byggnaden, så att kalibreringstekniken kan nyttjas till systemen generellt, oavsett om de är i produktion eller i fabrik.
+          Syftet med projektet är att ta fram en helt automatisk process som kan kalibrera fotosensorn i Parans solpaneler så att maximalt ljusflöde från panelen kan uppnås. Detta ska ske med lägre tidsåtgång och högre precision än dagens manuella metod. 
+          Vidare syftar projektet till att möjliggöra kommunikation mellan panelen och en luxmätare inne i byggnaden, så att kalibreringstekniken kan nyttjas till systemen generellt, oavsett om de är tagna i bruk eller i fabrik.
     % subsection syfte (end)
 
     \subsection{Mål} % (fold)
@@ -54,7 +52,7 @@
             Redan existerande hårdvara kommer att användas, det vill säga sådan avsedd att användas för de ändamål nödvändiga för projektet. 
             Den primära hårdvaran, solpanel och luxmätare, kommer att tillhandahållas av uppdragsgivaren och inga alternativ till dessa kommer att undersökas. 
             Eventuell övrig hårdvara kan antingen vara helhetslösningar eller sådana som löser delproblem och kombineras. 
-            Gällande lösningen som tas fram är den begränsad till att stödja företagets nu gällande panel SP3.\bigskip
+            De lösningar som kommer att undersökas och utvecklas är begränsade till att stödja företagets panel SP3.\bigskip
         % subsection h_rdvara (end)
 
         \subsubsection{Mjukvara} % (fold)
