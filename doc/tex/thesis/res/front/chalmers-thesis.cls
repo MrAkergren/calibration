@@ -220,7 +220,7 @@
    \def\licentiatethesisname{Licentiatavhandling}%
    \def\doctoratethesisname{Doktorsavhandling}%
    \def\techreportname{Teknisk rapport}%
-   \def\inname{i}%
+   \def\inname{inom}%
    \def\listofpublicationsname{Avhandling}%
    \def\papername{Artikel}%
    \def\publicationname{Publikation}%
