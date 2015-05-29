@@ -53,7 +53,7 @@
         \label{ssub:utformning_av_kommunikationslosning}
             Kommunikationsdelen i projektet har genomgått flera iterationer av fas 3 och två huvudlösningar utformades.\bigskip 
 
-            Den första lösningen bestod av två uppsättningar av mikrokontrollerkortet Arduino Uno, för en fullständig specifikation se bilaga~\ref{sub:arduino_spec} \cite{ardu}. Till sändaren kopplades en lysdiod till det gränssnitt som skickar data via den seriella standarden, vilket då omvandlade från RS-232 standardens höga och låga läge till ljus på och ljus av. Till mottagaren kopplades en fotoresistor som ändrar motståndet när den träffas av ljus. När den kopplades in till det seriella gränssnittet skapade resistorn spänningsförändringar som registrerades som högt eller lågt värde av standarden. För en enkel översikt av kopplingen se figur~\ref{fig:schema}. Fullständig specifikation finns i bilaga~\ref{sec:specifikationer}.\bigskip
+            Den första lösningen bestod av två uppsättningar av mikrokontrollerkortet Arduino Uno, för en fullständig specifikation se bilaga~\ref{sub:arduino_spec} \cite{ardu}. Till sändaren kopplades en lysdiod till det gränssnitt som skickar data via den seriella standarden, vilket då omvandlade från RS-232 standardens höga och låga läge till ljus på och ljus av. Till mottagaren kopplades en fotoresistor som ändrar motståndet när den träffas av ljus. När den kopplades in till det seriella gränssnittet skapade resistorn spänningsförändringar som registrerades som högt eller lågt värde av standarden. För en enkel översikt av kopplingen se figur~\ref{fig:schema}, kopplingsschema finns i bilaga~\ref{sec:kopplingsschema}. Fullständig specifikation finns i bilaga~\ref{sec:specifikationer}.\bigskip
 
             \begin{figure}
             \centering
@@ -63,7 +63,7 @@
                 \begin{subfigure}[b]{0.35\textwidth}
                     \includegraphics[width=\textwidth]{res/img/resistor}    
                 \end{subfigure}
-            \caption[Schema över sändare/mottagare]{Schema över sändare/mottagare. \\\tiny{Figuren skapad med hjälp av verktyget 'Fritzing'}}\label{fig:schema}
+            \caption[Översikt av sändare/mottagare]{Schema över sändare/mottagare. \\\tiny{Figuren skapad med hjälp av verktyget 'Fritzing'}}\label{fig:schema}
             \end{figure}
 
             För att möjliggöra överföringen användes den i förhållandevis låga överföringshastigheten om 300 baud, vilket gjorde att komponenterna (fotoresistorn och lysdioden) hann ändra sina värden under den tid de förväntades göra det. Komponenterna var inte särskilt utformade för denna uppgift och innehöll vissa fördröjningar vid skifte av tillstånd. \bigskip
