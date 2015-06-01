@@ -73,18 +73,30 @@
             Den andra lösningen använde sig endast av en luxmätare uppe på taket för att inhämta den data som efterfrågades. Genom att koppla samman två fibrer nere i rummet skickas ljuset åter upp till taket och en rundgång i systemet kan skapas. För att nyttja den här metoden behöver samtliga linser som tillhör en fiberkabel täckas över på panelen för att förhindra att dubbelt intag av solljus transporteras i de båda fiberkablarna. Kablarna är anpassade för att hantera den värme som produceras av det ljus som normalt transporteras vid fullt dagsljus men om den dubbla mängden skulle transporteras riskerar fibrerna att smälta på grund av värmebildningen. Lösningen använder sig inte av fiber som bärare av genererad information utan endast det solljus som panelen tar in skickas, vilket minskar både komplexiteten i systemet och risken för störningar.
         % subsubsection utformning_av_kommunikationslosning (end)
 
+        \subsubsection{Avläsning av luxmätare} % (fold)
+        \label{ssub:avlasning_av_luxmatare}
+            De båda luxmätarna skiljer sig åt med avseende på det gränssnitt som förmedlar data. Mätaren från Adafruit kräver koppling till en mikrokontroller för tolkning av data, medan mätaren från Yoctopuce kopplas direkt till en enhet via USB, vilket underlättar anslutning till en persondator. Även om luxmätarnas gränssnitt skiljer sig åt beter sig de båda snarlikt vid användning. Båda generar ett positivt heltal som representerar uppmätt luxvärde och skickar detta när en metod i respektives bibliotek anropas. Från en programmerares perspektiv är resultatet från och användningen av de båda mätarna i praktiken identisk.\bigskip
+
+            Vid kalibrering av panelen är det av intresse att inhämta så mycket av panelens ljus som möjligt när luxvärdet ska avläsas, samtidigt som bakgrundsljus från andra eventuella ljuskällor undviks, för att skapa mätbara skillnader mellan panelens olika kalibreringssteg. Luxmätaren placeras så nära fiberändan som möjligt för att säkerställa maximalt ljusintag från den panel som ska kalibreras, vilket i praktiken för detta projekt innebär tre till fyra centimeter från fibern. För att hålla mätaren stabil används olika metoder beroende på mätare, där den ena har monterats in i ett metallhölje som skruvas fast på fiberändan, medan den andra vilar i en armatur. Att metoderna skiljer sig åt beror på olika utformning av luxmätarnas mönsterkort och leder till att avlästa värden inte direkt kan jämföras.\bigskip 
+
+            Testning av luxmätarnas inrapporterade värden visade att resultaten från solpanelen fluktuerar, vilket kan bero på orsaker så som att panelen ständigt justerar för att följa solen eller att något som momentant skuggar panelen passerar förbi. Dessa skiftningar i värde är inget som det mänskliga ögat uppfattar men blir synligt i mätningarna.\bigskip
+
+
+
+        % subsubsection avlasning_av_luxmatare (end)
+
         \subsubsection{Utveckling av algoritm} % (fold)
         \label{ssub:utveckling_av_algoritm}
             Utformningen av algoritmen skedde genom flera iterationer av steg tre i den valda metoden. I den första iterationen utvecklades en sökalgoritm, algoritm $\mathscr{A}$, som genomförde medurs sökning i åtta riktningar med motsvarande österut som utgångsriktning. När ett större värde påträffats uppdateras nuvarande position och sökningen återupprepas. För jämförelse utvecklades även en variant med fyra sökriktningar, algoritm $\mathscr{B}$. Efterkommande iterationer var samtliga en vidareutveckling av den förra. Den andra iterationen gav algoritmen möjlighet att lagra information om tidigare besökta koordinater, så att dessa ej undersöks vid upprepade tillfällen. Ytterligare förbättringar implementerades i den tredje iterationen, då riktningen på den senaste förflyttningen registreras om ett nytt större värde påträffats. Med hjälp av denna information undersöks först samma riktning som den senast lyckade förflyttningen innan medurs sökning återupptas. Samtliga iterationer innebar märkbara förbättringar vid simulering. Efter tredje iterationen ansågs algoritmen vara funktionsduglig, den använder betydligt färre söksteg än tidigare versioner och hittar effektivt maximipunkten. Ett flödesschema över algoritmen finns i bilaga~\ref{sec:sokalgoritm_flow}.\bigskip
 
-            \begin{figure}[b]
+            \begin{figure}
                 \input{res/img/algoritm_stapeldiagram}
             \caption{\label{fig:algoritm_steg} Jämförelse algoritmernas antal söksteg}
             \end{figure} 
 
             För att jämföra sökalgoritmerna genomfördes simuleringar som mäter antal steg från utgångspositionen till positionen där maximalt värde påträffas. Simuleringarna använde sig av 10\thinspace000 stycken 100$\times$100-matriser, där varje matris hade en slumpvis genererad utgångsposition och maximalt värde. Algoritmerna genomsökte identiska matriser med samma utgångsposition. Samtliga positioners värden var strängt avtagande med avseende på avståndet till det maximala värdet. För varje iteration av algoritmen undersöktes sökning med både fyra och åtta sökriktningar. Sökning i fyra riktningar visade sig mer effektivt i samtliga fall, enligt figur~\ref{fig:algoritm_steg} och bilaga~\ref{sec:sokalgoritm_sim}. Skillnaderna i antal steg mellan samma algoritm med olika antal sökriktningar vara störst i den första iterationen, med 54~\% fler steg, men de visade sig även i övriga iterationer. I den tredje och slutgiltiga iterationen var skillnaden 10~\% fler steg. Varje iteration av algoritmen minskade det antal steg som behövdes för att finna det största värdet. Största förändringen mellan iterationer skedde mellan iteration två och tre, där antalet steg minskades med 43~\%, se tabell~\ref{tab:algoritm_forbattring}. Minskningen mellan iteration ett och tre var 51~\%. \bigskip
 
-            \begin{table}
+            \begin{table}[b]
                 \caption{\label{tab:algoritm_forbattring}Minskning av antal söksteg mellan algoritmversioner}
                 \centering
                 \begin{threeparttable}
@@ -103,29 +115,14 @@
 
             % Trots att fokuspunkten inte är utformad på samma sätt som förutspått, fungerar sökalgoritmen så pass att den riktar in sig till det högsta funna värdet, dock på grund av panelens utformning av fokuspunkten finns det inget exakt högsta värde, utan algoritmen stannar i en punkt i den cirkel som panelen genererar. Algoritmen är inte utformad för att söka igenom hela cirkeln och sätta det högsta värdet, utan lokaliserar ett lokalt maximum. Detta ger ett högt belysningsvärde ut från panelen även om det kan finnas ett något högre värde existerar på motsatt sida av cirkeln. Skillnaden inom denna cirkel är dock så pass små att det rör sig om så små värdeskillnader att dessa kan anses ligga inom felmarginalen. Att utveckla en algoritm som arbetar sig igenom hela cirkeln är fullt möjlig, men det handlar om en avvägning om hur lång tid kalibreringen kommer ta, den nu gällande algoritmen är utvecklad för att hitta ett lokalt maximum på så få steg som möjligt.
 
-
-        % subsubsection utveckling_av_algoritm (end)
-
-        % \subsubsection{Utveckling av kommunikationslösning} % (fold)
-        % \label{ssub:utveckling_av_kommunikationslosning}
-        % % subsubsection utveckling_av_kommunikationslosning (end)
-
-        \subsubsection{Avläsning av luxmätare} % (fold)
-        \label{ssub:avlasning_av_luxmatare}
-            De båda luxmätarna skiljer sig åt med avseende på det gränssnitt som förmedlar data. Mätaren från Adafruit kräver koppling till en mikrokontroller för tolkning av data, medan mätaren från Yoctopuce kopplas direkt till en enhet via USB, vilket underlättar anslutning till en persondator. Även om luxmätarnas gränssnitt skiljer sig åt beter sig de båda snarlikt vid användning. Båda generar ett positivt heltal som representerar uppmätt luxvärde och skickar detta när en metod i respektives bibliotek anropas. Från en programmerares perspektiv är resultatet från och användningen av de båda mätarna i praktiken identisk.\bigskip
-
-            Vid kalibrering av panelen är det av intresse att inhämta så mycket av panelens ljus som möjligt när luxvärdet ska avläsas, samtidigt som bakgrundsljus från andra eventuella ljuskällor undviks, för att skapa mätbara skillnader mellan panelens olika kalibreringssteg. Luxmätaren placeras så nära fiberändan som möjligt för att säkerställa maximalt ljusintag från den panel som ska kalibreras, vilket i praktiken för detta projekt innebär tre till fyra centimeter från fibern. För att hålla mätaren stabil används olika metoder beroende på mätare, där den ena har monterats in i ett metallhölje som skruvas fast på fiberändan, medan den andra vilar i en armatur. Att metoderna skiljer sig åt beror på olika utformning av luxmätarnas mönsterkort och leder till att avlästa värden inte direkt kan jämföras.\bigskip 
-
-            Testning av luxmätarnas inrapporterade värden visade att resultaten från solpanelen fluktuerar, vilket kan bero på orsaker så som att panelen ständigt justerar för att följa solen eller att något som momentant skuggar panelen passerar förbi. Dessa skiftningar i värde är inget som det mänskliga ögat uppfattar men blir synligt i mätningarna.\bigskip
-
-            En undersökning av solpanelens solintag genomfördes i syfte att undersöka om panelens fokuspunkt överensstämmer med projektets antagande, figur~\ref{fig:array}. 
-            Panelens justeringsvärden för ljussensorn stegades över ett kvadratiskt fält där ljusstyrkan avlästes och fördes in i en tvådimensionell matris.
+            Innan algoritmen testades på solpanelen gjordes en undersökning om panelens fokuspunkt överensstämmer med projektets antagande, figur~\ref{fig:array}. 
+            En enkel genomsökning av solintaget genomfördes, där panelens justeringsvärden för ljussensorn stegades över ett kvadratiskt fält samtidigt som ljusstyrkan avlästes och fördes in i en tvådimensionell matris.
             Resultatet av denna sökning gav olika bilder beroende på vilken luxmätare som användes. Den ena luxmätarens bild stämde inte överens med antagandet medan bilden från den andra stämde precis, vilket visas i figur~\ref{fig:luxcomp}.
             Hos Parans har tidigare efterforskningar aldrig resulterat i något liknande figur~\ref{fig:ada} och avvikelsen antas bero på luxmätaren Adafruit TSL2591. Att förlita sig till denna mätning skulle ge ett lägre ljusflöde från panelen då dess maximipunkt ligger i utkanten av äkta maximum.
             Projektet beslutade att endast använda den luxmätare som genererade förväntad fokuspunkt, Yoctopuce Yocto-Light-V3.
             Fullständig data från sökningen finns bifogad i bilaga~\ref{sec:heatmap}.
 
-            \begin{figure}[h]
+            \begin{figure}[t]
             \centering
                 \begin{subfigure}{0.35\textwidth}
                     \setlength{\fboxsep}{0pt}
@@ -139,7 +136,8 @@
                 \end{subfigure}
             \caption{\label{fig:luxcomp}Uppmätt ljusstyrka}
             \end{figure}
-        % subsubsection avlasning_av_luxmatare (end)
+
+        % subsubsection utveckling_av_algoritm (end)
 
         \subsubsection{Utveckling av applikation} % (fold)
         \label{ssub:utveckling_av_applikation}
