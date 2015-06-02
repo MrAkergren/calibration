@@ -49,7 +49,7 @@
     \label{sub:steg_3}
         Den tredje fasen i metoden syftar till själva utvecklingen artefakter, det vill säga att faktiskt framställa någonting som går att använda. Projektet spenderade största delen av den projekttiden i denna fas, då varje artefakt utvecklades genom iterationer av de tre delstegen utformning, utveckling och utvärdering. Detta innebar att utveckla en del av artefakten och sedan utvärdera delen för att undersöka hur den beter sig och vad som kan göras bättre.
 
-        \subsubsection{Utveckling av kommunikationslösning} % (fold)
+        \subsubsection{Kommunikationslösning} % (fold)
         \label{ssub:utformning_av_kommunikationslosning}
             Kommunikationsdelen i projektet har genomgått flera iterationer av fas 3 och två huvudlösningar utformades.\bigskip 
 
@@ -85,7 +85,7 @@
 
         % subsubsection avlasning_av_luxmatare (end)
 
-        \subsubsection{Utveckling av algoritm} % (fold)
+        \subsubsection{Algoritm} % (fold)
         \label{ssub:utveckling_av_algoritm}
             Utformningen av algoritmen skedde genom flera iterationer av steg tre i den valda metoden. I den första iterationen utvecklades en sökalgoritm, algoritm $\mathscr{A}$, som genomförde medurs sökning i åtta riktningar med motsvarande österut som utgångsriktning. När ett större värde påträffats uppdateras nuvarande position och sökningen återupprepas. För jämförelse utvecklades även en variant med fyra sökriktningar, algoritm $\mathscr{B}$. Efterkommande iterationer var samtliga en vidareutveckling av den förra. Den andra iterationen gav algoritmen möjlighet att lagra information om tidigare besökta koordinater, så att dessa ej undersöks vid upprepade tillfällen. Ytterligare förbättringar implementerades i den tredje iterationen, då riktningen på den senaste förflyttningen registreras om ett nytt större värde påträffats. Med hjälp av denna information undersöks först samma riktning som den senast lyckade förflyttningen innan medurs sökning återupptas. Samtliga iterationer innebar märkbara förbättringar vid simulering. Efter tredje iterationen ansågs algoritmen vara funktionsduglig, den använder betydligt färre söksteg än tidigare versioner och hittar effektivt maximipunkten. Ett flödesschema över algoritmen finns i bilaga~\ref{sec:sokalgoritm_flow}.\bigskip
 
@@ -112,9 +112,6 @@
             \end{threeparttable}
             \end{table}
 
-
-            % Trots att fokuspunkten inte är utformad på samma sätt som förutspått, fungerar sökalgoritmen så pass att den riktar in sig till det högsta funna värdet, dock på grund av panelens utformning av fokuspunkten finns det inget exakt högsta värde, utan algoritmen stannar i en punkt i den cirkel som panelen genererar. Algoritmen är inte utformad för att söka igenom hela cirkeln och sätta det högsta värdet, utan lokaliserar ett lokalt maximum. Detta ger ett högt belysningsvärde ut från panelen även om det kan finnas ett något högre värde existerar på motsatt sida av cirkeln. Skillnaden inom denna cirkel är dock så pass små att det rör sig om så små värdeskillnader att dessa kan anses ligga inom felmarginalen. Att utveckla en algoritm som arbetar sig igenom hela cirkeln är fullt möjlig, men det handlar om en avvägning om hur lång tid kalibreringen kommer ta, den nu gällande algoritmen är utvecklad för att hitta ett lokalt maximum på så få steg som möjligt.
-
             Innan algoritmen testades på solpanelen gjordes en undersökning om panelens fokuspunkt överensstämmer med projektets antagande, figur~\ref{fig:array}. 
             En enkel genomsökning av solintaget genomfördes, där panelens justeringsvärden för ljussensorn stegades över ett kvadratiskt fält samtidigt som ljusstyrkan avlästes och fördes in i en tvådimensionell matris.
             Resultatet av denna sökning gav olika bilder beroende på vilken luxmätare som användes. Den ena luxmätarens bild stämde inte överens med antagandet medan bilden från den andra stämde precis, vilket visas i figur~\ref{fig:luxcomp}.
@@ -139,7 +136,7 @@
 
         % subsubsection utveckling_av_algoritm (end)
 
-        \subsubsection{Utveckling av applikation} % (fold)
+        \subsubsection{Applikation} % (fold)
         \label{ssub:utveckling_av_applikation}
             Efter att ha implementerat en algoritm som i simuleringar uppfyllde önskvärd funktion påbörjades utveckling av en applikation där den kan tillämpas. Förutom själva kalibreringsalgoritmen skulle applikationen ha egenskaper som kommunikation med panelen, ett användarvänligt grafiskt gränssnitt och inhämtning av värden från luxmätare. Programmeringsspråket som valdes för utveckling av applikationen var \texttt{Python} och valet hade stöd av flera motiveringar. Den första anledningen till att språket valdes var att företaget har kompetens och erfarenhet att utveckla i detta språk, då den nya panelen SP4 kommer att drivas av en källkod skriven i just \texttt{Python}. Att kompetens och kunskap finns inom företaget medför att applikationen kan underhållas av företaget själv och modifieras vid framtida behov. Vidare har företaget sedan tidigare produkter utvecklade i detta programmeringsspråk, så att utveckla applikationen i samma språk underlättar för en eventuell implementering av mjukvaran i de existerande produkterna. Mer generella fördelar med att utveckla i \texttt{Python} är att språket är plattformsoberoende och är enkelt att utveckla grafiska gränssnitt i. Nackdelar med språket är att det är långsamt i förhållande till andra språk såsom \texttt{C} eller \texttt{Java}. Då applikationen kommer att kommunicera med mekanik, vilket leder till flertalet fördröjningar för rotation av panelen och inhämtning och sändning av information, anser projektet att språkets åverkan på applikationens snabbhet är försumbar \cite{python_speed}. \bigskip
 
