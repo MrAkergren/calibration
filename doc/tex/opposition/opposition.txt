@@ -1,0 +1,90 @@
+Ref 1: 
+    Pålitlig källa? Deras "about" är väldigt kort, ingen ansvarig utgivare, whois leder bara till en gmail, känns inte trovärdigt
+
+1.2 
+    Vilka är "vi"? Hela stycket känns som reklam/sälj-snack ej lämpligt i en
+    teknisk rapport
+
+1.3
+    "should structure" men ni säger i bakgrunden att ni ska använda angular för
+    att det är stort och välanvänt? Ni säger även i 1.5.1 att det är ett krav
+    från uppdragsgivaren,
+
+1.5.1
+    Ni har ett förslag att sätta upp en databas, men det är ett 
+    krav att hämta data från en, hur är det tänkt?
+
+2
+    Vetenskaplig metod? Agilt eller vattenfall? Vilken agil metod? Uppbackning
+    av litteratur?
+
+
+Ref 5:
+    Pålitlig källa? Ingen "about" whois leder bara till ett webbhotell 
+
+Ref 7:
+    Efter skärningen? Bara baserat på USA, hur ser det ut i resten av världen?
+    Författaren är under all kritik, verkar ej vara utbildad inom området
+
+3.1 Lampan är irrelevant
+
+Ref 11:
+    "Bits of Code is a blog for self-taught web developers such as myself."
+
+3.2
+    Skriv ut hela beteckningen först, där efter dess förkortning
+
+Ref 13:
+    Andrahandskälla, kontrollera mot förstahandskälla istället
+
+Ref 14:
+    ISBN?
+
+Ref 15:
+    json.org som källa? marknadsföringsmaterial
+
+3.3.1
+    Är antalet jobbannonser ett bevis på att det är ledande? verkar sjunka? Finns det flera?
+
+Fig 3.1
+    Referens?
+
+Ref 25
+    ISBN?
+
+Fig 4.1
+    Ska figur 2.1 och 4.1 vara identiska? 
+    Är det här planen eller resultatet? - förtydliga
+
+4.1.1.3
+    Hela avsnittet känns överflödigt, det som görs där har redan visats i 
+    fig 4.3
+
+4.1.2
+    Ni har redan redovisat "hibernate", hänvisa till den istället
+
+4.2.6 - .7
+    "Som visas i fig 4.9" fast där skapar ni endast en modul, felformulerat.
+
+    Hela avsnittet känns uppstyckat, svårt att följa, förvirrande för läsare 
+    utan just era förkunskaper.
+
+4.3
+    Felaktig användning av fotnoter
+
+4.3.1 
+    Varför git? Ni skriver i 2.2.2 att ni ska använda svn.
+
+Kapitel 5
+    Bra skrivet, tydlig struktur.
+
+6.1 
+    Saknar slutet av stycket.
+
+6.2 - 6.3 
+    Fattas
+
+Bilaga A
+    Använd den här istället för de utförliga beskrivningarna i 2.2.2
+    Ta bort "placeholder"
+
