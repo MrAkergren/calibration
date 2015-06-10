@@ -1,0 +1,82 @@
+\documentclass[a4paper, 11pt]{article}
+
+%%--LANGUAGE AND ENCODING--%%
+\usepackage[swedish]{babel}
+\usepackage[english,cleanlook]{isodate}%
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[yyyymmdd]{datetime}
+\renewcommand{\dateseparator}{--}
+
+
+%%-- MATH SPECIFIC --%%
+\usepackage{mathrsfs}
+
+%%--BIBLIOPGRAPHY--%%
+\usepackage{csquotes}
+\usepackage[backend=biber, natbib=true, urldate=iso8601, maxnames=2, minnames=1, maxbibnames=10, minbibnames=6, citestyle=numeric-comp, sorting=none, firstinits=true]{biblatex}
+
+%%--SPACING AND MARGIN--%
+\usepackage[textwidth=140mm]{geometry}
+\setlength{\parindent}{0mm}
+
+%%--SANS-SERIF FONTS FOR SECTIONS--%%
+\usepackage{sectsty}
+\usepackage{helvet}
+\allsectionsfont{\bfseries\sffamily}
+
+%% --BETTER TYPESETTING-- %%
+\usepackage{microtype}
+
+
+%%-- CAPTION AND NUMBERING RELATED --%%
+\usepackage{caption}
+\usepackage[justification=centering]{caption}
+\usepackage{subcaption}
+\usepackage{threeparttable}
+\usepackage{chngcntr}
+\counterwithin{figure}{section}
+
+%%--ADVANCED TABULARS--%%
+\usepackage{tabularx}
+\usepackage{booktabs}
+\def\arraystretch{1.3}
+
+%PREAMBLE%
+
+\newcommand{\blankpage}{\newpage\thispagestyle{empty}\hbox{}\newpage}
+%%-GRAPHICS-%%
+\usepackage{graphicx}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+
+%%-BIBLIOGRAPHY-%%
+%Adds references library and formats it.
+% To  refere to a reference in the library use  \cite{} for ieee
+\addbibresource{ref.bib} \setlength{\bibitemsep}{\baselineskip} 
+
+%%-DOCUMENT INFORMATION-%%
+%% Links within the doc and meta info %%
+\usepackage[pdftex,
+            pdfauthor={P. Svedberg \& O. Åkergren},
+            pdftitle={Opponeringsrapport},
+            pdfsubject={Examensarbete},
+            pdfkeywords={Kalibrering, RS-232, seriell kommunikation, optisk kommunikation, fiberoptik, mikrokonroller, belysning, Parans, ljussensor},
+            pdfproducer={Latex with hyperref},
+            pdfcreator={pdflatex},
+            hidelinks]{hyperref}
+
+\author{
+    Svedberg, Pär \\ \texttt{svpar@student.chalmers.se}
+    \and
+    Åkergren, Oskar \\ \texttt{akergren@student.chalmers.se}
+}
+\title{\vspace{-2cm}Opponeringsrapport}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\maketitle
+Denna rapport är den skriftliga delen av opponeringen av examensarbetet och behandlar rapporten \emph{Incorporating 3D web simulation in the transport industry, Web application constructed with WebGL and AngularJS} skriven av \emph{Mattias Isene} och \emph{Mathias Karlgren}
+\input{hiss}
+\input{formalia}
+\end{document}
