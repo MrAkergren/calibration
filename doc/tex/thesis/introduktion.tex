@@ -13,11 +13,12 @@
         Styrkortet och motorerna till panelen drivs av en spänning om tolv (12) volt och kortet är en egen design kring mikrokontrollen PIC32. 
         Källkoden till panelen är skriven i \texttt{C} och kommunikation till enheten sker via seriell förbindelse över USB, där en USB till RS-232-omvandlare är integrerad på styrkortet. För att skicka instruktioner till panelen används en terminalemulator. \bigskip
 
-        Ljussensorn som används i solpanelen kan representeras som ett koordinatsystem där sensorn som standard förväntar sig att ljuset fokuseras till en punkt som träffar origo. 
-        Problemet som Parans har är tudelat. Det första problemet är att linsen vid tillverkning av panelen kan fokusera ljuset något vid sidan av origo på sensorn, vilket leder till sämre ljusintag till de optiska fibrerna. 
-        Det andra problemet är att solen inte går att fokusera ned till en punkt, utan kommer alltid att representeras som en disk, vilket kan leda till en mätosäkerhet hos sensorn och då även sämre ljusintag till de optiska fibrerna. \bigskip
+        Ljussensorn som används i solpanelen kan representeras som ett koordinatsystem där sensorn som standard förväntar sig att ljuset genom en lins fokuseras till en punkt som träffar origo. 
+        Parans problem är att vid tillverkning av panelen kan linsen fokusera ljuset något vid sidan av sensorns origo, vilket leder till sämre ljusintag till de optiska fibrerna.
+        Efter fabriksmontering åtgärdas detta genom att kalibrera sensorn, genom att flytta punkten på det koordinatsystem som ljuset fokuseras ned till. Parans använder en manuell metod där man via en terminalemulator anger kommandon som vrider solpanelen och sedan kontrolleras värdet på en separat luxmätare. \bigskip
 
-        Sensorn kalibreras genom att flytta punkten på det koordinatsystem som ljuset fokuseras ned till. Idag använder Parans en manuell metod där en terminalemulator används för att ange kommandon som vrider solpanelen och sedan kontrolleras värdet på en separat luxmätare.
+        Vid installation hos slutkund har det i ibland visat sig att en enstaka panelers kalibrering inte har varit korrekt och vad detta beror på är fortfarande inte klarlagt. Sensorn måste då kalibreras om på installationsplatsen, vilket idag vanligtvis sker manuellt av två personer.
+        Den ena personen befinner sig då på taket vid panelen och justerar ljussensorns kalibreringsvärden, via den seriella anslutningen, samtidigt som den andra personen uppskattar den upplevda ljusstyrkan i det upplysta rummet. \bigskip
     % subsection bakgrund (end)
 
     \subsection{Syfte} % (fold)
