@@ -1,14 +1,25 @@
+Abstract 
+    Ska vara ett stycken / paragraph 
+    Inte "This thiesis" utan istället "degree project report" fick vi från vår examinator Lars Svensson.
+    Sidnumreringen ska börja på den här sidan, inte innan.
+
+Terminology & 2.2
+    LaTeX är överflödigt, vilken ordbehandlare som använts är irrelevant för läsaren.
+
 Ref 1: 
     Pålitlig källa? Deras "about" är väldigt kort, ingen ansvarig utgivare, whois leder bara till en gmail, känns inte trovärdigt
 
 1.2 
     Vilka är "vi"? Hela stycket känns som reklam/sälj-snack ej lämpligt i en
-    teknisk rapport
+    teknisk rapport. Är det ett citat ni måste använda, typsätt det som ett blockcitat och referera korrekt via referenssamlingen.
 
 1.3
     "should structure" men ni säger i bakgrunden att ni ska använda angular för
     att det är stort och välanvänt? Ni säger även i 1.5.1 att det är ett krav
     från uppdragsgivaren,
+
+1.4 Avgränsning 1 gällande patent ska inte vara med, det är irrelevant för
+    denna rapport. Behöver avtalet vara med rent juridiskt ska det vara placerat vid tryckkortsidan.
 
 1.5.1
     Ni har ett förslag att sätta upp en databas, men det är ett 
@@ -17,7 +28,6 @@ Ref 1:
 2
     Vetenskaplig metod? Agilt eller vattenfall? Vilken agil metod? Uppbackning
     av litteratur?
-
 
 Ref 5:
     Pålitlig källa? Ingen "about" whois leder bara till ett webbhotell 
@@ -58,7 +68,7 @@ Fig 4.1
 
 4.1.1.3
     Hela avsnittet känns överflödigt, det som görs där har redan visats i 
-    fig 4.3
+    fig 4.3, det är ingen SQL-tutorial ni skriver
 
 4.1.2
     Ni har redan redovisat "hibernate", hänvisa till den istället
