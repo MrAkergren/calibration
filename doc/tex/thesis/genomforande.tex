@@ -2,9 +2,9 @@
 \label{sec:genomf_rande}
     \subsection{Fas 1} % (fold)
     \label{sub:steg_1}
-        Projektet genomfördes med stöd av den valda metoden och i den första fasen, problemidentifikationsfasen, läggs grunden till projektet. Fas ett strävar till att skapa en grundläggande förståelse till det problem som projektet är satt till att lösa, samt möjliggöra för författarna att fördjupa sig i det rådande forskningsläget inom området.\bigskip
+        Projektet genomfördes med stöd av den valda metoden. I den första fasen, problemidentifikationsfasen, läggs grunden till projektet. Fas ett strävar efter att skapa en grundläggande förståelse av det problem som projektet avser lösa, samt att möjliggöra fördjupning inom områdets rådande forskningsläge.\bigskip
 
-        Detta arbete inleddes genom möten med uppdragsgivaren i syfte att få en enhällig uppfattning om vad företaget efterfrågade och formaliserade de praktiska problem som företaget sökte en lösning till. Vidare var det även i den här fasen som introduktionen till projektets rapport utvecklades för att fastslå vad projektet avsåg att utföra, som ett led i problemidentifieringen. \bigskip
+        I arbetets inledning hölls möten med uppdragsgivaren i syfte att få en enhällig uppfattning om vad företaget efterfrågade och formalisera de praktiska problem till vilka företaget sökte lösning. Vidare var det även i denna fas som introduktionen till projektets rapport utvecklades, som ett ytterligare led i problemidentifieringen och att fastslå vad projektet avsåg utföra. \bigskip
 
         Den initiala problemanalysen resulterade i att projektet i stort kom att vara uppdelat i två mindre delar, dels den algoritm som kalibrerar panelen och dels en kommunikationslösning mellan panelen och rummet som den levererar ljuset till. \bigskip
 
@@ -38,7 +38,7 @@
 
     \subsection{Fas 2} % (fold)
     \label{sub:steg_2}
-        Den andra fasen i arbetet tar vid när projektet har skapat en uppfattning kring vilket problem som ska lösas och vilken forskning som finns på området. I denna fas läggs förslag till hur problemet kan lösas och sedan väljs ett sådant förslag till att föras över till nästa fas, fas tre.
+        Metodens andra fas tar vid när projektet har skapat sig en uppfattning kring vilket problem som ska lösas och vilken forskning som finns inom området. I denna fas läggs förslag till hur problem kan lösas och sedan väljs ett sådant förslag att föras över till nästa fas, fas tre.
 
         Litteraturstudien resulterade i en förståelse av att standarder för trådlös datakommunikation såsom 802.11-standarderna har problem att sända när betongkonstruktioner hindrar utspridningen av radiovågor och speciell apparatur krävs för att klara av att skicka data under sådana förhållanden \cite{11n}. Detta medför att trådlös kommunikation inte är lämplig för företaget, då de på förhand inte kan veta ifall deras kommunikation kommer att fungera på plats hos deras kunder. Inköp av nämnda apparatur är inte aktuellt. \bigskip
 
@@ -56,7 +56,7 @@
         \label{ssub:utformning_av_kommunikationslosning}
             Kommunikationsdelen i projektet har genomgått flera iterationer av fas 3 och två huvudlösningar utformades.\bigskip 
 
-            Den första lösningen bestod av två uppsättningar av mikrokontrollerkortet Arduino Uno, för en fullständig specifikation se bilaga~\ref{sub:arduino_spec} \cite{ardu}. Till sändaren kopplades en lysdiod till det gränssnitt som skickar data via den seriella standarden, vilket då omvandlade från RS-232 standardens höga och låga läge till ljus på och ljus av. Till mottagaren kopplades en fotoresistor som ändrar motståndet när den träffas av ljus. När den kopplades in till det seriella gränssnittet skapade resistorn spänningsförändringar som registrerades som högt eller lågt värde av standarden. För en enkel översikt av kopplingen se figur~\ref{fig:schema}, kopplingsschema finns i bilaga~\ref{sec:kopplingsschema}. Fullständig specifikation finns i bilaga~\ref{sec:specifikationer}.\bigskip
+            Den första lösningen bestod av två uppsättningar av mikrokontrollerkortet Arduino Uno, för en fullständig specifikation se bilaga~\ref{sub:arduino_spec} \cite{ardu}. Till sändaren kopplades en lysdiod till det gränssnitt som skickar data via den seriella standarden, vilket då omvandlade från den seriella utgångens höga och låga läge till ljus på och ljus av. Till mottagaren kopplades en fotoresistor som ändrar motståndet när den träffas av ljus. När den kopplades in till det seriella gränssnittet skapade resistorn spänningsförändringar som registrerades som högt eller lågt värde av standarden. För en enkel översikt av kopplingen se figur~\ref{fig:schema}, kopplingsschema finns i bilaga~\ref{sec:kopplingsschema}. Fullständig specifikation finns i bilaga~\ref{sec:specifikationer}.\bigskip
 
             \begin{figure}
             \centering
@@ -71,7 +71,7 @@
 
             För att möjliggöra överföringen användes den i förhållandevis låga överföringshastigheten om 300 baud, vilket gjorde att komponenterna (fotoresistorn och lysdioden) hann ändra sina värden under den tid de förväntades göra det. Komponenterna var inte särskilt utformade för denna uppgift och innehöll vissa fördröjningar vid skifte av tillstånd. \bigskip
 
-            Den data som avsågs skickas i denna kommunikation bestod av ett 16 bitars värde, det vill säga två byte. Med en överföringshastighet om 300 baud ges en teoretisk möjlighet att skicka $\frac{300 \,\textit{baud}}{8 \, bit \cdot 2} = 18,75 \, \text{värden per sekund}$. Den faktiska hastigheten blir något lägre då extra bitar skickas enligt RS-232 protokollet, men överföringshastigheten var inte att anse som ett hinder i denna implementation. \bigskip
+            Den data som avsågs skickas i denna kommunikation bestod av ett 16 bitars värde, det vill säga två byte. Med en överföringshastighet om 300 baud ges en teoretisk möjlighet att skicka $\frac{300 \,\textit{baud}}{8 \, bit \cdot 2} = 18,75 \, \text{värden per sekund}$. Den faktiska hastigheten blir något lägre då extra bitar skickas enligt 8N1, men överföringshastigheten var inte att anse som ett hinder i denna implementation. \bigskip
             
             Den andra lösningen använde sig endast av en luxmätare uppe på taket för att inhämta den data som efterfrågades. Genom att koppla samman två fibrer nere i rummet skickas ljuset åter upp till taket och en rundgång i systemet kan skapas. För att nyttja den här metoden behöver samtliga linser som tillhör en fiberkabel täckas över på panelen för att förhindra att dubbelt intag av solljus transporteras i de båda fiberkablarna. Kablarna är anpassade för att hantera den värme som produceras av det ljus som normalt transporteras vid fullt dagsljus men om den dubbla mängden skulle transporteras riskerar fibrerna att smälta på grund av värmebildningen. Lösningen använder sig inte av fiber som bärare av genererad information utan endast det solljus som panelen tar in skickas, vilket minskar både komplexiteten i systemet och risken för störningar.
         % subsubsection utformning_av_kommunikationslosning (end)
