@@ -43,6 +43,8 @@
         Sökalgoritmen implementerades i form av en Pythonapplikation med grafiskt gränssnitt och applikationen stödjer inhämtning av ljusvärden från en luxmätare, där värden förmedlas genom antingen direkt anslutning till datorn eller seriell kommunikation från en annan enhet. Den luxmätare som användes vid implementationen av direkt anslutning var Yocto-Light-V3 medan Adafruit TSL2591 användes för avläsning som överfördes seriellt via en Arduino Uno. För seriell kommunikation använder applikationen sig av pySerial, ett bibliotek som kan hantera seriell kommunikation på de flesta vanligt förekommande operativsystem \cite{pyserial}. \bigskip
 
         Hos Parans fanns sedan tidigare kringutrustning som använder en Pythonapplikation med grafiskt gränssnitt anpassat till en pekskärm på en Raspberry Pi, där det grafiska gränssnittet är implementerat med ramverket TkInter \cite{solarremote}. Samma ramverk och grafiska formgivning har använts till den applikation som utvecklats av projektet. Detta upplägg är tänkt att underlätta framtida hantering och utveckling av applikationerna och möjliggör en eventuell framtida integrering av de båda. \bigskip
+        
+        \newpage
 
         Applikationen är utvecklad enligt en objektorienterad utvecklingsmodell och nya avläsningsmetoder kan implementeras utan större ingrepp i befintlig kod. För en översikt av källkodens struktur se UML diagrammen i bilaga~\ref{sec:uml_diagram}. Mjukvaran till Parans kommande solpanel, SP4, var ej färdigställd under projektets gång och således är applikationen riktad till SP3. Implementeringen av sökalgoritmen kan återanvändas till kommande versioner av solpaneler men vissa anpassningar kan behövas.
     % subsection applikation % (end)
