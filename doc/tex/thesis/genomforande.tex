@@ -115,6 +115,8 @@
             \end{threeparttable}
             \end{table}
 
+            I händelse av längre tids molnighet deaktiveras ljussensorn av panelens mjukvara och kalibrering går då ej att genomföra. För att hantera detta lades ytterligare funktionalitet till i algoritmen. Om så skulle ske under pågående kalibrering återställs panelens korrigeringsvärden till de värden som var aktuella innan den automatiska kalibreringen startade. För att ytterligare motverka oförutsedda problem vid kalibreringstillfället har kontroller för timeout och korrigeringsvärdenas rimlighet implementerats, där båda kontrollerna vid utslag avbryter sökningen och korrigeringsvärdena återställs.\bigskip
+
             Innan algoritmen testades på solpanelen gjordes en undersökning om panelens fokuspunkt överensstämmer med projektets antagande, figur~\ref{fig:array}. 
             En enkel genomsökning av solintaget genomfördes, där panelens justeringsvärden för ljussensorn stegades över ett kvadratiskt fält samtidigt som ljusstyrkan avlästes och fördes in i en tvådimensionell matris.
             Resultatet av denna sökning gav olika bilder beroende på vilken luxmätare som användes. Den ena luxmätarens bild stämde inte överens med antagandet medan bilden från den andra stämde precis, vilket visas i figur~\ref{fig:luxcomp}.
