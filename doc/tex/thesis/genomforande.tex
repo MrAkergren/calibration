@@ -53,6 +53,8 @@
     \label{sub:steg_3}
         Projektet spenderade större delen av projekttiden i denna fas, då varje artefakt utvecklades genom iterationer av de tre delstegen utformning, utveckling och utvärdering. Detta innebar att utveckla en del av artefakten och sedan utvärdera delen för att undersöka hur den beter sig och vad som kan göras bättre.
 
+        \newpage
+
         \subsubsection{Kommunikationslösning} % (fold)
         \label{ssub:utformning_av_kommunikationslosning}
             Kommunikationsdelen i projektet har genomgått flera iterationer av fas 3 och två huvudlösningar utformades.\bigskip 
@@ -61,7 +63,7 @@
 
             För att möjliggöra överföringen användes den i förhållandevis låga överföringshastigheten om 300 baud, vilket gjorde att komponenterna (fotoresistorn och lysdioden) hann ändra sina värden under den tid de förväntades göra det. Komponenterna var inte särskilt utformade för denna uppgift och innehöll vissa fördröjningar vid skifte av tillstånd. \bigskip
 
-            Den data som avsågs skickas i denna kommunikation bestod av ett 16 bitars värde, det vill säga två byte. Med en överföringshastighet om 300 baud ges en teoretisk möjlighet att skicka $\frac{300 \,\textit{baud}}{8 \, bit \cdot 2} = 18,75 \, \text{värden per sekund}$. Den faktiska hastigheten blir något lägre då extra bitar skickas enligt 8N1, men överföringshastigheten var inte att anse som ett hinder i denna implementation.\vspace{2cm}
+            Den data som avsågs skickas i denna kommunikation bestod av ett 16 bitars värde, det vill säga två byte. Med en överföringshastighet om 300 baud ges en teoretisk möjlighet att skicka $\frac{300 \,\textit{baud}}{8 \, bit \cdot 2} = 18,75 \, \text{värden per sekund}$. Den faktiska hastigheten blir något lägre då extra bitar skickas enligt 8N1, men överföringshastigheten var inte att anse som ett hinder i denna implementation.\bigskip
 
             \begin{figure}[hb]
             \centering
@@ -154,6 +156,8 @@
         \label{ssub:utveckling_av_applikation}
             Efter att ha implementerat en algoritm som i simuleringar uppfyllde önskvärd funktion påbörjades utveckling av en applikation där den kan tillämpas. Förutom själva kalibreringsalgoritmen skulle applikationen ha egenskaper som kommunikation med panelen, ett användarvänligt grafiskt gränssnitt och inhämtning av värden från luxmätare. Programmeringsspråket som valdes för utveckling av applikationen var \texttt{Python} och valet hade stöd av flera motiveringar. Den första anledningen till att språket valdes var att företaget har kompetens och erfarenhet att utveckla i detta språk, då den nya panelen SP4 kommer att drivas av en källkod skriven i just \texttt{Python}. Att kompetens och kunskap finns inom företaget medför att applikationen kan underhållas av företaget själv och modifieras vid framtida behov. Vidare har företaget sedan tidigare produkter utvecklade i detta programmeringsspråk, så att utveckla applikationen i samma språk underlättar för en eventuell implementering av mjukvaran i de existerande produkterna. Mer generella fördelar med att utveckla i \texttt{Python} är att språket är plattformsoberoende och är enkelt att utveckla grafiska gränssnitt i. Nackdelar med språket är att det är långsamt i förhållande till andra språk såsom \texttt{C} eller \texttt{Java}. Då applikationen kommer att kommunicera med mekanik, vilket leder till flertalet fördröjningar för rotation av panelen och inhämtning och sändning av information, anser projektet att språkets åverkan på applikationens snabbhet är försumbar \cite{python_speed}. \bigskip
 
+            \newpage
+
             För att kommunicera med panelen och den Arduino som mottar värden från luxmätaren Adafruit TSL2591 behövdes stöd för seriell kommunikation. Ett bibliotek som möjliggjorde seriell kommunikation med enheter anslutna till en dator var pySerial. Eftersom pySerial har stöd för operativsystem baserade på Windows, Linux och BSD är biblioteket i praktiken plattformsoberoende \cite{pyserial}. 
             Kodbibliotek till luxmätaren Yocto-Light-V3, som anslöts direkt till den dator som kör applikationen, fanns att tillgå från tillverkaren Yoctopuce. \bigskip
 
@@ -166,7 +170,7 @@
             Det grafiska gränssnittet gavs en enkel design och baserades på det utseende som används i företagets kringutrustning \cite{solarremote}. Nämnda kringutrustning var utformad för att kunna användas med pekskärm och således beaktades detta även här. Fyra knappar i form av ett styrkors lades till för att manuellt ändra panelens justeringsvärden för ljussensorn i x- och y-led. I mitten av styrkorset placerades en knapp för manuell avläsning av den anslutna luxmätaren. Nedanför styrkorset placerades en knapp som startar automatisk kalibrering och en knapp som återställer panelens justeringsvärden till de som var aktuella vid applikationens starttillfälle. Ett fält som kan förmedla aktuell information placerades i applikationens underkant. Det grafiska gränssnittet är avbildat i figur~\ref{fig:app_skiss}.
 
             \begin{figure}[hb]
-                \scalebox{0.82}{\input{res/img/app_layout}}
+                \input{res/img/app_layout}
             \caption{\label{fig:app_skiss} Skiss av det grafiska gränssnittet}
             \end{figure}
 
