@@ -11,7 +11,7 @@
         Detta för att alltid maximera det solljus som fokuseras in i fibern.\bigskip
 
         Styrkortet och motorerna till panelen drivs av en spänning om tolv (12) volt och kortet är en egen design kring mikrokontrollen PIC32. 
-        Källkoden till panelen är skriven i \texttt{C} och kommunikation till enheten sker via seriell förbindelse över USB, där en USB till RS-232-omvandlare är integrerad på styrkortet. För att skicka instruktioner till panelen används en terminalemulator. \bigskip
+        Källkoden till panelen är skriven i \texttt{C} och kommunikation till enheten sker via seriell förbindelse över USB, där en USB till UART-omvandlare är integrerad på styrkortet. För att skicka instruktioner till panelen används en terminalemulator. \bigskip
 
         Ljussensorn som används i solpanelen kan representeras som ett koordinatsystem där sensorn som standard förväntar sig att ljuset genom en lins fokuseras till en punkt som träffar origo. 
         Parans problem är att vid tillverkning av panelen kan linsen fokusera ljuset något vid sidan av sensorns origo, vilket leder till sämre ljusintag till de optiska fibrerna.
