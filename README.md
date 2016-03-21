@@ -1,5 +1,6 @@
 # Calibration
-Calibration of the SP3 sunpanel by Parans
+Calibration of the SP3 sunpanel by Parans.
+The final degree project report is found [here](http://studentarbeten.chalmers.se/publication/218757-kalibrering-av-ljussensor-for-parans-solpanel).
 
 Abstract
 ---
